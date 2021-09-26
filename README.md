@@ -1,6 +1,6 @@
 # Git Rules
 
-1. Create branch issue/*** from develop branch
+1. Create branch feature/*** from develop branch
 2. Create Pull Request after finish one task
 3. Frequently pull code from develop branch if there is update
 4. Review code first before push to feature branch
