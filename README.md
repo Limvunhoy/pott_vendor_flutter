@@ -1,16 +1,8 @@
-# pott_vendor
+# Git Rules
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Create branch feature/*** from develop branch
+2. Create Pull Request after finish one task
+3. Frequently pull code from develop branch if there is update
+4. Review code first before push to feature branch
+5. Create branch release-x.x from develop after app released
+6. Merge code from develop branch to master and create version tag
