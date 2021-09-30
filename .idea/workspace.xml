@@ -8,33 +8,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_account_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_logout_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_notification_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_order_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_report_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/menu/binding/menu_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/menu/controller/menu_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/menu/view/widgets/sale_report_card.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/model/menu/menu_item_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/service/logger_interceptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/service/logger_interceptor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pott_vendor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/pott_vendor.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/extension/color + extension.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/extension/color + extension.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/extension/double + extension.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/extension/double + extension.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1yjIdrPzXuzc6m2F9x5SIV6cXip" />
   <component name="ProjectView">
@@ -58,6 +73,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/icons/menu" />
       <recent name="$PROJECT_DIR$/assets/image" />
     </key>
   </component>
