@@ -12,4 +12,8 @@ class ImagePathConstant {
       "assets/icons/menu/menu_notification_icon.png";
   static const MENU_ACCOUNT_ICON = "assets/icons/menu/menu_account_icon.png";
   static const MENU_LOGOUT_ICON = "assets/icons/menu/menu_logout_icon.png";
+
+  // Notification
+  static const PRODUCT_READY =
+      "assets/icons/notification/notif_product_ready.png";
 }

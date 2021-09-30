@@ -8,24 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_account_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_logout_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_notification_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_order_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/icons/menu/menu_report_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/menu/binding/menu_binding.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/menu/controller/menu_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/menu/view/widgets/sale_report_card.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/model/menu/menu_item_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/notification/notif_product_ready.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/notification/view/notification_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_routes.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/extension/color + extension.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/extension/color + extension.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/extension/double + extension.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/extension/double + extension.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,10 +59,12 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/icons/notification" />
       <recent name="$PROJECT_DIR$/assets/icons/menu" />
       <recent name="$PROJECT_DIR$/assets/image" />
     </key>

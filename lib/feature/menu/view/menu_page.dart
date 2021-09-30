@@ -4,6 +4,7 @@ import 'package:pott_vendor/feature/menu/controller/menu_controller.dart';
 import 'package:pott_vendor/feature/menu/view/widgets/menu_item_.dart';
 import 'package:pott_vendor/feature/menu/view/widgets/sale_report_card.dart';
 import 'package:pott_vendor/model/menu/menu_item_model.dart';
+import 'package:pott_vendor/utils/app_routes.dart';
 import 'package:pott_vendor/utils/constants/image_path_constant.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
@@ -105,6 +106,7 @@ class MenuPage extends StatelessWidget {
                                   break;
                                 case MenuItemEnum.notification:
                                   print("Navigate to notification page");
+                                  Get.toNamed(Routes.NOTIFICATION);
                                   break;
                                 case MenuItemEnum.account:
                                   print("Navigate to account page");
