@@ -1,7 +1,6 @@
 import 'package:get/route_manager.dart';
 import 'package:pott_vendor/feature/menu/binding/menu_binding.dart';
 import 'package:pott_vendor/feature/menu/view/menu_page.dart';
-import 'package:pott_vendor/feature/notification/view/notification_page.dart';
 
 import 'export.dart';
 
