@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pott_vendor/feature/menu/view/menu_page.dart';
 import 'package:pott_vendor/service/api_base_helper.dart';
 import 'package:pott_vendor/utils/app_pages.dart';
 import 'package:pott_vendor/utils/app_routes.dart';
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       getPages: AppPages.routes,
-      initialRoute: Routes.MENU,
+      initialRoute: Routes.SIGNIN,
     );
   }
 }
