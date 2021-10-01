@@ -10,5 +10,6 @@ class AppPages {
   static final routes = [
     GetPage(name: Routes.SIGNIN, page: () => SignInPage()),
     GetPage(name: Routes.MENU, page: () => MenuPage(), binding: MenuBinding()),
+    GetPage(name: Routes.NOTIFICATION, page: () => NotificationPage()),
   ];
 }
