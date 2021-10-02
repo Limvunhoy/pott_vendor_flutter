@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pott_vendor/utils/constants/image_path_constant.dart';
@@ -18,9 +19,9 @@ class _SignInPageState extends State<SignInPage> {
 
   final TextEditingController passwordController = TextEditingController();
 
-  final String initialCountry = 'NG';
+  final String initialCountry = 'KH';
 
-  final PhoneNumber number = PhoneNumber(isoCode: 'NG');
+  final PhoneNumber number = PhoneNumber(isoCode: 'KH');
 
   late bool isShowPassword;
 
@@ -45,8 +46,6 @@ class _SignInPageState extends State<SignInPage> {
             reverse: true,
             physics: ClampingScrollPhysics(),
             child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   alignment: Alignment.center,
@@ -75,12 +74,73 @@ class _SignInPageState extends State<SignInPage> {
                 const SizedBox(
                   height: 69.0,
                 ),
+
+                // Container(
+                //     padding: EdgeInsets.only(top: 13.5, bottom: 9),
+                //     decoration: BoxDecoration(
+                //       border: Border(
+                //         bottom: BorderSide(width: 1, color: Colors.grey),
+                //       ),
+                //     ),
+                //     child: Row(
+                //       children: [
+                //         Row(
+                //           textDirection: TextDirection.ltr,
+                //           mainAxisAlignment: MainAxisAlignment.start,
+                //           // mainAxisSize: MainAxisSize.min,
+                //           children: <Widget>[
+                //             SizedBox(width: 10),
+                //             Container(
+                //               color: Colors.red,
+                //             ),
+                //             SizedBox(width: 12.0),
+                //             Text(
+                //               '+855',
+                //               textDirection: TextDirection.ltr,
+                //             ),
+                //             Container(
+                //               width: 11,
+                //               height: 8,
+                //               decoration: BoxDecoration(
+                //                 image: DecorationImage(
+                //                   image: AssetImage(
+                //                       "assets/icons/drop_down_icon.png"),
+                //                 ),
+                //               ),
+                //             )
+                //             // IconButton(
+                //             //   iconSize: 26,
+                //             //   padding: EdgeInsets.zero,
+                //             //   constraints: BoxConstraints(),
+                //             //   color: Colors.black,
+                //             //   onPressed: () {},
+                //             //   icon: Icon(Icons.arrow_drop_down),
+                //             // ),
+                //           ],
+                //         ),
+                //         Flexible(
+                //             child: TextField(
+                //           decoration: InputDecoration(
+                //             border: UnderlineInputBorder(
+                //               borderSide: BorderSide(color: Colors.red),
+                //             ),
+                //           ),
+                //         ))
+                //       ],
+                //     )),
+
                 InternationalPhoneNumberInput(
                   onInputChanged: (PhoneNumber phoneNumber) {},
                   ignoreBlank: false,
                   autoValidateMode: AutovalidateMode.disabled,
                   initialValue: number,
                   textFieldController: controller,
+                  selectorConfig: SelectorConfig(
+                      selectorType: PhoneInputSelectorType.DIALOG,
+                      trailingSpace: false,
+                      leadingPadding: 0),
+                  selectorTextStyle:
+                      TextStyle(fontSize: fontSizeExt.mediumSize),
                   keyboardType: TextInputType.numberWithOptions(
                       signed: true, decimal: true),
                   textStyle: TextStyle(fontSize: fontSizeExt.mediumSize),
