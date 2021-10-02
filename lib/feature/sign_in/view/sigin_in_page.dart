@@ -1,4 +1,3 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pott_vendor/utils/constants/image_path_constant.dart';
@@ -129,135 +128,150 @@ class _SignInPageState extends State<SignInPage> {
                 //       ],
                 //     )),
 
-                InternationalPhoneNumberInput(
-                  onInputChanged: (PhoneNumber phoneNumber) {},
-                  ignoreBlank: false,
-                  autoValidateMode: AutovalidateMode.disabled,
-                  initialValue: number,
-                  textFieldController: controller,
-                  selectorConfig: SelectorConfig(
-                      selectorType: PhoneInputSelectorType.DIALOG,
-                      trailingSpace: false,
-                      leadingPadding: 0),
-                  selectorTextStyle:
-                      TextStyle(fontSize: fontSizeExt.mediumSize),
-                  keyboardType: TextInputType.numberWithOptions(
-                      signed: true, decimal: true),
-                  textStyle: TextStyle(fontSize: fontSizeExt.mediumSize),
-                  inputDecoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: colorExt.PRIMARY_COLOR),
-                      ),
-                      hintText: "Number"),
-                  onSaved: (PhoneNumber number) {
-                    print('On Saved: $number');
-                  },
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                TextFormField(
-                  focusNode: fieldNode,
-                  controller: passwordController,
-                  obscureText: !isShowPassword,
-                  decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: colorExt.PRIMARY_COLOR),
-                    ),
-                    hintText: "Password",
-                    labelStyle: TextStyle(color: Colors.red),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isShowPassword = !isShowPassword;
-                        });
-                      },
-                      icon: Icon(
-                          isShowPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Colors.grey),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 12.0,
-                ),
-                Container(
-                  padding: EdgeInsets.zero,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Form(
+                  key: formKey,
+                  child: Column(
                     children: [
-                      SizedBox(
-                        width: 20.0,
+                      InternationalPhoneNumberInput(
+                        onInputChanged: (PhoneNumber phoneNumber) {},
+                        ignoreBlank: false,
+                        autoValidateMode: AutovalidateMode.disabled,
+                        initialValue: number,
+                        textFieldController: controller,
+                        selectorConfig: SelectorConfig(
+                            selectorType: PhoneInputSelectorType.DIALOG,
+                            trailingSpace: false,
+                            leadingPadding: 0),
+                        selectorTextStyle:
+                            TextStyle(fontSize: fontSizeExt.mediumSize),
+                        keyboardType: TextInputType.numberWithOptions(
+                            signed: true, decimal: true),
+                        textStyle: TextStyle(fontSize: fontSizeExt.mediumSize),
+                        inputDecoration: InputDecoration(
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: colorExt.PRIMARY_COLOR),
+                            ),
+                            hintText: "Number"),
+                        validator: (phone) {
+                          return phone!.isEmpty
+                              ? "Please enter your phone number"
+                              : null;
+                        },
+                        onSaved: (PhoneNumber number) {
+                          print('On Saved: $number');
+                        },
+                      ),
+                      const SizedBox(
                         height: 20.0,
-                        child: Radio(
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          activeColor: colorExt.PRIMARY_COLOR,
-                          value: 1,
-                          groupValue: val,
-                          onChanged: (onValue) {
-                            setState(
-                              () {
-                                val = onValue as int;
-                              },
-                            );
-                          },
+                      ),
+                      TextFormField(
+                        focusNode: fieldNode,
+                        controller: passwordController,
+                        obscureText: !isShowPassword,
+                        decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: colorExt.PRIMARY_COLOR),
+                          ),
+                          hintText: "Password",
+                          labelStyle: TextStyle(color: Colors.red),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isShowPassword = !isShowPassword;
+                              });
+                            },
+                            icon: Icon(
+                                isShowPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.grey),
+                          ),
                         ),
                       ),
-                      const SizedBox(width: 10.0),
-                      Text(
-                        "Remember me",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: fontSizeExt.smallSize,
+                      const SizedBox(
+                        height: 12.0,
+                      ),
+                      Container(
+                        padding: EdgeInsets.zero,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 20.0,
+                              height: 20.0,
+                              child: Radio(
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                activeColor: colorExt.PRIMARY_COLOR,
+                                value: 1,
+                                groupValue: val,
+                                onChanged: (onValue) {
+                                  setState(
+                                    () {
+                                      val = onValue as int;
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 10.0),
+                            Text(
+                              "Remember me",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: fontSizeExt.smallSize,
+                              ),
+                            ),
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {},
+                                child: Text("Forgot password"),
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  minimumSize: Size(10, 10),
+                                  alignment: Alignment.centerRight,
+                                  primary: Colors.grey,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  textStyle: TextStyle(
+                                    fontSize: fontSizeExt.smallSize,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      Expanded(
-                        child: TextButton(
+                      const SizedBox(
+                        height: 50.0,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 38.0,
+                        child: ElevatedButton(
                           onPressed: () {},
-                          child: Text("Forgot password"),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            minimumSize: Size(10, 10),
-                            alignment: Alignment.centerRight,
-                            primary: Colors.grey,
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          child: Text("LOG IN"),
+                          style: ElevatedButton.styleFrom(
+                            primary: colorExt.PRIMARY_COLOR,
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
                             textStyle: TextStyle(
-                              fontSize: fontSizeExt.smallSize,
+                              fontSize: fontSizeExt.mediumSize,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                      )
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
                     ],
                   ),
-                ),
-                const SizedBox(
-                  height: 50.0,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 38.0,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("LOG IN"),
-                    style: ElevatedButton.styleFrom(
-                      primary: colorExt.PRIMARY_COLOR,
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      textStyle: TextStyle(
-                        fontSize: fontSizeExt.mediumSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 50,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
