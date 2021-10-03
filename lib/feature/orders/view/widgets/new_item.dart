@@ -23,6 +23,7 @@ class NewItem extends StatelessWidget {
       ),
       child: Column(
         children: [
+          // Delivery info
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,6 +70,7 @@ class NewItem extends StatelessWidget {
               ),
             ],
           ),
+          // Product info
           Container(
             margin: const EdgeInsets.only(top: 16.0),
             child: Row(
@@ -131,6 +133,7 @@ class NewItem extends StatelessWidget {
               ],
             ),
           ),
+          // Total info
           Container(
             margin: const EdgeInsets.only(top: 16.0),
             padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -207,6 +210,7 @@ class NewItem extends StatelessWidget {
               ],
             ),
           ),
+          // Buttons components
           Container(
             margin: const EdgeInsets.only(top: 10.0),
             padding: EdgeInsets.zero,

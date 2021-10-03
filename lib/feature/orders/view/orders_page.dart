@@ -30,20 +30,6 @@ class OrdersPage extends StatelessWidget {
                     text: e.title,
                   ))
               .toList(),
-          // tabs: [
-          //   Tab(
-          //     text: "New",
-          //   ),
-          //   Tab(
-          //     text: "Ready",
-          //   ),
-          //   Tab(
-          //     text: "Finished",
-          //   ),
-          //   Tab(
-          //     text: "Completed",
-          //   ),
-          // ],
         ),
         body: Container(
           color: colorExt.PRIMARY_BACKGROUND_COLOR,
