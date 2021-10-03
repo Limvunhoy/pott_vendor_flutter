@@ -107,11 +107,7 @@ class MenuPage extends StatelessWidget {
                                   break;
                                 case MenuItemEnum.notification:
                                   print("Navigate to notification page");
-                                  // Get.toNamed(Routes.NOTIFICATION);
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (_) {
-                                    return NotificationPage();
-                                  }));
+                                  Get.toNamed(Routes.NOTIFICATION);
                                   break;
                                 case MenuItemEnum.account:
                                   print("Navigate to account page");
