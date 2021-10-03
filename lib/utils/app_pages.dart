@@ -1,6 +1,7 @@
 import 'package:get/route_manager.dart';
 import 'package:pott_vendor/feature/menu/binding/menu_binding.dart';
 import 'package:pott_vendor/feature/menu/view/menu_page.dart';
+import 'package:pott_vendor/feature/orders/binding/orders_binding.dart';
 import 'package:pott_vendor/feature/orders/view/orders_page.dart';
 import 'package:pott_vendor/feature/sign_in/binding/sign_in_binding.dart';
 
@@ -16,6 +17,9 @@ class AppPages {
         binding: SignInBinding()),
     GetPage(name: Routes.MENU, page: () => MenuPage(), binding: MenuBinding()),
     GetPage(name: Routes.NOTIFICATION, page: () => NotificationPage()),
-    GetPage(name: Routes.ORDERS, page: () => OrdersPage()),
+    GetPage(
+        name: Routes.ORDERS,
+        page: () => OrdersPage(),
+        binding: OrdersBinding()),
   ];
 }

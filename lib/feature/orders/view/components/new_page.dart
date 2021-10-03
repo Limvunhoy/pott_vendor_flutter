@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
+import 'package:pott_vendor/utils/common/refresh_widget.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class NewPage extends StatelessWidget {
@@ -7,15 +8,18 @@ class NewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
+    return RefreshWidget(
       onRefresh: () async {
-        print("Refreshing");
+        print("On Refresh");
       },
       child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return NewItem();
-          }),
+        shrinkWrap: true,
+        primary: false,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return NewItem();
+        },
+      ),
     );
   }
 }

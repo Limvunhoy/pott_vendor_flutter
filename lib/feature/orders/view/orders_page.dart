@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/components/new_page.dart';
 import 'package:pott_vendor/utils/common/base_view.dart';
+import 'package:pott_vendor/utils/export.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
+import 'package:get/get.dart';
 
 class OrdersPage extends StatelessWidget {
-  const OrdersPage({Key? key}) : super(key: key);
+  final ordersController = Get.find<OrdersController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +25,25 @@ class OrdersPage extends StatelessWidget {
               fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w500),
           unselectedLabelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
           unselectedLabelColor: Colors.black,
-          tabs: [
-            Tab(
-              text: "New",
-            ),
-            Tab(
-              text: "Ready",
-            ),
-            Tab(
-              text: "Finished",
-            ),
-            Tab(
-              text: "Completed",
-            ),
-          ],
+          tabs: ordersController.orderTabs
+              .map((e) => Tab(
+                    text: e.title,
+                  ))
+              .toList(),
+          // tabs: [
+          //   Tab(
+          //     text: "New",
+          //   ),
+          //   Tab(
+          //     text: "Ready",
+          //   ),
+          //   Tab(
+          //     text: "Finished",
+          //   ),
+          //   Tab(
+          //     text: "Completed",
+          //   ),
+          // ],
         ),
         body: Container(
           color: colorExt.PRIMARY_BACKGROUND_COLOR,
