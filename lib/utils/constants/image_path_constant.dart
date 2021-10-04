@@ -4,6 +4,9 @@ class ImagePathConstant {
       "assets/images/menu_background_image.png";
   static const SIGN_IN_STORE_IMAGE = "assets/images/sign_in_store_image.png";
 
+  // Orders Page
+  static const EMPTY_IMAGE = "assets/images/new_orders_empty_image.png";
+
   // Icon
   static const WALLET_ICON = "assets/icons/wallet_icon.png";
   static const MENU_ICON = "assets/icons/menu/menu_icon.png";

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
+import 'package:pott_vendor/feature/orders/view/components/completed_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/finished_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/new_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/ready_page.dart';
+import 'package:pott_vendor/feature/orders/view/widgets/empty_new_orders_widget.dart';
 import 'package:pott_vendor/utils/common/base_view.dart';
 import 'package:pott_vendor/utils/export.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
@@ -70,6 +72,7 @@ class OrdersPage extends StatelessWidget {
           color: colorExt.PRIMARY_BACKGROUND_COLOR,
           child: TabBarView(
             children: [
+              // EmptyNewOrdersWidget(),
               NewPage(
                 key: PageStorageKey<String>("newOrderPage"),
               ),
@@ -79,8 +82,8 @@ class OrdersPage extends StatelessWidget {
               FinishedPage(
                 key: PageStorageKey<String>("finishedOrderPage"),
               ),
-              Center(
-                child: Text("Completed"),
+              CompletedPage(
+                key: PageStorageKey<String>("completedOrderPage"),
               ),
             ],
           ),

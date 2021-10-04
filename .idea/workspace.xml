@@ -8,19 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/utils/common/dissmiss_keyboard_content.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/new_orders_empty_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/orders/view/widgets/empty_new_orders_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sign_in/binding/sign_in_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sign_in/binding/sign_in_binding.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sign_in/controller/sign_in_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sign_in/controller/sign_in_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sign_in/view/sigin_in_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sign_in/view/sigin_in_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/orders_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/orders_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/common/refresh_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/refresh_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +63,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/assets/icons/notification" />
       <recent name="$PROJECT_DIR$/assets/icons/menu" />
       <recent name="$PROJECT_DIR$/assets/image" />
