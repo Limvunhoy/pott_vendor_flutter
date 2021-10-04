@@ -5,6 +5,7 @@ class BaseView extends StatelessWidget {
   final String? title;
   final Color? backgroundColor;
   final List<Widget>? actions;
+  final PreferredSizeWidget? bottom;
   final Widget body;
 
   const BaseView(
@@ -12,6 +13,7 @@ class BaseView extends StatelessWidget {
       this.title = "",
       this.backgroundColor = colorExt.PRIMARY_BACKGROUND_COLOR,
       this.actions,
+      this.bottom,
       required this.body})
       : super(key: key);
 
@@ -22,6 +24,8 @@ class BaseView extends StatelessWidget {
         title: Text(title!),
         actions: actions,
         backgroundColor: backgroundColor,
+        bottom: bottom,
+        elevation: 0.0,
       ),
       body: body,
     );
