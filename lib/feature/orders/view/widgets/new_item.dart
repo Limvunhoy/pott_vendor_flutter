@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:pott_vendor/feature/orders/binding/orders_binding.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_product_option_item.dart';
 import 'package:pott_vendor/utils/common/base_button.dart';
 import 'package:pott_vendor/utils/constants/image_path_constant.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
+enum OrderStatus { newOrder, ready, finished, competed }
+
 class NewItem extends StatelessWidget {
-  const NewItem({Key? key}) : super(key: key);
+  const NewItem({Key? key, required this.orderStatus}) : super(key: key);
+
+  final OrderStatus orderStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -58,16 +63,30 @@ class NewItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 2.0),
-                width: 12.0,
-                height: 12.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(ImagePathConstant.GO_ICON),
+              if (orderStatus == OrderStatus.ready ||
+                  orderStatus == OrderStatus.finished) ...[
+                Container(
+                  margin: const EdgeInsets.only(top: 2.0),
+                  width: 24.0,
+                  height: 24.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(ImagePathConstant.PHONE_ICON),
+                    ),
                   ),
                 ),
-              ),
+              ] else ...[
+                Container(
+                  margin: const EdgeInsets.only(top: 2.0),
+                  width: 14.0,
+                  height: 14.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(ImagePathConstant.GO_ICON),
+                    ),
+                  ),
+                ),
+              ],
             ],
           ),
           // Product info
@@ -125,7 +144,7 @@ class NewItem extends StatelessWidget {
                                 width: 5.0,
                               );
                             },
-                            itemCount: 5),
+                            itemCount: 1),
                       ),
                     ],
                   ),
@@ -214,29 +233,42 @@ class NewItem extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 10.0),
             padding: EdgeInsets.zero,
-            child: Row(
-              children: [
-                Expanded(
-                  child: BaseButton(
-                    onPressed: () {},
-                    title: "Reject",
-                    titleColor: colorExt.PRIMARY_COLOR,
-                    backgroundColor: Colors.white,
-                    borderColor: colorExt.PRIMARY_COLOR,
-                  ),
-                ),
-                const SizedBox(
-                  width: 12.0,
-                ),
-                Expanded(
-                  child: BaseButton(
-                      onPressed: () {},
-                      title: "Confirm",
-                      titleColor: Colors.white,
-                      backgroundColor: colorExt.PRIMARY_COLOR),
-                ),
-              ],
-            ),
+            child: orderStatus == OrderStatus.newOrder
+                ? Row(
+                    children: [
+                      Expanded(
+                        child: BaseButton(
+                          onPressed: () {},
+                          title: "Reject",
+                          titleColor: colorExt.PRIMARY_COLOR,
+                          backgroundColor: Colors.white,
+                          borderColor: colorExt.PRIMARY_COLOR,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 12.0,
+                      ),
+                      Expanded(
+                        child: BaseButton(
+                            onPressed: () {},
+                            title: "Confirm",
+                            titleColor: Colors.white,
+                            backgroundColor: colorExt.PRIMARY_COLOR),
+                      ),
+                    ],
+                  )
+                : orderStatus == OrderStatus.ready
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: BaseButton(
+                            onPressed: () {},
+                            title: "Order Ready",
+                            titleColor: Colors.white,
+                            backgroundColor: colorExt.PRIMARY_COLOR),
+                      )
+                    : Container(
+                        height: 38.0,
+                      ),
           ),
         ],
       ),

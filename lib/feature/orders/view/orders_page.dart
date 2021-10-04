@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
+import 'package:pott_vendor/feature/orders/view/components/finished_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/new_page.dart';
+import 'package:pott_vendor/feature/orders/view/components/ready_page.dart';
 import 'package:pott_vendor/utils/common/base_view.dart';
 import 'package:pott_vendor/utils/export.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
@@ -26,6 +28,7 @@ class OrdersPage extends StatelessWidget {
               fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600),
           unselectedLabelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
           unselectedLabelColor: Colors.black,
+          labelPadding: const EdgeInsets.symmetric(horizontal: 5.0),
           tabs: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,12 +70,14 @@ class OrdersPage extends StatelessWidget {
           color: colorExt.PRIMARY_BACKGROUND_COLOR,
           child: TabBarView(
             children: [
-              NewPage(),
-              Center(
-                child: Text("Ready"),
+              NewPage(
+                key: PageStorageKey<String>("newOrderPage"),
               ),
-              Center(
-                child: Text("Finished"),
+              ReadyPage(
+                key: PageStorageKey<String>("readyOrderPage"),
+              ),
+              FinishedPage(
+                key: PageStorageKey<String>("finishedOrderPage"),
               ),
               Center(
                 child: Text("Completed"),

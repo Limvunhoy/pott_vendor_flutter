@@ -25,6 +25,7 @@ class BaseView extends StatelessWidget {
         actions: actions,
         backgroundColor: backgroundColor,
         bottom: bottom,
+        elevation: 0.0,
       ),
       body: body,
     );
