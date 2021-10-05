@@ -24,4 +24,9 @@ class ImagePathConstant {
   // Notification
   static const PRODUCT_READY =
       "assets/icons/notification/notif_product_ready.png";
+
+  // Sale Menu Page
+  static const BID_ICON = "assets/icons/sale_menu/bid_icon.png";
+  static const IN_STOCK_ICON = "assets/icons/sale_menu/in_stock_icon.png";
+  static const EDIT_ICON = "assets/icons/sale_menu/edit_icon.png";
 }

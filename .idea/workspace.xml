@@ -8,14 +8,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/new_orders_empty_image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/orders/view/widgets/empty_new_orders_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/sale_menu/bid_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/sale_menu/edit_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/sale_menu/in_stock_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/bid_product_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/sale_product_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/sale_menu_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/bid_prodcut_item.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/sale_product_item.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/orders_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/orders_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/common/refresh_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/refresh_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_routes.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/extension/color + extension.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/extension/color + extension.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +71,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/icons/sale_menu" />
       <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/assets/icons/notification" />
       <recent name="$PROJECT_DIR$/assets/icons/menu" />
