@@ -24,92 +24,131 @@ class BidProductItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
-              fit: BoxFit.cover,
-              width: 100.0,
-              height: 100.0,
-            ),
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                  fit: BoxFit.cover,
+                  width: 100.0,
+                  height: 100.0,
+                ),
+              ),
+              Container(
+                width: 100.0,
+                height: 100.0,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Text(
+                  "Unpublished",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: fontSizeExt.extraSmallSize),
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "iPhone 13 Pro Max new arrival",
-                  style: TextStyle(
-                      color: Colors.black, fontSize: fontSizeExt.mediumSize),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(
-                  height: 7.0,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "\$1500.00",
-                      style: TextStyle(
-                          color: colorExt.RED,
-                          fontSize: fontSizeExt.mediumSize,
-                          fontWeight: FontWeight.w600),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(
-                      width: 6.0,
-                    ),
-                    Image.asset(
-                      ImagePathConstant.BID_ICON,
-                      fit: BoxFit.cover,
-                      width: 43.0,
-                      height: 14.0,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  "Buy it now \$ 1300.00",
-                  style: TextStyle(
-                    color: colorExt.DARK_GRAY,
-                    fontSize: fontSizeExt.smallSize,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "iPhone 13 Pro Max new arrival",
+                    style: TextStyle(
+                        color: Colors.black, fontSize: fontSizeExt.mediumSize),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(
-                  height: 12.0,
-                ),
-                Row(
-                  children: [
-                    Image.asset(
-                      ImagePathConstant.IN_STOCK_ICON,
-                      fit: BoxFit.cover,
-                      width: 14.01,
-                      height: 13.01,
-                    ),
-                    const SizedBox(
-                      width: 7.0,
-                    ),
-                    Text(
-                      "Stock 10",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: fontSizeExt.smallSize,
+                  const SizedBox(
+                    height: 7.0,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Text(
+                              "\$1500.00",
+                              style: TextStyle(
+                                  color: colorExt.RED,
+                                  fontSize: fontSizeExt.mediumSize,
+                                  fontWeight: FontWeight.w600),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(
+                              width: 6.0,
+                            ),
+                            Image.asset(
+                              ImagePathConstant.BID_ICON,
+                              fit: BoxFit.cover,
+                              width: 43.0,
+                              height: 14.0,
+                            ),
+                          ],
+                        ),
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFFF1F0),
+                          borderRadius: BorderRadius.circular(2.0),
+                        ),
+                        child: Text(
+                          "Sold out",
+                          style: TextStyle(color: colorExt.RED, fontSize: 10.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    "Buy it now \$ 1300.00",
+                    style: TextStyle(
+                      color: colorExt.DARK_GRAY,
+                      fontSize: fontSizeExt.smallSize,
                     ),
-                  ],
-                )
-              ],
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        ImagePathConstant.IN_STOCK_ICON,
+                        fit: BoxFit.cover,
+                        width: 14.01,
+                        height: 13.01,
+                      ),
+                      const SizedBox(
+                        width: 7.0,
+                      ),
+                      Text(
+                        "Stock 10",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: fontSizeExt.smallSize,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           )
         ],

@@ -3,6 +3,7 @@ import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 
 class BaseView extends StatelessWidget {
   final String? title;
+  final Color? titleColor;
   final Color? backgroundColor;
   final List<Widget>? actions;
   final PreferredSizeWidget? bottom;
@@ -11,6 +12,7 @@ class BaseView extends StatelessWidget {
   const BaseView(
       {Key? key,
       this.title = "",
+      this.titleColor = Colors.black,
       this.backgroundColor = colorExt.PRIMARY_BACKGROUND_COLOR,
       this.actions,
       this.bottom,
@@ -21,7 +23,10 @@ class BaseView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title!),
+        title: Text(
+          title!,
+          style: TextStyle(color: titleColor),
+        ),
         actions: actions,
         backgroundColor: backgroundColor,
         bottom: bottom,
