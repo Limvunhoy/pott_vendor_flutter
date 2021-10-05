@@ -19,7 +19,7 @@ class OrdersPage extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: BaseView(
-        backgroundColor: Colors.white,
+        appBarBackgroundColor: Colors.white,
         title: "Orders",
         bottom: TabBar(
           indicator: UnderlineTabIndicator(

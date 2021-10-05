@@ -7,8 +7,9 @@ class BaseButton extends StatelessWidget {
   final double? height;
   final VoidCallback? onPressed;
   final String title;
-  final Color? backgroundColor;
   final Color? titleColor;
+  final FontWeight? fontWeight;
+  final Color? backgroundColor;
   final Color? borderColor;
 
   const BaseButton(
@@ -17,8 +18,9 @@ class BaseButton extends StatelessWidget {
       this.height = 38.0,
       required this.onPressed,
       required this.title,
-      this.backgroundColor = Colors.white,
       this.titleColor = Colors.black,
+      this.backgroundColor = Colors.white,
+      this.fontWeight,
       this.borderColor = Colors.transparent})
       : super(key: key);
 
@@ -31,7 +33,10 @@ class BaseButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           title,
-          style: TextStyle(color: titleColor, fontSize: fontSizeExt.mediumSize),
+          style: TextStyle(
+              color: titleColor,
+              fontSize: fontSizeExt.mediumSize,
+              fontWeight: fontWeight),
         ),
         style: ElevatedButton.styleFrom(
           primary: backgroundColor,

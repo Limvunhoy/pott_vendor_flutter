@@ -7,6 +7,8 @@ class ImagePathConstant {
   // Orders Page
   static const EMPTY_IMAGE = "assets/images/new_orders_empty_image.png";
 
+  // ======================================================================== //
+
   // Icon
   static const WALLET_ICON = "assets/icons/wallet_icon.png";
   static const MENU_ICON = "assets/icons/menu/menu_icon.png";
@@ -33,4 +35,8 @@ class ImagePathConstant {
   static const BID_ICON = "assets/icons/sale_menu/bid_icon.png";
   static const IN_STOCK_ICON = "assets/icons/sale_menu/in_stock_icon.png";
   static const EDIT_ICON = "assets/icons/sale_menu/edit_icon.png";
+
+  // Processing Page
+  static const CONTACT_DRIVER_ICON =
+      "assets/icons/processing/contact_driver_icon.png";
 }
