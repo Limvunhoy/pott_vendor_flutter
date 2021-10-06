@@ -14,7 +14,7 @@ class SaleMenuScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: BaseView(
-        backgroundColor: colorExt.PRIMARY_COLOR,
+        appBarBackgroundColor: colorExt.PRIMARY_COLOR,
         title: "Menu",
         titleColor: Colors.white,
         actions: [
