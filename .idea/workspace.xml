@@ -8,27 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/icons/processing/contact_driver_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/processing/binding/processing_binding.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/processing/controller/processing_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/processing/view/processing_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/processing/view/widgets/order_details_item.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/processing/view/widgets/processing_product_list.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/model/processing/processing_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/processing/view/widgets/bottom_navigation_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/processing/view/widgets/contact_driver_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/processing/view/widgets/export_widgets.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/processing/view/widgets/order_details_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/orders_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/orders_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/sale_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/sale_menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/common/base_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/base_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/common/base_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/base_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/processing/view/processing_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/processing/view/processing_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

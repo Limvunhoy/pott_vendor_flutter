@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/feature/processing/controller/processing_controller.dart';
-import 'package:pott_vendor/feature/processing/view/widgets/order_details_item.dart';
-import 'package:pott_vendor/feature/processing/view/widgets/processing_product_list.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/bottom_navigation_widget.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/model/processing/processing_model.dart';
-import 'package:pott_vendor/utils/common/base_button.dart';
-import 'package:pott_vendor/utils/common/base_view.dart';
-import 'package:pott_vendor/utils/constants/image_path_constant.dart';
-import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
-import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class ProcessingPage extends StatelessWidget {
   const ProcessingPage({Key? key}) : super(key: key);
@@ -169,31 +164,7 @@ class ProcessingPage extends StatelessWidget {
                       const SizedBox(
                         width: 10.0,
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Contact to driver",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: fontSizeExt.mediumSize,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4.0,
-                            ),
-                            Text(
-                              "Call ask about delivery",
-                              style: TextStyle(
-                                color: colorExt.LIGHT_GRAY,
-                                fontSize: fontSizeExt.smallSize,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      ContactDriverWidget(),
                       Container(
                         margin: const EdgeInsets.only(right: 10.0),
                         child: Image.asset(
@@ -212,47 +183,7 @@ class ProcessingPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Order Details",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: fontSizeExt.mediumSize,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      OrderDetailItem(
-                        title: "Order ID:",
-                        value: "#12345",
-                        valueColor: colorExt.PRIMARY_COLOR,
-                        backgroundColor: Color(0xFFF0FFF9),
-                      ),
-                      const SizedBox(
-                        height: 14.0,
-                      ),
-                      OrderDetailItem(
-                        title: "Order Date:",
-                        value: "10-09-2021 | 9:00am",
-                      ),
-                      const SizedBox(
-                        height: 14.0,
-                      ),
-                      OrderDetailItem(
-                        title: "Delivery Address:",
-                        value: "#35, St 310, Phnom Penh",
-                      ),
-                      const SizedBox(
-                        height: 14.0,
-                      ),
-                      OrderDetailItem(
-                        title: "Delivery Fee:",
-                        value: "\$1.50",
-                      ),
+                      OrderDetailsWidget(),
                       const SizedBox(
                         height: 15.0,
                       ),
@@ -265,56 +196,8 @@ class ProcessingPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigation: Container(
-        padding: const EdgeInsets.symmetric(
-            vertical: 14.0, horizontal: defaultSizeExt.basePadding),
-        height: 96.0 + MediaQuery.of(context).padding.bottom,
-        color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total:",
-                  style: TextStyle(
-                      color: Colors.black, fontSize: fontSizeExt.smallSize),
-                ),
-                Text(
-                  "\$ 1500.00",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: fontSizeExt.largeSize,
-                    fontWeight: fontWeightExt.baseFontWeight,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 13.0,
-            ),
-            Obx(
-              () {
-                return Visibility(
-                  visible: processingController.dummyData.value.state !=
-                      ProcessingState.delivered,
-                  child: BaseButton(
-                    width: MediaQuery.of(context).size.width,
-                    height: 40.0,
-                    onPressed: () {},
-                    title: "Confirm Now",
-                    titleColor: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    backgroundColor: colorExt.PRIMARY_COLOR,
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+      bottomNavigation: BottomNavigationWidget(
+        processingController: processingController,
       ),
     );
   }
