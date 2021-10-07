@@ -8,6 +8,8 @@ import 'package:pott_vendor/feature/processing/view/processing_page.dart';
 import 'package:pott_vendor/feature/sale_menu/binding/sale_menu_binding.dart';
 import 'package:pott_vendor/feature/sale_menu/view/sale_menu_page.dart';
 import 'package:pott_vendor/feature/sign_in/binding/sign_in_binding.dart';
+import 'package:pott_vendor/feature/view_product/binding/view_product_binding.dart';
+import 'package:pott_vendor/feature/view_product/view/view_product_page.dart';
 
 import 'export.dart';
 
@@ -33,5 +35,10 @@ class AppPages {
         name: Routes.PROCESSING,
         page: () => ProcessingPage(),
         binding: ProcessingBinding()),
+    GetPage(
+      name: Routes.VIEW_PRODUCT,
+      page: () => ViewProductPage(),
+      binding: ViewProductBinding(),
+    ),
   ];
 }
