@@ -39,4 +39,11 @@ class ImagePathConstant {
   // Processing Page
   static const CONTACT_DRIVER_ICON =
       "assets/icons/processing/contact_driver_icon.png";
+
+  // View Product Page
+  static const BACK_ICON = "assets/icons/view_product/back_icon.png";
+  static const MORE_ICON = "assets/icons/view_product/more_icon.png";
+  static const STARTING_BID_ICON =
+      "assets/icons/view_product/starting_bid_icon.png";
+  static const HOT_SALE_ICON = "assets/icons/view_product/hot_sale_icon.png";
 }
