@@ -31,7 +31,8 @@ dependencies:
   get: ^4.3.8
   country_code_picker: ^2.0.2
   flutter_countdown_timer: ^4.1.0
-  visibility_detector: ^0.2.0
+  visibility_detector: ^0.2.0  # this package used to get index of scroll in ListView.builder
+  image_picker: ^0.8.4+1
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,7 @@ flutter:
     - assets/icons/sale_menu/
     - assets/icons/processing/
     - assets/icons/view_product/
+    - assets/icons/account/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

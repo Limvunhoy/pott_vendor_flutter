@@ -46,4 +46,7 @@ class ImagePathConstant {
   static const STARTING_BID_ICON =
       "assets/icons/view_product/starting_bid_icon.png";
   static const HOT_SALE_ICON = "assets/icons/view_product/hot_sale_icon.png";
+
+  // Account
+  static const CAMERA_ICON = "assets/icons/account/camera_icon.png";
 }
