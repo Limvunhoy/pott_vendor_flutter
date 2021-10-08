@@ -43,7 +43,7 @@ class BaseButton extends StatelessWidget {
           elevation: 0.0,
           side: BorderSide(width: 1, color: borderColor!),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(6.0),
           ),
         ),
       ),

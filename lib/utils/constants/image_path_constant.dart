@@ -11,6 +11,8 @@ class ImagePathConstant {
 
   // Icon
   static const WALLET_ICON = "assets/icons/wallet_icon.png";
+
+  // Menu & Add Menu
   static const MENU_ICON = "assets/icons/menu/menu_icon.png";
   static const MENU_ORDER_ICON = "assets/icons/menu/menu_order_icon.png";
   static const MENU_REPORT_ICON = "assets/icons/menu/menu_report_icon.png";
@@ -18,6 +20,7 @@ class ImagePathConstant {
       "assets/icons/menu/menu_notification_icon.png";
   static const MENU_ACCOUNT_ICON = "assets/icons/menu/menu_account_icon.png";
   static const MENU_LOGOUT_ICON = "assets/icons/menu/menu_logout_icon.png";
+  static const ADD_PHOTO_ICON = "assets/icons/menu/menu_add_photo_icon.png";
 
   // Sale Menu Page
   static const APP_BAR_EDIT_ICON =
