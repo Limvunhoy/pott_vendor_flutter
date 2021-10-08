@@ -6,4 +6,5 @@ class Routes {
   static const SALE_MENU = "/sale_menu";
   static const PROCESSING = "/processing";
   static const VIEW_PRODUCT = "/view_product";
+  static const ACCOUNT = "/account";
 }
