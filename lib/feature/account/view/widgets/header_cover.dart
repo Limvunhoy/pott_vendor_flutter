@@ -1,11 +1,26 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pott_vendor/feature/account/controller/account_controller.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 
 class HeaderCover extends StatelessWidget {
-  const HeaderCover({Key? key}) : super(key: key);
+  const HeaderCover(
+      {Key? key, required this.onProfileTap, required this.accountController})
+      : super(key: key);
+
+  final VoidCallback onProfileTap;
+  final AccountController accountController;
 
   @override
   Widget build(BuildContext context) {
+    // final imagePath = this.accountController.profilePic!.path;
+    // final image = imagePath.contains("https://")
+    //     ? NetworkImage(
+    //         "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg",
+    //       )
+    //     : FileImage(File(imagePath));
+
     return SliverAppBar(
       backgroundColor: colorExt.PRIMARY_COLOR,
       expandedHeight: MediaQuery.of(context).size.width / 1.8,
@@ -45,23 +60,36 @@ class HeaderCover extends StatelessWidget {
                 right: 0.0,
                 child: Container(
                   alignment: Alignment.center,
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                        width: 120.0,
-                        height: 120.0,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 4),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg"),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 4),
+                      borderRadius: BorderRadius.circular(60.0),
+                    ),
+                    child: GetBuilder(
+                      init: AccountController(),
+                      builder: (context) {
+                        return ClipOval(
+                          child: Material(
+                            child: Ink.image(
+                              // image: image as ImageProvider,
+                              image: accountController.profilePic != null
+                                  ? FileImage(File(
+                                          accountController.profilePic!.path))
+                                      as ImageProvider
+                                  : NetworkImage(
+                                      "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg",
+                                    ),
+                              fit: BoxFit.cover,
+                              width: 116.0,
+                              height: 116.0,
+                              child: InkWell(
+                                onTap: onProfileTap,
+                              ),
+                            ),
                           ),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),

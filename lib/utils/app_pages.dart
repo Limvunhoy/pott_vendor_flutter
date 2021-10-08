@@ -1,4 +1,5 @@
 import 'package:get/route_manager.dart';
+import 'package:pott_vendor/feature/account/binding/account_binding.dart';
 import 'package:pott_vendor/feature/account/view/account_page.dart';
 import 'package:pott_vendor/feature/menu/binding/menu_binding.dart';
 import 'package:pott_vendor/feature/menu/view/menu_page.dart';
@@ -44,6 +45,7 @@ class AppPages {
     GetPage(
       name: Routes.ACCOUNT,
       page: () => AccountPage(),
+      binding: AccountBinding(),
     ),
   ];
 }

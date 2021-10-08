@@ -43,5 +43,11 @@
 		<false/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSCameraUsageDescription</key>
+        <string>Allow to use your camera</string>
+        <key>NSMicrophoneUsageDescription</key>
+        <string>Allow to use your microphone</string>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>Allow to access your device photo</string>
 	</dict>
 </plist>
