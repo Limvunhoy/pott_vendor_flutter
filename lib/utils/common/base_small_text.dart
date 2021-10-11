@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class BaseSmallText extends StatelessWidget {
-  const BaseSmallText(
-      {Key? key,
-      required this.text,
-      this.color = Colors.black,
-      this.fontWeight,
-      this.textAlign})
-      : super(key: key);
+  const BaseSmallText({
+    Key? key,
+    required this.text,
+    this.color = Colors.black,
+    this.fontWeight,
+    this.textAlign,
+    this.textOverflow,
+  }) : super(key: key);
 
   final String text;
   final Color? color;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
+  final TextOverflow? textOverflow;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class BaseSmallText extends StatelessWidget {
         fontWeight: fontWeight,
       ),
       textAlign: textAlign,
+      overflow: textOverflow,
     );
   }
 }
