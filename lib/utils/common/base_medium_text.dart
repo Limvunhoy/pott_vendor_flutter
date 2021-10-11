@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
-class BaseTitleText extends StatelessWidget {
-  const BaseTitleText(
+class BaseMediumText extends StatelessWidget {
+  const BaseMediumText(
       {Key? key,
       required this.text,
       this.color = Colors.black,
-      this.textAlign = TextAlign.start})
+      this.fontWeight,
+      this.textAlign})
       : super(key: key);
 
   final String text;
   final Color? color;
+  final FontWeight? fontWeight;
   final TextAlign? textAlign;
 
   @override
@@ -20,7 +22,7 @@ class BaseTitleText extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontSize: fontSizeExt.mediumSize,
-        fontWeight: FontWeight.w600,
+        fontWeight: fontWeight,
       ),
       textAlign: textAlign,
     );
