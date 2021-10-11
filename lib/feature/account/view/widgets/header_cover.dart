@@ -14,13 +14,6 @@ class HeaderCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final imagePath = this.accountController.profilePic!.path;
-    // final image = imagePath.contains("https://")
-    //     ? NetworkImage(
-    //         "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg",
-    //       )
-    //     : FileImage(File(imagePath));
-
     return SliverAppBar(
       backgroundColor: colorExt.PRIMARY_COLOR,
       expandedHeight: MediaQuery.of(context).size.width / 1.8,
@@ -71,7 +64,6 @@ class HeaderCover extends StatelessWidget {
                         return ClipOval(
                           child: Material(
                             child: Ink.image(
-                              // image: image as ImageProvider,
                               image: accountController.profilePic != null
                                   ? FileImage(File(
                                           accountController.profilePic!.path))

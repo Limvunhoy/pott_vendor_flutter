@@ -8,21 +8,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/feature/account/binding/account_binding.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/add_menu/view/widgets/add_description_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/add_menu/view/widgets/add_photo_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/add_menu/view/widgets/photo_description_list.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/add_menu/view/widgets/product_option_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/common/base_extra_small_text.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/common/base_medium_text.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/common/base_small_text.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/account/view/account_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/view/account_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/account/view/widgets/header_cover.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/view/widgets/header_cover.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/generated_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/generated_plugin_registrant.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/add_menu/controller/add_menu_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/add_menu/controller/add_menu_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/add_menu/view/add_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/add_menu/view/add_menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/common/base_title_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/base_title_text.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,11 +71,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/icons/menu" />
       <recent name="$PROJECT_DIR$/assets/icons/account" />
       <recent name="$PROJECT_DIR$/assets/icons/view_product" />
       <recent name="$PROJECT_DIR$/assets/icons/processing" />
       <recent name="$PROJECT_DIR$/assets/images" />
-      <recent name="$PROJECT_DIR$/assets/icons/sale_menu" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

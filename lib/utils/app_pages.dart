@@ -1,6 +1,8 @@
 import 'package:get/route_manager.dart';
 import 'package:pott_vendor/feature/account/binding/account_binding.dart';
 import 'package:pott_vendor/feature/account/view/account_page.dart';
+import 'package:pott_vendor/feature/add_menu/binding/add_menu_binding.dart';
+import 'package:pott_vendor/feature/add_menu/view/add_menu_page.dart';
 import 'package:pott_vendor/feature/menu/binding/menu_binding.dart';
 import 'package:pott_vendor/feature/menu/view/menu_page.dart';
 import 'package:pott_vendor/feature/orders/binding/orders_binding.dart';
@@ -46,6 +48,11 @@ class AppPages {
       name: Routes.ACCOUNT,
       page: () => AccountPage(),
       binding: AccountBinding(),
+    ),
+    GetPage(
+      name: Routes.ADD_MENU,
+      page: () => AddMenuPage(),
+      binding: AddMenuBinding(),
     ),
   ];
 }
