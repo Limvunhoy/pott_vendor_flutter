@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       getPages: AppPages.routes,
-      initialRoute: Routes.ADD_MENU,
+      initialRoute: Routes.PRODUCT_OPTION,
     );
   }
 }

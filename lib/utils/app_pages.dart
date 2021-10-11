@@ -9,6 +9,8 @@ import 'package:pott_vendor/feature/orders/binding/orders_binding.dart';
 import 'package:pott_vendor/feature/orders/view/orders_page.dart';
 import 'package:pott_vendor/feature/processing/binding/processing_binding.dart';
 import 'package:pott_vendor/feature/processing/view/processing_page.dart';
+import 'package:pott_vendor/feature/product_option/binding/product_option_binding.dart';
+import 'package:pott_vendor/feature/product_option/view/product_option_page.dart';
 import 'package:pott_vendor/feature/sale_menu/binding/sale_menu_binding.dart';
 import 'package:pott_vendor/feature/sale_menu/view/sale_menu_page.dart';
 import 'package:pott_vendor/feature/sign_in/binding/sign_in_binding.dart';
@@ -53,6 +55,11 @@ class AppPages {
       name: Routes.ADD_MENU,
       page: () => AddMenuPage(),
       binding: AddMenuBinding(),
+    ),
+    GetPage(
+      name: Routes.PRODUCT_OPTION,
+      page: () => ProductOptionPage(),
+      binding: ProductOptionBinding(),
     ),
   ];
 }

@@ -8,4 +8,5 @@ class Routes {
   static const VIEW_PRODUCT = "/view_product";
   static const ACCOUNT = "/account";
   static const ADD_MENU = "/add_menu";
+  static const PRODUCT_OPTION = "/product_option";
 }
