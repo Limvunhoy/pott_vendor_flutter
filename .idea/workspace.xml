@@ -8,63 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/icons/processing/driver_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/total_sale_this_month_bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/total_sale_today_bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/report/view/report_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/report/view/widgets/total_sale_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/splash_screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/splash_screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/account/view/widgets/header_cover.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/view/widgets/header_cover.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/add_menu/view/add_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/add_menu/view/add_menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/add_menu/view/widgets/add_photo_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/add_menu/view/widgets/add_photo_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/menu/binding/menu_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/binding/menu_binding.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/menu/controller/menu_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/controller/menu_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/app_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/app_routes.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/menu/view/widgets/menu_item_.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/view/widgets/menu_item_.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/menu/view/widgets/sale_report_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/view/widgets/sale_report_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/notification/view/widget/notification_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/notification/view/widget/notification_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/widgets/empty_new_orders_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/widgets/empty_new_orders_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/widgets/new_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/widgets/new_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/processing/controller/processing_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/processing/controller/processing_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/processing/view/processing_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/processing/view/processing_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/processing/view/widgets/bottom_navigation_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/processing/view/widgets/bottom_navigation_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/processing/view/widgets/export_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/processing/view/widgets/export_widgets.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/bid_product_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/bid_product_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/sale_product_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/sale_product_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/sale_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/sale_menu_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/bid_prodcut_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/bid_prodcut_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/sale_product_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/sale_product_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/sign_in/view/sigin_in_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sign_in/view/sigin_in_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/view_product/view/widgets/bid_price_starting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/view_product/view/widgets/bid_price_starting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/view_product/view/widgets/hot_sale_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/view_product/view/widgets/hot_sale_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/view_product/view/widgets/hstack_product_image_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/view_product/view/widgets/hstack_product_image_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/model/menu/menu_item_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/menu/menu_item_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/model/processing/processing_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/processing/processing_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/service/api_base_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/api/api_base_helper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/service/logger_interceptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/api/logger_interceptor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/app_pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/app_routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/common/base_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/base_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/constants/image_path_constant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/asset_path.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/export.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/export.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/img/light-background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/splash/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/splash/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/asset_path.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/asset_path.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,10 +65,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/lib/core/api" />
       <recent name="$PROJECT_DIR$/lib/config" />
       <recent name="$PROJECT_DIR$/assets/icons/processing" />
-      <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/assets/icons/menu" />
     </key>
   </component>
