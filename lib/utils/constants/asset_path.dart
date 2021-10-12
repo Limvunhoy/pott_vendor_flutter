@@ -7,6 +7,11 @@ class AssetPath {
   // Orders Page
   static const EMPTY_IMAGE = "assets/images/new_orders_empty_image.png";
 
+  // Report Page
+  static const TOTAL_SALE_TODAY_BG = "assets/images/total_sale_today_bg.png";
+  static const TOTAL_SALE_THIS_MONTH_BG =
+      "assets/images/total_sale_this_month_bg.png";
+
   // ======================================================================== //
 
   // Icon

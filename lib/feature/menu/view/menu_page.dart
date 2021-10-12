@@ -106,6 +106,7 @@ class MenuPage extends StatelessWidget {
                                   break;
                                 case MenuItemEnum.report:
                                   print("Navigate to report page");
+                                  Get.toNamed(Routes.REPORT);
                                   break;
                                 case MenuItemEnum.notification:
                                   print("Navigate to notification page");
