@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pott_vendor/core/model/processing/processing_model.dart';
 import 'package:pott_vendor/feature/processing/controller/processing_controller.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/bottom_navigation_widget.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
-import 'package:pott_vendor/model/processing/processing_model.dart';
 
 class ProcessingPage extends StatelessWidget {
   const ProcessingPage({Key? key}) : super(key: key);
@@ -62,10 +62,10 @@ class ProcessingPage extends StatelessWidget {
                   height: 30.0,
                 ),
                 Image.asset(
-                  ImagePathConstant.CONTACT_DRIVER_ICON,
+                  AssetPath.DRIVER_ICON,
                   fit: BoxFit.cover,
-                  width: 96.0,
-                  height: 96.0,
+                  width: MediaQuery.of(context).size.width / 3.7,
+                  height: MediaQuery.of(context).size.width / 3.5,
                 ),
                 const SizedBox(
                   height: 15.0,
@@ -156,7 +156,7 @@ class ProcessingPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Image.asset(
-                        ImagePathConstant.CONTACT_DRIVER_ICON,
+                        AssetPath.CONTACT_DRIVER_ICON,
                         fit: BoxFit.cover,
                         width: 45.0,
                         height: 45.0,
@@ -168,7 +168,7 @@ class ProcessingPage extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(right: 10.0),
                         child: Image.asset(
-                          ImagePathConstant.PHONE_ICON,
+                          AssetPath.PHONE_ICON,
                           fit: BoxFit.cover,
                           width: 24.0,
                           height: 24.0,

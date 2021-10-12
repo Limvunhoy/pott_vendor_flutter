@@ -21,7 +21,9 @@ class HeaderCover extends StatelessWidget {
       pinned: true,
       elevation: 0.0,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.back();
+        },
         icon: Icon(Icons.arrow_back_ios),
         color: Colors.white,
       ),
@@ -32,7 +34,7 @@ class HeaderCover extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {},
-          icon: Image.asset(ImagePathConstant.CAMERA_ICON),
+          icon: Image.asset(AssetPath.CAMERA_ICON),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(

@@ -4,6 +4,6 @@ import 'package:pott_vendor/feature/menu/controller/menu_controller.dart';
 class MenuBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<MenuController>(MenuController());
+    Get.lazyPut(() => MenuController());
   }
 }

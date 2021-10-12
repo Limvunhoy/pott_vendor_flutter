@@ -12,7 +12,7 @@ class BidPriceStarting extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            ImagePathConstant.STARTING_BID_ICON,
+            AssetPath.STARTING_BID_ICON,
             fit: BoxFit.cover,
             width: 24.0,
             height: 27.0,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pott_vendor/utils/constants/image_path_constant.dart';
+import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 
 class NotificationItem extends StatelessWidget {
@@ -22,8 +22,7 @@ class NotificationItem extends StatelessWidget {
             ),
           ],
           image: DecorationImage(
-              image: AssetImage(ImagePathConstant.PRODUCT_READY),
-              fit: BoxFit.cover),
+              image: AssetImage(AssetPath.PRODUCT_READY), fit: BoxFit.cover),
         ),
       ),
       title: RichText(

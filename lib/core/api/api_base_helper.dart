@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pott_vendor/service/logger_interceptor.dart';
+import 'package:pott_vendor/core/api/logger_interceptor.dart';
 
 class ApiBaseHelper {
   static final String baseUrl = "https://jsonplaceholder.typicode.com";

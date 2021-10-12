@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pott_vendor/model/menu/menu_item_model.dart';
+import 'package:pott_vendor/core/model/menu/menu_item_model.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class MenuItem extends StatelessWidget {

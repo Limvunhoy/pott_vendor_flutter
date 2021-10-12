@@ -21,7 +21,7 @@ class HotSaleWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            ImagePathConstant.HOT_SALE_ICON,
+            AssetPath.HOT_SALE_ICON,
             fit: BoxFit.cover,
             width: 92.91,
             height: 17.0,

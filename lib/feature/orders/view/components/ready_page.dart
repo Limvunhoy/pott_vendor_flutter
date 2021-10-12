@@ -19,6 +19,7 @@ class ReadyPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return NewItem(
             orderStatus: OrderStatus.ready,
+            onConfirm: () {},
           );
         },
       ),

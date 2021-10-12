@@ -1,10 +1,12 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pott_vendor/feature/menu/view/menu_page.dart';
 import 'package:pott_vendor/feature/sign_in/controller/sign_in_controller.dart';
+import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/base_view.dart';
 import 'package:pott_vendor/utils/common/dissmiss_keyboard_content.dart';
-import 'package:pott_vendor/utils/constants/image_path_constant.dart';
+import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
@@ -46,7 +48,7 @@ class _SignInPageState extends State<SignInPage> {
                     margin: const EdgeInsets.only(top: 37.0),
                     height: 153.0,
                     child: Image.asset(
-                      ImagePathConstant.SIGN_IN_STORE_IMAGE,
+                      AssetPath.SIGN_IN_STORE_IMAGE,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -225,6 +227,7 @@ class _SignInPageState extends State<SignInPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               signInController.onLogIn();
+                              Get.offNamed(Routes.MENU);
                             },
                             child: Text("LOG IN"),
                             style: ElevatedButton.styleFrom(

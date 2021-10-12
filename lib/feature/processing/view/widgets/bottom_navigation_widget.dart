@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pott_vendor/core/model/processing/processing_model.dart';
 import 'package:pott_vendor/feature/processing/controller/processing_controller.dart';
-import 'package:pott_vendor/model/processing/processing_model.dart';
 import 'package:pott_vendor/utils/common/base_button.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
@@ -53,7 +53,9 @@ class BottomNavigationWidget extends StatelessWidget {
                 child: BaseButton(
                   width: MediaQuery.of(context).size.width,
                   height: 40.0,
-                  onPressed: () {},
+                  onPressed: () {
+                    processingController.handleConfirmOrder();
+                  },
                   title: "Confirm Now",
                   titleColor: Colors.white,
                   fontWeight: FontWeight.w600,

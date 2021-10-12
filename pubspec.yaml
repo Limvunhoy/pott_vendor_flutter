@@ -45,12 +45,12 @@ flutter_native_splash:
   ios: true
 #  web: false
 
-#  color: "#4DDCA6"
-  background_image: "assets/image/splash_screen.png"
-#  image: assets/image/splash_screen.png
+  color: "#4DDCA6"
+#  background_image: "assets/images/splash_screen.png"
+  image: assets/images/splash_screen.png
 
   android_gravity: center
-  ios_content_mode: center
+  ios_content_mode: scaleAspectFit
 #  web_image_mode: center
 
   android12: true

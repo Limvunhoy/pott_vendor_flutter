@@ -10,6 +10,7 @@ class BaseView extends StatelessWidget {
   final Widget body;
   final Color? backgroundColor;
   final Widget? bottomNavigation;
+  final Widget? leading;
 
   const BaseView({
     Key? key,
@@ -21,6 +22,7 @@ class BaseView extends StatelessWidget {
     required this.body,
     this.backgroundColor,
     this.bottomNavigation,
+    this.leading,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class BaseView extends StatelessWidget {
           title!,
           style: TextStyle(color: titleColor),
         ),
+        leading: leading,
         actions: actions,
         backgroundColor: appBarBackgroundColor,
         bottom: bottom,
