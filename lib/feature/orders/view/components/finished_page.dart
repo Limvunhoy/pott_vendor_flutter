@@ -19,6 +19,7 @@ class FinishedPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return NewItem(
             orderStatus: OrderStatus.finished,
+            onConfirm: () {},
           );
         },
       ),

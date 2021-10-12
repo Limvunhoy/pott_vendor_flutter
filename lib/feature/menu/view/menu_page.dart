@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pott_vendor/core/model/menu/menu_item_model.dart';
 import 'package:pott_vendor/feature/menu/controller/menu_controller.dart';
 import 'package:pott_vendor/feature/menu/view/widgets/menu_item_.dart';
 import 'package:pott_vendor/feature/menu/view/widgets/sale_report_card.dart';
-import 'package:pott_vendor/model/menu/menu_item_model.dart';
-import 'package:pott_vendor/utils/app_routes.dart';
-import 'package:pott_vendor/utils/constants/image_path_constant.dart';
+import 'package:pott_vendor/config/app_routes.dart';
+import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/export.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
@@ -27,7 +27,7 @@ class MenuPage extends StatelessWidget {
                 height: 255,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(ImagePathConstant.MENU_BACKGROUND_IMAGE),
+                    image: AssetImage(AssetPath.MENU_BACKGROUND_IMAGE),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -98,9 +98,11 @@ class MenuPage extends StatelessWidget {
                                   _menuController.menuItemList[index].type) {
                                 case MenuItemEnum.orders:
                                   print("Navigate to order page");
+                                  Get.toNamed(Routes.ORDERS);
                                   break;
                                 case MenuItemEnum.menu:
                                   print("Navigate to menu page");
+                                  Get.toNamed(Routes.SALE_MENU);
                                   break;
                                 case MenuItemEnum.report:
                                   print("Navigate to report page");
@@ -111,6 +113,7 @@ class MenuPage extends StatelessWidget {
                                   break;
                                 case MenuItemEnum.account:
                                   print("Navigate to account page");
+                                  Get.toNamed(Routes.ACCOUNT);
                                   break;
                                 case MenuItemEnum.logout:
                                   print("Navigate to logout page");

@@ -17,7 +17,7 @@ import 'package:pott_vendor/feature/sign_in/binding/sign_in_binding.dart';
 import 'package:pott_vendor/feature/view_product/binding/view_product_binding.dart';
 import 'package:pott_vendor/feature/view_product/view/view_product_page.dart';
 
-import 'export.dart';
+import '../utils/export.dart';
 
 class AppPages {
   static const INITIAL = Routes.SIGNIN;

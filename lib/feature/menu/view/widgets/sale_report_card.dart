@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pott_vendor/utils/constants/image_path_constant.dart';
+import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class SaleReportCard extends StatelessWidget {
@@ -26,7 +26,7 @@ class SaleReportCard extends StatelessWidget {
               width: 26.0,
               height: 25.0,
               child: Image.asset(
-                ImagePathConstant.WALLET_ICON,
+                AssetPath.WALLET_ICON,
                 fit: BoxFit.cover,
               ),
             ),

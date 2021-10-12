@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pott_vendor/utils/constants/image_path_constant.dart';
+import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
@@ -38,7 +38,7 @@ class AddPhotoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                ImagePathConstant.ADD_PHOTO_ICON,
+                AssetPath.ADD_PHOTO_ICON,
                 fit: BoxFit.cover,
                 width: iconWidth,
                 height: iconHeight,

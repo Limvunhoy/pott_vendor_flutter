@@ -3,16 +3,18 @@ import 'package:flutter/rendering.dart';
 import 'package:pott_vendor/feature/orders/binding/orders_binding.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_product_option_item.dart';
 import 'package:pott_vendor/utils/common/base_button.dart';
-import 'package:pott_vendor/utils/constants/image_path_constant.dart';
+import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 enum OrderStatus { newOrder, ready, finished, competed }
 
 class NewItem extends StatelessWidget {
-  const NewItem({Key? key, required this.orderStatus}) : super(key: key);
+  const NewItem({Key? key, required this.orderStatus, required this.onConfirm})
+      : super(key: key);
 
   final OrderStatus orderStatus;
+  final VoidCallback onConfirm;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,7 @@ class NewItem extends StatelessWidget {
                   height: 24.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(ImagePathConstant.PHONE_ICON),
+                      image: AssetImage(AssetPath.PHONE_ICON),
                     ),
                   ),
                 ),
@@ -82,7 +84,7 @@ class NewItem extends StatelessWidget {
                   height: 14.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(ImagePathConstant.GO_ICON),
+                      image: AssetImage(AssetPath.GO_ICON),
                     ),
                   ),
                 ),
@@ -250,7 +252,7 @@ class NewItem extends StatelessWidget {
                       ),
                       Expanded(
                         child: BaseButton(
-                            onPressed: () {},
+                            onPressed: onConfirm,
                             title: "Confirm",
                             titleColor: Colors.white,
                             backgroundColor: colorExt.PRIMARY_COLOR),

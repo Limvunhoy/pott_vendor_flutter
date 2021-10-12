@@ -1,4 +1,4 @@
-class ImagePathConstant {
+class AssetPath {
   // Image
   static const MENU_BACKGROUND_IMAGE =
       "assets/images/menu_background_image.png";
@@ -42,6 +42,7 @@ class ImagePathConstant {
   // Processing Page
   static const CONTACT_DRIVER_ICON =
       "assets/icons/processing/contact_driver_icon.png";
+  static const DRIVER_ICON = "assets/icons/processing/driver_icon.png";
 
   // View Product Page
   static const BACK_ICON = "assets/icons/view_product/back_icon.png";

@@ -10,6 +10,7 @@ import 'package:pott_vendor/feature/add_menu/view/widgets/add_photo_widget.dart'
 import 'package:pott_vendor/feature/add_menu/view/widgets/photo_description_list.dart';
 import 'package:pott_vendor/feature/add_menu/view/widgets/product_option_widget.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
+import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/base_medium_text.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
 
@@ -137,6 +138,7 @@ class AddMenuPage extends StatelessWidget {
                     title: "Product Option",
                     onTap: () {
                       print("Navigate to Product Option Screen");
+                      Get.toNamed(Routes.PRODUCT_OPTION);
                     },
                   ),
                   AddDescriptionWidget(controller: _controller),

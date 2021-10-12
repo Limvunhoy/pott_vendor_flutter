@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pott_vendor/utils/constants/image_path_constant.dart';
+import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class EmptyNewOrdersWidget extends StatelessWidget {
@@ -12,7 +12,7 @@ class EmptyNewOrdersWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(
-          ImagePathConstant.EMPTY_IMAGE,
+          AssetPath.EMPTY_IMAGE,
           fit: BoxFit.cover,
           width: MediaQuery.of(context).size.width / 1.5,
         ),

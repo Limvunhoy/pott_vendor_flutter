@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pott_vendor/service/api_base_helper.dart';
-import 'package:pott_vendor/utils/app_pages.dart';
-import 'package:pott_vendor/utils/app_routes.dart';
+import 'package:pott_vendor/core/api/api_base_helper.dart';
+import 'package:pott_vendor/config/app_pages.dart';
+import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 
 void main() {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       getPages: AppPages.routes,
-      initialRoute: Routes.PRODUCT_OPTION,
+      initialRoute: Routes.SIGNIN,
     );
   }
 }

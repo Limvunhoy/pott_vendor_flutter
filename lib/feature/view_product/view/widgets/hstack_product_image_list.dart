@@ -18,9 +18,11 @@ class HStackProductImageList extends StatelessWidget {
       backgroundColor: Colors.white,
       expandedHeight: MediaQuery.of(context).size.width / 1.2,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.back();
+        },
         icon: Image.asset(
-          ImagePathConstant.BACK_ICON,
+          AssetPath.BACK_ICON,
           fit: BoxFit.cover,
           width: 31.0,
           height: 31.0,
@@ -30,7 +32,7 @@ class HStackProductImageList extends StatelessWidget {
         IconButton(
           onPressed: () {},
           icon: Image.asset(
-            ImagePathConstant.MORE_ICON,
+            AssetPath.MORE_ICON,
             fit: BoxFit.cover,
             width: 31.0,
             height: 31.0,

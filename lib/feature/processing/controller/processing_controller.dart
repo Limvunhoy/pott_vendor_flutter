@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:pott_vendor/model/processing/processing_model.dart';
+import 'package:pott_vendor/core/model/processing/processing_model.dart';
 
 class ProcessingController extends GetxController {
   Rx<ProcessingModel> dummyData = ProcessingModel().obs;
@@ -13,7 +13,9 @@ class ProcessingController extends GetxController {
         state: ProcessingState.processing,
         title: "Processing",
         subTitle: 'Waiting Your Confirm'));
+  }
 
+  void handleConfirmOrder() {
     timer = Timer.periodic(
       Duration(seconds: 5),
       (timer) {
