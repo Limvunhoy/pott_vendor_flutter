@@ -58,4 +58,7 @@ class AssetPath {
 
   // Account
   static const CAMERA_ICON = "assets/icons/account/camera_icon.png";
+
+  // Report
+  static const SORT_BY_ICON = "assets/icons/report/sort_by_icon.png";
 }

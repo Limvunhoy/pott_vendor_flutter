@@ -40,7 +40,7 @@ class HeaderCover extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.pin,
         background: Container(
-          color: colorExt.PRIMARY_BACKGROUND_COLOR,
+          color: Colors.white,
           child: Stack(
             children: [
               Image.network(

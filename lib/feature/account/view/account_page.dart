@@ -19,7 +19,7 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DismissKeyboardContent(
       child: Scaffold(
-        backgroundColor: colorExt.PRIMARY_BACKGROUND_COLOR,
+        backgroundColor: Colors.white,
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
