@@ -12,13 +12,12 @@ class SaleReportCard extends StatelessWidget {
       left: 0.0,
       right: 0.0,
       child: Container(
-        margin:
-            const EdgeInsets.symmetric(horizontal: defaultSizeExt.basePadding),
+        margin: const EdgeInsets.symmetric(horizontal: appSizeExt.basePadding),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         height: 88,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+          borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
         ),
         child: Row(
           children: [

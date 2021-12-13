@@ -31,7 +31,7 @@ class AddMenuPage extends StatelessWidget {
           children: [
             Container(
               color: Colors.white,
-              padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+              padding: const EdgeInsets.all(appSizeExt.basePadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -79,7 +79,7 @@ class AddMenuPage extends StatelessWidget {
             ),
             Container(
               color: Colors.white,
-              padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+              padding: const EdgeInsets.all(appSizeExt.basePadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -196,7 +196,7 @@ class AddMenuPage extends StatelessWidget {
       ),
       bottomNavigation: SafeArea(
         child: Container(
-          padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+          padding: const EdgeInsets.all(appSizeExt.basePadding),
           child: BaseButton(
             onPressed: () {},
             title: "Create",

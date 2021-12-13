@@ -20,7 +20,7 @@ class TotalSaleWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width / 4,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+        borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
         image: DecorationImage(
           fit: BoxFit.cover,
           image: type == TotalType.today

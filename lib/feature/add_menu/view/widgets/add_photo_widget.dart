@@ -29,10 +29,10 @@ class AddPhotoWidget extends StatelessWidget {
         height: frameHeight,
         decoration: BoxDecoration(
           color: Color(0xFFE9E9E9),
-          borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+          borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
         ),
         child: InkWell(
-          borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+          borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
           onTap: onTap,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

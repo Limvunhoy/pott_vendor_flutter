@@ -10,7 +10,7 @@ class OptionProductItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 8.0,
-        horizontal: defaultSizeExt.basePadding,
+        horizontal: appSizeExt.basePadding,
       ),
       decoration: BoxDecoration(
         color: Color(0xFFF5F5F5),

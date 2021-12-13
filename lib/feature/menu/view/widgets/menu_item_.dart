@@ -48,7 +48,7 @@ class MenuItem extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: defaultSizeExt.basePadding,
+            height: appSizeExt.basePadding,
           ),
           Text(
             "${menuItemModel.title}",

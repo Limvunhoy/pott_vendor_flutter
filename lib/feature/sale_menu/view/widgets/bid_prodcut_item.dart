@@ -15,15 +15,15 @@ class BidProductItem extends StatelessWidget {
       onTap: onItemTapped,
       child: Container(
         margin: const EdgeInsets.fromLTRB(
-          defaultSizeExt.basePadding,
-          defaultSizeExt.basePadding,
-          defaultSizeExt.basePadding,
+          appSizeExt.basePadding,
+          appSizeExt.basePadding,
+          appSizeExt.basePadding,
           0.0,
         ),
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(defaultSizeExt.basePadding),
+          borderRadius: BorderRadius.circular(appSizeExt.basePadding),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

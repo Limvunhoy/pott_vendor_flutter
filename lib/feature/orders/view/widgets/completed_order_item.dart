@@ -10,15 +10,15 @@ class CompletedOrderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(
-        defaultSizeExt.basePadding,
-        defaultSizeExt.basePadding,
-        defaultSizeExt.basePadding,
+        appSizeExt.basePadding,
+        appSizeExt.basePadding,
+        appSizeExt.basePadding,
         0,
       ),
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+        borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
       ),
       child: Row(
         children: [
@@ -34,7 +34,7 @@ class CompletedOrderItem extends StatelessWidget {
           Expanded(
             child: Container(
               margin: const EdgeInsets.symmetric(
-                  horizontal: defaultSizeExt.basePadding),
+                  horizontal: appSizeExt.basePadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
