@@ -16,10 +16,10 @@ class NotificationPage extends StatelessWidget {
         elevation: 0.0,
       ),
       body: Container(
-        margin: const EdgeInsets.all(defaultSizeExt.basePadding),
+        margin: const EdgeInsets.all(appSizeExt.basePadding),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+          borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
         ),
         child: ListView.separated(
           padding: EdgeInsets.symmetric(vertical: 14.0),

@@ -22,7 +22,7 @@ class _SignInPageState extends State<SignInPage> {
 
   FocusNode fieldNode = FocusNode();
 
-  final signInController = Get.find<SignInController>();
+  final signInController = Get.find<AuthController>();
 
   @override
   void initState() {
@@ -259,7 +259,9 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(Routes.REGISTER);
+                        },
                         child: Text("Register"),
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,

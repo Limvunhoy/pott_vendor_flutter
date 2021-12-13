@@ -16,7 +16,7 @@ class BottomNavigationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-          vertical: 14.0, horizontal: defaultSizeExt.basePadding),
+          vertical: 14.0, horizontal: appSizeExt.basePadding),
       height: 96.0 + MediaQuery.of(context).padding.bottom,
       color: Colors.white,
       child: Column(

@@ -10,7 +10,7 @@ class ProcessingProductList extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(6.0, 10.0, 6.0, 0.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+        borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
         color: Color(0xFFF2F2F2),
       ),
       child: ListView.builder(

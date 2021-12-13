@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class SignInController extends GetxController {
+class AuthController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   TextEditingController phoneNumberController = TextEditingController();

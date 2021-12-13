@@ -8,7 +8,7 @@ extension fontSizeExt on double {
   static const largeSize = 20.0;
 }
 
-extension defaultSizeExt on double {
+extension appSizeExt on double {
   static const basePadding = 12.0;
   static const baseBorderRadius = 10.0;
 }

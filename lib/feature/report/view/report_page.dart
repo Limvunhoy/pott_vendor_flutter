@@ -13,7 +13,7 @@ class ReportPage extends StatelessWidget {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+            padding: const EdgeInsets.all(appSizeExt.basePadding),
             child: Column(
               children: [
                 TotalSaleWidget(type: TotalType.today),

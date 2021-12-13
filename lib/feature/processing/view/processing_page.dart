@@ -33,7 +33,7 @@ class ProcessingPage extends StatelessWidget {
           margin: const EdgeInsets.only(top: 20.0),
           child: Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+            padding: const EdgeInsets.all(appSizeExt.basePadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -47,7 +47,7 @@ class ProcessingPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: defaultSizeExt.basePadding,
+                  height: appSizeExt.basePadding,
                 ),
                 Obx(
                   () => Text(

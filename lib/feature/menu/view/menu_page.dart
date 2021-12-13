@@ -32,7 +32,7 @@ class MenuPage extends StatelessWidget {
                   ),
                 ),
                 child: Container(
-                  padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+                  padding: const EdgeInsets.all(appSizeExt.basePadding),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class MenuPage extends StatelessWidget {
             height: 44,
           ),
           Container(
-            padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+            padding: const EdgeInsets.all(appSizeExt.basePadding),
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(8)),
               child: Container(
