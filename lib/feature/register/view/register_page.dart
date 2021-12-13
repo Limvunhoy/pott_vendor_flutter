@@ -1,7 +1,9 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/feature/register/controller/register_controller.dart';
 import 'package:pott_vendor/utils/common/base_button.dart';
 import 'package:pott_vendor/utils/common/base_view.dart';
@@ -17,8 +19,7 @@ class RegisterPage extends GetWidget<RegisterController> {
     final Size screenSize = MediaQuery.of(context).size;
 
     return DismissKeyboardContent(
-        child: Scaffold(
-      body: BaseView(
+      child: BaseView(
         appBarBackgroundColor: Colors.white,
         backgroundColor: Colors.white,
         title: "Register",
@@ -239,9 +240,11 @@ class RegisterPage extends GetWidget<RegisterController> {
                       BaseButton(
                         width: MediaQuery.of(context).size.width,
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            controller.handleRegister();
-                          }
+                          Get.toNamed(Routes.VALIDATION);
+                          // if (_formKey.currentState!.validate()) {
+                          //   // controller.handleRegister();
+
+                          // }
                         },
                         title: "REGISTER",
                         titleColor: Colors.white,
@@ -253,6 +256,6 @@ class RegisterPage extends GetWidget<RegisterController> {
               }),
         ),
       ),
-    ));
+    );
   }
 }
