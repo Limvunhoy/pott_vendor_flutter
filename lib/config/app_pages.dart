@@ -15,6 +15,7 @@ import 'package:pott_vendor/feature/report/view/report_page.dart';
 import 'package:pott_vendor/feature/sale_menu/binding/sale_menu_binding.dart';
 import 'package:pott_vendor/feature/sale_menu/view/sale_menu_page.dart';
 import 'package:pott_vendor/feature/sign_in/binding/sign_in_binding.dart';
+import 'package:pott_vendor/feature/validation/view/validation_page.dart';
 import 'package:pott_vendor/feature/view_product/binding/view_product_binding.dart';
 import 'package:pott_vendor/feature/view_product/view/view_product_page.dart';
 
@@ -28,6 +29,7 @@ class AppPages {
         name: Routes.SIGNIN,
         page: () => SignInPage(),
         binding: SignInBinding()),
+    GetPage(name: Routes.VALIDATION, page: () => ValidationPage()),
     GetPage(name: Routes.MENU, page: () => MenuPage(), binding: MenuBinding()),
     GetPage(name: Routes.NOTIFICATION, page: () => NotificationPage()),
     GetPage(
