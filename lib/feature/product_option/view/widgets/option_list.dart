@@ -14,7 +14,7 @@ class OptionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+      padding: const EdgeInsets.all(appSizeExt.basePadding),
       color: Colors.white,
       child: Column(
         children: [

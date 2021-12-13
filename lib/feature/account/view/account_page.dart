@@ -45,8 +45,8 @@ class AccountPage extends StatelessWidget {
         bottomNavigationBar: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: defaultSizeExt.basePadding,
-                vertical: defaultSizeExt.basePadding),
+                horizontal: appSizeExt.basePadding,
+                vertical: appSizeExt.basePadding),
             child: BaseButton(
               onPressed: () {},
               title: "Update",

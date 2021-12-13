@@ -21,10 +21,10 @@ class VariantOptionTypeWidget extends StatelessWidget {
     return Container(
       color: Colors.white,
       padding: isTopPadding == true
-          ? const EdgeInsets.fromLTRB(defaultSizeExt.basePadding, 16.0,
-              defaultSizeExt.basePadding, 20.0)
-          : const EdgeInsets.fromLTRB(defaultSizeExt.basePadding, 0.0,
-              defaultSizeExt.basePadding, 20.0),
+          ? const EdgeInsets.fromLTRB(
+              appSizeExt.basePadding, 16.0, appSizeExt.basePadding, 20.0)
+          : const EdgeInsets.fromLTRB(
+              appSizeExt.basePadding, 0.0, appSizeExt.basePadding, 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,7 +38,7 @@ class VariantOptionTypeWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                defaultSizeExt.baseBorderRadius,
+                appSizeExt.baseBorderRadius,
               ),
               border: Border.all(width: 1, color: colorExt.LINE_COLOR),
             ),

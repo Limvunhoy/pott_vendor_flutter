@@ -19,13 +19,13 @@ class NewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(defaultSizeExt.basePadding,
-          defaultSizeExt.basePadding, defaultSizeExt.basePadding, 0),
+      margin: const EdgeInsets.fromLTRB(appSizeExt.basePadding,
+          appSizeExt.basePadding, appSizeExt.basePadding, 0),
       padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 12.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(
-          defaultSizeExt.baseBorderRadius,
+          appSizeExt.baseBorderRadius,
         ),
       ),
       child: Column(

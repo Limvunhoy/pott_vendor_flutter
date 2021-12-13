@@ -11,6 +11,8 @@ import 'package:pott_vendor/feature/processing/binding/processing_binding.dart';
 import 'package:pott_vendor/feature/processing/view/processing_page.dart';
 import 'package:pott_vendor/feature/product_option/binding/product_option_binding.dart';
 import 'package:pott_vendor/feature/product_option/view/product_option_page.dart';
+import 'package:pott_vendor/feature/register/binding/register_binding.dart';
+import 'package:pott_vendor/feature/register/view/register_page.dart';
 import 'package:pott_vendor/feature/report/view/report_page.dart';
 import 'package:pott_vendor/feature/sale_menu/binding/sale_menu_binding.dart';
 import 'package:pott_vendor/feature/sale_menu/view/sale_menu_page.dart';
@@ -24,6 +26,10 @@ class AppPages {
   static const INITIAL = Routes.SIGNIN;
 
   static final routes = [
+    GetPage(
+        name: Routes.REGISTER,
+        page: () => RegisterPage(),
+        binding: RegisterBinding()),
     GetPage(
         name: Routes.SIGNIN,
         page: () => SignInPage(),

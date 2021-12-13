@@ -80,7 +80,7 @@ class ProductOptionPage extends StatelessWidget {
       ),
       bottomNavigation: SafeArea(
         child: Container(
-          padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+          padding: const EdgeInsets.all(appSizeExt.basePadding),
           child: BaseButton(
             height: 40.0,
             title: "Create",
