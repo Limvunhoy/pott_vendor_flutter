@@ -2,7 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/feature/menu/view/menu_page.dart';
-import 'package:pott_vendor/feature/sign_in/controller/sign_in_controller.dart';
+import 'package:pott_vendor/feature/sign_in/controller/auth_controller.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/base_view.dart';
 import 'package:pott_vendor/utils/common/dissmiss_keyboard_content.dart';
@@ -22,7 +22,9 @@ class _SignInPageState extends State<SignInPage> {
 
   FocusNode fieldNode = FocusNode();
 
-  final signInController = Get.find<AuthController>();
+  final authController = Get.find<AuthController>();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -72,7 +74,7 @@ class _SignInPageState extends State<SignInPage> {
                     height: 69.0,
                   ),
                   Form(
-                    key: signInController.formKey,
+                    key: _formKey,
                     child: Column(
                       children: [
                         Container(
@@ -92,11 +94,18 @@ class _SignInPageState extends State<SignInPage> {
                                     CountryCodePicker(
                                       flagWidth: 28.0,
                                       padding: EdgeInsets.zero,
-                                      onChanged: (value) {},
+                                      onChanged: (code) {
+                                        authController
+                                            .onUpdateCountryCode(code);
+                                      },
                                       initialSelection: "KH",
                                       textStyle: TextStyle(
                                           fontSize: fontSizeExt.mediumSize,
                                           color: Colors.black),
+                                      onInit: (code) {
+                                        authController
+                                            .onUpdateCountryCode(code!);
+                                      },
                                     ),
                                     Container(
                                       width: 11.0,
@@ -116,7 +125,7 @@ class _SignInPageState extends State<SignInPage> {
                                 child: TextFormField(
                                   keyboardType: TextInputType.number,
                                   controller:
-                                      signInController.phoneNumberController,
+                                      authController.phoneNumberController,
                                   style: TextStyle(
                                       fontSize: fontSizeExt.mediumSize),
                                   decoration: InputDecoration(
@@ -126,8 +135,7 @@ class _SignInPageState extends State<SignInPage> {
                                           width: 1.0, color: Colors.grey),
                                     ),
                                   ),
-                                  validator:
-                                      signInController.phoneNumberValidate,
+                                  validator: authController.phoneNumberValidate,
                                 ),
                               )
                             ],
@@ -138,7 +146,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         TextFormField(
                           focusNode: fieldNode,
-                          controller: signInController.passwordController,
+                          controller: authController.passwordController,
                           obscureText: !isShowPassword,
                           decoration: InputDecoration(
                             focusedBorder: UnderlineInputBorder(
@@ -161,7 +169,7 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                             ),
                           ),
-                          validator: signInController.phoneNumberValidate,
+                          validator: authController.phoneNumberValidate,
                         ),
                         const SizedBox(
                           height: 12.0,
@@ -226,8 +234,8 @@ class _SignInPageState extends State<SignInPage> {
                           height: 38.0,
                           child: ElevatedButton(
                             onPressed: () {
-                              signInController.onLogIn();
-                              Get.offNamed(Routes.MENU);
+                              authController.login();
+                              Get.toNamed(Routes.MENU);
                             },
                             child: Text("LOG IN"),
                             style: ElevatedButton.styleFrom(
