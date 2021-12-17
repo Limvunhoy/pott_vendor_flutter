@@ -4,33 +4,19 @@ import 'package:get/get.dart';
 import 'package:pott_vendor/feature/menu/view/menu_page.dart';
 import 'package:pott_vendor/feature/sign_in/controller/auth_controller.dart';
 import 'package:pott_vendor/config/app_routes.dart';
-import 'package:pott_vendor/utils/common/base_view.dart';
 import 'package:pott_vendor/utils/common/dissmiss_keyboard_content.dart';
+import 'package:pott_vendor/utils/common/loading_widget.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
+import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
-class SignInPage extends StatefulWidget {
-  @override
-  _SignInPageState createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
-  late bool isShowPassword;
-
-  int val = -1;
-
-  FocusNode fieldNode = FocusNode();
+class SignInPage extends StatelessWidget {
+  final FocusNode fieldNode = FocusNode();
 
   final authController = Get.find<AuthController>();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    isShowPassword = false;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,33 +130,35 @@ class _SignInPageState extends State<SignInPage> {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        TextFormField(
-                          focusNode: fieldNode,
-                          controller: authController.passwordController,
-                          obscureText: !isShowPassword,
-                          decoration: InputDecoration(
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: colorExt.PRIMARY_COLOR),
-                            ),
-                            hintText: "Password",
-                            labelStyle: TextStyle(color: Colors.red),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isShowPassword = !isShowPassword;
-                                });
-                              },
-                              icon: Icon(
-                                isShowPassword
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
-                          validator: authController.phoneNumberValidate,
-                        ),
+                        GetBuilder(
+                            init: authController,
+                            builder: (_) {
+                              return TextFormField(
+                                focusNode: fieldNode,
+                                controller: authController.passwordController,
+                                obscureText: !authController.isShowPassword,
+                                decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: colorExt.PRIMARY_COLOR),
+                                  ),
+                                  hintText: "Password",
+                                  labelStyle: TextStyle(color: Colors.red),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      authController.handleShowPassword();
+                                    },
+                                    icon: Icon(
+                                      authController.isShowPassword
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                                validator: authController.passwordValidate,
+                              );
+                            }),
                         const SizedBox(
                           height: 12.0,
                         ),
@@ -188,21 +176,15 @@ class _SignInPageState extends State<SignInPage> {
                                       MaterialTapTargetSize.shrinkWrap,
                                   activeColor: colorExt.PRIMARY_COLOR,
                                   value: 1,
-                                  groupValue: val,
-                                  onChanged: (onValue) {
-                                    setState(
-                                      () {
-                                        val = onValue as int;
-                                      },
-                                    );
-                                  },
+                                  groupValue: 1,
+                                  onChanged: (onValue) {},
                                 ),
                               ),
                               const SizedBox(width: 10.0),
                               Text(
                                 "Remember me",
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: colorExt.PRIMARY_COLOR,
                                   fontSize: fontSizeExt.smallSize,
                                 ),
                               ),
@@ -229,35 +211,54 @@ class _SignInPageState extends State<SignInPage> {
                         const SizedBox(
                           height: 50.0,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 38.0,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              authController.login();
-                              Get.toNamed(Routes.MENU);
-                            },
-                            child: Text("LOG IN"),
-                            style: ElevatedButton.styleFrom(
-                              primary: colorExt.PRIMARY_COLOR,
-                              elevation: 0.0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              textStyle: TextStyle(
-                                fontSize: fontSizeExt.mediumSize,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
+                        GetBuilder(
+                            init: authController,
+                            builder: (_) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 38.0,
+                                child: ElevatedButton(
+                                  onPressed: authController.fetchStatus ==
+                                          FetchStatus.loading
+                                      ? null
+                                      : () async {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            bool isLoggedIn =
+                                                await authController.login();
+                                            if (isLoggedIn) {
+                                              Get.offAllNamed(Routes.MENU);
+                                            }
+                                          }
+                                        },
+                                  child: authController.fetchStatus ==
+                                          FetchStatus.loading
+                                      ? LoadingWidget()
+                                      : Text("LOG IN"),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: colorExt.PRIMARY_COLOR,
+                                    onPrimary: Colors.white,
+                                    onSurface: colorExt.PRIMARY_COLOR,
+                                    elevation: 0.0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    textStyle: TextStyle(
+                                      fontSize: fontSizeExt.mediumSize,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
                         const SizedBox(
                           height: 50,
                         ),
                       ],
                     ),
                   ),
-                  Row(
+                  // No Account | Register Widget
+                  /*Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -284,7 +285,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                     ],
-                  ),
+                  ), */
                 ],
               ),
             ),

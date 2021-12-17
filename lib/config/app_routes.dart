@@ -1,4 +1,5 @@
 class Routes {
+  static const ROOT = "/";
   static const SIGNIN = "/signIn";
   static const VALIDATION = "/validation";
   static const REGISTER = "/register";

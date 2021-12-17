@@ -7,14 +7,14 @@ import 'package:pott_vendor/utils/constants/end_poing.dart';
 class AuthService {
   ApiBaseHelper _apiBaseHelper = Get.find<ApiBaseHelper>();
 
-  Future<UserResponse> login(String phone, String password) async {
+  Future<UserDataResponse> login(String phone, String password) async {
     final bodyRequest = {"phone": phone, "password": password};
 
     try {
       var response = await _apiBaseHelper.post(EndPoint.login, bodyRequest);
 
       if (response.data["httpCode"] == 200) {
-        return UserResponse.fromJson(response.data);
+        return UserDataResponse.fromJson(response.data["data"]);
       } else {
         throw ErrorResponse.fromJson(response.data);
       }

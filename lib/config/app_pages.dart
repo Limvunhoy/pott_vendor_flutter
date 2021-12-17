@@ -1,5 +1,4 @@
 import 'package:get/route_manager.dart';
-import 'package:pott_vendor/config/auth_middleware.dart';
 import 'package:pott_vendor/feature/account/binding/account_binding.dart';
 import 'package:pott_vendor/feature/account/view/account_page.dart';
 import 'package:pott_vendor/feature/add_menu/binding/add_menu_binding.dart';
@@ -30,20 +29,19 @@ class AppPages {
 
   static final routes = [
     GetPage(
-        name: Routes.MENU,
-        page: () => MenuPage(),
-        binding: MenuBinding(),
-        middlewares: [AuthMiddleware()]),
+      name: Routes.MENU,
+      page: () => MenuPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: Routes.SIGNIN,
+      page: () => SignInPage(),
+      binding: AuthBinding(),
+    ),
     GetPage(
         name: Routes.REGISTER,
         page: () => RegisterPage(),
         binding: RegisterBinding()),
-    GetPage(
-      name: Routes.SIGNIN,
-      page: () => SignInPage(),
-      binding: SignInBinding(),
-      // middlewares: [AuthMiddleware()]
-    ),
     GetPage(
         name: Routes.VALIDATION,
         page: () => VerificationCodePage(),
