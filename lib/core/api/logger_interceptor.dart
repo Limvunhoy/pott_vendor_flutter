@@ -1,11 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/core/model/auth/user_response.dart';
+import 'package:pott_vendor/feature/sign_in/controller/auth_controller.dart';
+import 'package:pott_vendor/utils/constants/shared_preference_keys.dart';
+import 'package:pott_vendor/utils/helper/shared_preference_helper.dart';
 
 class LoggerInterceptor extends Interceptor {
   LoggerInterceptor();
 
+  static SharedPreferenceHelper _sharedPreferenceHelper =
+      SharedPreferenceHelper();
+
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     logPrint("*** REQUEST LOG ***");
     printKV("URL", options.uri);
     printKV("METHOD", options.method);
@@ -14,16 +22,52 @@ class LoggerInterceptor extends Interceptor {
     logPrint("BODY:");
     printAll(options.data ?? "");
     logPrint("*** END LOG ***");
+
+    if (options.headers.containsKey("requiresToken")) {
+      return handler.next(options);
+    }
+
     // return requestInterceptor(options);
-    requestInterceptor(options);
-    return super.onRequest(options, handler);
+    // return super.onRequest(options, handler);
+    UserDataResponse currentUser = UserDataResponse.fromJson(
+        await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
+
+    String token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTZjNDBmNTU0NTM2ZTI5N2MzYzI0NjAiLCJ2ZW5kb3JJZCI6IjE1IiwiZmlyc3ROYW1lIjoiU2VuIiwibGFzdE5hbWUiOiJUb2xhIiwicGhvbmUiOiIrODU1OTAzMDMwMjAiLCJzdGF0dXMiOiJhY3RpdmF0ZWQiLCJhY2NvdW50VmVyaWZ5IjpmYWxzZSwicm9sZSI6InZlbmRvciIsImlhdCI6MTY0MDA5Mzc3Mn0.YSU8HL-W77KDqMzXBwLBvEp0aJJ4SAbuW0QaxalNqmk";
+    if (currentUser.token != "") {
+      token = currentUser.token; // this token should get from share preference
+    }
+
+    options.headers.addAll({"authorization": "Bearer $token"});
+
+    return handler.next(options);
   }
+
+  // static Future<String> getCurrentUser() async {
+  //   try {
+  //     UserDataResponse? currentUser = UserDataResponse.fromJson(
+  //         await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
+  //
+  //     return currentUser.token;
+  //   } catch (e) {
+  //     print("Failed to Read User From Local Storage $e");
+  //     return "";
+  //   }
+  // }
 
   static dynamic requestInterceptor(RequestOptions options) async {
     // Get your JWT token
-    const token = ""; // this token should get from share preference
+
+    UserDataResponse currentUser = UserDataResponse.fromJson(
+        await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
+
+    String token = "";
+    if (currentUser.token != "") {
+      token = currentUser.token; // this token should get from share preference
+    }
+
     options.headers.addAll({
-      "Authorization": "Bearer: $token",
+      "authorization": "Bearer: $token",
     });
 
     return options;

@@ -4,6 +4,6 @@ import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 class OrdersBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<OrdersController>(OrdersController());
+    Get.lazyPut(() => OrdersController());
   }
 }

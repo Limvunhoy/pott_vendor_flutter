@@ -16,79 +16,83 @@ class OrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: BaseView(
-        appBarBackgroundColor: Colors.white,
-        title: "Orders",
-        bottom: TabBar(
-          indicator: UnderlineTabIndicator(
-            borderSide: BorderSide(width: 2.0, color: colorExt.PRIMARY_COLOR),
-            insets: EdgeInsets.symmetric(horizontal: 40.0),
-          ),
-          labelStyle: TextStyle(
-              fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600),
-          unselectedLabelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
-          unselectedLabelColor: Colors.black,
-          labelPadding: const EdgeInsets.symmetric(horizontal: 5.0),
-          tabs: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Tab(
-                  text: "New",
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 2.0),
-                  width: 16.0,
-                  height: 16.0,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFFF0000),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Text(
-                    "2",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: fontSizeExt.extraSmallSize),
-                  ),
-                ),
-              ],
-            ),
-            Tab(
-              text: "Ready",
-            ),
-            Tab(
-              text: "Finished",
-            ),
-            Tab(
-              text: "Completed",
-            ),
-          ],
+    return BaseView(
+      appBarBackgroundColor: Colors.white,
+      title: "Orders",
+      bottom: TabBar(
+        controller: ordersController.tabController,
+        indicator: UnderlineTabIndicator(
+          borderSide: BorderSide(width: 2.0, color: colorExt.PRIMARY_COLOR),
+          insets: EdgeInsets.symmetric(horizontal: 40.0),
         ),
-        body: Container(
-          color: colorExt.PRIMARY_BACKGROUND_COLOR,
-          child: TabBarView(
+        labelStyle: TextStyle(
+            fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600),
+        unselectedLabelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
+        unselectedLabelColor: Colors.black,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 5.0),
+        tabs: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // EmptyNewOrdersWidget(),
-              NewPage(
-                key: PageStorageKey<String>("newOrderPage"),
+              Tab(
+                text: "New",
               ),
-              ReadyPage(
-                key: PageStorageKey<String>("readyOrderPage"),
-              ),
-              FinishedPage(
-                key: PageStorageKey<String>("finishedOrderPage"),
-              ),
-              CompletedPage(
-                key: PageStorageKey<String>("completedOrderPage"),
+              Container(
+                margin: const EdgeInsets.only(left: 2.0),
+                width: 16.0,
+                height: 16.0,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFF0000),
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  "2",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: fontSizeExt.extraSmallSize),
+                ),
               ),
             ],
           ),
-        ),
+          Tab(
+            text: "Ready",
+          ),
+          Tab(
+            text: "Finished",
+          ),
+          Tab(
+            text: "Completed",
+          ),
+        ],
       ),
+      body: GetBuilder(
+          init: ordersController,
+          builder: (_) {
+            return Container(
+              color: colorExt.PRIMARY_BACKGROUND_COLOR,
+              child: TabBarView(
+                controller: ordersController.tabController,
+                children: [
+                  // EmptyNewOrdersWidget(),
+                  NewPage(
+                    key: PageStorageKey<String>("newOrderPage"),
+                    ordersController: ordersController,
+                  ),
+                  ReadyPage(
+                    key: PageStorageKey<String>("readyOrderPage"),
+                  ),
+                  FinishedPage(
+                    key: PageStorageKey<String>("finishedOrderPage"),
+                  ),
+                  CompletedPage(
+                    key: PageStorageKey<String>("completedOrderPage"),
+                  ),
+                ],
+              ),
+            );
+          }),
     );
   }
 }

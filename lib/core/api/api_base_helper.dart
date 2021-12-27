@@ -63,6 +63,16 @@ class ApiBaseHelper {
     }
   }
 
+  Future<Response> postWithoutHeader(String url, dynamic data) async {
+    try {
+      Response response = await baseAPI.post(url,
+          data: data, options: Options(headers: {"requiresToken": false}));
+      return response;
+    } catch (e) {
+      return _handleError(e);
+    }
+  }
+
   Future<Response> put(String url, dynamic data) async {
     try {
       Response response = await baseAPI.put(url, data: data);

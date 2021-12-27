@@ -17,6 +17,8 @@ class LoadingWidget extends StatelessWidget {
   }
 
   Widget buildIOSLoading() {
-    return CupertinoActivityIndicator();
+    return Center(
+      child: CupertinoActivityIndicator(),
+    );
   }
 }
