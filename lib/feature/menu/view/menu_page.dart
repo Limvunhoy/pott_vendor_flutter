@@ -5,6 +5,7 @@ import 'package:pott_vendor/feature/menu/controller/menu_controller.dart';
 import 'package:pott_vendor/feature/menu/view/widgets/menu_item_.dart';
 import 'package:pott_vendor/feature/menu/view/widgets/sale_report_card.dart';
 import 'package:pott_vendor/config/app_routes.dart';
+import 'package:pott_vendor/feature/sign_in/controller/auth_controller.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/export.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
@@ -12,6 +13,7 @@ import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class MenuPage extends StatelessWidget {
   final MenuController _menuController = Get.find<MenuController>();
+  final AuthController _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,10 @@ class MenuPage extends StatelessWidget {
                         color: Colors.white,
                         child: Ink(
                           child: InkWell(
-                            onTap: () {
+                            onTap: () async {
+                              bool isAuth = await _authController.readUser();
+                              print(isAuth);
+
                               switch (
                                   _menuController.menuItemList[index].type) {
                                 case MenuItemEnum.orders:
