@@ -10,6 +10,13 @@ class OrderTabs {
   const OrderTabs(this.title);
 }
 
+enum OrderEnum {
+  newOrder,
+  readyOrder,
+  finishedOrder,
+  completedOrder,
+}
+
 class OrdersController extends GetxController
     with SingleGetTickerProviderMixin {
   List<OrderTabs> orderTabs = const <OrderTabs>[
@@ -22,7 +29,10 @@ class OrdersController extends GetxController
   late TabController tabController;
   OrderService _orderService = OrderService();
 
-  OrderDataResponse? orderDataResponse;
+  OrderDataResponse? newOrderRecord;
+  OrderDataResponse? readyOrderRecord;
+  OrderDataResponse? finishedOrderRecord;
+  OrderDataResponse? completedOrderRecord;
 
   FetchStatus fetchStatus = FetchStatus.idle;
 
@@ -32,7 +42,7 @@ class OrdersController extends GetxController
   void onInit() {
     super.onInit();
 
-    getOrder("new");
+    getOrder("new", OrderEnum.newOrder);
 
     tabController = TabController(length: 4, vsync: this)
       ..addListener(() {
@@ -51,12 +61,33 @@ class OrdersController extends GetxController
 
 // MARK: Services
 extension on OrdersController {
-  getOrder(String status) async {
+  getOrder(String status, OrderEnum orderEnum) async {
     fetchStatus = FetchStatus.loading;
+    update();
+
     try {
-      orderDataResponse = await _orderService.getQueryOrder(vendorId, status);
+      OrderDataResponse? orderResponse =
+          await _orderService.getQueryOrder(vendorId, status);
       fetchStatus = FetchStatus.complete;
-      update();
+
+      switch (orderEnum) {
+        case OrderEnum.newOrder:
+          newOrderRecord = orderResponse;
+          update();
+          break;
+        case OrderEnum.readyOrder:
+          readyOrderRecord = orderResponse;
+          update();
+          break;
+        case OrderEnum.finishedOrder:
+          finishedOrderRecord = orderResponse;
+          update();
+          break;
+        case OrderEnum.completedOrder:
+          completedOrderRecord = orderResponse;
+          update();
+          break;
+      }
     } catch (e) {
       print("Failed to get order $e");
     }
@@ -65,19 +96,28 @@ extension on OrdersController {
 
 // MARK: Handle Tab Bar Changed
 extension on OrdersController {
-  void handleTabBarChange(int index) {
+  void handleTabBarChange(int index) async {
     switch (tabController.index) {
       case 0:
         print("Current TabBar: New");
         break;
       case 1:
         print("Current TabBar: Ready");
+        if (readyOrderRecord == null) {
+          await getOrder("ready", OrderEnum.readyOrder);
+        }
         break;
       case 2:
         print("Current TabBar: Finished");
+        if (finishedOrderRecord == null) {
+          await getOrder("confirm", OrderEnum.finishedOrder);
+        }
         break;
       case 3:
         print("Current TabBar: Completed");
+        if (completedOrderRecord == null) {
+          await getOrder("completed", OrderEnum.completedOrder);
+        }
         break;
     }
   }

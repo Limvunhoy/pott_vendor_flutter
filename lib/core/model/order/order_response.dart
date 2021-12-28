@@ -35,43 +35,43 @@ class OrderResponse {
 
 class OrderDataResponse {
   OrderDataResponse({
-    // required this.records,
+    required this.records,
     required this.totalItems,
-    // // required this.totalNumPage,
-    // // required this.pageSize,
-    // // required this.page,
-    // required this.limit,
-    // required this.skip,
+    required this.totalNumPage,
+    required this.pageSize,
+    required this.page,
+    required this.limit,
+    required this.skip,
   });
 
-  // final List<OrderRecordResponse> records;
+  final List<OrderRecordResponse> records;
   final int totalItems;
-  // final int totalNumPage;
-  // final int pageSize;
-  // final int page;
-  // final int limit;
-  // final int skip;
+  final int totalNumPage;
+  final int pageSize;
+  final int page;
+  final int limit;
+  final int skip;
 
   factory OrderDataResponse.fromJson(Map<String, dynamic> json) =>
       OrderDataResponse(
-        // records: List<OrderRecordResponse>.from(
-        //     json["records"].map((x) => OrderRecordResponse.fromJson(x))),
+        records: List<OrderRecordResponse>.from(
+            json["records"].map((x) => OrderRecordResponse.fromJson(x))),
         totalItems: json["total_items"],
-        // totalNumPage: json["total_num_page"],
-        // pageSize: json["page_size"],
-        // page: json["page"],
-        // limit: json["limit"],
-        // skip: json["skip"],
+        totalNumPage: json["total_num_page"],
+        pageSize: json["page_size"],
+        page: json["page"],
+        limit: json["limit"],
+        skip: json["skip"],
       );
 
   Map<String, dynamic> toJson() => {
-        // "records": List<dynamic>.from(records.map((x) => x.toJson())),
+        "records": List<dynamic>.from(records.map((x) => x.toJson())),
         "total_items": totalItems,
-        // "total_num_page": totalNumPage,
-        // "page_size": pageSize,
-        // "page": page,
-        // "limit": limit,
-        // "skip": skip,
+        "total_num_page": totalNumPage,
+        "page_size": pageSize,
+        "page": page,
+        "limit": limit,
+        "skip": skip,
       };
 }
 

@@ -1,23 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:pott_vendor/feature/orders/binding/orders_binding.dart';
+import 'package:pott_vendor/core/model/order/order_response.dart';
+import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_product_option_item.dart';
 import 'package:pott_vendor/utils/common/base_button.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 enum OrderStatus { newOrder, ready, finished, competed }
 
 class NewItem extends StatelessWidget {
-  const NewItem({Key? key, required this.orderStatus, required this.onConfirm})
-      : super(key: key);
+  const NewItem({
+    Key? key,
+    required this.orderStatus,
+    required this.onConfirm,
+    required this.orderRecord,
+    required this.orderEnum,
+  }) : super(key: key);
 
   final OrderStatus orderStatus;
   final VoidCallback onConfirm;
+  final OrderRecordResponse orderRecord;
+  final OrderEnum orderEnum;
 
   @override
   Widget build(BuildContext context) {
+    String convertTimeAgo() {
+      if (orderEnum == OrderEnum.newOrder) {
+        return orderRecord.timeLine.newAt != null
+            ? timeago.format(orderRecord.timeLine.newAt!)
+            : "...";
+      } else if (orderEnum == OrderEnum.readyOrder) {
+        return orderRecord.timeLine.readyAt != null
+            ? timeago.format(orderRecord.timeLine.readyAt!)
+            : "...";
+      } else {
+        return orderRecord.timeLine.confirmAt != null
+            ? timeago.format(orderRecord.timeLine.confirmAt!)
+            : "...";
+      }
+    }
+
     return Container(
       margin: const EdgeInsets.fromLTRB(appSizeExt.basePadding,
           appSizeExt.basePadding, appSizeExt.basePadding, 0),
@@ -48,7 +73,7 @@ class NewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "TADA Delivery",
+                      "${orderRecord.delivery?.driverName ?? ""}", // TODO: Ask B Vanto: is driver name optional?
                       style: TextStyle(
                           fontSize: fontSizeExt.smallSize,
                           fontWeight: FontWeight.w500),
@@ -57,7 +82,7 @@ class NewItem extends StatelessWidget {
                       height: 4.0,
                     ),
                     Text(
-                      "15 Minutes ago",
+                      convertTimeAgo(),
                       style: TextStyle(
                           fontSize: fontSizeExt.extraSmallSize,
                           color: Colors.grey),
@@ -99,7 +124,8 @@ class NewItem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                    "${orderRecord.itemList.first.image}",
                     fit: BoxFit.cover,
                     width: 80.0,
                     height: 80.0,
@@ -114,7 +140,7 @@ class NewItem extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Mackbook Pro 2021",
+                        "${orderRecord.itemList.first.name}",
                         style: TextStyle(fontSize: fontSizeExt.mediumSize),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -123,7 +149,7 @@ class NewItem extends StatelessWidget {
                         height: 8.0,
                       ),
                       Text(
-                        "\$ 2500.00 x 1",
+                        "\$ ${orderRecord.itemList.first.productVariance.price} x ${orderRecord.itemList.first.qty}", //TODO: ask B Vanto where the qty come from?
                         style: TextStyle(
                           fontSize: fontSizeExt.mediumSize,
                           fontWeight: FontWeight.w600,
@@ -139,14 +165,18 @@ class NewItem extends StatelessWidget {
                         child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return NewProductOptionItem();
+                              return NewProductOptionItem(
+                                varianceCombination: orderRecord
+                                    .itemList.first.productVariance.combination,
+                              );
                             },
                             separatorBuilder: (context, index) {
                               return SizedBox(
                                 width: 5.0,
                               );
                             },
-                            itemCount: 1),
+                            itemCount:
+                                1), // TODO: Ask B Vanto: Product Variance Obj or Array?
                       ),
                     ],
                   ),
@@ -172,8 +202,9 @@ class NewItem extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.grey, fontSize: fontSizeExt.smallSize),
                     ),
+                    // TODO: Where to get subtotal?
                     Text(
-                      "\$2500.00",
+                      "\$${orderRecord.totalPrice}",
                       style: TextStyle(
                           color: Colors.black, fontSize: fontSizeExt.smallSize),
                       textAlign: TextAlign.right,
@@ -191,6 +222,7 @@ class NewItem extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.grey, fontSize: fontSizeExt.smallSize),
                     ),
+                    // TODO: Where to get delivery fee?
                     Text(
                       "\$1.50",
                       style: TextStyle(
@@ -217,6 +249,7 @@ class NewItem extends StatelessWidget {
                             fontSize: fontSizeExt.smallSize,
                             fontWeight: FontWeight.w600),
                       ),
+                      // TODO: where to get order total?
                       Text(
                         "\$1.50",
                         style: TextStyle(

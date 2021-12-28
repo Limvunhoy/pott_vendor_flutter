@@ -21,18 +21,23 @@ class NewPage extends StatelessWidget {
         print("Refreshing");
       },
       child: ordersController.fetchStatus == FetchStatus.loading
-          ? LoadingWidget()
+          ? Container(
+              height: MediaQuery.of(context).size.height / 1.2,
+              alignment: Alignment.center,
+              child: LoadingWidget())
           : ListView.builder(
               key: PageStorageKey("newOrderList"),
               shrinkWrap: true,
               primary: false,
-              itemCount: 10,
+              itemCount: ordersController.newOrderRecord?.records.length ?? 0,
               itemBuilder: (context, index) {
                 return NewItem(
                   orderStatus: OrderStatus.newOrder,
                   onConfirm: () {
                     Get.toNamed(Routes.PROCESSING);
                   },
+                  orderRecord: ordersController.newOrderRecord!.records[index],
+                  orderEnum: OrderEnum.newOrder,
                 );
               },
             ),

@@ -82,12 +82,15 @@ class OrdersPage extends StatelessWidget {
                   ),
                   ReadyPage(
                     key: PageStorageKey<String>("readyOrderPage"),
+                    ordersController: ordersController,
                   ),
                   FinishedPage(
                     key: PageStorageKey<String>("finishedOrderPage"),
+                    ordersController: ordersController,
                   ),
                   CompletedPage(
                     key: PageStorageKey<String>("completedOrderPage"),
+                    ordersController: ordersController,
                   ),
                 ],
               ),

@@ -32,8 +32,7 @@ class LoggerInterceptor extends Interceptor {
     UserDataResponse currentUser = UserDataResponse.fromJson(
         await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
 
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTZjNDBmNTU0NTM2ZTI5N2MzYzI0NjAiLCJ2ZW5kb3JJZCI6IjE1IiwiZmlyc3ROYW1lIjoiU2VuIiwibGFzdE5hbWUiOiJUb2xhIiwicGhvbmUiOiIrODU1OTAzMDMwMjAiLCJzdGF0dXMiOiJhY3RpdmF0ZWQiLCJhY2NvdW50VmVyaWZ5IjpmYWxzZSwicm9sZSI6InZlbmRvciIsImlhdCI6MTY0MDA5Mzc3Mn0.YSU8HL-W77KDqMzXBwLBvEp0aJJ4SAbuW0QaxalNqmk";
+    String token = "";
     if (currentUser.token != "") {
       token = currentUser.token; // this token should get from share preference
     }

@@ -8,19 +8,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/core/model/order/order_response.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/core/service/order/order_service.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/api/api_base_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/api/api_base_helper.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/api/logger_interceptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/api/logger_interceptor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/service/auth/auth_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/auth/auth_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/binding/orders_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/binding/orders_binding.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/model/order/order_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/order/order_response.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/completed_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/completed_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/orders_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/orders_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/common/loading_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/loading_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/constants/end_poing.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/end_poing.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/widgets/completed_order_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/widgets/completed_order_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/widgets/new_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/widgets/new_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/widgets/new_product_option_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/widgets/new_product_option_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,23 +152,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/core/api/logger_interceptor.dart</url>
-          <line>26</line>
-          <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/api/logger_interceptor.dart</url>
-          <line>43</line>
-          <option name="timeStamp" value="88" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/api/logger_interceptor.dart</url>
-          <line>40</line>
-          <option name="timeStamp" value="89" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/api/logger_interceptor.dart</url>
           <line>36</line>
-          <option name="timeStamp" value="90" />
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
