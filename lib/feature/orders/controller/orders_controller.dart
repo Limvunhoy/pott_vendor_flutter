@@ -23,16 +23,20 @@ class OrdersController extends GetxController
     const OrderTabs("New"),
     const OrderTabs("Ready"),
     const OrderTabs("Finished"),
-    const OrderTabs("Complted"),
+    const OrderTabs("Completed"),
   ];
 
   late TabController tabController;
   OrderService _orderService = OrderService();
 
   OrderDataResponse? newOrderRecord;
+  List<OrderRecordResponse> newOrderRecords = [];
+
   OrderDataResponse? readyOrderRecord;
   OrderDataResponse? finishedOrderRecord;
+
   OrderDataResponse? completedOrderRecord;
+  List<OrderRecordResponse> completedRecords = [];
 
   FetchStatus fetchStatus = FetchStatus.idle;
 
@@ -57,13 +61,59 @@ class OrdersController extends GetxController
     tabController.dispose();
     super.onClose();
   }
+
+  handlePullRefresh(OrderEnum orderStatus) {
+    switch (orderStatus) {
+      case OrderEnum.newOrder:
+        Future.delayed(Duration(milliseconds: 500), () async {
+          await getOrder("new", OrderEnum.newOrder, isPullRefresh: true);
+        });
+        break;
+      case OrderEnum.readyOrder:
+        // TODO: Handle this case.
+        break;
+      case OrderEnum.finishedOrder:
+        // TODO: Handle this case.
+        break;
+      case OrderEnum.completedOrder:
+        // TODO: Handle this case.
+        break;
+    }
+  }
+
+  int getNewOrderCount() {
+    return newOrderRecords.length;
+  }
+
+  int getCompletedOrderCount() {
+    return completedRecords.length;
+  }
+
+  String calculateOrderTotal(int index) {
+    int orderTotal = newOrderRecords[index].totalPrice +
+        (newOrderRecords[index].delivery?.amount ?? 0);
+    return "$orderTotal";
+  }
+
+  String getCompletedItem(int index) {
+    String item = "";
+    if (completedRecords[index].totalQty <= 1) {
+      item = "${completedRecords[index].totalQty} Item";
+    } else {
+      item = "${completedRecords[index].totalQty} Items";
+    }
+    return item;
+  }
 }
 
 // MARK: Services
 extension on OrdersController {
-  getOrder(String status, OrderEnum orderEnum) async {
-    fetchStatus = FetchStatus.loading;
-    update();
+  getOrder(String status, OrderEnum orderEnum,
+      {bool isPullRefresh = false}) async {
+    if (!isPullRefresh) {
+      fetchStatus = FetchStatus.loading;
+      update();
+    }
 
     try {
       OrderDataResponse? orderResponse =
@@ -72,7 +122,16 @@ extension on OrdersController {
 
       switch (orderEnum) {
         case OrderEnum.newOrder:
-          newOrderRecord = orderResponse;
+          if (orderResponse != null) {
+            newOrderRecord = orderResponse;
+
+            if (isPullRefresh) {
+              newOrderRecords = orderResponse.records;
+            } else {
+              newOrderRecords.addAll(orderResponse.records);
+            }
+          }
+
           update();
           break;
         case OrderEnum.readyOrder:
@@ -84,7 +143,15 @@ extension on OrdersController {
           update();
           break;
         case OrderEnum.completedOrder:
-          completedOrderRecord = orderResponse;
+          if (orderResponse != null) {
+            completedOrderRecord = orderResponse;
+            if (isPullRefresh) {
+              completedRecords = completedOrderRecord?.records ?? [];
+            } else {
+              completedRecords.addAll(completedOrderRecord?.records ?? []);
+            }
+          }
+
           update();
           break;
       }

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/completed_order_item.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
@@ -28,12 +27,11 @@ class CompletedPage extends StatelessWidget {
               key: PageStorageKey("readyOrderList"),
               shrinkWrap: true,
               primary: false,
-              itemCount:
-                  ordersController.completedOrderRecord?.records.length ?? 0,
+              itemCount: ordersController.getCompletedOrderCount(),
               itemBuilder: (context, index) {
                 return CompletedOrderItem(
-                  orderRecordResponse:
-                      ordersController.completedOrderRecord!.records[index],
+                  orderRecordResponse: ordersController.completedRecords[index],
+                  item: ordersController.getCompletedItem(index),
                 );
               },
             ),

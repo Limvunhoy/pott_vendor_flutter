@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/core/model/order/order_response.dart';
+import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/utils/common/base_button.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class CompletedOrderItem extends StatelessWidget {
-  const CompletedOrderItem({Key? key, required this.orderRecordResponse})
+  const CompletedOrderItem(
+      {Key? key, required this.orderRecordResponse, required this.item})
       : super(key: key);
 
   final OrderRecordResponse orderRecordResponse;
+  final String item;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,7 @@ class CompletedOrderItem extends StatelessWidget {
                     height: 5.0,
                   ),
                   Text(
-                    "1 Item", // TODO: Where to get number of completed item
+                    item,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: fontSizeExt.smallSize,

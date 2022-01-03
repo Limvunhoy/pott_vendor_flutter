@@ -36,6 +36,7 @@ class FinishedPage extends StatelessWidget {
                   orderRecord:
                       ordersController.finishedOrderRecord!.records[index],
                   orderEnum: OrderEnum.finishedOrder,
+                  orderTotal: "",
                 );
               },
             ),

@@ -18,12 +18,14 @@ class NewItem extends StatelessWidget {
     required this.onConfirm,
     required this.orderRecord,
     required this.orderEnum,
+    required this.orderTotal,
   }) : super(key: key);
 
   final OrderStatus orderStatus;
   final VoidCallback onConfirm;
   final OrderRecordResponse orderRecord;
   final OrderEnum orderEnum;
+  final String orderTotal;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,6 @@ class NewItem extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 35.0 / 2,
-                // backgroundImage: ,
                 backgroundColor: Colors.grey,
               ),
               const SizedBox(
@@ -201,7 +202,6 @@ class NewItem extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.grey, fontSize: fontSizeExt.smallSize),
                     ),
-                    // TODO: Where to get subtotal?
                     Text(
                       "\$${orderRecord.totalPrice}",
                       style: TextStyle(
@@ -221,9 +221,8 @@ class NewItem extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.grey, fontSize: fontSizeExt.smallSize),
                     ),
-                    // TODO: Where to get delivery fee?
                     Text(
-                      "\$1.50",
+                      "\$${orderRecord.delivery?.amount ?? 0}",
                       style: TextStyle(
                           color: Colors.black, fontSize: fontSizeExt.smallSize),
                       textAlign: TextAlign.right,
@@ -248,9 +247,8 @@ class NewItem extends StatelessWidget {
                             fontSize: fontSizeExt.smallSize,
                             fontWeight: FontWeight.w600),
                       ),
-                      // TODO: where to get order total?
                       Text(
-                        "\$1.50",
+                        "\$$orderTotal",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: fontSizeExt.smallSize,

@@ -33,6 +33,7 @@ class ReadyPage extends StatelessWidget {
                   orderRecord:
                       ordersController.readyOrderRecord!.records[index],
                   orderEnum: OrderEnum.readyOrder,
+                  orderTotal: "",
                 );
               },
             ),

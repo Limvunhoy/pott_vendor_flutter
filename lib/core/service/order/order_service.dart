@@ -14,8 +14,6 @@ class OrderService {
     try {
       var res = await _apiBaseHelper.post(EndPoint.order, bodyRequest);
 
-      print("Res Data ${res.data}");
-
       if (res.data["httpCode"] == 200) {
         print("Get Order Success");
         return OrderDataResponse.fromJson(res.data["data"]);
