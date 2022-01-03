@@ -73,7 +73,7 @@ class NewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${orderRecord.delivery?.driverName ?? ""}", // TODO: Ask B Vanto: is driver name optional?
+                      "${orderRecord.delivery?.driverName ?? "N/A"}",
                       style: TextStyle(
                           fontSize: fontSizeExt.smallSize,
                           fontWeight: FontWeight.w500),
@@ -149,7 +149,7 @@ class NewItem extends StatelessWidget {
                         height: 8.0,
                       ),
                       Text(
-                        "\$ ${orderRecord.itemList.first.productVariance.price} x ${orderRecord.itemList.first.qty}", //TODO: ask B Vanto where the qty come from?
+                        "\$ ${orderRecord.itemList.first.productVariance.price} x ${orderRecord.itemList.first.qty}",
                         style: TextStyle(
                           fontSize: fontSizeExt.mediumSize,
                           fontWeight: FontWeight.w600,
@@ -175,8 +175,7 @@ class NewItem extends StatelessWidget {
                                 width: 5.0,
                               );
                             },
-                            itemCount:
-                                1), // TODO: Ask B Vanto: Product Variance Obj or Array?
+                            itemCount: 1),
                       ),
                     ],
                   ),
