@@ -33,7 +33,10 @@ class OrdersController extends GetxController
   List<OrderRecordResponse> newOrderRecords = [];
 
   OrderDataResponse? readyOrderRecord;
+  List<OrderRecordResponse> readyOrderRecords = [];
+
   OrderDataResponse? finishedOrderRecord;
+  List<OrderRecordResponse> finishedOrderRecords = [];
 
   OrderDataResponse? completedOrderRecord;
   List<OrderRecordResponse> completedRecords = [];
@@ -65,24 +68,30 @@ class OrdersController extends GetxController
   handlePullRefresh(OrderEnum orderStatus) {
     switch (orderStatus) {
       case OrderEnum.newOrder:
-        Future.delayed(Duration(milliseconds: 500), () async {
-          await getOrder("new", OrderEnum.newOrder, isPullRefresh: true);
-        });
+        pullRefresh("new", orderStatus);
         break;
       case OrderEnum.readyOrder:
-        // TODO: Handle this case.
+        pullRefresh("ready", orderStatus);
         break;
       case OrderEnum.finishedOrder:
-        // TODO: Handle this case.
+        pullRefresh("confirm", orderStatus);
         break;
       case OrderEnum.completedOrder:
-        // TODO: Handle this case.
+        pullRefresh("completed", orderStatus);
         break;
     }
   }
 
   int getNewOrderCount() {
     return newOrderRecords.length;
+  }
+
+  int getReadyOrderCount() {
+    return readyOrderRecords.length;
+  }
+
+  int getFinishedOrderCount() {
+    return finishedOrderRecords.length;
   }
 
   int getCompletedOrderCount() {
@@ -103,6 +112,14 @@ class OrdersController extends GetxController
       item = "${completedRecords[index].totalQty} Items";
     }
     return item;
+  }
+}
+
+extension on OrdersController {
+  void pullRefresh(String query, OrderEnum orderEnum) {
+    Future.delayed(Duration(milliseconds: 500), () async {
+      await getOrder(query, orderEnum, isPullRefresh: true);
+    });
   }
 }
 
@@ -135,11 +152,26 @@ extension on OrdersController {
           update();
           break;
         case OrderEnum.readyOrder:
-          readyOrderRecord = orderResponse;
+          if (orderResponse != null) {
+            readyOrderRecord = orderResponse;
+            if (isPullRefresh) {
+              readyOrderRecords = readyOrderRecord?.records ?? [];
+            } else {
+              readyOrderRecords.addAll(readyOrderRecord?.records ?? []);
+            }
+          }
           update();
           break;
         case OrderEnum.finishedOrder:
-          finishedOrderRecord = orderResponse;
+          if (orderResponse != null) {
+            finishedOrderRecord = orderResponse;
+            if (isPullRefresh) {
+              finishedOrderRecords = finishedOrderRecord?.records ?? [];
+            } else {
+              finishedOrderRecords.addAll(finishedOrderRecord?.records ?? []);
+            }
+          }
+
           update();
           break;
         case OrderEnum.completedOrder:

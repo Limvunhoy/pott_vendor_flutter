@@ -16,7 +16,7 @@ class CompletedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshWidget(
       onRefresh: () async {
-        print("Refreshing");
+        await ordersController.handlePullRefresh(OrderEnum.completedOrder);
       },
       child: ordersController.fetchStatus == FetchStatus.loading
           ? Container(
