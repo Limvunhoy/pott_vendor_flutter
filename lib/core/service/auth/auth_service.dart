@@ -11,7 +11,8 @@ class AuthService {
     final bodyRequest = {"phone": phone, "password": password};
 
     try {
-      var response = await _apiBaseHelper.post(EndPoint.login, bodyRequest);
+      var response =
+          await _apiBaseHelper.postWithoutHeader(EndPoint.login, bodyRequest);
 
       if (response.data["httpCode"] == 200) {
         return UserDataResponse.fromJson(response.data["data"]);
