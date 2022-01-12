@@ -19,10 +19,12 @@ class NewItem extends StatelessWidget {
     required this.orderRecord,
     required this.orderEnum,
     required this.orderTotal,
+    this.onReject,
   }) : super(key: key);
 
   final OrderStatus orderStatus;
   final VoidCallback onConfirm;
+  final VoidCallback? onReject;
   final OrderRecordResponse orderRecord;
   final OrderEnum orderEnum;
   final String orderTotal;
@@ -270,7 +272,7 @@ class NewItem extends StatelessWidget {
                     children: [
                       Expanded(
                         child: BaseButton(
-                          onPressed: () {},
+                          onPressed: onReject,
                           title: "Reject",
                           titleColor: colorExt.PRIMARY_COLOR,
                           backgroundColor: Colors.white,

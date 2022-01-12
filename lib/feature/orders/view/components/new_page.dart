@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
+import 'package:pott_vendor/utils/common/alert_popup.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
 import 'package:pott_vendor/utils/common/refresh_widget.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
@@ -33,6 +34,13 @@ class NewPage extends StatelessWidget {
                   orderStatus: OrderStatus.newOrder,
                   onConfirm: () {
                     Get.toNamed(Routes.PROCESSING);
+                  },
+                  onReject: () {
+                    AppDialog.showAppDialog(context, onClose: () {
+                      Get.back();
+                    }, onConfirm: () {
+                      // TODO: Handle reject order
+                    });
                   },
                   orderRecord: ordersController.newOrderRecords[index],
                   orderEnum: OrderEnum.newOrder,
