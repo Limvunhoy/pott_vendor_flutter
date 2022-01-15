@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/order/order_response.dart';
 import 'package:pott_vendor/core/service/order/order_service.dart';
+import 'package:pott_vendor/utils/constants/app_constants.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
 class OrderTabs {
@@ -43,12 +44,15 @@ class OrdersController extends GetxController
 
   FetchStatus fetchStatus = FetchStatus.idle;
 
-  String vendorId = "15";
+  String vendorId = "22";
+
+  late ScrollController scrollController;
+
+  bool isMoreNewOrder = false;
+  int newOrderPage = 1;
 
   @override
   void onInit() {
-    super.onInit();
-
     getOrder("new", OrderEnum.newOrder);
 
     tabController = TabController(length: 4, vsync: this)
@@ -57,6 +61,10 @@ class OrdersController extends GetxController
           handleTabBarChange(tabController.index);
         }
       });
+
+    scrollController = ScrollController()..addListener(_fetchMoreOrder);
+
+    super.onInit();
   }
 
   @override
@@ -118,7 +126,8 @@ class OrdersController extends GetxController
 extension on OrdersController {
   void pullRefresh(String query, OrderEnum orderEnum) {
     Future.delayed(Duration(milliseconds: 500), () async {
-      await getOrder(query, orderEnum, isPullRefresh: true);
+      newOrderPage = 1;
+      await getOrder(query, orderEnum, isPullRefresh: true, isLoading: false);
     });
   }
 }
@@ -126,15 +135,16 @@ extension on OrdersController {
 // MARK: Services
 extension on OrdersController {
   getOrder(String status, OrderEnum orderEnum,
-      {bool isPullRefresh = false}) async {
-    if (!isPullRefresh) {
+      {bool isPullRefresh = false, bool isLoading = true}) async {
+    if (isLoading) {
       fetchStatus = FetchStatus.loading;
       update();
     }
 
     try {
       OrderDataResponse? orderResponse =
-          await _orderService.getQueryOrder(vendorId, status);
+          await _orderService.getQueryOrder(vendorId, status, newOrderPage);
+      print("Get Order ${orderResponse?.records.length ?? 0}");
       fetchStatus = FetchStatus.complete;
 
       switch (orderEnum) {
@@ -143,8 +153,19 @@ extension on OrdersController {
             newOrderRecord = orderResponse;
 
             if (isPullRefresh) {
+              newOrderPage = 1;
+              isMoreNewOrder = false;
               newOrderRecords = orderResponse.records;
             } else {
+              if ((orderResponse.records.length == fetchLimit) &&
+                  (newOrderRecords.length < orderResponse.totalItems)) {
+                isMoreNewOrder = true;
+                if (newOrderPage < orderResponse.totalNumPage) {
+                  newOrderPage += 1;
+                }
+              } else {
+                isMoreNewOrder = false;
+              }
               newOrderRecords.addAll(orderResponse.records);
             }
           }
@@ -218,6 +239,18 @@ extension on OrdersController {
           await getOrder("completed", OrderEnum.completedOrder);
         }
         break;
+    }
+  }
+}
+
+extension on OrdersController {
+  void _fetchMoreOrder() async {
+    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange) {
+      if (isMoreNewOrder) {
+        print("Load More Order");
+        await getOrder("new", OrderEnum.newOrder, isLoading: false);
+      }
     }
   }
 }

@@ -8,12 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/utils/constants/app_constants.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/model/auth/user_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/auth/user_response.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/model/order/order_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/order/order_response.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/service/order/order_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/order/order_service.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/completed_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/completed_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,41 +117,6 @@
           <url>file://$PROJECT_DIR$/lib/utils/helper/user_manager.dart</url>
           <line>23</line>
           <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
-          <line>14</line>
-          <option name="timeStamp" value="81" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
-          <line>23</line>
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
-          <line>18</line>
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
-          <line>20</line>
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/core/api/logger_interceptor.dart</url>
-          <line>36</line>
-          <option name="timeStamp" value="91" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart</url>
-          <line>157</line>
-          <option name="timeStamp" value="93" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart</url>
-          <line>159</line>
-          <option name="timeStamp" value="94" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
