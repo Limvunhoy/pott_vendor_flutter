@@ -8,12 +8,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/core/model/report/report_response.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/service/report/report_service.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/report/binding/report_binding.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/report/controller/report_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/report/view/widgets/no_data_report.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/common/base_large_text.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/completed_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/completed_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/app_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/model/auth/user_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/auth/user_response.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/report/view/report_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/report/view/report_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/report/view/widgets/total_sale_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/report/view/widgets/total_sale_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/end_poing.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/end_poing.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,6 +156,16 @@
           <url>file://$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart</url>
           <line>159</line>
           <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/feature/sign_in/controller/auth_controller.dart</url>
+          <line>83</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/feature/sign_in/controller/auth_controller.dart</url>
+          <line>91</line>
+          <option name="timeStamp" value="96" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

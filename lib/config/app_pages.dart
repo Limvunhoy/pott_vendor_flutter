@@ -13,6 +13,7 @@ import 'package:pott_vendor/feature/product_option/binding/product_option_bindin
 import 'package:pott_vendor/feature/product_option/view/product_option_page.dart';
 import 'package:pott_vendor/feature/register/binding/register_binding.dart';
 import 'package:pott_vendor/feature/register/view/register_page.dart';
+import 'package:pott_vendor/feature/report/binding/report_binding.dart';
 import 'package:pott_vendor/feature/report/view/report_page.dart';
 import 'package:pott_vendor/feature/sale_menu/binding/sale_menu_binding.dart';
 import 'package:pott_vendor/feature/sale_menu/view/sale_menu_page.dart';
@@ -82,6 +83,7 @@ class AppPages {
     GetPage(
       name: Routes.REPORT,
       page: () => ReportPage(),
+      binding: ReportBinding(),
     ),
   ];
 }
