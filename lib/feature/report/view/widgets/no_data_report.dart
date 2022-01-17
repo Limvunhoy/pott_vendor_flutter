@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/feature/report/view/widgets/total_sale_widget.dart';
 import 'package:pott_vendor/utils/common/base_large_text.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
@@ -27,7 +28,7 @@ class NoDataReport extends StatelessWidget {
       ),
       child: BaseLargeText(
         text: "No Data",
-        color: Colors.white,
+        color: type == TotalType.today ? Colors.white : colorExt.PRIMARY_COLOR,
         fontWeight: fontWeightExt.baseFontWeight,
       ),
     );

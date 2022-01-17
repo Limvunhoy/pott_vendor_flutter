@@ -9,8 +9,7 @@ class ReportService {
 
   Future<ReportDataResponse?> getReport(String type) async {
     try {
-      var res =
-          await _apiBaseHelper.get("${EndPoint.report}?type=$type&status=new");
+      var res = await _apiBaseHelper.get("${EndPoint.report}?type=$type");
 
       if (res.data["httpCode"] == 200) {
         print("Get Order Success");
