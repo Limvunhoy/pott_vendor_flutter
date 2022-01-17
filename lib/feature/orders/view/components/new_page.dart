@@ -14,36 +14,35 @@ class NewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return RefreshWidget(
-    //     onRefresh: () async {
-    //       await ordersController.handlePullRefresh(OrderEnum.newOrder);
-    //     },
-    //     child:
-    return ordersController.fetchStatus == FetchStatus.loading
-        ? Container(
-            height: MediaQuery.of(context).size.height / 1.2,
-            alignment: Alignment.center,
-            child: LoadingWidget())
-        : ListView.builder(
-            key: PageStorageKey("newOrderList"),
-            controller: ordersController.scrollController,
-            // shrinkWrap: true,
-            // primary: false,
-            physics:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-            itemCount: ordersController.getNewOrderCount(),
-            itemBuilder: (context, index) {
-              return NewItem(
-                orderStatus: OrderStatus.newOrder,
-                onConfirm: () {
-                  Get.toNamed(Routes.PROCESSING);
-                },
-                orderRecord: ordersController.newOrderRecords[index],
-                orderEnum: OrderEnum.newOrder,
-                orderTotal: ordersController.calculateOrderTotal(index),
-              );
-            },
-            // ),
-          );
+    return RefreshWidget(
+      onRefresh: () async {
+        await ordersController.handlePullRefresh(OrderType.newOrder);
+      },
+      child: ordersController.fetchStatus == FetchStatus.loading
+          ? Container(
+              height: MediaQuery.of(context).size.height / 1.2,
+              alignment: Alignment.center,
+              child: LoadingWidget())
+          : ListView.builder(
+              key: PageStorageKey("newOrderList"),
+              controller: ordersController.scrollController,
+              // shrinkWrap: true,
+              // primary: false,
+              physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              itemCount: ordersController.getNewOrderCount(),
+              itemBuilder: (context, index) {
+                return NewItem(
+                  orderStatus: OrderStatus.newOrder,
+                  onConfirm: () {
+                    Get.toNamed(Routes.PROCESSING);
+                  },
+                  orderRecord: ordersController.newOrderRecords[index],
+                  orderEnum: OrderType.newOrder,
+                  orderTotal: ordersController.calculateOrderTotal(index),
+                );
+              },
+            ),
+    );
   }
 }

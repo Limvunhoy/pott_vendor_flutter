@@ -9,12 +9,13 @@ class OrderService {
   ApiBaseHelper _apiBaseHelper = Get.find<ApiBaseHelper>();
 
   Future<OrderDataResponse?> getQueryOrder(
-      String vendorId, String status, int page) async {
+      String vendorId, String status, RxInt page) async {
     final bodyRequest = {"vendorId": vendorId, "status": status};
 
     try {
       var res = await _apiBaseHelper.post(
-          "${EndPoint.order}?limit=$fetchLimit&page=$page", bodyRequest);
+          "${EndPoint.order}?limit=$fetchLimit&page=${page.value}",
+          bodyRequest);
 
       if (res.data["httpCode"] == 200) {
         print("Get Order Success");
