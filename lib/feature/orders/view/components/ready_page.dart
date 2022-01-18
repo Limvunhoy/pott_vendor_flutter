@@ -28,9 +28,11 @@ class ReadyPage extends StatelessWidget {
               itemCount: ordersController.getReadyOrderCount(),
               itemBuilder: (context, index) {
                 return NewItem(
+                  onOrderReady: () {
+                    ordersController.updateReadyOrder(index);
+                  },
                   orderStatus: OrderStatus.ready,
-                  onConfirm: () {},
-                  orderRecord: ordersController.readyOrderRecords[index],
+                  orderRecord: ordersController.confirmOrderRecords[index],
                   orderEnum: OrderType.readyOrder,
                   orderTotal: "",
                 );
