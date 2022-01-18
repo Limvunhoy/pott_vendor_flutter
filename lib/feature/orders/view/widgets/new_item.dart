@@ -20,11 +20,13 @@ class NewItem extends StatelessWidget {
     required this.orderEnum,
     required this.orderTotal,
     this.onReject,
+    this.onGoToOrderDetail,
   }) : super(key: key);
 
   final OrderStatus orderStatus;
   final VoidCallback onConfirm;
   final VoidCallback? onReject;
+  final VoidCallback? onGoToOrderDetail;
   final OrderRecordResponse orderRecord;
   final OrderType orderEnum;
   final String orderTotal;
@@ -106,13 +108,16 @@ class NewItem extends StatelessWidget {
                   ),
                 ),
               ] else ...[
-                Container(
-                  margin: const EdgeInsets.only(top: 2.0),
-                  width: 14.0,
-                  height: 14.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(AssetPath.GO_ICON),
+                GestureDetector(
+                  onTap: onGoToOrderDetail,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 2.0),
+                    width: 14.0,
+                    height: 14.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(AssetPath.GO_ICON),
+                      ),
                     ),
                   ),
                 ),

@@ -45,6 +45,10 @@ class NewPage extends StatelessWidget {
                       // TODO: Handle reject order
                     });
                   },
+                  onGoToOrderDetail: () {
+                    Get.toNamed(Routes.PROCESSING,
+                        arguments: ordersController.newOrderRecords[index]);
+                  },
                   orderRecord: ordersController.newOrderRecords[index],
                   orderEnum: OrderType.newOrder,
                   orderTotal: ordersController.calculateOrderTotal(index),
