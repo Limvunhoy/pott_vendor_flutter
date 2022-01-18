@@ -36,7 +36,7 @@ class UserDataResponse {
   });
 
   String id;
-  String vendorId;
+  int vendorId;
   String firstName;
   String lastName;
   String phone;

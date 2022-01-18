@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 
 class RefreshWidget extends StatefulWidget {
   final Widget child;
@@ -15,12 +16,13 @@ class RefreshWidget extends StatefulWidget {
 
 class _RefreshWidgetState extends State<RefreshWidget> {
   @override
-  Widget build(BuildContext context) =>
-      Platform.isIOS ? buildIOSList() : buildAndroidList();
+  Widget build(BuildContext context) => buildAndroidList();
+  // Platform.isIOS ? buildIOSList() : buildAndroidList();
 
   Widget buildAndroidList() => RefreshIndicator(
         child: widget.child,
         onRefresh: widget.onRefresh,
+        color: colorExt.PRIMARY_COLOR,
       );
 
   Widget buildIOSList() => CustomScrollView(

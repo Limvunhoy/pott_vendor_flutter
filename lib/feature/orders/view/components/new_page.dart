@@ -16,7 +16,7 @@ class NewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshWidget(
       onRefresh: () async {
-        await ordersController.handlePullRefresh(OrderEnum.newOrder);
+        await ordersController.handlePullRefresh(OrderType.newOrder);
       },
       child: ordersController.fetchStatus == FetchStatus.loading
           ? Container(
@@ -25,8 +25,11 @@ class NewPage extends StatelessWidget {
               child: LoadingWidget())
           : ListView.builder(
               key: PageStorageKey("newOrderList"),
-              shrinkWrap: true,
-              primary: false,
+              controller: ordersController.scrollController,
+              // shrinkWrap: true,
+              // primary: false,
+              physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
               itemCount: ordersController.getNewOrderCount(),
               itemBuilder: (context, index) {
                 return NewItem(
@@ -35,7 +38,7 @@ class NewPage extends StatelessWidget {
                     Get.toNamed(Routes.PROCESSING);
                   },
                   orderRecord: ordersController.newOrderRecords[index],
-                  orderEnum: OrderEnum.newOrder,
+                  orderEnum: OrderType.newOrder,
                   orderTotal: ordersController.calculateOrderTotal(index),
                 );
               },

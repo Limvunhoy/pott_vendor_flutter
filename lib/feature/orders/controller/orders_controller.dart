@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/order/order_response.dart';
 import 'package:pott_vendor/core/service/order/order_service.dart';
+import 'package:pott_vendor/utils/constants/app_constants.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
 class OrderTabs {
@@ -10,7 +11,7 @@ class OrderTabs {
   const OrderTabs(this.title);
 }
 
-enum OrderEnum {
+enum OrderType {
   newOrder,
   readyOrder,
   finishedOrder,
@@ -29,60 +30,78 @@ class OrdersController extends GetxController
   late TabController tabController;
   OrderService _orderService = OrderService();
 
-  OrderDataResponse? newOrderRecord;
   List<OrderRecordResponse> newOrderRecords = [];
-
-  OrderDataResponse? readyOrderRecord;
   List<OrderRecordResponse> readyOrderRecords = [];
-
-  OrderDataResponse? finishedOrderRecord;
   List<OrderRecordResponse> finishedOrderRecords = [];
-
-  OrderDataResponse? completedOrderRecord;
-  List<OrderRecordResponse> completedRecords = [];
+  List<OrderRecordResponse> completedOrderRecords = [];
 
   FetchStatus fetchStatus = FetchStatus.idle;
 
-  String vendorId = "15";
+  String vendorId = "22";
+
+  late ScrollController scrollController;
+
+  RxBool isMoreNewOrder = false.obs;
+  RxBool isMoreReadyOrder = false.obs;
+  RxBool isMoreFinishedOrder = false.obs;
+  RxBool isMoreCompletedOrder = false.obs;
+
+  RxInt newOrderPage = 1.obs;
+  RxInt readyOrderPage = 1.obs;
+  RxInt finishedOrderPage = 1.obs;
+  RxInt completedOrderPage = 1.obs;
 
   @override
-  void onInit() {
-    super.onInit();
-
-    getOrder("new", OrderEnum.newOrder);
-
+  void onInit() async {
     tabController = TabController(length: 4, vsync: this)
       ..addListener(() {
         if (!tabController.indexIsChanging) {
           handleTabBarChange(tabController.index);
         }
       });
+
+    newOrderRecords = await fetchOrder(
+        newOrderType, newOrderPage, isMoreNewOrder, newOrderRecords);
+
+    scrollController = ScrollController()..addListener(_fetchMoreOrder);
+
+    super.onInit();
   }
 
   @override
   void onClose() {
     tabController.dispose();
+    scrollController.dispose();
     super.onClose();
   }
 
-  handlePullRefresh(OrderEnum orderStatus) {
+  handlePullRefresh(OrderType orderStatus) async {
     switch (orderStatus) {
-      case OrderEnum.newOrder:
-        pullRefresh("new", orderStatus);
+      case OrderType.newOrder:
+        await fetchOrder(
+            newOrderType, newOrderPage, isMoreNewOrder, newOrderRecords,
+            isPullRefresh: true, isLoading: false);
         break;
-      case OrderEnum.readyOrder:
-        pullRefresh("ready", orderStatus);
+      case OrderType.readyOrder:
+        await fetchOrder(
+            readyOrderType, readyOrderPage, isMoreReadyOrder, readyOrderRecords,
+            isPullRefresh: true, isLoading: false);
         break;
-      case OrderEnum.finishedOrder:
-        pullRefresh("confirm", orderStatus);
+      case OrderType.finishedOrder:
+        await fetchOrder(confirmOrderType, finishedOrderPage,
+            isMoreFinishedOrder, finishedOrderRecords,
+            isPullRefresh: true, isLoading: false);
         break;
-      case OrderEnum.completedOrder:
-        pullRefresh("completed", orderStatus);
+      case OrderType.completedOrder:
+        await fetchOrder(completedOrderType, completedOrderPage,
+            isMoreCompletedOrder, completedOrderRecords,
+            isPullRefresh: true, isLoading: false);
         break;
     }
   }
 
   int getNewOrderCount() {
+    print("New Order Count ${newOrderRecords.length}");
     return newOrderRecords.length;
   }
 
@@ -95,7 +114,7 @@ class OrdersController extends GetxController
   }
 
   int getCompletedOrderCount() {
-    return completedRecords.length;
+    return completedOrderRecords.length;
   }
 
   String calculateOrderTotal(int index) {
@@ -106,89 +125,54 @@ class OrdersController extends GetxController
 
   String getCompletedItem(int index) {
     String item = "";
-    if (completedRecords[index].totalQty <= 1) {
-      item = "${completedRecords[index].totalQty} Item";
+    if (completedOrderRecords[index].totalQty <= 1) {
+      item = "${completedOrderRecords[index].totalQty} Item";
     } else {
-      item = "${completedRecords[index].totalQty} Items";
+      item = "${completedOrderRecords[index].totalQty} Items";
     }
     return item;
   }
-}
 
-extension on OrdersController {
-  void pullRefresh(String query, OrderEnum orderEnum) {
-    Future.delayed(Duration(milliseconds: 500), () async {
-      await getOrder(query, orderEnum, isPullRefresh: true);
-    });
-  }
-}
+  // MARK: Fetch More Order
+  void _fetchMoreOrder() async {
+    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange) {
+      print("isMoreNewRecord ${isMoreNewOrder.value}");
 
-// MARK: Services
-extension on OrdersController {
-  getOrder(String status, OrderEnum orderEnum,
-      {bool isPullRefresh = false}) async {
-    if (!isPullRefresh) {
-      fetchStatus = FetchStatus.loading;
-      update();
-    }
-
-    try {
-      OrderDataResponse? orderResponse =
-          await _orderService.getQueryOrder(vendorId, status);
-      fetchStatus = FetchStatus.complete;
-
-      switch (orderEnum) {
-        case OrderEnum.newOrder:
-          if (orderResponse != null) {
-            newOrderRecord = orderResponse;
-
-            if (isPullRefresh) {
-              newOrderRecords = orderResponse.records;
-            } else {
-              newOrderRecords.addAll(orderResponse.records);
-            }
+      switch (tabController.index) {
+        case 0:
+          if (isMoreNewOrder.isTrue) {
+            print("Load More New Order");
+            await fetchOrder(
+                newOrderType, newOrderPage, isMoreNewOrder, newOrderRecords,
+                isLoading: false);
           }
-
-          update();
           break;
-        case OrderEnum.readyOrder:
-          if (orderResponse != null) {
-            readyOrderRecord = orderResponse;
-            if (isPullRefresh) {
-              readyOrderRecords = readyOrderRecord?.records ?? [];
-            } else {
-              readyOrderRecords.addAll(readyOrderRecord?.records ?? []);
-            }
+        case 1:
+          if (isMoreReadyOrder.isTrue) {
+            print("Load More Ready Order");
+            await fetchOrder(readyOrderType, readyOrderPage, isMoreReadyOrder,
+                readyOrderRecords,
+                isLoading: false);
           }
-          update();
           break;
-        case OrderEnum.finishedOrder:
-          if (orderResponse != null) {
-            finishedOrderRecord = orderResponse;
-            if (isPullRefresh) {
-              finishedOrderRecords = finishedOrderRecord?.records ?? [];
-            } else {
-              finishedOrderRecords.addAll(finishedOrderRecord?.records ?? []);
-            }
+        case 3:
+          if (isMoreFinishedOrder.isTrue) {
+            print("Load More Finished Order");
+            await fetchOrder(confirmOrderType, finishedOrderPage,
+                isMoreFinishedOrder, finishedOrderRecords,
+                isLoading: false);
           }
-
-          update();
           break;
-        case OrderEnum.completedOrder:
-          if (orderResponse != null) {
-            completedOrderRecord = orderResponse;
-            if (isPullRefresh) {
-              completedRecords = completedOrderRecord?.records ?? [];
-            } else {
-              completedRecords.addAll(completedOrderRecord?.records ?? []);
-            }
+        case 4:
+          if (isMoreCompletedOrder.isTrue) {
+            print("Load More Completed Order");
+            await fetchOrder(completedOrderType, completedOrderPage,
+                isMoreCompletedOrder, completedOrderRecords,
+                isLoading: false);
           }
-
-          update();
           break;
       }
-    } catch (e) {
-      print("Failed to get order $e");
     }
   }
 }
@@ -199,25 +183,77 @@ extension on OrdersController {
     switch (tabController.index) {
       case 0:
         print("Current TabBar: New");
+        if (newOrderRecords.isEmpty) {
+          await fetchOrder(
+              newOrderType, newOrderPage, isMoreNewOrder, newOrderRecords);
+        }
         break;
       case 1:
         print("Current TabBar: Ready");
-        if (readyOrderRecord == null) {
-          await getOrder("ready", OrderEnum.readyOrder);
+        if (readyOrderRecords.isEmpty) {
+          await fetchOrder(readyOrderType, readyOrderPage, isMoreReadyOrder,
+              readyOrderRecords);
         }
         break;
       case 2:
         print("Current TabBar: Finished");
-        if (finishedOrderRecord == null) {
-          await getOrder("confirm", OrderEnum.finishedOrder);
+        if (finishedOrderRecords.isEmpty) {
+          await fetchOrder(confirmOrderType, finishedOrderPage,
+              isMoreFinishedOrder, finishedOrderRecords);
         }
         break;
       case 3:
         print("Current TabBar: Completed");
-        if (completedOrderRecord == null) {
-          await getOrder("completed", OrderEnum.completedOrder);
+        if (completedOrderRecords.isEmpty) {
+          await fetchOrder(completedOrderType, completedOrderPage,
+              isMoreCompletedOrder, completedOrderRecords);
         }
         break;
+    }
+  }
+}
+
+// MARK: Fetch Order Records
+extension on OrdersController {
+  Future<List<OrderRecordResponse>> fetchOrder(String status, RxInt page,
+      RxBool isLoadMore, List<OrderRecordResponse> records,
+      {bool isPullRefresh = false, bool isLoading = true}) async {
+    if (isLoading) {
+      fetchStatus = FetchStatus.loading;
+      update();
+    }
+
+    try {
+      if (isPullRefresh) {
+        page.value = 1;
+      }
+
+      final response =
+          await _orderService.getQueryOrder(vendorId, status, page);
+      fetchStatus = FetchStatus.complete;
+
+      if (response != null) {
+        if (response.records.length == fetchLimit) {
+          isLoadMore.value = true;
+
+          if (page.value < response.totalNumPage) {
+            page.value += 1;
+          }
+
+          if (isPullRefresh) {
+            records.clear();
+          }
+        } else {
+          isLoadMore.value = false;
+        }
+        records.addAll(response.records);
+      }
+      update();
+      return records;
+    } catch (e) {
+      fetchStatus = FetchStatus.complete;
+      update();
+      return [];
     }
   }
 }

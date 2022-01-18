@@ -254,14 +254,12 @@ class OrderTimeLineResponse {
     required this.confirmAt,
     required this.readyAt,
     required this.completedAt,
-    required this.okok,
   });
 
   final DateTime? newAt;
   final DateTime? confirmAt;
   final DateTime? readyAt;
   final DateTime? completedAt;
-  final DateTime? okok;
 
   factory OrderTimeLineResponse.fromJson(Map<String, dynamic> json) =>
       OrderTimeLineResponse(
@@ -274,7 +272,6 @@ class OrderTimeLineResponse {
         completedAt: json["completedAt"] == null
             ? null
             : DateTime.parse(json["completedAt"]),
-        okok: DateTime.parse(json["okok"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -283,7 +280,6 @@ class OrderTimeLineResponse {
         "readyAt": readyAt == null ? null : readyAt?.toIso8601String(),
         "completedAt":
             completedAt == null ? null : completedAt?.toIso8601String(),
-        "okok": okok?.toIso8601String(),
       };
 }
 

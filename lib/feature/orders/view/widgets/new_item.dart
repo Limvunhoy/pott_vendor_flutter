@@ -24,17 +24,17 @@ class NewItem extends StatelessWidget {
   final OrderStatus orderStatus;
   final VoidCallback onConfirm;
   final OrderRecordResponse orderRecord;
-  final OrderEnum orderEnum;
+  final OrderType orderEnum;
   final String orderTotal;
 
   @override
   Widget build(BuildContext context) {
     String convertTimeAgo() {
-      if (orderEnum == OrderEnum.newOrder) {
+      if (orderEnum == OrderType.newOrder) {
         return orderRecord.timeLine.newAt != null
             ? timeago.format(orderRecord.timeLine.newAt!)
             : "...";
-      } else if (orderEnum == OrderEnum.readyOrder) {
+      } else if (orderEnum == OrderType.readyOrder) {
         return orderRecord.timeLine.readyAt != null
             ? timeago.format(orderRecord.timeLine.readyAt!)
             : "...";
