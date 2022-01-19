@@ -105,7 +105,7 @@ class OrdersController extends GetxController
       if (response) {
         confirmOrderRecords.removeAt(index);
         if (finishedOrderRecords.isNotEmpty) {
-          finishedOrderRecords.insert(0, newOrderRecords[index]);
+          finishedOrderRecords.insert(0, confirmOrderRecords[index]);
         }
         Fluttertoast.showToast(
           msg: "Order Ready",
