@@ -4,6 +4,7 @@ import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart'
 class AccountTextField extends StatelessWidget {
   const AccountTextField(
       {Key? key,
+      this.controller,
       required this.title,
       required this.hintText,
       this.keyboardType,
@@ -12,6 +13,7 @@ class AccountTextField extends StatelessWidget {
       this.isAutoCorrect = true})
       : super(key: key);
 
+  final TextEditingController? controller;
   final String title;
   final String hintText;
   final TextInputType? keyboardType;
@@ -35,6 +37,7 @@ class AccountTextField extends StatelessWidget {
           SizedBox(
             height: 38.0,
             child: TextFormField(
+              controller: controller,
               cursorColor: colorExt.PRIMARY_COLOR,
               keyboardType: keyboardType,
               obscureText: obscureText!,

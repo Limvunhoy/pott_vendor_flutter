@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/feature/account/controller/account_controller.dart';
 import 'package:pott_vendor/feature/account/view/widgets/account_textfield.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 
 class AccountBody extends StatelessWidget {
-  const AccountBody({Key? key}) : super(key: key);
+  const AccountBody({Key? key, required this.controller}) : super(key: key);
+
+  final AccountController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +19,7 @@ class AccountBody extends StatelessWidget {
               Flexible(
                 flex: 2,
                 child: AccountTextField(
+                  controller: controller.firstNameTextController,
                   title: "First Name",
                   hintText: "Firstname",
                 ),
@@ -26,6 +30,7 @@ class AccountBody extends StatelessWidget {
               Flexible(
                 flex: 3,
                 child: AccountTextField(
+                  controller: controller.lastNameTextController,
                   title: "Last Name",
                   hintText: "Lastname",
                 ),
@@ -36,6 +41,7 @@ class AccountBody extends StatelessWidget {
             height: 20.0,
           ),
           AccountTextField(
+            controller: controller.emailTextController,
             title: "Email",
             hintText: "Example@gmail.com",
             keyboardType: TextInputType.emailAddress,
@@ -44,6 +50,7 @@ class AccountBody extends StatelessWidget {
             height: 20.0,
           ),
           AccountTextField(
+            controller: controller.phoneNumberTextController,
             title: "Phone Number",
             hintText: "+855 123456",
             keyboardType: TextInputType.number,
@@ -52,18 +59,14 @@ class AccountBody extends StatelessWidget {
             height: 20.0,
           ),
           AccountTextField(
-              title: "Address", hintText: "No 1, St 310, Phnom Penh"),
+              controller: controller.addressTextController,
+              title: "Address",
+              hintText: "No 1, St 310, Phnom Penh"),
           const SizedBox(
             height: 20.0,
           ),
           AccountTextField(
-            title: "Address",
-            hintText: "No 1, St 310, Phnom Penh",
-          ),
-          const SizedBox(
-            height: 20.0,
-          ),
-          AccountTextField(
+            controller: controller.passwordTextController,
             title: "Password",
             hintText: "••••••",
             obscureText: true,

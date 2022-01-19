@@ -89,7 +89,7 @@
         <entry key="dio">
           <value>
             <list>
-              <option value="$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/dio-4.0.0/lib" />
+              <option value="$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/dio-4.0.4/lib" />
             </list>
           </value>
         </entry>
@@ -479,7 +479,7 @@
       <root url="file://$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/cross_file-0.3.1+5/lib" />
       <root url="file://$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1/lib" />
       <root url="file://$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.3/lib" />
-      <root url="file://$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/dio-4.0.0/lib" />
+      <root url="file://$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/dio-4.0.4/lib" />
       <root url="file://$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0/lib" />
       <root url="file://$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-1.1.2/lib" />
       <root url="file://$USER_HOME$/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.2/lib" />
