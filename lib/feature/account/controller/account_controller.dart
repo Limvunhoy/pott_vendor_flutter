@@ -37,14 +37,21 @@ class AccountController extends GetxController {
     print("Image Picker Source $source");
     try {
       print("Source $source");
-      final image = await _imagePicker.pickImage(source: source);
+      final image = await _imagePicker.pickImage(
+        source: source,
+        // imageQuality: 50,
+        // maxHeight: 500,
+        // maxWidth: 500,
+      );
       print("Image $image");
       if (image == null) return;
       profilePic = File(image.path);
       print("Image Path ${image.path}");
 
       // await uploadImage(profilePic!);
-      // _accountService.uploadImage(profilePic!);
+      // _accountService.uploadImageHttp(profilePic!);
+      _accountService.uploadImage(File(image.path));
+      // _accountService.getUploadImg(profilePic!);
 
       update();
       print("Profile Path ${profilePic!.path}");

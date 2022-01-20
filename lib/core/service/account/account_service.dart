@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getX;
 import 'package:http_parser/http_parser.dart';
+import 'package:mime_type/mime_type.dart';
 import 'package:pott_vendor/core/api/api_base_helper.dart';
 import 'package:pott_vendor/core/model/account/updateUserBodyRequest.dart';
 import 'package:pott_vendor/core/model/account/update_account_info_response.dart';
@@ -11,7 +14,6 @@ import 'package:pott_vendor/utils/constants/end_poing.dart';
 
 class AccountService {
   ApiBaseHelper _apiBaseHelper = getX.Get.find<ApiBaseHelper>();
-  var _dio = Dio();
 
   Future<UpdateAccountInfoResponse> updateAccountInfo(
       int userId, UpdateAccountBodyRequest bodyRequest) async {
@@ -30,48 +32,35 @@ class AccountService {
 
   String url = "https://storage.pottbid.com/storage/upload-image-user";
 
-  void uploadImage(File file) async {
-    String fileName = file.path.split("/").last;
-    FormData formData = FormData.fromMap({
-      "file": await MultipartFile.fromFile(
-        file.path,
-        filename: fileName,
-        contentType: MediaType("image", "jpg"),
-      ),
+  void uploadImage(File selectedImage) async {
+    String fileName = selectedImage.path.split("/").last;
+    String? mimeType = mime(selectedImage.path);
+    String mimee = mimeType!.split('/')[0];
+    String type = mimeType.split('/')[1];
+
+    FormData data = FormData.fromMap({
+      "file": await MultipartFile.fromFile(selectedImage.path,
+          filename: fileName, contentType: MediaType(mimee, type)),
     });
 
-    print("File Name: $fileName, file path: ${file.path}");
+    var length = await selectedImage.length();
 
-    await _dio
+    Dio dio = Dio();
+    dio
         .post(url,
-            data: formData,
-            options: Options(headers: {
+            data: data,
+            options: Options(contentType: "multipart/form-data", headers: {
               "Content-Type": "multipart/form-data",
-              "Accept": "*/*"
+              "Content-Length": length,
+              "accept": "*/*",
+              "Connection": "keep-alive"
             }))
         .then((response) {
       print("Upload Response $response");
     }).catchError((error) {
-      print("Upload error $error");
+      if (error is DioError) {
+        print("Upload error ${error.response!.data}");
+      }
     });
-
-    // try {
-    //   String fileName = file.path.split("/").last;
-    //   FormData formData = FormData.fromMap({
-    //     "file": await MultipartFile.fromFile(file.path, filename: fileName),
-    //   });
-    //
-    //   String url = "https://storage.pottbid.com/storage/upload-image-user";
-    //   final response = await _dio.post(url, data: file.openRead());
-    //
-    //   print("upload response $response");
-    //   if (response.statusCode == 200) {
-    //     return UpdateUserProfileResponse.fromJson(response.data);
-    //   } else {
-    //     throw "Failed to Upload Image";
-    //   }
-    // } catch (e) {
-    //   throw e;
-    // }
   }
 }
