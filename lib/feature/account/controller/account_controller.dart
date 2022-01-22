@@ -12,8 +12,14 @@ import 'package:pott_vendor/utils/constants/shared_preference_keys.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 import 'package:pott_vendor/utils/helper/shared_preference_helper.dart';
 
+enum PictureType {
+  cover,
+  profile,
+}
+
 class AccountController extends GetxController {
   File? profilePic;
+  File? coverPic;
   final ImagePicker _imagePicker = ImagePicker();
 
   AccountService _accountService = AccountService();
@@ -27,99 +33,85 @@ class AccountController extends GetxController {
 
   UserDataResponse? user;
   UpdateAccountInfoResponse? updateAccountInfoResponse;
-  String? profilePath;
+  String? _profilePath;
+  String? _coverPath;
 
   SharedPreferenceHelper _sharedPreferenceHelper = SharedPreferenceHelper();
 
   FetchStatus fetchStatus = FetchStatus.idle;
 
-  Future pickImage(ImageSource source) async {
-    print("Image Picker Source $source");
+  late UpdateAccountBodyRequest bodyRequest;
+
+  Future pickImage(ImageSource source, PictureType type) async {
     try {
-      print("Source $source");
       final image = await _imagePicker.pickImage(
         source: source,
-        // imageQuality: 50,
-        // maxHeight: 500,
-        // maxWidth: 500,
       );
-      print("Image $image");
       if (image == null) return;
-      profilePic = File(image.path);
-      print("Image Path ${image.path}");
 
-      // await uploadImage(profilePic!);
-      // _accountService.uploadImageHttp(profilePic!);
-      _accountService.uploadImage(File(image.path));
-      // _accountService.getUploadImg(profilePic!);
-
+      if (type == PictureType.cover) {
+        coverPic = File(image.path);
+      } else {
+        profilePic = File(image.path);
+      }
+      // await _accountService.uploadImage(profilePic!);
       update();
-      print("Profile Path ${profilePic!.path}");
     } on PlatformException catch (e) {
       print("Error Pick Image $e");
     }
   }
 
+  updateBodyRequest(String? profilePic, String? coverPic) {
+    bodyRequest = UpdateAccountBodyRequest(
+      firstname: firstNameTextController.text.isEmpty
+          ? null
+          : firstNameTextController.text,
+      lastname: lastNameTextController.text.isEmpty
+          ? null
+          : lastNameTextController.text,
+      email: emailTextController.text.isEmpty ? null : emailTextController.text,
+      phone: phoneNumberTextController.text.isEmpty
+          ? null
+          : phoneNumberTextController.text,
+      address: addressTextController.text.isEmpty
+          ? null
+          : addressTextController.text,
+      password: passwordTextController.text.isEmpty
+          ? null
+          : passwordTextController.text,
+      photo: profilePic,
+      cover: coverPic,
+    );
+  }
+
   updateAccountInfo() async {
     try {
-      UpdateAccountBodyRequest updateAccountBodyRequest =
-          UpdateAccountBodyRequest(
-        firstname: firstNameTextController.text,
-        lastname: lastNameTextController.text,
-        email: emailTextController.text,
-        phone: phoneNumberTextController.text,
-        address: addressTextController.text,
-        photo: "",
-        cover: "",
-      );
-
-      print("Phone ${phoneNumberTextController.text.runtimeType}");
-      // if (firstNameTextController.text.isNotEmpty) {
-      //   updateAccountBodyRequest.firstname = firstNameTextController.text;
-      // } else if (lastNameTextController.text.isNotEmpty) {
-      //   updateAccountBodyRequest.lastname = lastNameTextController.text;
-      // } else if (emailTextController.text.isNotEmpty) {
-      //   updateAccountBodyRequest.email = emailTextController.text;
-      // } else if (phone)
       fetchStatus = FetchStatus.loading;
       update();
+
+      if (profilePic != null) {
+        await _accountService.uploadImage(profilePic!).then((profilePath) {
+          print("KARK PATH: $profilePath");
+          _profilePath = profilePath;
+          updateBodyRequest(profilePath, _coverPath);
+        });
+        print("Kark Path: $_profilePath");
+      } else if (coverPic != null) {
+        _coverPath = await _accountService.uploadImage(coverPic!);
+        updateBodyRequest(_profilePath, _coverPath);
+      } else {
+        updateBodyRequest(_profilePath, _coverPath);
+      }
 
       UserDataResponse currentUser = UserDataResponse.fromJson(
           await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
       final res = await _accountService.updateAccountInfo(
-          currentUser.vendorId, updateAccountBodyRequest);
-
+          currentUser.vendorId, bodyRequest.toJson());
+      print("Update User Account Info Successfully: ${res.data}");
       fetchStatus = FetchStatus.complete;
       update();
-
-      print("Update User Account Info Successfully: ${res.data}");
     } catch (e) {
       print("Failed to Update User Account Info: $e");
     }
   }
-
-  // uploadImage(File file) async {
-  //   try {
-  //     final res = await _accountService.uploadImage(file);
-  //     print("Upload Image Response: ${res.results.path}");
-  //     profilePath = res.results.path;
-  //     update();
-  //   } catch (e) {
-  //     print("Something went wrong...! $e");
-  //   }
-  // }
-
-  // updateAccountInfo() async {
-  //   try {
-  //
-  //     UserDataResponse currentUser = UserDataResponse.fromJson(
-  //         await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
-  //
-  //     updateAccountInfoResponse = await _accountService.updateAccountInfo(currentUser.vendorId, )
-  //
-  //   } catch (e) {
-  //     print("Failed to update account info $e");
-  //   }
-  // }
-
 }

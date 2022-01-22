@@ -9,12 +9,12 @@
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/model/account/updateUserBodyRequest.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/account/updateUserBodyRequest.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/service/account/account_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/account/account_service.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/account/view/account_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/view/account_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/account/view/widgets/header_cover.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/view/widgets/header_cover.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +115,16 @@
           <url>file://$PROJECT_DIR$/lib/utils/helper/user_manager.dart</url>
           <line>23</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart</url>
+          <line>100</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart</url>
+          <line>104</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -34,7 +34,7 @@ class AccountPage extends GetWidget<AccountController> {
                       final source = await showImageSource(context);
                       if (source != null) {
                         print("Image Source $source");
-                        _controller.pickImage(source);
+                        _controller.pickImage(source, PictureType.profile);
                       }
                     },
                     accountController: _controller,

@@ -43,11 +43,20 @@ class HeaderCover extends StatelessWidget {
           color: colorExt.PRIMARY_BACKGROUND_COLOR,
           child: Stack(
             children: [
-              Image.network(
-                "https://cdn.dribbble.com/users/5536321/screenshots/14189735/dribble_4x.png",
-                fit: BoxFit.cover,
+              Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 4,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: accountController.coverPic != null
+                        ? FileImage(File(accountController.coverPic!.path))
+                            as ImageProvider
+                        : NetworkImage(
+                            "https://cdn.dribbble.com/users/5536321/screenshots/14189735/dribble_4x.png",
+                          ),
+                  ),
+                ),
               ),
               Positioned(
                 bottom: 0.0,
@@ -60,29 +69,24 @@ class HeaderCover extends StatelessWidget {
                       border: Border.all(color: Colors.white, width: 4),
                       borderRadius: BorderRadius.circular(60.0),
                     ),
-                    child: GetBuilder(
-                      init: AccountController(),
-                      builder: (context) {
-                        return ClipOval(
-                          child: Material(
-                            child: Ink.image(
-                              image: accountController.profilePic != null
-                                  ? FileImage(File(
-                                          accountController.profilePic!.path))
-                                      as ImageProvider
-                                  : NetworkImage(
-                                      "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg",
-                                    ),
-                              fit: BoxFit.cover,
-                              width: 116.0,
-                              height: 116.0,
-                              child: InkWell(
-                                onTap: onProfileTap,
-                              ),
-                            ),
+                    child: ClipOval(
+                      child: Material(
+                        child: Ink.image(
+                          image: accountController.profilePic != null
+                              ? FileImage(
+                                      File(accountController.profilePic!.path))
+                                  as ImageProvider
+                              : NetworkImage(
+                                  "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg",
+                                ),
+                          fit: BoxFit.cover,
+                          width: 116.0,
+                          height: 116.0,
+                          child: InkWell(
+                            onTap: onProfileTap,
                           ),
-                        );
-                      },
+                        ),
+                      ),
                     ),
                   ),
                 ),
