@@ -52,6 +52,24 @@ class AccountController extends GetxController {
     super.onInit();
   }
 
+  bool isUpdateButtonEnabled = false;
+
+  checkEnableUpdateButton() {
+    if (firstNameTextController.text.isNotEmpty ||
+        lastNameTextController.text.isNotEmpty ||
+        emailTextController.text.isNotEmpty ||
+        phoneNumberTextController.text.isNotEmpty ||
+        addressTextController.text.isNotEmpty ||
+        passwordTextController.text.isNotEmpty ||
+        profilePic != null ||
+        coverPic != null) {
+      isUpdateButtonEnabled = true;
+    } else {
+      isUpdateButtonEnabled = false;
+    }
+    update();
+  }
+
   @override
   void onClose() {
     profilePic = null;
@@ -79,6 +97,7 @@ class AccountController extends GetxController {
         profilePic = File(image.path);
       }
 
+      checkEnableUpdateButton();
       update();
     } on PlatformException catch (e) {
       print("Error Pick Image $e");

@@ -20,6 +20,11 @@ class AccountBody extends StatelessWidget {
                 flex: 2,
                 child: AccountTextField(
                   controller: controller.firstNameTextController,
+                  onChanged: (value) {
+                    if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                      controller.checkEnableUpdateButton();
+                    }
+                  },
                   title: "First Name",
                   hintText:
                       "${controller.authController.auth?.firstName ?? "N/A"}",
@@ -32,6 +37,11 @@ class AccountBody extends StatelessWidget {
                 flex: 3,
                 child: AccountTextField(
                   controller: controller.lastNameTextController,
+                  onChanged: (value) {
+                    if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                      controller.checkEnableUpdateButton();
+                    }
+                  },
                   title: "Last Name",
                   hintText:
                       "${controller.authController.auth?.lastName ?? "N/A"}",
@@ -44,6 +54,11 @@ class AccountBody extends StatelessWidget {
           ),
           AccountTextField(
             controller: controller.emailTextController,
+            onChanged: (value) {
+              if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                controller.checkEnableUpdateButton();
+              }
+            },
             title: "Email",
             hintText: "Example@gmail.com",
             keyboardType: TextInputType.emailAddress,
@@ -53,6 +68,11 @@ class AccountBody extends StatelessWidget {
           ),
           AccountTextField(
             controller: controller.phoneNumberTextController,
+            onChanged: (value) {
+              if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                controller.checkEnableUpdateButton();
+              }
+            },
             title: "Phone Number",
             hintText: "${controller.authController.phoneNumberFormat()}",
             keyboardType: TextInputType.phone,
@@ -62,6 +82,11 @@ class AccountBody extends StatelessWidget {
           ),
           AccountTextField(
               controller: controller.addressTextController,
+              onChanged: (value) {
+                if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                  controller.checkEnableUpdateButton();
+                }
+              },
               title: "Address",
               hintText: "No 1, St 310, Phnom Penh"),
           const SizedBox(
@@ -69,6 +94,11 @@ class AccountBody extends StatelessWidget {
           ),
           AccountTextField(
             controller: controller.passwordTextController,
+            onChanged: (value) {
+              if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                controller.checkEnableUpdateButton();
+              }
+            },
             title: "Password",
             hintText: "••••••",
             obscureText: true,
