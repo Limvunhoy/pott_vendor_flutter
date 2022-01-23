@@ -6,6 +6,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:pott_vendor/core/api/api_base_helper.dart';
 import 'package:pott_vendor/core/model/account/update_account_info_response.dart';
+import 'package:pott_vendor/core/model/account/upload_image_response.dart';
 import 'package:pott_vendor/core/model/error/error_response.dart';
 import 'package:pott_vendor/utils/constants/end_poing.dart';
 
@@ -29,7 +30,7 @@ class AccountService {
 
   String url = "https://storage.pottbid.com/storage/upload-image-user";
 
-  Future<String?> uploadImage(File selectedImage) async {
+  Future<UploadImageResponse?> uploadImage(File selectedImage) async {
     String fileName = selectedImage.path.split("/").last;
     String? mimeType = mime(selectedImage.path);
     String mimee = mimeType!.split('/')[0];
@@ -40,30 +41,23 @@ class AccountService {
           filename: fileName, contentType: MediaType(mimee, type)),
     });
 
-    var length = await selectedImage.length();
+    try {
+      final response = await Dio().post(url,
+          data: data,
+          options: Options(contentType: "multipart/form-data", headers: {
+            "Content-Type": "multipart/form-data",
+            "accept": "*/*",
+            "Connection": "keep-alive"
+          }));
 
-    Dio dio = Dio();
-    dio
-        .post(url,
-            data: data,
-            options: Options(contentType: "multipart/form-data", headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Length": length,
-              "accept": "*/*",
-              "Connection": "keep-alive"
-            }))
-        .then((response) {
-      print("Upload Response $response");
       if (response.statusCode == 200) {
-        print("result path: ${response.data["results"]["path"]}");
-        return response.data["results"]["path"].toString();
+        return UploadImageResponse.fromJson(response.data);
       }
-      return null;
-    }).catchError((error) {
-      if (error is DioError) {
-        print("Upload error ${error.response!.data}");
-        return "";
+    } catch (e) {
+      if (e is DioError) {
+        print("Upload error ${e.response!.data}");
       }
-    });
+      throw e;
+    }
   }
 }

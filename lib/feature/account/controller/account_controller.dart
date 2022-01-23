@@ -1,12 +1,15 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pott_vendor/core/model/account/updateUserBodyRequest.dart';
+import 'package:pott_vendor/core/model/account/update_user_body_request.dart';
 import 'package:pott_vendor/core/model/account/update_account_info_response.dart';
+import 'package:pott_vendor/core/model/account/upload_image_response.dart';
 import 'package:pott_vendor/core/model/auth/user_response.dart';
+import 'package:pott_vendor/core/model/menu/menu_item_model.dart';
 import 'package:pott_vendor/core/service/account/account_service.dart';
 import 'package:pott_vendor/utils/constants/shared_preference_keys.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
@@ -33,14 +36,14 @@ class AccountController extends GetxController {
 
   UserDataResponse? user;
   UpdateAccountInfoResponse? updateAccountInfoResponse;
-  String? _profilePath;
-  String? _coverPath;
 
   SharedPreferenceHelper _sharedPreferenceHelper = SharedPreferenceHelper();
 
   FetchStatus fetchStatus = FetchStatus.idle;
 
   late UpdateAccountBodyRequest bodyRequest;
+  UploadImageResponse? _profileUploadResponse;
+  UploadImageResponse? _coverUploadResponse;
 
   Future pickImage(ImageSource source, PictureType type) async {
     try {
@@ -61,7 +64,7 @@ class AccountController extends GetxController {
     }
   }
 
-  updateBodyRequest(String? profilePic, String? coverPic) {
+  updateBodyRequest(String? profilePath, String? coverPath) {
     bodyRequest = UpdateAccountBodyRequest(
       firstname: firstNameTextController.text.isEmpty
           ? null
@@ -79,29 +82,35 @@ class AccountController extends GetxController {
       password: passwordTextController.text.isEmpty
           ? null
           : passwordTextController.text,
-      photo: profilePic,
-      cover: coverPic,
+      photo: profilePath != "" ? profilePath : null,
+      cover: coverPath != "" ? coverPath : null,
     );
+    update();
   }
 
-  updateAccountInfo() async {
+  Future updateAccountInfo() async {
     try {
       fetchStatus = FetchStatus.loading;
       update();
 
       if (profilePic != null) {
-        await _accountService.uploadImage(profilePic!).then((profilePath) {
-          print("KARK PATH: $profilePath");
-          _profilePath = profilePath;
-          updateBodyRequest(profilePath, _coverPath);
+        await _accountService.uploadImage(profilePic!).then((res) {
+          if (res != null) {
+            _profileUploadResponse = res;
+          }
         });
-        print("Kark Path: $_profilePath");
-      } else if (coverPic != null) {
-        _coverPath = await _accountService.uploadImage(coverPic!);
-        updateBodyRequest(_profilePath, _coverPath);
-      } else {
-        updateBodyRequest(_profilePath, _coverPath);
       }
+
+      if (coverPic != null) {
+        await _accountService.uploadImage(coverPic!).then((res) {
+          if (res != null) {
+            _coverUploadResponse = res;
+          }
+        });
+      }
+
+      updateBodyRequest(_profileUploadResponse?.results.path ?? null,
+          _coverUploadResponse?.results.path ?? null);
 
       UserDataResponse currentUser = UserDataResponse.fromJson(
           await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
@@ -111,7 +120,9 @@ class AccountController extends GetxController {
       fetchStatus = FetchStatus.complete;
       update();
     } catch (e) {
-      print("Failed to Update User Account Info: $e");
+      if (e is DioError) {
+        print("Failed to Update User Account Info: ${e.response!.data}");
+      }
     }
   }
 }

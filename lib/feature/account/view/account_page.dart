@@ -30,11 +30,15 @@ class AccountPage extends GetWidget<AccountController> {
                 slivers: [
                   HeaderCover(
                     onProfileTap: () async {
-                      print("Handle On Profile Tapped");
                       final source = await showImageSource(context);
                       if (source != null) {
-                        print("Image Source $source");
                         _controller.pickImage(source, PictureType.profile);
+                      }
+                    },
+                    onCameraTap: () async {
+                      final source = await showImageSource(context);
+                      if (source != null) {
+                        _controller.pickImage(source, PictureType.cover);
                       }
                     },
                     accountController: _controller,
@@ -58,7 +62,7 @@ class AccountPage extends GetWidget<AccountController> {
                     onPressed: controller.fetchStatus == FetchStatus.loading
                         ? null
                         : () async {
-                            controller.updateAccountInfo();
+                            await controller.updateAccountInfo();
                           },
                     child: controller.fetchStatus == FetchStatus.loading
                         ? LoadingButton()

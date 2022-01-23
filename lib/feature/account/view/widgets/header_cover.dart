@@ -6,10 +6,14 @@ import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart'
 
 class HeaderCover extends StatelessWidget {
   const HeaderCover(
-      {Key? key, required this.onProfileTap, required this.accountController})
+      {Key? key,
+      required this.onProfileTap,
+      required this.onCameraTap,
+      required this.accountController})
       : super(key: key);
 
   final VoidCallback onProfileTap;
+  final VoidCallback onCameraTap;
   final AccountController accountController;
 
   @override
@@ -33,7 +37,7 @@ class HeaderCover extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: onCameraTap,
           icon: Image.asset(AssetPath.CAMERA_ICON),
         ),
       ],

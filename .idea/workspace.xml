@@ -8,9 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/core/model/account/upload_image_response.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/model/account/updateUserBodyRequest.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/account/updateUserBodyRequest.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/model/account/updateUserBodyRequest.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/account/update_user_body_request.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/service/account/account_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/account/account_service.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/account/view/account_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/view/account_page.dart" afterDir="false" />
@@ -117,14 +118,19 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart</url>
-          <line>100</line>
-          <option name="timeStamp" value="28" />
+          <url>file://$PROJECT_DIR$/lib/core/service/account/account_service.dart</url>
+          <line>57</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart</url>
-          <line>104</line>
-          <option name="timeStamp" value="29" />
+          <url>file://$PROJECT_DIR$/lib/core/service/account/account_service.dart</url>
+          <line>59</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/service/account/account_service.dart</url>
+          <line>53</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
