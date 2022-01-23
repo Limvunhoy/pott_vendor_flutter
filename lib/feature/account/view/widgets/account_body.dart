@@ -21,7 +21,8 @@ class AccountBody extends StatelessWidget {
                 child: AccountTextField(
                   controller: controller.firstNameTextController,
                   title: "First Name",
-                  hintText: "Firstname",
+                  hintText:
+                      "${controller.authController.auth?.firstName ?? "N/A"}",
                 ),
               ),
               const SizedBox(
@@ -32,7 +33,8 @@ class AccountBody extends StatelessWidget {
                 child: AccountTextField(
                   controller: controller.lastNameTextController,
                   title: "Last Name",
-                  hintText: "Lastname",
+                  hintText:
+                      "${controller.authController.auth?.lastName ?? "N/A"}",
                 ),
               ),
             ],
@@ -52,8 +54,8 @@ class AccountBody extends StatelessWidget {
           AccountTextField(
             controller: controller.phoneNumberTextController,
             title: "Phone Number",
-            hintText: "+855 123456",
-            keyboardType: TextInputType.number,
+            hintText: "${controller.authController.phoneNumberFormat()}",
+            keyboardType: TextInputType.phone,
           ),
           const SizedBox(
             height: 20.0,

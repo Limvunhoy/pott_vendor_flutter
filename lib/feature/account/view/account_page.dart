@@ -82,16 +82,6 @@ class AccountPage extends GetWidget<AccountController> {
                       ),
                     ),
                   ),
-                  // BaseButton(
-                  //   onPressed: _controller.fetchStatus == FetchStatus.loading
-                  //       ? null
-                  //       : () async {
-                  //           await controller.updateAccountInfo();
-                  //         },
-                  //   title: "Update",
-                  //   titleColor: Colors.white,
-                  //   backgroundColor: colorExt.PRIMARY_COLOR,
-                  // ),
                 ),
               ),
             );

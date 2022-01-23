@@ -29,8 +29,10 @@ class AuthController extends GetxController {
       UserDataResponse? currentUser = UserDataResponse.fromJson(
           await sharedPreferenceHelper.read(SharedPreferenceKey.user));
 
+      auth = currentUser;
       isAuthentication.value = currentUser.token != "";
 
+      update();
       return isAuthentication.value;
     } catch (e) {
       isAuthentication.value = false;
@@ -44,6 +46,14 @@ class AuthController extends GetxController {
   handleShowPassword() {
     isShowPassword = !isShowPassword;
     update();
+  }
+
+  String usernameFormat() {
+    return "${auth?.firstName ?? "N/A"} ${auth?.lastName ?? "N/A"}";
+  }
+
+  String phoneNumberFormat() {
+    return "${auth!.phone}";
   }
 
   String? phoneNumberValidate(String? phone) {

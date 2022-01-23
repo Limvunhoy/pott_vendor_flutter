@@ -56,9 +56,12 @@ class HeaderCover extends StatelessWidget {
                     image: accountController.coverPic != null
                         ? FileImage(File(accountController.coverPic!.path))
                             as ImageProvider
-                        : NetworkImage(
-                            "https://cdn.dribbble.com/users/5536321/screenshots/14189735/dribble_4x.png",
-                          ),
+                        : accountController.authController.auth?.cover != null
+                            ? NetworkImage(
+                                accountController.authController.auth!.cover!)
+                            : NetworkImage(
+                                "https://cdn.dribbble.com/users/5536321/screenshots/14189735/dribble_4x.png",
+                              ),
                   ),
                 ),
               ),
@@ -80,9 +83,15 @@ class HeaderCover extends StatelessWidget {
                               ? FileImage(
                                       File(accountController.profilePic!.path))
                                   as ImageProvider
-                              : NetworkImage(
-                                  "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg",
-                                ),
+                              : accountController.authController.auth?.photo !=
+                                      null
+                                  ? NetworkImage(
+                                      accountController
+                                          .authController.auth!.photo!,
+                                    )
+                                  : NetworkImage(
+                                      "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg",
+                                    ),
                           fit: BoxFit.cover,
                           width: 116.0,
                           height: 116.0,

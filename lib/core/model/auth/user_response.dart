@@ -31,6 +31,8 @@ class UserDataResponse {
     required this.phone,
     required this.status,
     required this.accountVerify,
+    this.cover,
+    this.photo,
     required this.role,
     required this.token,
   });
@@ -42,6 +44,8 @@ class UserDataResponse {
   String phone;
   String status;
   bool accountVerify;
+  String? cover;
+  String? photo;
   String role;
   String token;
 
@@ -54,6 +58,8 @@ class UserDataResponse {
         phone: json["phone"],
         status: json["status"],
         accountVerify: json["accountVerify"],
+        cover: json["cover"],
+        photo: json["photo"],
         role: json["role"],
         token: json["token"],
       );
@@ -66,6 +72,8 @@ class UserDataResponse {
         "phone": phone,
         "status": status,
         "accountVerify": accountVerify,
+        "cover": cover,
+        "photo": photo,
         "role": role,
         "token": token,
       };

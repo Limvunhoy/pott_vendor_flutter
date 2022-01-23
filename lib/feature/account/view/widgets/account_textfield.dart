@@ -10,7 +10,9 @@ class AccountTextField extends StatelessWidget {
       this.keyboardType,
       this.obscureText = false,
       this.isEnableSuggestion = true,
-      this.isAutoCorrect = true})
+      this.isAutoCorrect = true,
+      this.onChanged,
+      this.prefix})
       : super(key: key);
 
   final TextEditingController? controller;
@@ -20,6 +22,8 @@ class AccountTextField extends StatelessWidget {
   final bool? obscureText;
   final bool? isEnableSuggestion;
   final bool? isAutoCorrect;
+  final ValueChanged<String>? onChanged;
+  final Widget? prefix;
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +47,12 @@ class AccountTextField extends StatelessWidget {
               obscureText: obscureText!,
               autocorrect: isAutoCorrect!,
               enableSuggestions: isEnableSuggestion!,
+              onChanged: onChanged,
               style: TextStyle(fontSize: fontSizeExt.mediumSize),
               decoration: InputDecoration(
                 fillColor: Colors.red,
                 hintText: hintText,
+                prefix: prefix,
                 hintStyle: TextStyle(
                     fontSize: fontSizeExt.mediumSize,
                     color: colorExt.LIGHT_GRAY),

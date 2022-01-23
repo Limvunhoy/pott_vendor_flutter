@@ -233,7 +233,7 @@ class SignInPage extends StatelessWidget {
                                         },
                                   child: authController.fetchStatus ==
                                           FetchStatus.loading
-                                      ? LoadingWidget()
+                                      ? LoadingButton()
                                       : Text("LOG IN"),
                                   style: ElevatedButton.styleFrom(
                                     primary: colorExt.PRIMARY_COLOR,

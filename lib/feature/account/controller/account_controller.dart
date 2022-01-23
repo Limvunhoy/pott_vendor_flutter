@@ -9,8 +9,8 @@ import 'package:pott_vendor/core/model/account/update_user_body_request.dart';
 import 'package:pott_vendor/core/model/account/update_account_info_response.dart';
 import 'package:pott_vendor/core/model/account/upload_image_response.dart';
 import 'package:pott_vendor/core/model/auth/user_response.dart';
-import 'package:pott_vendor/core/model/menu/menu_item_model.dart';
 import 'package:pott_vendor/core/service/account/account_service.dart';
+import 'package:pott_vendor/feature/sign_in/controller/auth_controller.dart';
 import 'package:pott_vendor/utils/constants/shared_preference_keys.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 import 'package:pott_vendor/utils/helper/shared_preference_helper.dart';
@@ -45,6 +45,27 @@ class AccountController extends GetxController {
   UploadImageResponse? _profileUploadResponse;
   UploadImageResponse? _coverUploadResponse;
 
+  AuthController authController = Get.find<AuthController>();
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    profilePic = null;
+    coverPic = null;
+
+    firstNameTextController.dispose();
+    lastNameTextController.dispose();
+    phoneNumberTextController.dispose();
+    emailTextController.dispose();
+    addressTextController.dispose();
+    passwordTextController.dispose();
+    super.onClose();
+  }
+
   Future pickImage(ImageSource source, PictureType type) async {
     try {
       final image = await _imagePicker.pickImage(
@@ -57,11 +78,17 @@ class AccountController extends GetxController {
       } else {
         profilePic = File(image.path);
       }
-      // await _accountService.uploadImage(profilePic!);
+
       update();
     } on PlatformException catch (e) {
       print("Error Pick Image $e");
     }
+  }
+
+  String _phoneNumberFormat() {
+    return phoneNumberTextController.text.contains("+855")
+        ? phoneNumberTextController.text
+        : "+855${phoneNumberTextController.text}";
   }
 
   updateBodyRequest(String? profilePath, String? coverPath) {
@@ -73,9 +100,8 @@ class AccountController extends GetxController {
           ? null
           : lastNameTextController.text,
       email: emailTextController.text.isEmpty ? null : emailTextController.text,
-      phone: phoneNumberTextController.text.isEmpty
-          ? null
-          : phoneNumberTextController.text,
+      phone:
+          phoneNumberTextController.text.isEmpty ? null : _phoneNumberFormat(),
       address: addressTextController.text.isEmpty
           ? null
           : addressTextController.text,

@@ -65,14 +65,14 @@ class AppPages {
       binding: ViewProductBinding(),
     ),
     GetPage(
-      name: Routes.ACCOUNT,
-      page: () => AccountPage(),
-      binding: AccountBinding(),
-    ),
-    GetPage(
       name: Routes.ADD_MENU,
       page: () => AddMenuPage(),
       binding: AddMenuBinding(),
+    ),
+    GetPage(
+      name: Routes.ACCOUNT,
+      page: () => AccountPage(),
+      binding: AccountBinding(),
     ),
     GetPage(
       name: Routes.PRODUCT_OPTION,
