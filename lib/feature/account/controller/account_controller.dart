@@ -161,7 +161,23 @@ class AccountController extends GetxController {
           await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
       final res = await _accountService.updateAccountInfo(
           currentUser.vendorId, bodyRequest.toJson());
+
+      resetData();
+
+      UserDataResponse? _copyUser = authController.auth;
+
+      authController.auth = _copyUser?.copyWith(
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        phone: res.data.phone,
+        photo: res.data.photo,
+        cover: res.data.cover,
+      );
+
+      authController.saveUser(authController.auth!);
       print("Update User Account Info Successfully: ${res.data}");
+
+      isUpdateButtonEnabled = false;
       fetchStatus = FetchStatus.complete;
       update();
     } catch (e) {
@@ -169,5 +185,20 @@ class AccountController extends GetxController {
         print("Failed to Update User Account Info: ${e.response!.data}");
       }
     }
+  }
+}
+
+extension on AccountController {
+  resetData() {
+    profilePic = null;
+    coverPic = null;
+    firstNameTextController.clear();
+    lastNameTextController.clear();
+    emailTextController.clear();
+    phoneNumberTextController.clear();
+    addressTextController.clear();
+    passwordTextController.clear();
+
+    update();
   }
 }

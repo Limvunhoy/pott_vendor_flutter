@@ -49,6 +49,33 @@ class UserDataResponse {
   String role;
   String token;
 
+  UserDataResponse copyWith({
+    String? id,
+    int? vendorId,
+    String? firstName,
+    String? lastName,
+    String? phone,
+    String? status,
+    bool? accountVerify,
+    String? cover,
+    String? photo,
+    String? role,
+    String? token,
+  }) =>
+      UserDataResponse(
+        id: id ?? this.id,
+        vendorId: vendorId ?? this.vendorId,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        phone: phone ?? this.phone,
+        status: status ?? this.status,
+        accountVerify: accountVerify ?? this.accountVerify,
+        cover: cover ?? this.cover,
+        photo: photo ?? this.photo,
+        role: role ?? this.role,
+        token: token ?? this.token,
+      );
+
   factory UserDataResponse.fromJson(Map<String, dynamic> json) =>
       UserDataResponse(
         id: json["_id"],

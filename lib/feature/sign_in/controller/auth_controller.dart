@@ -102,12 +102,6 @@ class AuthController extends GetxController {
       return false;
     }
   }
-}
-
-extension on AuthController {
-  String getPhoneNumber(CountryCode code, String phone) {
-    return code.toString() + "${int.parse(phone)}";
-  }
 
   saveUser(UserDataResponse _auth) async {
     try {
@@ -115,5 +109,16 @@ extension on AuthController {
     } catch (e) {
       print("Failed to save user");
     }
+  }
+
+  updateAuth(UserDataResponse userDataResponse) {
+    auth = userDataResponse;
+    update();
+  }
+}
+
+extension on AuthController {
+  String getPhoneNumber(CountryCode code, String phone) {
+    return code.toString() + "${int.parse(phone)}";
   }
 }

@@ -8,6 +8,7 @@ import 'package:pott_vendor/feature/account/controller/account_controller.dart';
 import 'package:pott_vendor/feature/account/view/widgets/account_body.dart';
 import 'package:pott_vendor/feature/account/view/widgets/header_cover.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
+import 'package:pott_vendor/main.dart';
 import 'package:pott_vendor/utils/common/dissmiss_keyboard_content.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
@@ -42,6 +43,9 @@ class AccountPage extends GetWidget<AccountController> {
                       }
                     },
                     accountController: _controller,
+                    onBack: () {
+                      Get.back(result: authController.auth);
+                    },
                   ),
                   SliverPadding(
                     padding: const EdgeInsets.only(top: 30.0),

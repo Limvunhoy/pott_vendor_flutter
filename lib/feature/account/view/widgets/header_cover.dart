@@ -9,12 +9,14 @@ class HeaderCover extends StatelessWidget {
       {Key? key,
       required this.onProfileTap,
       required this.onCameraTap,
-      required this.accountController})
+      required this.accountController,
+      required this.onBack})
       : super(key: key);
 
   final VoidCallback onProfileTap;
   final VoidCallback onCameraTap;
   final AccountController accountController;
+  final VoidCallback onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,7 @@ class HeaderCover extends StatelessWidget {
       pinned: true,
       elevation: 0.0,
       leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
+        onPressed: onBack,
         icon: Icon(Icons.arrow_back_ios),
         color: Colors.white,
       ),
