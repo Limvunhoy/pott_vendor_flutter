@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/core/model/product/product_response.dart';
+import 'package:pott_vendor/feature/sale_menu/controller/sale_menu_controller.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class BidProductItem extends StatelessWidget {
-  const BidProductItem({Key? key, required this.onItemTapped})
+  const BidProductItem(
+      {Key? key,
+      required this.onItemTapped,
+      required this.bidProduct,
+      required this.controller})
       : super(key: key);
 
   final VoidCallback onItemTapped;
+  final SaleMenuController controller;
+  final ProductRecord bidProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -34,27 +42,30 @@ class BidProductItem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                    bidProduct.image,
+                    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
                   ),
                 ),
-                Container(
-                  width: 100.0,
-                  height: 100.0,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Text(
-                    "Unpublished",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: fontSizeExt.extraSmallSize),
-                  ),
-                ),
+                bidProduct.status == "true"
+                    ? const SizedBox.shrink()
+                    : Container(
+                        width: 100.0,
+                        height: 100.0,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.4),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          "Unpublished",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: fontSizeExt.extraSmallSize),
+                        ),
+                      ),
               ],
             ),
             Expanded(
@@ -65,7 +76,7 @@ class BidProductItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "iPhone 13 Pro Max new arrival",
+                      bidProduct.name,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: fontSizeExt.mediumSize),
@@ -82,7 +93,7 @@ class BidProductItem extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "\$1500.00",
+                                "\$${bidProduct.salePrice}",
                                 style: TextStyle(
                                     color: colorExt.RED,
                                     fontSize: fontSizeExt.mediumSize,

@@ -1,21 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/feature/sale_menu/controller/sale_menu_controller.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class SaleProductItem extends StatelessWidget {
-  const SaleProductItem({Key? key, required this.onItemTapped})
+  const SaleProductItem(
+      {Key? key,
+      required this.onItemTapped,
+      required this.saleProduct,
+      required this.controller})
       : super(key: key);
 
   final VoidCallback onItemTapped;
+  final ProductRecord saleProduct;
+  final SaleMenuController controller;
 
   @override
   Widget build(BuildContext context) {
-    final _controller = Get.find<SaleMenuController>();
-
     return GestureDetector(
       onTap: onItemTapped,
       child: Container(
@@ -39,27 +44,30 @@ class SaleProductItem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                    saleProduct.image,
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
                   ),
                 ),
-                Container(
-                  width: 100.0,
-                  height: 100.0,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Text(
-                    "Unpublished",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: fontSizeExt.extraSmallSize),
-                  ),
-                ),
+                saleProduct.status == "true"
+                    ? const SizedBox.shrink()
+                    : Container(
+                        width: 100.0,
+                        height: 100.0,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.4),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          "Unpublished",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: fontSizeExt.extraSmallSize),
+                        ),
+                      ),
               ],
             ),
             const SizedBox(
@@ -71,7 +79,7 @@ class SaleProductItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "iPhone 13 Pro Max new arrival",
+                    saleProduct.name,
                     style: TextStyle(
                         color: Colors.black, fontSize: fontSizeExt.mediumSize),
                     maxLines: 1,
@@ -85,7 +93,7 @@ class SaleProductItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "\$1500.00",
+                        "\$${saleProduct.salePrice}",
                         style: TextStyle(
                             color: colorExt.RED,
                             fontSize: fontSizeExt.mediumSize,
@@ -202,19 +210,17 @@ class SaleProductItem extends StatelessWidget {
                         () {
                           return Container(
                             alignment: Alignment.centerRight,
-                            // color: Colors.red,
                             width: 23.0,
-                            height: 12.0,
                             child: Material(
                               color: Colors.transparent,
                               elevation: 0.0,
                               child: Ink(
                                 child: InkWell(
                                   onTap: () {
-                                    _controller.handleSwitch();
+                                    controller.handleSwitch();
                                   },
                                   child: Image.asset(
-                                    _controller.isOn.isTrue
+                                    controller.isOn.isTrue
                                         ? "assets/icons/sale_menu/switch_active_icon.png"
                                         : "assets/icons/sale_menu/switch_inactive_icon.png",
                                     fit: BoxFit.cover,

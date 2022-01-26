@@ -6,4 +6,7 @@ class EndPoint {
 
   // Account
   static const updateUserInfo = "/user";
+
+  // Product
+  static const queryProduct = "/product/query";
 }
