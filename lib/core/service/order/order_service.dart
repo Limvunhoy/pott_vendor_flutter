@@ -27,4 +27,24 @@ class OrderService {
       throw e;
     }
   }
+
+  Future<bool> updateOrderStatus(String id, String status) async {
+    final bodyRequest = {
+      "_id": id,
+      "status": status,
+    };
+
+    try {
+      final res =
+          await _apiBaseHelper.post(EndPoint.updateOrderStatus, bodyRequest);
+
+      if (res.data["httpCode"] == 200) {
+        print("Update Order Status Successfully");
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw e;
+    }
+  }
 }

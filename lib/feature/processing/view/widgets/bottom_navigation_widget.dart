@@ -31,7 +31,7 @@ class BottomNavigationWidget extends StatelessWidget {
                     color: Colors.black, fontSize: fontSizeExt.smallSize),
               ),
               Text(
-                "\$ 1500.00",
+                "\$ ${processingController.orderRecordItem?.totalPrice ?? 0}",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: fontSizeExt.largeSize,

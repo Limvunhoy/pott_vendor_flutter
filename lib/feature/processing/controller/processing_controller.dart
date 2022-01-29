@@ -1,12 +1,40 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:pott_vendor/core/model/order/order_response.dart';
 import 'package:pott_vendor/core/model/processing/processing_model.dart';
 
 class ProcessingController extends GetxController {
   Rx<ProcessingModel> dummyData = ProcessingModel().obs;
 
   Timer? timer;
+
+  OrderRecordResponse? orderRecordItem;
+
+  final arg = Get.arguments;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    if (arg is OrderRecordResponse) {
+      orderRecordItem = arg;
+      update();
+    }
+  }
+
+  String orderDate() {
+    if (orderRecordItem?.timeLine.newAt != null) {
+      DateTime? orderDate = orderRecordItem!.timeLine.newAt;
+      String formattedDate =
+          DateFormat('dd-MM-yyyy | kk:mma').format(orderDate!);
+
+      return formattedDate;
+    } else {
+      return "...";
+    }
+  }
 
   ProcessingController() {
     dummyData = Rx<ProcessingModel>(ProcessingModel(
