@@ -16,7 +16,7 @@ class CompletedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshWidget(
       onRefresh: () async {
-        await ordersController.handlePullRefresh(OrderEnum.completedOrder);
+        await ordersController.handlePullRefresh(OrderType.completedOrder);
       },
       child: ordersController.fetchStatus == FetchStatus.loading
           ? Container(
@@ -30,7 +30,8 @@ class CompletedPage extends StatelessWidget {
               itemCount: ordersController.getCompletedOrderCount(),
               itemBuilder: (context, index) {
                 return CompletedOrderItem(
-                  orderRecordResponse: ordersController.completedRecords[index],
+                  orderRecordResponse:
+                      ordersController.completedOrderRecords[index],
                   item: ordersController.getCompletedItem(index),
                 );
               },

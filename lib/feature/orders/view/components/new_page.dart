@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
+import 'package:pott_vendor/utils/common/alert_popup.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
 import 'package:pott_vendor/utils/common/refresh_widget.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
@@ -16,7 +17,7 @@ class NewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshWidget(
       onRefresh: () async {
-        await ordersController.handlePullRefresh(OrderEnum.newOrder);
+        await ordersController.handlePullRefresh(OrderType.newOrder);
       },
       child: ordersController.fetchStatus == FetchStatus.loading
           ? Container(
@@ -25,8 +26,11 @@ class NewPage extends StatelessWidget {
               child: LoadingWidget())
           : ListView.builder(
               key: PageStorageKey("newOrderList"),
-              shrinkWrap: true,
-              primary: false,
+              controller: ordersController.scrollController,
+              // shrinkWrap: true,
+              // primary: false,
+              physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
               itemCount: ordersController.getNewOrderCount(),
               itemBuilder: (context, index) {
                 return NewItem(
@@ -34,8 +38,15 @@ class NewPage extends StatelessWidget {
                   onConfirm: () {
                     Get.toNamed(Routes.PROCESSING);
                   },
+                  onReject: () {
+                    AppDialog.showAppDialog(context, onClose: () {
+                      Get.back();
+                    }, onConfirm: () {
+                      // TODO: Handle reject order
+                    });
+                  },
                   orderRecord: ordersController.newOrderRecords[index],
-                  orderEnum: OrderEnum.newOrder,
+                  orderEnum: OrderType.newOrder,
                   orderTotal: ordersController.calculateOrderTotal(index),
                 );
               },

@@ -14,7 +14,7 @@ class ReadyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshWidget(
       onRefresh: () async {
-        await ordersController.handlePullRefresh(OrderEnum.readyOrder);
+        await ordersController.handlePullRefresh(OrderType.readyOrder);
       },
       child: ordersController.fetchStatus == FetchStatus.loading
           ? Container(
@@ -31,7 +31,7 @@ class ReadyPage extends StatelessWidget {
                   orderStatus: OrderStatus.ready,
                   onConfirm: () {},
                   orderRecord: ordersController.readyOrderRecords[index],
-                  orderEnum: OrderEnum.readyOrder,
+                  orderEnum: OrderType.readyOrder,
                   orderTotal: "",
                 );
               },

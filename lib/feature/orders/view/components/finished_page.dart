@@ -16,7 +16,7 @@ class FinishedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshWidget(
       onRefresh: () async {
-        await ordersController.handlePullRefresh(OrderEnum.finishedOrder);
+        await ordersController.handlePullRefresh(OrderType.finishedOrder);
       },
       child: ordersController.fetchStatus == FetchStatus.loading
           ? Container(
@@ -33,7 +33,7 @@ class FinishedPage extends StatelessWidget {
                   orderStatus: OrderStatus.finished,
                   onConfirm: () {},
                   orderRecord: ordersController.finishedOrderRecords[index],
-                  orderEnum: OrderEnum.finishedOrder,
+                  orderEnum: OrderType.finishedOrder,
                   orderTotal: "",
                 );
               },

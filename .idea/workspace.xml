@@ -8,9 +8,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/utils/common/alert_popup.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/common/base_large_text.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/lib/core/service/report/report_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/report/report_service.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/report/view/widgets/no_data_report.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/report/view/widgets/no_data_report.dart" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/service/order/order_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/order/order_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/completed_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/completed_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/finished_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/new_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/components/ready_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/orders/view/widgets/new_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/orders/view/widgets/new_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/common/loading_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/loading_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/common/refresh_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/refresh_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/app_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/app_constants.dart" afterDir="false" />
+>>>>>>> 5b4f7c499f0b67dd6fd23041acae96a040bd9d2b
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +129,7 @@
           <line>23</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+<<<<<<< HEAD
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
           <line>14</line>
@@ -157,6 +175,8 @@
           <line>91</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
+=======
+>>>>>>> 5b4f7c499f0b67dd6fd23041acae96a040bd9d2b
       </breakpoints>
     </breakpoint-manager>
   </component>
