@@ -39,6 +39,7 @@ dependencies:
   mime_type: ^1.0.0
   http: ^0.13.3
   intl: ^0.17.0
+  material_tag_editor: ^0.1.1
 
 dev_dependencies:
   flutter_test:

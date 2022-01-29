@@ -32,7 +32,7 @@ class VariantItem extends StatelessWidget {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       onDeleted: () {},
       label: BaseSmallText(
-        text: "Type",
+        text: title,
         color: titleColor,
       ),
     );
