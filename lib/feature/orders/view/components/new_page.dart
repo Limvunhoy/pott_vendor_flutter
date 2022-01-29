@@ -36,7 +36,8 @@ class NewPage extends StatelessWidget {
                 return NewItem(
                   orderStatus: OrderStatus.newOrder,
                   onConfirm: () {
-                    Get.toNamed(Routes.PROCESSING);
+                    // Get.toNamed(Routes.PROCESSING);
+                    ordersController.confirmNewOrder(index);
                   },
                   onReject: () {
                     AppDialog.showAppDialog(context, onClose: () {
@@ -44,6 +45,10 @@ class NewPage extends StatelessWidget {
                     }, onConfirm: () {
                       // TODO: Handle reject order
                     });
+                  },
+                  onGoToOrderDetail: () {
+                    Get.toNamed(Routes.PROCESSING,
+                        arguments: ordersController.newOrderRecords[index]);
                   },
                   orderRecord: ordersController.newOrderRecords[index],
                   orderEnum: OrderType.newOrder,

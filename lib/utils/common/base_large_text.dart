@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
-class BaseMediumText extends StatelessWidget {
-  const BaseMediumText(
+class BaseLargeText extends StatelessWidget {
+  const BaseLargeText(
       {Key? key,
       required this.text,
       this.color = Colors.black,

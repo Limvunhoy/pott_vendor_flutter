@@ -9,4 +9,8 @@ class EndPoint {
 
   // Product
   static const queryProduct = "/product/query";
+  static const updateOrderStatus = "/order/status";
+
+  // Report
+  static const report = "/report";
 }

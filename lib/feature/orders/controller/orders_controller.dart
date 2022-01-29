@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/order/order_response.dart';
 import 'package:pott_vendor/core/service/order/order_service.dart';
@@ -31,7 +32,7 @@ class OrdersController extends GetxController
   OrderService _orderService = OrderService();
 
   List<OrderRecordResponse> newOrderRecords = [];
-  List<OrderRecordResponse> readyOrderRecords = [];
+  List<OrderRecordResponse> confirmOrderRecords = [];
   List<OrderRecordResponse> finishedOrderRecords = [];
   List<OrderRecordResponse> completedOrderRecords = [];
 
@@ -42,12 +43,12 @@ class OrdersController extends GetxController
   late ScrollController scrollController;
 
   RxBool isMoreNewOrder = false.obs;
-  RxBool isMoreReadyOrder = false.obs;
+  RxBool isMoreConfirmOrder = false.obs;
   RxBool isMoreFinishedOrder = false.obs;
   RxBool isMoreCompletedOrder = false.obs;
 
   RxInt newOrderPage = 1.obs;
-  RxInt readyOrderPage = 1.obs;
+  RxInt confirmOrderPage = 1.obs;
   RxInt finishedOrderPage = 1.obs;
   RxInt completedOrderPage = 1.obs;
 
@@ -75,6 +76,49 @@ class OrdersController extends GetxController
     super.onClose();
   }
 
+  confirmNewOrder(int index) async {
+    try {
+      final response = await _orderService.updateOrderStatus(
+          newOrderRecords[index].id, "confirm");
+      if (response) {
+        newOrderRecords.removeAt(index);
+        if (confirmOrderRecords.isNotEmpty) {
+          confirmOrderRecords.insert(0, newOrderRecords[index]);
+        }
+
+        Fluttertoast.showToast(
+            msg: "Order Confirmed",
+            gravity: ToastGravity.BOTTOM,
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 1);
+        update();
+      }
+    } catch (e) {
+      Get.snackbar("Something went wrong!", e.toString());
+    }
+  }
+
+  updateReadyOrder(int index) async {
+    try {
+      final response = await _orderService.updateOrderStatus(
+          confirmOrderRecords[index].id, "ready");
+      if (response) {
+        confirmOrderRecords.removeAt(index);
+        if (finishedOrderRecords.isNotEmpty) {
+          finishedOrderRecords.insert(0, confirmOrderRecords[index]);
+        }
+        Fluttertoast.showToast(
+          msg: "Order Ready",
+          gravity: ToastGravity.BOTTOM,
+          toastLength: Toast.LENGTH_SHORT,
+        );
+        update();
+      }
+    } catch (e) {
+      Get.snackbar("Something went wrong!", e.toString());
+    }
+  }
+
   handlePullRefresh(OrderType orderStatus) async {
     switch (orderStatus) {
       case OrderType.newOrder:
@@ -83,12 +127,12 @@ class OrdersController extends GetxController
             isPullRefresh: true, isLoading: false);
         break;
       case OrderType.readyOrder:
-        await fetchOrder(
-            readyOrderType, readyOrderPage, isMoreReadyOrder, readyOrderRecords,
+        await fetchOrder(confirmOrderType, confirmOrderPage, isMoreConfirmOrder,
+            confirmOrderRecords,
             isPullRefresh: true, isLoading: false);
         break;
       case OrderType.finishedOrder:
-        await fetchOrder(confirmOrderType, finishedOrderPage,
+        await fetchOrder(finishedOrderType, finishedOrderPage,
             isMoreFinishedOrder, finishedOrderRecords,
             isPullRefresh: true, isLoading: false);
         break;
@@ -106,7 +150,7 @@ class OrdersController extends GetxController
   }
 
   int getReadyOrderCount() {
-    return readyOrderRecords.length;
+    return confirmOrderRecords.length;
   }
 
   int getFinishedOrderCount() {
@@ -149,17 +193,17 @@ class OrdersController extends GetxController
           }
           break;
         case 1:
-          if (isMoreReadyOrder.isTrue) {
+          if (isMoreConfirmOrder.isTrue) {
             print("Load More Ready Order");
-            await fetchOrder(readyOrderType, readyOrderPage, isMoreReadyOrder,
-                readyOrderRecords,
+            await fetchOrder(confirmOrderType, confirmOrderPage,
+                isMoreConfirmOrder, confirmOrderRecords,
                 isLoading: false);
           }
           break;
         case 3:
           if (isMoreFinishedOrder.isTrue) {
             print("Load More Finished Order");
-            await fetchOrder(confirmOrderType, finishedOrderPage,
+            await fetchOrder(finishedOrderType, finishedOrderPage,
                 isMoreFinishedOrder, finishedOrderRecords,
                 isLoading: false);
           }
@@ -190,15 +234,15 @@ extension on OrdersController {
         break;
       case 1:
         print("Current TabBar: Ready");
-        if (readyOrderRecords.isEmpty) {
-          await fetchOrder(readyOrderType, readyOrderPage, isMoreReadyOrder,
-              readyOrderRecords);
+        if (confirmOrderRecords.isEmpty) {
+          await fetchOrder(confirmOrderType, confirmOrderPage,
+              isMoreConfirmOrder, confirmOrderRecords);
         }
         break;
       case 2:
         print("Current TabBar: Finished");
         if (finishedOrderRecords.isEmpty) {
-          await fetchOrder(confirmOrderType, finishedOrderPage,
+          await fetchOrder(finishedOrderType, finishedOrderPage,
               isMoreFinishedOrder, finishedOrderRecords);
         }
         break;
