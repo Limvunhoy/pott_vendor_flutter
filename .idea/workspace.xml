@@ -9,12 +9,17 @@
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
 <<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/lib/core/model/product/product_response.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/core/service/product/product_service.dart" afterDir="false" />
+=======
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
       <change afterPath="$PROJECT_DIR$/lib/utils/common/alert_popup.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/utils/common/base_large_text.dart" afterDir="false" />
 >>>>>>> 449b2466e0b91b4e8da30dc216111292cc483301
+>>>>>>> 14fc89fadc45ff2afcf78e8eb5517383ab59a223
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/lib/core/service/report/report_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/report/report_service.dart" afterDir="false" />
@@ -22,6 +27,16 @@
 =======
 >>>>>>> bd17a30b3c27008bc2b6aabb9ee048bd3d5f4495
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/controller/sale_menu_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/controller/sale_menu_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/bid_product_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/bid_product_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/sale_product_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/components/sale_product_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/sale_menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/sale_menu_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/bid_prodcut_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/bid_prodcut_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/sale_product_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/sale_menu/view/widgets/sale_product_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/app_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/app_constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/end_poing.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/end_poing.dart" afterDir="false" />
+=======
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/lib/core/model/auth/user_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/model/auth/user_response.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/controller/account_controller.dart" afterDir="false" />
@@ -43,6 +58,7 @@
 >>>>>>> 5b4f7c499f0b67dd6fd23041acae96a040bd9d2b
 >>>>>>> bd17a30b3c27008bc2b6aabb9ee048bd3d5f4495
 >>>>>>> 449b2466e0b91b4e8da30dc216111292cc483301
+>>>>>>> 14fc89fadc45ff2afcf78e8eb5517383ab59a223
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,6 +209,9 @@
 =======
 >>>>>>> 5b4f7c499f0b67dd6fd23041acae96a040bd9d2b
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="dart-exception" />
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">

@@ -6,6 +6,9 @@ class EndPoint {
 
   // Account
   static const updateUserInfo = "/user";
+
+  // Product
+  static const queryProduct = "/product/query";
   static const updateOrderStatus = "/order/status";
 
   // Report
