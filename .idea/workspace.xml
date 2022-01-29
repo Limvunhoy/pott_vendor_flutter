@@ -11,6 +11,10 @@
       <change afterPath="$PROJECT_DIR$/lib/utils/common/alert_popup.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/utils/common/base_large_text.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/lib/core/service/report/report_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/report/report_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/report/view/widgets/no_data_report.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/report/view/widgets/no_data_report.dart" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/menu/view/menu_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/service/order/order_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/service/order/order_service.dart" afterDir="false" />
@@ -23,6 +27,7 @@
       <change beforePath="$PROJECT_DIR$/lib/utils/common/loading_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/loading_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/common/refresh_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/common/refresh_widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/constants/app_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/app_constants.dart" afterDir="false" />
+>>>>>>> 5b4f7c499f0b67dd6fd23041acae96a040bd9d2b
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +129,54 @@
           <line>23</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+<<<<<<< HEAD
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
+          <line>14</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
+          <line>23</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
+          <line>18</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/service/order/order_service.dart</url>
+          <line>20</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/core/api/logger_interceptor.dart</url>
+          <line>36</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart</url>
+          <line>157</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/feature/orders/controller/orders_controller.dart</url>
+          <line>159</line>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/feature/sign_in/controller/auth_controller.dart</url>
+          <line>83</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/feature/sign_in/controller/auth_controller.dart</url>
+          <line>91</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+=======
+>>>>>>> 5b4f7c499f0b67dd6fd23041acae96a040bd9d2b
       </breakpoints>
     </breakpoint-manager>
   </component>
