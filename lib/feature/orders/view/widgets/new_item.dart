@@ -15,16 +15,20 @@ class NewItem extends StatelessWidget {
   const NewItem({
     Key? key,
     required this.orderStatus,
-    required this.onConfirm,
+    this.onConfirm,
     required this.orderRecord,
     required this.orderEnum,
     required this.orderTotal,
     this.onReject,
+    this.onGoToOrderDetail,
+    this.onOrderReady,
   }) : super(key: key);
 
   final OrderStatus orderStatus;
-  final VoidCallback onConfirm;
+  final VoidCallback? onConfirm;
   final VoidCallback? onReject;
+  final VoidCallback? onGoToOrderDetail;
+  final VoidCallback? onOrderReady;
   final OrderRecordResponse orderRecord;
   final OrderType orderEnum;
   final String orderTotal;
@@ -106,13 +110,16 @@ class NewItem extends StatelessWidget {
                   ),
                 ),
               ] else ...[
-                Container(
-                  margin: const EdgeInsets.only(top: 2.0),
-                  width: 14.0,
-                  height: 14.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(AssetPath.GO_ICON),
+                GestureDetector(
+                  onTap: onGoToOrderDetail,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 2.0),
+                    width: 14.0,
+                    height: 14.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(AssetPath.GO_ICON),
+                      ),
                     ),
                   ),
                 ),
@@ -295,7 +302,7 @@ class NewItem extends StatelessWidget {
                     ? Container(
                         width: MediaQuery.of(context).size.width,
                         child: BaseButton(
-                            onPressed: () {},
+                            onPressed: onOrderReady,
                             title: "Order Ready",
                             titleColor: Colors.white,
                             backgroundColor: colorExt.PRIMARY_COLOR),
