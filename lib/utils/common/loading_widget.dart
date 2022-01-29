@@ -25,3 +25,27 @@ class LoadingWidget extends StatelessWidget {
     );
   }
 }
+
+class LoadingButton extends StatelessWidget {
+  const LoadingButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => buildAndroidLoading();
+  // Platform.isAndroid ? buildAndroidLoading() : buildIOSLoading();
+
+  Widget buildAndroidLoading() {
+    return SizedBox(
+      width: 25,
+      height: 25,
+      child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(colorExt.PRIMARY_COLOR),
+      ),
+    );
+  }
+
+  Widget buildIOSLoading() {
+    return Center(
+      child: CupertinoActivityIndicator(),
+    );
+  }
+}

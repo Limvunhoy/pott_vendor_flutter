@@ -3,6 +3,9 @@ class EndPoint {
 
   // Order
   static const order = "/order/query";
+
+  // Account
+  static const updateUserInfo = "/user";
   static const updateOrderStatus = "/order/status";
 
   // Report

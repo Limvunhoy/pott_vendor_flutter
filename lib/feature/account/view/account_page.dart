@@ -8,9 +8,12 @@ import 'package:pott_vendor/feature/account/controller/account_controller.dart';
 import 'package:pott_vendor/feature/account/view/widgets/account_body.dart';
 import 'package:pott_vendor/feature/account/view/widgets/header_cover.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
+import 'package:pott_vendor/main.dart';
 import 'package:pott_vendor/utils/common/dissmiss_keyboard_content.dart';
+import 'package:pott_vendor/utils/common/loading_widget.dart';
+import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends GetWidget<AccountController> {
   // const AccountPage({Key? key}) : super(key: key);
 
   final AccountController _controller = Get.find<AccountController>();
@@ -18,44 +21,76 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DismissKeyboardContent(
-      child: Scaffold(
-        backgroundColor: colorExt.PRIMARY_BACKGROUND_COLOR,
-        body: CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          slivers: [
-            HeaderCover(
-              onProfileTap: () async {
-                print("Handle On Profile Tapped");
-                final source = await showImageSource(context);
-                if (source != null) {
-                  print("Image Source $source");
-                  _controller.pickImage(source);
-                }
-              },
-              accountController: _controller,
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.only(top: 30.0),
-              sliver: SliverToBoxAdapter(
-                child: AccountBody(),
+      child: GetBuilder(
+          init: controller,
+          builder: (_) {
+            return Scaffold(
+              backgroundColor: colorExt.PRIMARY_BACKGROUND_COLOR,
+              body: CustomScrollView(
+                physics: BouncingScrollPhysics(),
+                slivers: [
+                  HeaderCover(
+                    onProfileTap: () async {
+                      final source = await showImageSource(context);
+                      if (source != null) {
+                        _controller.pickImage(source, PictureType.profile);
+                      }
+                    },
+                    onCameraTap: () async {
+                      final source = await showImageSource(context);
+                      if (source != null) {
+                        _controller.pickImage(source, PictureType.cover);
+                      }
+                    },
+                    accountController: _controller,
+                    onBack: () {
+                      Get.back(result: authController.auth);
+                    },
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    sliver: SliverToBoxAdapter(
+                      child: AccountBody(
+                        controller: controller,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-        bottomNavigationBar: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: appSizeExt.basePadding,
-                vertical: appSizeExt.basePadding),
-            child: BaseButton(
-              onPressed: () {},
-              title: "Update",
-              titleColor: Colors.white,
-              backgroundColor: colorExt.PRIMARY_COLOR,
-            ),
-          ),
-        ),
-      ),
+              bottomNavigationBar: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: appSizeExt.basePadding,
+                      vertical: appSizeExt.basePadding),
+                  child: ElevatedButton(
+                    onPressed: !controller.isUpdateButtonEnabled ||
+                            controller.fetchStatus == FetchStatus.loading
+                        ? null
+                        : () async {
+                            await controller.updateAccountInfo();
+                          },
+                    child: controller.fetchStatus == FetchStatus.loading
+                        ? LoadingButton()
+                        : Text("UPDATE"),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(0, 40.0),
+                      primary: colorExt.PRIMARY_COLOR,
+                      onPrimary: Colors.white,
+                      onSurface: colorExt.PRIMARY_COLOR,
+                      elevation: 0.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      textStyle: TextStyle(
+                        fontSize: fontSizeExt.mediumSize,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
     );
   }
 }

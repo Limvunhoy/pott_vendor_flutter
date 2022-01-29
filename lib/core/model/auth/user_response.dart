@@ -31,6 +31,8 @@ class UserDataResponse {
     required this.phone,
     required this.status,
     required this.accountVerify,
+    this.cover,
+    this.photo,
     required this.role,
     required this.token,
   });
@@ -42,8 +44,37 @@ class UserDataResponse {
   String phone;
   String status;
   bool accountVerify;
+  String? cover;
+  String? photo;
   String role;
   String token;
+
+  UserDataResponse copyWith({
+    String? id,
+    int? vendorId,
+    String? firstName,
+    String? lastName,
+    String? phone,
+    String? status,
+    bool? accountVerify,
+    String? cover,
+    String? photo,
+    String? role,
+    String? token,
+  }) =>
+      UserDataResponse(
+        id: id ?? this.id,
+        vendorId: vendorId ?? this.vendorId,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        phone: phone ?? this.phone,
+        status: status ?? this.status,
+        accountVerify: accountVerify ?? this.accountVerify,
+        cover: cover ?? this.cover,
+        photo: photo ?? this.photo,
+        role: role ?? this.role,
+        token: token ?? this.token,
+      );
 
   factory UserDataResponse.fromJson(Map<String, dynamic> json) =>
       UserDataResponse(
@@ -54,6 +85,8 @@ class UserDataResponse {
         phone: json["phone"],
         status: json["status"],
         accountVerify: json["accountVerify"],
+        cover: json["cover"],
+        photo: json["photo"],
         role: json["role"],
         token: json["token"],
       );
@@ -66,6 +99,8 @@ class UserDataResponse {
         "phone": phone,
         "status": status,
         "accountVerify": accountVerify,
+        "cover": cover,
+        "photo": photo,
         "role": role,
         "token": token,
       };
