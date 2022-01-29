@@ -4,4 +4,7 @@ class EndPoint {
   // Order
   static const order = "/order/query";
   static const updateOrderStatus = "/order/status";
+
+  // Report
+  static const report = "/report";
 }
