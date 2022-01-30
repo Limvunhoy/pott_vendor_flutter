@@ -7,4 +7,27 @@ class ProductOptionController extends GetxController {
     "Sale",
     "QTY",
   ];
+
+  List<String> variantTypes = [];
+  List<List<String>> productOptions = [];
+
+  handleAddVariantType(String newType) {
+    variantTypes.add(newType);
+    update();
+  }
+
+  handleRemoveVariantType(int index) {
+    variantTypes.removeAt(index);
+    update();
+  }
+
+  handleAddOptionVariant(int index, String option) {}
+
+  String variantTypeFormat() {
+    String format = "";
+    variantTypes.forEach((element) {
+      format = element;
+    });
+    return format;
+  }
 }
