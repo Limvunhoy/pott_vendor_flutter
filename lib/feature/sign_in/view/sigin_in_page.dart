@@ -224,6 +224,15 @@ class SignInPage extends StatelessWidget {
                                       : () async {
                                           if (_formKey.currentState!
                                               .validate()) {
+                                            FocusScopeNode currentFocus =
+                                                FocusScope.of(context);
+                                            if (!currentFocus.hasPrimaryFocus &&
+                                                currentFocus.focusedChild !=
+                                                    null) {
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            }
+
                                             bool isLoggedIn =
                                                 await authController.login();
                                             if (isLoggedIn) {

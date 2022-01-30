@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -93,10 +94,13 @@ class AuthController extends GetxController {
 
       return true;
     } catch (e) {
-      fetchStatus = FetchStatus.complete;
       fetchStatus = FetchStatus.error;
       if (e is ErrorResponse) {
         Fluttertoast.showToast(msg: e.message.description);
+      }
+
+      if (e is DioError) {
+        print("Error ${e.message}");
       }
       update();
       return false;
