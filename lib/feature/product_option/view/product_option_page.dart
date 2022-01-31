@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/feature/product_option/controller/product_option_controller.dart';
 import 'package:pott_vendor/feature/product_option/view/export_widget.dart';
+import 'package:pott_vendor/feature/product_option/view/widgets/variant_type.dart';
 
 class ProductOptionPage extends GetWidget<ProductOptionController> {
   const ProductOptionPage({Key? key}) : super(key: key);
@@ -23,12 +24,15 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  VariantOptionTypeWidget(
-                    titleType: "Choose Variation Type",
-                    controller: controller,
-                    items: controller.variantTypes,
+                  VariantTypeWidget(
+                    items: controller.types(),
+                    onSubmitted: (newType) {
+                      controller.handleAddVariantType(newType);
+                    },
+                    onDeleted: (index) {
+                      controller.handleRemoveVariantType(index);
+                    },
                   ),
-                  // TODO: Type
                   Container(
                     color: Color(0xFFF5F5F5),
                     height: 10,
@@ -37,14 +41,20 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     primary: false,
-                    itemCount: controller.variantTypes.length,
+                    itemCount: controller.productOptions.length,
                     itemBuilder: (context, index) {
-                      return VariantOptionTypeWidget(
-                        titleType: "${controller.variantTypes[index]}",
-                        isVariantType: true,
-                        isTopPadding: index != 0 ? false : true,
+                      return VariantOptionWidget(
+                        titleType:
+                            "${controller.productOptions[index].keys.single}",
                         controller: controller,
-                        items: null,
+                        items: controller.optionVariant(index),
+                        isTopPadding: index != 0 ? false : true,
+                        onSubmitted: (newValue) {
+                          controller.handleAddOptionVariant(index, newValue);
+                        },
+                        onDeleted: (index) {
+                          controller.handleRemoveOption(index);
+                        },
                       );
                     },
                   ),

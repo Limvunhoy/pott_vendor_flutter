@@ -6,21 +6,15 @@ import 'package:pott_vendor/utils/common/base_title_text.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
-class VariantOptionWidget extends StatelessWidget {
-  const VariantOptionWidget({
+class VariantTypeWidget extends StatelessWidget {
+  const VariantTypeWidget({
     Key? key,
-    required this.titleType,
-    required this.controller,
-    this.items,
-    this.isTopPadding = false,
+    required this.items,
     required this.onSubmitted,
     required this.onDeleted,
   }) : super(key: key);
 
-  final String titleType;
-  final ProductOptionController controller;
-  final List<String>? items;
-  final bool isTopPadding;
+  final List<String> items;
   final Function(String) onSubmitted;
   final Function(int) onDeleted;
 
@@ -28,15 +22,12 @@ class VariantOptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: isTopPadding == true
-          ? const EdgeInsets.fromLTRB(
-              appSizeExt.basePadding, 16.0, appSizeExt.basePadding, 20.0)
-          : const EdgeInsets.fromLTRB(
-              appSizeExt.basePadding, 0.0, appSizeExt.basePadding, 20.0),
+      padding: const EdgeInsets.fromLTRB(
+          appSizeExt.basePadding, 0.0, appSizeExt.basePadding, 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BaseTitleText(text: "$titleType"),
+          BaseTitleText(text: "Choose Variation Type"),
           const SizedBox(
             height: 8.0,
           ),
@@ -49,7 +40,7 @@ class VariantOptionWidget extends StatelessWidget {
                 border: Border.all(width: 1, color: colorExt.LINE_COLOR),
               ),
               child: TagEditor(
-                length: items == null ? 0 : items!.length,
+                length: items.length,
                 delimiters: [
                   ',',
                   '.',
@@ -70,8 +61,9 @@ class VariantOptionWidget extends StatelessWidget {
                   // controller.handleAddVariantType(newValue);
                 },
                 tagBuilder: (context, index) => _Chip(
-                  label: items != null ? items![index] : "",
+                  label: items[index],
                   onDeleted: () {
+                    print("Remove At Index: $index");
                     onDeleted(index);
                   },
                 ),
@@ -95,9 +87,9 @@ class _Chip extends StatelessWidget {
   Widget build(BuildContext context) {
     return VariantItem(
       title: label,
-      backgroundColor: Color(0xFFF5F5F5),
-      titleColor: Colors.black,
-      iconColor: Colors.black,
+      backgroundColor: colorExt.PRIMARY_COLOR,
+      titleColor: Colors.white,
+      iconColor: Colors.white,
       onDeleted: onDeleted,
     );
   }
