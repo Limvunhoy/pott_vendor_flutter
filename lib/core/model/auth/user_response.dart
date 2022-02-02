@@ -33,6 +33,8 @@ class UserDataResponse {
     required this.accountVerify,
     this.cover,
     this.photo,
+    this.email,
+    this.address,
     required this.role,
     required this.token,
   });
@@ -46,6 +48,8 @@ class UserDataResponse {
   bool accountVerify;
   String? cover;
   String? photo;
+  String? email;
+  String? address;
   String role;
   String token;
 
@@ -59,6 +63,8 @@ class UserDataResponse {
     bool? accountVerify,
     String? cover,
     String? photo,
+    String? email,
+    String? address,
     String? role,
     String? token,
   }) =>
@@ -72,6 +78,8 @@ class UserDataResponse {
         accountVerify: accountVerify ?? this.accountVerify,
         cover: cover ?? this.cover,
         photo: photo ?? this.photo,
+        email: email ?? this.email,
+        address: address ?? this.address,
         role: role ?? this.role,
         token: token ?? this.token,
       );
@@ -87,6 +95,8 @@ class UserDataResponse {
         accountVerify: json["accountVerify"],
         cover: json["cover"],
         photo: json["photo"],
+        email: json["email"],
+        address: json["address"],
         role: json["role"],
         token: json["token"],
       );
@@ -101,6 +111,8 @@ class UserDataResponse {
         "accountVerify": accountVerify,
         "cover": cover,
         "photo": photo,
+        "email": email,
+        "address": address,
         "role": role,
         "token": token,
       };
