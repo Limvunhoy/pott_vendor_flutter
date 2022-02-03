@@ -64,4 +64,6 @@ class AssetPath {
       "assets/icons/category/category_arrow_right_icon.png";
   static const CATEGORY_ARROW_DOWN_ICON =
       "assets/icons/category/category_arrow_down_icon.png";
+  // Report
+  static const SORT_BY_ICON = "assets/icons/report/sort_by_icon.png";
 }
