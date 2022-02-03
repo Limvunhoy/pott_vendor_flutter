@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pott_vendor/feature/product_option/controller/product_option_controller.dart';
 import 'package:pott_vendor/feature/product_option/view/export_widget.dart';
+import 'package:pott_vendor/feature/product_option/view/widgets/variant_type.dart';
 
-class ProductOptionPage extends StatelessWidget {
+class ProductOptionPage extends GetWidget<ProductOptionController> {
   const ProductOptionPage({Key? key}) : super(key: key);
 
   @override
@@ -15,68 +18,86 @@ class ProductOptionPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(top: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            VariantOptionTypeWidget(
-              titleType: "Choose Variation Type",
-            ),
-            // TODO: Type
-            Container(
-              color: Color(0xFFF5F5F5),
-              height: 10,
-            ),
-            ListView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              primary: false,
-              itemCount: 2,
-              itemBuilder: (context, index) {
-                return VariantOptionTypeWidget(
-                  titleType: "Type:",
-                  isVariantType: true,
-                  isTopPadding: index != 0 ? false : true,
-                );
-              },
-            ),
-            Container(
-              color: Color(0xFFF5F5F5),
-              height: 10,
-            ),
-            Container(
-              color: Colors.white,
-              child: TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  minimumSize: Size(MediaQuery.of(context).size.width, 59.0),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      color: colorExt.PRIMARY_COLOR,
+        child: GetBuilder(
+            init: controller,
+            builder: (_) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  VariantTypeWidget(
+                    items: controller.types(),
+                    onSubmitted: (newType) {
+                      controller.handleAddVariantType(newType);
+                    },
+                    onDeleted: (index) {
+                      controller.handleRemoveVariantType(index);
+                    },
+                  ),
+                  Container(
+                    color: Color(0xFFF5F5F5),
+                    height: 10,
+                  ),
+                  ListView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: controller.productOptions.length,
+                    itemBuilder: (context, index) {
+                      return VariantOptionWidget(
+                        titleType:
+                            "${controller.productOptions[index].keys.single}",
+                        controller: controller,
+                        items: controller.optionVariant(index),
+                        isTopPadding: index != 0 ? false : true,
+                        onSubmitted: (newValue) {
+                          controller.handleAddOptionVariant(index, newValue);
+                        },
+                        onDeleted: (index) {
+                          controller.handleRemoveOption(index);
+                        },
+                      );
+                    },
+                  ),
+                  Container(
+                    color: Color(0xFFF5F5F5),
+                    height: 10,
+                  ),
+                  Container(
+                    color: Colors.white,
+                    child: TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width, 59.0),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            color: colorExt.PRIMARY_COLOR,
+                          ),
+                          const SizedBox(
+                            width: 7.0,
+                          ),
+                          BaseMediumText(
+                            text: "Generate Option",
+                            color: colorExt.PRIMARY_COLOR,
+                            fontWeight: FontWeight.w400,
+                          )
+                        ],
+                      ),
                     ),
-                    const SizedBox(
-                      width: 7.0,
-                    ),
-                    BaseMediumText(
-                      text: "Generate Option",
-                      color: colorExt.PRIMARY_COLOR,
-                      fontWeight: FontWeight.w400,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              color: Color(0xFFF5F5F5),
-              height: 10,
-            ),
-            OptionList(),
-          ],
-        ),
+                  ),
+                  Container(
+                    color: Color(0xFFF5F5F5),
+                    height: 10,
+                  ),
+                  OptionList(),
+                ],
+              );
+            }),
       ),
       bottomNavigation: SafeArea(
         child: Container(
