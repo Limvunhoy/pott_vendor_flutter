@@ -65,7 +65,9 @@ class MenuPage extends GetWidget<AuthController> {
                         ),
                       ),
                     ),
-                    SaleReportCard(),
+                    SaleReportCard(
+                      controller: _menuController,
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -137,8 +139,10 @@ class MenuPage extends GetWidget<AuthController> {
                                     }
                                   },
                                   child: MenuItem(
-                                      menuItemModel:
-                                          _menuController.menuItemList[index]),
+                                    menuItemModel:
+                                        _menuController.menuItemList[index],
+                                    controller: _menuController,
+                                  ),
                                 ),
                               ),
                             ),

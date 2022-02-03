@@ -4,7 +4,6 @@ import 'package:pott_vendor/feature/orders/view/components/completed_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/finished_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/new_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/ready_page.dart';
-import 'package:pott_vendor/feature/orders/view/widgets/empty_new_orders_widget.dart';
 import 'package:pott_vendor/utils/common/base_view.dart';
 import 'package:pott_vendor/utils/export.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
@@ -38,22 +37,24 @@ class OrdersPage extends StatelessWidget {
               Tab(
                 text: "New",
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 2.0),
-                width: 16.0,
-                height: 16.0,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color(0xFFFF0000),
-                  shape: BoxShape.circle,
-                ),
-                child: Text(
-                  "2",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: fontSizeExt.extraSmallSize),
-                ),
-              ),
+              ordersController.newOrderRecords != []
+                  ? Container(
+                      margin: const EdgeInsets.only(left: 2.0),
+                      width: 16.0,
+                      height: 16.0,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFF0000),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        "${ordersController.getNewOrderCount()}",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: fontSizeExt.extraSmallSize),
+                      ),
+                    )
+                  : const SizedBox.shrink()
             ],
           ),
           Tab(

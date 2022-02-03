@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/feature/account/controller/account_controller.dart';
 import 'package:pott_vendor/feature/account/view/widgets/account_textfield.dart';
-import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 
 class AccountBody extends StatelessWidget {
   const AccountBody({Key? key, required this.controller}) : super(key: key);
@@ -60,7 +59,7 @@ class AccountBody extends StatelessWidget {
               }
             },
             title: "Email",
-            hintText: "Example@gmail.com",
+            hintText: "${controller.authController.auth?.email ?? ""}",
             keyboardType: TextInputType.emailAddress,
           ),
           const SizedBox(
@@ -88,7 +87,7 @@ class AccountBody extends StatelessWidget {
                 }
               },
               title: "Address",
-              hintText: "No 1, St 310, Phnom Penh"),
+              hintText: "${controller.authController.auth?.address ?? ""}"),
           const SizedBox(
             height: 20.0,
           ),
