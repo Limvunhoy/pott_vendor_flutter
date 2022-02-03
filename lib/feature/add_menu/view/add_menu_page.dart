@@ -131,7 +131,7 @@ class AddMenuPage extends StatelessWidget {
                   ProductOptionWidget(
                     title: "Category",
                     onTap: () {
-                      print("Navigate to Category Screen");
+                      Get.toNamed(Routes.CHOOSE_CATEGORY);
                     },
                   ),
                   ProductOptionWidget(

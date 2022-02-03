@@ -84,6 +84,7 @@ flutter:
     - assets/icons/processing/
     - assets/icons/view_product/
     - assets/icons/account/
+    - assets/icons/category/
     - assets/icons/report/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
