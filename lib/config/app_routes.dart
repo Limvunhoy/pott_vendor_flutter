@@ -13,4 +13,5 @@ class Routes {
   static const ADD_MENU = "/add_menu";
   static const PRODUCT_OPTION = "/product_option";
   static const REPORT = "/report";
+  static const CHOOSE_CATEGORY = "/choose_category";
 }

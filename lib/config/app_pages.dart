@@ -3,6 +3,8 @@ import 'package:pott_vendor/feature/account/binding/account_binding.dart';
 import 'package:pott_vendor/feature/account/view/account_page.dart';
 import 'package:pott_vendor/feature/add_menu/binding/add_menu_binding.dart';
 import 'package:pott_vendor/feature/add_menu/view/add_menu_page.dart';
+import 'package:pott_vendor/feature/category/binding/category_binding.dart';
+import 'package:pott_vendor/feature/category/view/choose_category_page.dart';
 import 'package:pott_vendor/feature/menu/binding/menu_binding.dart';
 import 'package:pott_vendor/feature/menu/view/menu_page.dart';
 import 'package:pott_vendor/feature/orders/binding/orders_binding.dart';
@@ -84,6 +86,11 @@ class AppPages {
       name: Routes.REPORT,
       page: () => ReportPage(),
       binding: ReportBinding(),
+    ),
+    GetPage(
+      name: Routes.CHOOSE_CATEGORY,
+      page: () => ChooseCategoryPage(),
+      binding: CategoryBinding(),
     ),
   ];
 }
