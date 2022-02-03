@@ -4,6 +4,7 @@ import 'package:pott_vendor/core/model/processing/processing_model.dart';
 import 'package:pott_vendor/feature/processing/controller/processing_controller.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/bottom_navigation_widget.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
+import 'package:pott_vendor/utils/common/alert_popup.dart';
 
 class ProcessingPage extends StatelessWidget {
   const ProcessingPage({Key? key}) : super(key: key);
@@ -19,7 +20,13 @@ class ProcessingPage extends StatelessWidget {
       appBarBackgroundColor: Colors.white,
       actions: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            AppDialog.showAppDialog(context, onClose: () {
+              Get.back();
+            }, onConfirm: () {
+              // TODO: Handle reject order
+            });
+          },
           child: Text(
             "Reject",
             style: TextStyle(
@@ -33,7 +40,7 @@ class ProcessingPage extends StatelessWidget {
           margin: const EdgeInsets.only(top: 20.0),
           child: Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.all(defaultSizeExt.basePadding),
+            padding: const EdgeInsets.all(appSizeExt.basePadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -47,7 +54,7 @@ class ProcessingPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: defaultSizeExt.basePadding,
+                  height: appSizeExt.basePadding,
                 ),
                 Obx(
                   () => Text(
@@ -183,11 +190,17 @@ class ProcessingPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      OrderDetailsWidget(),
+                      OrderDetailsWidget(
+                        orderItem: processingController.orderRecordItem!,
+                      ),
                       const SizedBox(
                         height: 15.0,
                       ),
-                      ProcessingProductList(),
+                      ProcessingProductList(
+                        orderItemList:
+                            processingController.orderRecordItem?.itemList ??
+                                [],
+                      ),
                     ],
                   ),
                 ),

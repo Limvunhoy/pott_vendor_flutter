@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/core/model/order/order_response.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class ProcessingProductList extends StatelessWidget {
-  const ProcessingProductList({Key? key}) : super(key: key);
+  const ProcessingProductList({Key? key, required this.orderItemList})
+      : super(key: key);
+
+  final List<OrderItemListResponse> orderItemList;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(6.0, 10.0, 6.0, 0.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+        borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
         color: Color(0xFFF2F2F2),
       ),
       child: ListView.builder(
@@ -18,7 +22,7 @@ class ProcessingProductList extends StatelessWidget {
         shrinkWrap: true,
         primary: false,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: 3,
+        itemCount: orderItemList.length,
         itemBuilder: (context, index) {
           return Container(
             child: Column(
@@ -27,7 +31,7 @@ class ProcessingProductList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("iPhone 13 Pro Max"),
-                    Text("\$1500.00"),
+                    Text("\$${orderItemList[index].productVariance.price}"),
                   ],
                 ),
                 const SizedBox(
@@ -36,8 +40,8 @@ class ProcessingProductList extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("White, 6GB"),
-                    Text("x1"),
+                    Text("${orderItemList[index].productVariance.combination}"),
+                    Text("${orderItemList[index].qty}"),
                   ],
                 ),
                 Divider(

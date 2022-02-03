@@ -16,7 +16,7 @@ class BottomNavigationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-          vertical: 14.0, horizontal: defaultSizeExt.basePadding),
+          vertical: 14.0, horizontal: appSizeExt.basePadding),
       height: 96.0 + MediaQuery.of(context).padding.bottom,
       color: Colors.white,
       child: Column(
@@ -31,7 +31,7 @@ class BottomNavigationWidget extends StatelessWidget {
                     color: Colors.black, fontSize: fontSizeExt.smallSize),
               ),
               Text(
-                "\$ 1500.00",
+                "\$ ${processingController.orderRecordItem?.totalPrice ?? 0}",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: fontSizeExt.largeSize,

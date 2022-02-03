@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/feature/account/controller/account_controller.dart';
 import 'package:pott_vendor/feature/account/view/widgets/account_textfield.dart';
-import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 
 class AccountBody extends StatelessWidget {
-  const AccountBody({Key? key}) : super(key: key);
+  const AccountBody({Key? key, required this.controller}) : super(key: key);
+
+  final AccountController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,15 @@ class AccountBody extends StatelessWidget {
               Flexible(
                 flex: 2,
                 child: AccountTextField(
+                  controller: controller.firstNameTextController,
+                  onChanged: (value) {
+                    if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                      controller.checkEnableUpdateButton();
+                    }
+                  },
                   title: "First Name",
-                  hintText: "Firstname",
+                  hintText:
+                      "${controller.authController.auth?.firstName ?? "N/A"}",
                 ),
               ),
               const SizedBox(
@@ -26,8 +35,15 @@ class AccountBody extends StatelessWidget {
               Flexible(
                 flex: 3,
                 child: AccountTextField(
+                  controller: controller.lastNameTextController,
+                  onChanged: (value) {
+                    if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                      controller.checkEnableUpdateButton();
+                    }
+                  },
                   title: "Last Name",
-                  hintText: "Lastname",
+                  hintText:
+                      "${controller.authController.auth?.lastName ?? "N/A"}",
                 ),
               ),
             ],
@@ -36,34 +52,52 @@ class AccountBody extends StatelessWidget {
             height: 20.0,
           ),
           AccountTextField(
+            controller: controller.emailTextController,
+            onChanged: (value) {
+              if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                controller.checkEnableUpdateButton();
+              }
+            },
             title: "Email",
-            hintText: "Example@gmail.com",
+            hintText: "${controller.authController.auth?.email ?? ""}",
             keyboardType: TextInputType.emailAddress,
           ),
           const SizedBox(
             height: 20.0,
           ),
           AccountTextField(
+            controller: controller.phoneNumberTextController,
+            onChanged: (value) {
+              if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                controller.checkEnableUpdateButton();
+              }
+            },
             title: "Phone Number",
-            hintText: "+855 123456",
-            keyboardType: TextInputType.number,
+            hintText: "${controller.authController.phoneNumberFormat()}",
+            keyboardType: TextInputType.phone,
           ),
           const SizedBox(
             height: 20.0,
           ),
           AccountTextField(
-              title: "Address", hintText: "No 1, St 310, Phnom Penh"),
+              controller: controller.addressTextController,
+              onChanged: (value) {
+                if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                  controller.checkEnableUpdateButton();
+                }
+              },
+              title: "Address",
+              hintText: "${controller.authController.auth?.address ?? ""}"),
           const SizedBox(
             height: 20.0,
           ),
           AccountTextField(
-            title: "Address",
-            hintText: "No 1, St 310, Phnom Penh",
-          ),
-          const SizedBox(
-            height: 20.0,
-          ),
-          AccountTextField(
+            controller: controller.passwordTextController,
+            onChanged: (value) {
+              if (!controller.isUpdateButtonEnabled || value.isEmpty) {
+                controller.checkEnableUpdateButton();
+              }
+            },
             title: "Password",
             hintText: "••••••",
             obscureText: true,

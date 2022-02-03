@@ -9,7 +9,7 @@ class ProductOverView extends StatelessWidget {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(
-          horizontal: defaultSizeExt.basePadding, vertical: 10.0),
+          horizontal: appSizeExt.basePadding, vertical: 10.0),
       child: Column(
         children: [
           Text(

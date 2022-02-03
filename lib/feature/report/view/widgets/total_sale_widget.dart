@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
+import 'package:pott_vendor/feature/report/controller/report_controller.dart';
 import 'package:pott_vendor/utils/common/base_extra_small_text.dart';
 import 'package:pott_vendor/utils/common/base_small_text.dart';
 
@@ -9,9 +10,12 @@ enum TotalType {
 }
 
 class TotalSaleWidget extends StatelessWidget {
-  const TotalSaleWidget({Key? key, required this.type}) : super(key: key);
+  const TotalSaleWidget(
+      {Key? key, required this.type, required this.reportController})
+      : super(key: key);
 
   final TotalType type;
+  final ReportController reportController;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class TotalSaleWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width / 4,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(defaultSizeExt.baseBorderRadius),
+        borderRadius: BorderRadius.circular(appSizeExt.baseBorderRadius),
         image: DecorationImage(
           fit: BoxFit.cover,
           image: type == TotalType.today
@@ -73,7 +77,7 @@ class TotalSaleWidget extends StatelessWidget {
                               fontSize: fontSizeExt.extraSmallSize),
                         ),
                         TextSpan(
-                          text: " \$1.500.00",
+                          text: " \$${reportController.totalSale(type)}",
                           style: TextStyle(
                               color: type == TotalType.today
                                   ? Colors.white
@@ -92,7 +96,7 @@ class TotalSaleWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               BaseExtraSmallText(
-                text: "Total Yesterday",
+                text: "Total Solid",
                 color: type == TotalType.today
                     ? Colors.white
                     : colorExt.PRIMARY_COLOR,
@@ -105,22 +109,22 @@ class TotalSaleWidget extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "USD",
-                      style: TextStyle(
-                        fontSize: 10.0,
-                        color: type == TotalType.today
-                            ? Colors.white
-                            : colorExt.PRIMARY_COLOR,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " \$1.200.00",
+                      text: reportController.totalSaleItem(type),
                       style: TextStyle(
                           color: type == TotalType.today
                               ? Colors.white
                               : colorExt.PRIMARY_COLOR,
                           fontSize: fontSizeExt.extraSmallSize,
                           fontWeight: fontWeightExt.baseFontWeight),
+                    ),
+                    TextSpan(
+                      text: " Items",
+                      style: TextStyle(
+                        fontSize: 10.0,
+                        color: type == TotalType.today
+                            ? Colors.white
+                            : colorExt.PRIMARY_COLOR,
+                      ),
                     ),
                   ],
                 ),

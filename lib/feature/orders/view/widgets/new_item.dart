@@ -1,31 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:pott_vendor/feature/orders/binding/orders_binding.dart';
+import 'package:pott_vendor/core/model/order/order_response.dart';
+import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_product_option_item.dart';
 import 'package:pott_vendor/utils/common/base_button.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 enum OrderStatus { newOrder, ready, finished, competed }
 
 class NewItem extends StatelessWidget {
-  const NewItem({Key? key, required this.orderStatus, required this.onConfirm})
-      : super(key: key);
+  const NewItem({
+    Key? key,
+    required this.orderStatus,
+    this.onConfirm,
+    required this.orderRecord,
+    required this.orderEnum,
+    required this.orderTotal,
+    this.onReject,
+    this.onGoToOrderDetail,
+    this.onOrderReady,
+  }) : super(key: key);
 
   final OrderStatus orderStatus;
-  final VoidCallback onConfirm;
+  final VoidCallback? onConfirm;
+  final VoidCallback? onReject;
+  final VoidCallback? onGoToOrderDetail;
+  final VoidCallback? onOrderReady;
+  final OrderRecordResponse orderRecord;
+  final OrderType orderEnum;
+  final String orderTotal;
 
   @override
   Widget build(BuildContext context) {
+    String convertTimeAgo() {
+      if (orderEnum == OrderType.newOrder) {
+        return orderRecord.timeLine.newAt != null
+            ? timeago.format(orderRecord.timeLine.newAt!)
+            : "...";
+      } else if (orderEnum == OrderType.readyOrder) {
+        return orderRecord.timeLine.readyAt != null
+            ? timeago.format(orderRecord.timeLine.readyAt!)
+            : "...";
+      } else {
+        return orderRecord.timeLine.confirmAt != null
+            ? timeago.format(orderRecord.timeLine.confirmAt!)
+            : "...";
+      }
+    }
+
     return Container(
-      margin: const EdgeInsets.fromLTRB(defaultSizeExt.basePadding,
-          defaultSizeExt.basePadding, defaultSizeExt.basePadding, 0),
+      margin: const EdgeInsets.fromLTRB(appSizeExt.basePadding,
+          appSizeExt.basePadding, appSizeExt.basePadding, 0),
       padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 12.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(
-          defaultSizeExt.baseBorderRadius,
+          appSizeExt.baseBorderRadius,
         ),
       ),
       child: Column(
@@ -37,7 +70,6 @@ class NewItem extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 35.0 / 2,
-                // backgroundImage: ,
                 backgroundColor: Colors.grey,
               ),
               const SizedBox(
@@ -48,7 +80,7 @@ class NewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "TADA Delivery",
+                      "${orderRecord.delivery?.driverName ?? "N/A"}",
                       style: TextStyle(
                           fontSize: fontSizeExt.smallSize,
                           fontWeight: FontWeight.w500),
@@ -57,7 +89,7 @@ class NewItem extends StatelessWidget {
                       height: 4.0,
                     ),
                     Text(
-                      "15 Minutes ago",
+                      convertTimeAgo(),
                       style: TextStyle(
                           fontSize: fontSizeExt.extraSmallSize,
                           color: Colors.grey),
@@ -78,13 +110,16 @@ class NewItem extends StatelessWidget {
                   ),
                 ),
               ] else ...[
-                Container(
-                  margin: const EdgeInsets.only(top: 2.0),
-                  width: 14.0,
-                  height: 14.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(AssetPath.GO_ICON),
+                GestureDetector(
+                  onTap: onGoToOrderDetail,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 2.0),
+                    width: 14.0,
+                    height: 14.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(AssetPath.GO_ICON),
+                      ),
                     ),
                   ),
                 ),
@@ -99,7 +134,8 @@ class NewItem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                    "${orderRecord.itemList.first.image}",
                     fit: BoxFit.cover,
                     width: 80.0,
                     height: 80.0,
@@ -114,7 +150,7 @@ class NewItem extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Mackbook Pro 2021",
+                        "${orderRecord.itemList.first.name}",
                         style: TextStyle(fontSize: fontSizeExt.mediumSize),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -123,7 +159,7 @@ class NewItem extends StatelessWidget {
                         height: 8.0,
                       ),
                       Text(
-                        "\$ 2500.00 x 1",
+                        "\$ ${orderRecord.itemList.first.productVariance.price} x ${orderRecord.itemList.first.qty}",
                         style: TextStyle(
                           fontSize: fontSizeExt.mediumSize,
                           fontWeight: FontWeight.w600,
@@ -139,7 +175,10 @@ class NewItem extends StatelessWidget {
                         child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return NewProductOptionItem();
+                              return NewProductOptionItem(
+                                varianceCombination: orderRecord
+                                    .itemList.first.productVariance.combination,
+                              );
                             },
                             separatorBuilder: (context, index) {
                               return SizedBox(
@@ -173,7 +212,7 @@ class NewItem extends StatelessWidget {
                           color: Colors.grey, fontSize: fontSizeExt.smallSize),
                     ),
                     Text(
-                      "\$2500.00",
+                      "\$${orderRecord.totalPrice}",
                       style: TextStyle(
                           color: Colors.black, fontSize: fontSizeExt.smallSize),
                       textAlign: TextAlign.right,
@@ -192,7 +231,7 @@ class NewItem extends StatelessWidget {
                           color: Colors.grey, fontSize: fontSizeExt.smallSize),
                     ),
                     Text(
-                      "\$1.50",
+                      "\$${orderRecord.delivery?.amount ?? 0}",
                       style: TextStyle(
                           color: Colors.black, fontSize: fontSizeExt.smallSize),
                       textAlign: TextAlign.right,
@@ -218,7 +257,7 @@ class NewItem extends StatelessWidget {
                             fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        "\$1.50",
+                        "\$$orderTotal",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: fontSizeExt.smallSize,
@@ -240,7 +279,7 @@ class NewItem extends StatelessWidget {
                     children: [
                       Expanded(
                         child: BaseButton(
-                          onPressed: () {},
+                          onPressed: onReject,
                           title: "Reject",
                           titleColor: colorExt.PRIMARY_COLOR,
                           backgroundColor: Colors.white,
@@ -263,7 +302,7 @@ class NewItem extends StatelessWidget {
                     ? Container(
                         width: MediaQuery.of(context).size.width,
                         child: BaseButton(
-                            onPressed: () {},
+                            onPressed: onOrderReady,
                             title: "Order Ready",
                             titleColor: Colors.white,
                             backgroundColor: colorExt.PRIMARY_COLOR),

@@ -1,5 +1,8 @@
 class Routes {
+  static const ROOT = "/";
   static const SIGNIN = "/signIn";
+  static const VALIDATION = "/validation";
+  static const REGISTER = "/register";
   static const MENU = "/menu";
   static const NOTIFICATION = "/notification";
   static const ORDERS = "/orders";

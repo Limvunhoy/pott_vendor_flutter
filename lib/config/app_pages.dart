@@ -11,10 +11,15 @@ import 'package:pott_vendor/feature/processing/binding/processing_binding.dart';
 import 'package:pott_vendor/feature/processing/view/processing_page.dart';
 import 'package:pott_vendor/feature/product_option/binding/product_option_binding.dart';
 import 'package:pott_vendor/feature/product_option/view/product_option_page.dart';
+import 'package:pott_vendor/feature/register/binding/register_binding.dart';
+import 'package:pott_vendor/feature/register/view/register_page.dart';
+import 'package:pott_vendor/feature/report/binding/report_binding.dart';
 import 'package:pott_vendor/feature/report/view/report_page.dart';
 import 'package:pott_vendor/feature/sale_menu/binding/sale_menu_binding.dart';
 import 'package:pott_vendor/feature/sale_menu/view/sale_menu_page.dart';
-import 'package:pott_vendor/feature/sign_in/binding/sign_in_binding.dart';
+import 'package:pott_vendor/feature/sign_in/binding/auth_binding.dart';
+import 'package:pott_vendor/feature/validation/binding/verification_code_binding.dart';
+import 'package:pott_vendor/feature/validation/view/verification_code_page.dart';
 import 'package:pott_vendor/feature/view_product/binding/view_product_binding.dart';
 import 'package:pott_vendor/feature/view_product/view/view_product_page.dart';
 
@@ -25,10 +30,23 @@ class AppPages {
 
   static final routes = [
     GetPage(
-        name: Routes.SIGNIN,
-        page: () => SignInPage(),
-        binding: SignInBinding()),
-    GetPage(name: Routes.MENU, page: () => MenuPage(), binding: MenuBinding()),
+      name: Routes.MENU,
+      page: () => MenuPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: Routes.SIGNIN,
+      page: () => SignInPage(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+        name: Routes.REGISTER,
+        page: () => RegisterPage(),
+        binding: RegisterBinding()),
+    GetPage(
+        name: Routes.VALIDATION,
+        page: () => VerificationCodePage(),
+        binding: VerificationCodeBinding()),
     GetPage(name: Routes.NOTIFICATION, page: () => NotificationPage()),
     GetPage(
         name: Routes.ORDERS,
@@ -48,14 +66,14 @@ class AppPages {
       binding: ViewProductBinding(),
     ),
     GetPage(
-      name: Routes.ACCOUNT,
-      page: () => AccountPage(),
-      binding: AccountBinding(),
-    ),
-    GetPage(
       name: Routes.ADD_MENU,
       page: () => AddMenuPage(),
       binding: AddMenuBinding(),
+    ),
+    GetPage(
+      name: Routes.ACCOUNT,
+      page: () => AccountPage(),
+      binding: AccountBinding(),
     ),
     GetPage(
       name: Routes.PRODUCT_OPTION,
@@ -65,6 +83,7 @@ class AppPages {
     GetPage(
       name: Routes.REPORT,
       page: () => ReportPage(),
+      binding: ReportBinding(),
     ),
   ];
 }

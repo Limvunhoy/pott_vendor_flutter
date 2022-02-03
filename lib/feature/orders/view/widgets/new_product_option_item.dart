@@ -3,7 +3,10 @@ import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class NewProductOptionItem extends StatelessWidget {
-  const NewProductOptionItem({Key? key}) : super(key: key);
+  const NewProductOptionItem({Key? key, required this.varianceCombination})
+      : super(key: key);
+
+  final String varianceCombination;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class NewProductOptionItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.0),
           color: colorExt.PRIMARY_BACKGROUND_COLOR),
       child: Text(
-        "White, 8GB",
+        "$varianceCombination",
         style: TextStyle(fontSize: fontSizeExt.smallSize, color: Colors.grey),
       ),
     );

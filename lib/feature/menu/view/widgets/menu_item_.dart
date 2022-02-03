@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/core/model/menu/menu_item_model.dart';
+import 'package:pott_vendor/feature/menu/controller/menu_controller.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class MenuItem extends StatelessWidget {
-  const MenuItem({Key? key, required this.menuItemModel}) : super(key: key);
+  const MenuItem(
+      {Key? key, required this.menuItemModel, required this.controller})
+      : super(key: key);
 
   final MenuItemModel menuItemModel;
+  final MenuController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class MenuItem extends StatelessWidget {
                   ),
                 ),
               ),
-              if (menuItemModel.isBadge)
+              if (menuItemModel.isBadge && controller.newOrderBadges.value != 0)
                 Positioned(
                   top: -5,
                   right: 0,
@@ -40,7 +44,7 @@ class MenuItem extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Text(
-                      "5",
+                      "${controller.newOrderBadges.value}",
                       style: TextStyle(color: Colors.white, fontSize: 12.0),
                     ),
                   ),
@@ -48,7 +52,7 @@ class MenuItem extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: defaultSizeExt.basePadding,
+            height: appSizeExt.basePadding,
           ),
           Text(
             "${menuItemModel.title}",
