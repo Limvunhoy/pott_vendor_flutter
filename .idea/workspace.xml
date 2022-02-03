@@ -9,6 +9,19 @@
   <component name="ChangeListManager">
     <list default="true" id="15f5f6c3-b485-45cd-bd67-e9b36ff18dcb" name="Changes" comment="">
 <<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/assets/icons/report/sort_by_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/feature/report/view/widgets/chart_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/account/view/account_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/view/account_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/account/view/widgets/header_cover.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/account/view/widgets/header_cover.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/feature/report/view/report_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/feature/report/view/report_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/asset_path.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants/asset_path.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+=======
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/lib/core/model/product/product_response.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/core/service/product/product_service.dart" afterDir="false" />
 =======
@@ -59,6 +72,7 @@
 >>>>>>> bd17a30b3c27008bc2b6aabb9ee048bd3d5f4495
 >>>>>>> 449b2466e0b91b4e8da30dc216111292cc483301
 >>>>>>> 14fc89fadc45ff2afcf78e8eb5517383ab59a223
+>>>>>>> 0487026364536dd28ba13dc174e47c0624d70cb7
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,11 +120,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/icons/report" />
       <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/lib/core/api" />
       <recent name="$PROJECT_DIR$/lib/config" />
       <recent name="$PROJECT_DIR$/assets/icons/processing" />
-      <recent name="$PROJECT_DIR$/assets/icons/menu" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
