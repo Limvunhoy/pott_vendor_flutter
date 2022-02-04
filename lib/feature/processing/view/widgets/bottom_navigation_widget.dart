@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/processing/processing_model.dart';
 import 'package:pott_vendor/feature/processing/controller/processing_controller.dart';
 import 'package:pott_vendor/utils/common/base_button.dart';
@@ -31,7 +31,7 @@ class BottomNavigationWidget extends StatelessWidget {
                     color: Colors.black, fontSize: fontSizeExt.smallSize),
               ),
               Text(
-                "\$ ${processingController.orderRecordItem?.totalPrice ?? 0}",
+                "\$ ${processingController.orderRecordItem.totalPrice}",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: fontSizeExt.largeSize,
@@ -45,25 +45,28 @@ class BottomNavigationWidget extends StatelessWidget {
           const SizedBox(
             height: 13.0,
           ),
-          Obx(
-            () {
-              return Visibility(
-                visible: processingController.dummyData.value.state !=
-                    ProcessingState.delivered,
-                child: BaseButton(
+          processingController.processingState == ProcessingState.processing
+              ? BaseButton(
                   width: MediaQuery.of(context).size.width,
                   height: 40.0,
-                  onPressed: () {
-                    processingController.handleConfirmOrder();
-                  },
+                  onPressed: () {},
                   title: "Confirm Now",
                   titleColor: Colors.white,
                   fontWeight: FontWeight.w600,
                   backgroundColor: colorExt.PRIMARY_COLOR,
-                ),
-              );
-            },
-          ),
+                )
+              : processingController.processingState ==
+                      ProcessingState.estimatedTime
+                  ? BaseButton(
+                      width: MediaQuery.of(context).size.width,
+                      height: 40.0,
+                      onPressed: () {},
+                      title: "Order Ready",
+                      titleColor: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      backgroundColor: colorExt.PRIMARY_COLOR,
+                    )
+                  : const SizedBox.shrink()
         ],
       ),
     );

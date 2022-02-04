@@ -295,7 +295,7 @@ extension on OrdersController {
       update();
       return records;
     } catch (e) {
-      fetchStatus = FetchStatus.complete;
+      fetchStatus = FetchStatus.error;
       update();
       return [];
     }
