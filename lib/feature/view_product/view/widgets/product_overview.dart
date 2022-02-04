@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 
 class ProductOverView extends StatelessWidget {
-  const ProductOverView({Key? key}) : super(key: key);
+  const ProductOverView({Key? key, required this.productRecord})
+      : super(key: key);
+
+  final ProductRecord productRecord;
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +15,11 @@ class ProductOverView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: appSizeExt.basePadding, vertical: 10.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "BES875UK The Barista Express Espresso Samsung Smart TV 8K",
+            // "BES875UK The Barista Express Espresso Samsung Smart TV 8K",
+            "${productRecord.name}",
             style: TextStyle(
               color: Colors.black,
               fontSize: 18.0,

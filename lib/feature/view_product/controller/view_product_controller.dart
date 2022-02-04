@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pott_vendor/core/model/product/product_response.dart';
 
 class ViewProductController extends GetxController {
   String getNumberAddZero(int number) {
@@ -24,4 +25,28 @@ class ViewProductController extends GetxController {
     "https://i.ytimg.com/vi/dVuyfNVcwO4/maxresdefault.jpg",
     "https://1.bp.blogspot.com/-9gc8riuC1pE/YPwuVApgG4I/AAAAAAAAVuU/Ke3rU9EorFstBRno2nWW5iNhkKCBFcaBwCLcBGAsYHQ/s900/Shoes%2B%2BWeb%2BBanners.jpg",
   ];
+
+  final args = Get.arguments;
+  late ProductRecord productRecord;
+  bool isBid = false;
+
+  @override
+  void onInit() {
+    isBid = args["isBid"];
+    productRecord = args["productRecord"];
+    update();
+    // if (args["isBid"] == true) {
+    //   isBid = args["isBid"];
+    //   update();
+    // }
+    //
+    //
+    //
+    // if (args["productRecord"] is ProductRecord) {
+    //   productRecord = args;
+    //   update();
+    // }
+
+    super.onInit();
+  }
 }

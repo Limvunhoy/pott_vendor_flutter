@@ -33,7 +33,10 @@ class SaleProductPage extends StatelessWidget {
                 return SaleProductItem(
                   controller: controller,
                   onItemTapped: () {
-                    Get.toNamed(Routes.VIEW_PRODUCT);
+                    Get.toNamed(Routes.VIEW_PRODUCT, arguments: {
+                      "isBid": false,
+                      "productRecord": controller.saleProductRecords[index]
+                    });
                   },
                   saleProduct: controller.saleProductRecords[index],
                 );

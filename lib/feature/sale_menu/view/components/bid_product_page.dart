@@ -40,7 +40,10 @@ class BidProductPage extends StatelessWidget {
                     return BidProductItem(
                       controller: controller,
                       onItemTapped: () {
-                        Get.toNamed(Routes.VIEW_PRODUCT);
+                        Get.toNamed(Routes.VIEW_PRODUCT, arguments: {
+                          "isBid": true,
+                          "productRecord": controller.bidProductRecords[index]
+                        });
                       },
                       bidProduct: controller.bidProductRecords[index],
                     );
