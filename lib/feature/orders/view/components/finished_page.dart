@@ -34,9 +34,14 @@ class FinishedPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
+                    print("Pass order at index: $index");
                     Get.toNamed(Routes.PROCESSING, arguments: {
                       "type": ProcessingState.delivered,
                       "record": ordersController.finishedOrderRecords[index]
+                    })?.then((orderId) {
+                      final _index = ordersController.finishedOrderRecords
+                          .indexWhere((element) => element.id == orderId);
+                      print("Return index back $_index");
                     });
                   },
                   child: NewItem(

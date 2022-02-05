@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pott_vendor/core/model/order/order_response.dart';
 import 'package:pott_vendor/core/model/processing/processing_model.dart';
+import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
+import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
 class ProcessingController extends GetxController {
   // Rx<ProcessingModel> dummyData = ProcessingModel().obs;
@@ -17,6 +19,10 @@ class ProcessingController extends GetxController {
 
   late ProcessingState processingState;
   ProcessingModel? processingModel;
+
+  final OrdersController _ordersController = Get.find<OrdersController>();
+
+  FetchStatus fetchStatus = FetchStatus.idle;
 
   @override
   void onInit() {
@@ -95,11 +101,47 @@ class ProcessingController extends GetxController {
           subTitle: 'Estimated delivery time');
     } else {
       processingModel = ProcessingModel(
-          state: ProcessingState.estimatedTime,
+          state: ProcessingState.delivered,
           title: "Delivered",
           subTitle: 'Order Success');
     }
     update();
+  }
+
+  handleConfirmOrder() async {
+    fetchStatus = FetchStatus.loading;
+    await _ordersController
+        .confirmNewOrder(orderRecordItem.id)
+        .then((isSuccess) {
+      if (isSuccess) {
+        processingState = ProcessingState.estimatedTime;
+        updateProcessingState();
+        fetchStatus = FetchStatus.complete;
+        update();
+
+        final _index = _ordersController.newOrderRecords
+            .indexWhere((element) => element.id == orderRecordItem.id);
+        _ordersController.handleUpdateNewOrderItem(_index);
+      }
+    });
+  }
+
+  handleOrderReady() async {
+    fetchStatus = FetchStatus.loading;
+    await _ordersController
+        .updateReadyOrder(orderRecordItem.id)
+        .then((isSuccess) {
+      if (isSuccess) {
+        processingState = ProcessingState.delivered;
+        updateProcessingState();
+        fetchStatus = FetchStatus.complete;
+        update();
+
+        final _index = _ordersController.confirmOrderRecords
+            .indexWhere((element) => element.id == orderRecordItem.id);
+        _ordersController.handleUpdateReadyOrderItem(_index);
+      }
+    });
   }
 
   // void handleConfirmOrder() {

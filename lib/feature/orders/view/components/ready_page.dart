@@ -34,12 +34,19 @@ class ReadyPage extends StatelessWidget {
                   onTap: () {
                     Get.toNamed(Routes.PROCESSING, arguments: {
                       "type": ProcessingState.estimatedTime,
-                      "record": ordersController.confirmOrderRecords[index]
+                      "record": ordersController.confirmOrderRecords[index],
                     });
                   },
                   child: NewItem(
-                    onOrderReady: () {
-                      ordersController.updateReadyOrder(index);
+                    onOrderReady: () async {
+                      await ordersController
+                          .updateReadyOrder(
+                              ordersController.confirmOrderRecords[index].id)
+                          .then((isSuccess) {
+                        if (isSuccess) {
+                          ordersController.handleUpdateReadyOrderItem(index);
+                        }
+                      });
                     },
                     orderStatus: OrderStatus.ready,
                     orderRecord: ordersController.confirmOrderRecords[index],

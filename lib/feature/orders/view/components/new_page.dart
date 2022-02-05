@@ -38,9 +38,16 @@ class NewPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return NewItem(
                       orderStatus: OrderStatus.newOrder,
-                      onConfirm: () {
+                      onConfirm: () async {
                         // Get.toNamed(Routes.PROCESSING);
-                        ordersController.confirmNewOrder(index);
+                        await ordersController
+                            .confirmNewOrder(
+                                ordersController.newOrderRecords[index].id)
+                            .then((isSuccess) {
+                          if (isSuccess) {
+                            ordersController.handleUpdateNewOrderItem(index);
+                          }
+                        });
                       },
                       onReject: () {
                         AppDialog.showAppDialog(context, onClose: () {

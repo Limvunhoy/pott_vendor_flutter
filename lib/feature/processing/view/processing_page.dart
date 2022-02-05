@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/processing/processing_model.dart';
@@ -203,6 +204,12 @@ class ProcessingPage extends GetWidget<ProcessingController> {
       ),
       bottomNavigation: BottomNavigationWidget(
         processingController: controller,
+        onConfirmNow: () {
+          controller.handleConfirmOrder();
+        },
+        onOrderReady: () {
+          controller.handleOrderReady();
+        },
       ),
     );
   }

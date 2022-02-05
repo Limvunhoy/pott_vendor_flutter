@@ -76,47 +76,64 @@ class OrdersController extends GetxController
     super.onClose();
   }
 
-  confirmNewOrder(int index) async {
+  Future<bool> confirmNewOrder(String id) async {
     try {
-      final response = await _orderService.updateOrderStatus(
-          newOrderRecords[index].id, "confirm");
-      if (response) {
-        newOrderRecords.removeAt(index);
-        if (confirmOrderRecords.isNotEmpty) {
-          confirmOrderRecords.insert(0, newOrderRecords[index]);
-        }
-
-        Fluttertoast.showToast(
-            msg: "Order Confirmed",
-            gravity: ToastGravity.BOTTOM,
-            toastLength: Toast.LENGTH_SHORT,
-            timeInSecForIosWeb: 1);
-        update();
-      }
+      final response = await _orderService.updateOrderStatus(id, "confirm");
+      // if (response) {
+      //   newOrderRecords.removeAt(index);
+      //   if (confirmOrderRecords.isNotEmpty) {
+      //     confirmOrderRecords.insert(0, newOrderRecords[index]);
+      //   }
+      //
+      //   Fluttertoast.showToast(
+      //       msg: "Order Confirmed",
+      //       gravity: ToastGravity.BOTTOM,
+      //       toastLength: Toast.LENGTH_SHORT,
+      //       timeInSecForIosWeb: 1);
+      //   update();
+      return response;
     } catch (e) {
       Get.snackbar("Something went wrong!", e.toString());
+      return false;
     }
   }
 
-  updateReadyOrder(int index) async {
+  Future<bool> updateReadyOrder(String id) async {
     try {
-      final response = await _orderService.updateOrderStatus(
-          confirmOrderRecords[index].id, "ready");
-      if (response) {
-        confirmOrderRecords.removeAt(index);
-        if (finishedOrderRecords.isNotEmpty) {
-          finishedOrderRecords.insert(0, confirmOrderRecords[index]);
-        }
-        Fluttertoast.showToast(
-          msg: "Order Ready",
-          gravity: ToastGravity.BOTTOM,
-          toastLength: Toast.LENGTH_SHORT,
-        );
-        update();
-      }
+      final response = await _orderService.updateOrderStatus(id, "ready");
+
+      return response;
     } catch (e) {
       Get.snackbar("Something went wrong!", e.toString());
+      return false;
     }
+  }
+
+  handleUpdateNewOrderItem(int index) {
+    newOrderRecords.removeAt(index);
+    if (confirmOrderRecords.isNotEmpty) {
+      confirmOrderRecords.insert(0, newOrderRecords[index]);
+    }
+
+    Fluttertoast.showToast(
+        msg: "Order Confirmed",
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 1);
+    update();
+  }
+
+  handleUpdateReadyOrderItem(int index) {
+    confirmOrderRecords.removeAt(index);
+    if (finishedOrderRecords.isNotEmpty) {
+      finishedOrderRecords.insert(0, confirmOrderRecords[index]);
+    }
+    Fluttertoast.showToast(
+      msg: "Order Ready",
+      gravity: ToastGravity.BOTTOM,
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    update();
   }
 
   handlePullRefresh(OrderType orderStatus) async {
