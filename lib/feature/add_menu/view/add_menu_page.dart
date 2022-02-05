@@ -9,6 +9,7 @@ import 'package:pott_vendor/feature/add_menu/controller/add_menu_controller.dart
 import 'package:pott_vendor/feature/add_menu/view/widgets/add_description_widget.dart';
 import 'package:pott_vendor/feature/add_menu/view/widgets/add_photo_widget.dart';
 import 'package:pott_vendor/feature/add_menu/view/widgets/photo_description_list.dart';
+import 'package:pott_vendor/feature/add_menu/view/widgets/photo_list.dart';
 import 'package:pott_vendor/feature/add_menu/view/widgets/product_option_widget.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/config/app_routes.dart';
@@ -66,14 +67,48 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                         const SizedBox(
                           height: 13.0,
                         ),
-                        AddPhotoWidget(
-                          frameWidth: 104.0,
-                          frameHeight: 104.0,
-                          iconWidth: 37.37,
-                          iconHeight: 30.77,
-                          fontSize: fontSizeExt.smallSize,
-                          onTap: () {},
-                        ),
+                        Row(
+                          children: [
+                            AddPhotoWidget(
+                              frameWidth: 104.0,
+                              frameHeight: 104.0,
+                              iconWidth: 37.37,
+                              iconHeight: 30.77,
+                              fontSize: fontSizeExt.smallSize,
+                              onTap: () {
+                                controller.photoPicker();
+                              },
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Container(
+                                  height: 104,
+                                  color: Colors.transparent,
+                                  child: PhotoList(
+                                    controller: controller,
+                                  )
+                                  // ListView.separated(
+                                  //     shrinkWrap: true,
+                                  //     scrollDirection: Axis.horizontal,
+                                  //     separatorBuilder: (context, index) {
+                                  //       return const SizedBox(
+                                  //         width: 10,
+                                  //       );
+                                  //     },
+                                  //     itemCount: 5,
+                                  //     itemBuilder: (context, index) {
+                                  //       return Container(
+                                  //         width: 104,
+                                  //         height: 104,
+                                  //         color: Colors.yellow,
+                                  //       );
+                                  //     }),
+                                  ),
+                            )
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -164,8 +199,12 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                                 children: [
                                   BaseTitleText(text: "Photo Description"),
                                   BaseMediumText(
-                                    text: "3/10",
-                                    color: colorExt.LIGHT_GRAY,
+                                    text:
+                                        "${controller.descriptionPhotos.length}/${controller.limitPhoto}",
+                                    color: controller.descriptionPhotos.length >
+                                            controller.limitPhoto
+                                        ? Colors.red
+                                        : colorExt.LIGHT_GRAY,
                                   ),
                                 ],
                               ),
@@ -187,15 +226,40 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                               //     ),
                               //   ],
                               // ),
-                              PhotoDescriptionList(
-                                onTap: () async {
-                                  // final source = await showImageSource(context);
-                                  // if (source != null) {
-                                  //   _controller.pickImage(source);
-                                  // }
-                                  controller.pickImage();
-                                },
-                                controller: controller,
+                              // const SizedBox(
+                              //   height: 13.0,
+                              // ),
+                              Container(
+                                height: 100,
+                                child: Row(
+                                  children: [
+                                    AddPhotoWidget(
+                                      frameWidth: 70.0,
+                                      frameHeight: 70.0,
+                                      iconWidth: 25.15,
+                                      iconHeight: 20.71,
+                                      fontSize: fontSizeExt.extraSmallSize,
+                                      onTap: () {
+                                        controller.descriptionPhotoPicker();
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    PhotoDescriptionList(
+                                      // onRemove: () async {
+                                      //   // final source = await showImageSource(context);
+                                      //   // if (source != null) {
+                                      //   //   _controller.pickImage(source);
+                                      //   // }
+                                      //   // controller.pickImage();
+                                      //   // controller.descriptionPhotoPicker();
+                                      //   controller.handleRemoveDescriptionPhoto(index);
+                                      // },
+                                      controller: controller,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
