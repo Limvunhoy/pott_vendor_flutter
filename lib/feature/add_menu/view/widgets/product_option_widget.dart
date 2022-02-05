@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/feature/product_option/view/export_widget.dart';
+import 'package:pott_vendor/utils/common/base_small_text.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class ProductOptionWidget extends StatelessWidget {
   const ProductOptionWidget(
-      {Key? key, required this.title, required this.onTap})
+      {Key? key,
+      required this.title,
+      required this.onTap,
+      this.isCategory = false,
+      this.selectedCategory})
       : super(key: key);
 
   final String title;
   final VoidCallback onTap;
+  final bool? isCategory;
+  final String? selectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +35,22 @@ class ProductOptionWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BaseTitleText(text: title),
-            Icon(
-              Icons.arrow_drop_down,
-              color: colorExt.LIGHT_GRAY,
-            ),
+            Row(
+              children: [
+                isCategory == true
+                    ? BaseSmallText(
+                        text: selectedCategory ?? "",
+                        color: colorExt.LIGHT_GRAY,
+                      )
+                    : const SizedBox.shrink(),
+                Icon(
+                  isCategory == true
+                      ? Icons.arrow_right
+                      : Icons.arrow_drop_down,
+                  color: colorExt.LIGHT_GRAY,
+                ),
+              ],
+            )
           ],
         ),
       ),

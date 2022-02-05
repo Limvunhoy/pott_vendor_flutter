@@ -10,9 +10,15 @@ class AddMenuController extends GetxController {
   final ImagePicker _imagePicker = ImagePicker();
 
   List<XFile>? selectedImages = [];
+  String? selectedCategory;
 
   counterText(String text) {
     enteredText.value = text;
+  }
+
+  updateSelectedCategory(String cate) {
+    selectedCategory = cate;
+    update();
   }
 
   Future pickImage() async {
