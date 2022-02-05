@@ -110,7 +110,8 @@ class MenuPage extends GetWidget<AuthController> {
                                         .menuItemList[index].type) {
                                       case MenuItemEnum.orders:
                                         print("Navigate to order page");
-                                        Get.toNamed(Routes.ORDERS);
+                                        // Get.toNamed(Routes.ORDERS);
+                                        Get.toNamed(Routes.ADD_MENU);
                                         break;
                                       case MenuItemEnum.menu:
                                         print("Navigate to menu page");
