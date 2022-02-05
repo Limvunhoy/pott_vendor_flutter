@@ -38,10 +38,6 @@ class FinishedPage extends StatelessWidget {
                     Get.toNamed(Routes.PROCESSING, arguments: {
                       "type": ProcessingState.delivered,
                       "record": ordersController.finishedOrderRecords[index]
-                    })?.then((orderId) {
-                      final _index = ordersController.finishedOrderRecords
-                          .indexWhere((element) => element.id == orderId);
-                      print("Return index back $_index");
                     });
                   },
                   child: NewItem(
