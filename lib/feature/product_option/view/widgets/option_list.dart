@@ -22,35 +22,45 @@ class OptionList extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: DataTable(
-          headingRowColor:
-              MaterialStateColor.resolveWith((states) => Colors.grey),
+          // headingRowColor:
+          //     MaterialStateColor.resolveWith((states) => Colors.grey),
+
           headingRowHeight: 36.0,
           dataRowHeight: 40,
+          headingTextStyle: TextStyle(
+            fontWeight: FontWeight.normal,
+          ),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(10)),
-              color: Colors.white),
+              borderRadius: BorderRadius.circular(6.0),
+              color: colorExt.LINE_COLOR),
           columns: const <DataColumn>[
             DataColumn(
               label: BaseSmallText(
                 text: 'Option',
+                color: colorExt.LIGHT_GRAY,
               ),
             ),
             DataColumn(
               label: BaseSmallText(
                 text: 'Ori-Price',
+                color: colorExt.LIGHT_GRAY,
               ),
             ),
             DataColumn(
               label: BaseSmallText(
                 text: 'Sale Price',
+                color: colorExt.LIGHT_GRAY,
               ),
             ),
             DataColumn(
               label: BaseSmallText(
                 text: 'Qty',
+                color: colorExt.LIGHT_GRAY,
               ),
             ),
           ],
+          dataRowColor:
+              MaterialStateColor.resolveWith((states) => Colors.white),
           rows: controller.generatedOptions
               .map((e) => DataRow(cells: [
                     DataCell(Text("${controller.getOptionFormat(e)}")),
