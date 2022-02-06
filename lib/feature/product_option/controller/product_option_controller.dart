@@ -21,6 +21,13 @@ class ProductOptionController extends GetxController {
     update();
   }
 
+  bool hideHintText = false;
+
+  handleHintText() {
+    hideHintText = true;
+    update();
+  }
+
   handleRemoveVariantType(int index) {
     productOptions.removeAt(index);
     print("Product Option After Removed $productOptions");
@@ -35,12 +42,46 @@ class ProductOptionController extends GetxController {
     update();
   }
 
-  handleRemoveOption(index) {
-    productOptions.forEach((element) {
-      element.values.single.removeAt(index);
-    });
+  handleRemoveOption(int parentIndex, int index) {
+    productOptions[parentIndex].values.single.removeAt(index);
     print(productOptions);
     update();
+  }
+
+  List<List<String>> generatedOptions = <List<String>>[];
+
+  handleGenerateOptions() {
+    generatedOptions.clear();
+    update();
+
+    List<List<String>> list = <List<String>>[];
+
+    productOptions.forEach((element) {
+      list.addAll(element.values);
+    });
+
+    var types = list[0].map((e) {
+      return [e];
+    });
+
+    for (var i = 1; i < list.length; i++) {
+      var next = [];
+      types.forEach((item) {
+        list[i].forEach((word) {
+          List<String> line = item.sublist(0);
+          line.add(word);
+          next.add(line);
+        });
+      });
+      types = next.map((e) => e);
+    }
+    generatedOptions.addAll(types);
+    update();
+  }
+
+  String getOptionFormat(List<String> options) {
+    String format = options.join("-");
+    return format;
   }
 
   List<String> optionVariant(index) {

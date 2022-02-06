@@ -52,8 +52,9 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                         onSubmitted: (newValue) {
                           controller.handleAddOptionVariant(index, newValue);
                         },
-                        onDeleted: (index) {
-                          controller.handleRemoveOption(index);
+                        onDeleted: (deletedIndex) {
+                          print(index);
+                          controller.handleRemoveOption(index, deletedIndex);
                         },
                       );
                     },
@@ -65,10 +66,12 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                   Container(
                     color: Colors.white,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.handleGenerateOptions();
+                      },
                       style: TextButton.styleFrom(
                         minimumSize:
-                            Size(MediaQuery.of(context).size.width, 59.0),
+                            Size(MediaQuery.of(context).size.width, 49.0),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,7 +97,9 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                     color: Color(0xFFF5F5F5),
                     height: 10,
                   ),
-                  OptionList(),
+                  OptionList(
+                    controller: controller,
+                  ),
                 ],
               );
             }),
