@@ -94,6 +94,7 @@ class TotalSaleWidget extends StatelessWidget {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               BaseExtraSmallText(
                 text: "Total Solid",
@@ -106,6 +107,7 @@ class TotalSaleWidget extends StatelessWidget {
                 height: 10.0,
               ),
               RichText(
+                textAlign: TextAlign.right,
                 text: TextSpan(
                   children: [
                     TextSpan(
@@ -118,7 +120,7 @@ class TotalSaleWidget extends StatelessWidget {
                           fontWeight: fontWeightExt.baseFontWeight),
                     ),
                     TextSpan(
-                      text: " Items",
+                      text: reportController.itemFormat(type),
                       style: TextStyle(
                         fontSize: 10.0,
                         color: type == TotalType.today

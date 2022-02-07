@@ -81,9 +81,9 @@ class ReportController extends GetxController {
   String totalSale(TotalType type) {
     switch (type) {
       case TotalType.today:
-        return "${todayReport?.records.first.totalPrice ?? "..."}";
+        return "${todayReport?.records.first.totalPrice ?? "0"}";
       case TotalType.month:
-        return "${monthlyReport?.records.first.totalPrice ?? "..."}";
+        return "${monthlyReport?.records.first.totalPrice ?? "0"}";
     }
   }
 
@@ -112,20 +112,35 @@ class ReportController extends GetxController {
     ];
   }
 
+  String strItem = "";
+
   String totalSaleItem(TotalType type) {
     switch (type) {
       case TotalType.today:
         if ((todayReport?.records.first.totalQty ?? 0) <= 1) {
-          return "${(todayReport?.records.first.totalQty ?? 0)} Item";
+          return "${(todayReport?.records.first.totalQty ?? 0)}";
         } else {
-          return "${(todayReport?.records.first.totalQty ?? 0)} Items";
+          return "${(todayReport?.records.first.totalQty ?? 0)}";
         }
       case TotalType.month:
         if ((monthlyReport?.records.first.totalQty ?? 0) <= 1) {
-          return "${(monthlyReport?.records.first.totalQty ?? 0)} Item";
+          return "${(monthlyReport?.records.first.totalQty ?? 0)}";
         } else {
-          return "${(monthlyReport?.records.first.totalQty ?? 0)} Items";
+          return "${(monthlyReport?.records.first.totalQty ?? 0)}";
         }
+    }
+  }
+
+  String itemFormat(TotalType type) {
+    switch (type) {
+      case TotalType.today:
+        return (todayReport?.records.first.totalQty ?? 0) > 1
+            ? " Items"
+            : " Item";
+      case TotalType.month:
+        return (monthlyReport?.records.first.totalQty ?? 0) > 1
+            ? " Items"
+            : " Item";
     }
   }
 }
