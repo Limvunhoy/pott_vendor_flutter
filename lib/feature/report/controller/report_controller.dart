@@ -13,6 +13,7 @@ class ReportController extends GetxController {
   ReportService _reportService = ReportService();
   ReportDataResponse? todayReport;
   ReportDataResponse? monthlyReport;
+  ReportDataResponse? weeklyReport;
 
   List<String> sortByReports = [
     "Today",
@@ -29,7 +30,9 @@ class ReportController extends GetxController {
   void onInit() {
     getTodayReport();
     getMonthlyReport();
+    getWeeklyReport();
 
+    // TODO: Update default chart after API update. Default Weekly
     chartData = sortByToday();
 
     tooltipBehavior = TooltipBehavior(
@@ -45,16 +48,6 @@ class ReportController extends GetxController {
     super.onInit();
   }
 
-  getTodayReport() async {
-    try {
-      todayReport = await _reportService.getReport("today");
-      update();
-    } catch (e) {
-      if (e is ErrorResponse) {}
-      print("Failed to get report: $e");
-    }
-  }
-
   handleSortBy(String sortBy) {
     sortedBy = sortBy;
     if (sortBy == "Today") {
@@ -67,15 +60,6 @@ class ReportController extends GetxController {
       chartData = sortByToday();
     }
     update();
-  }
-
-  getMonthlyReport() async {
-    try {
-      monthlyReport = await _reportService.getReport("monthly");
-      update();
-    } catch (e) {
-      print("Failed to get monthly report: $e");
-    }
   }
 
   String totalSale(TotalType type) {
@@ -141,6 +125,37 @@ class ReportController extends GetxController {
         return (monthlyReport?.records.first.totalQty ?? 0) > 1
             ? " Items"
             : " Item";
+    }
+  }
+}
+
+// MARK: - Get Report: Today, Weekly, Monthly
+extension on ReportController {
+  getTodayReport() async {
+    try {
+      todayReport = await _reportService.getReport("today");
+      update();
+    } catch (e) {
+      if (e is ErrorResponse) {}
+      print("Failed to get report: $e");
+    }
+  }
+
+  getWeeklyReport() async {
+    try {
+      weeklyReport = await _reportService.getReport("weekly");
+      update();
+    } catch (e) {
+      print("Failed to get monthly report: $e");
+    }
+  }
+
+  getMonthlyReport() async {
+    try {
+      monthlyReport = await _reportService.getReport("monthly");
+      update();
+    } catch (e) {
+      print("Failed to get monthly report: $e");
     }
   }
 }
