@@ -25,7 +25,7 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   VariantTypeWidget(
-                    items: controller.types(),
+                    items: controller.listProductOptions,
                     onSubmitted: (newType) {
                       controller.handleAddVariantType(newType);
                     },
@@ -41,13 +41,18 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     primary: false,
-                    itemCount: controller.productOptions.length,
+                    // itemCount: controller.productOptions.length,
+                    itemCount: controller.listProductOptions.length,
                     itemBuilder: (context, index) {
                       return VariantOptionWidget(
+                        // titleType:
+                        //     "${controller.productOptions[index].keys.single}",
                         titleType:
-                            "${controller.productOptions[index].keys.single}",
+                            "${controller.listProductOptions[index].option}",
                         controller: controller,
-                        items: controller.optionVariant(index),
+                        // items: controller.optionVariant(index),
+                        items: controller
+                            .listProductOptions[index].productOptionValue,
                         isTopPadding: index != 0 ? false : true,
                         onSubmitted: (newValue) {
                           controller.handleAddOptionVariant(index, newValue);
@@ -67,7 +72,9 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                     color: Colors.white,
                     child: TextButton(
                       onPressed: () {
-                        controller.handleGenerateOptions();
+                        // controller.handleGenerateOptions();
+                        // controller.handleAddProductOptions();
+                        controller.handleGenerateProductOption();
                       },
                       style: TextButton.styleFrom(
                         minimumSize:

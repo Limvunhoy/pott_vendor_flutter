@@ -25,19 +25,16 @@ class ReportPage extends GetWidget<ReportController> {
               padding: const EdgeInsets.all(appSizeExt.basePadding),
               child: Column(
                 children: [
-                  controller.todayReport != null
-                      ? TotalSaleWidget(
-                          type: TotalType.today,
-                          reportController: controller,
-                        )
-                      : NoDataReport(type: TotalType.today),
+                  TotalSaleWidget(
+                    type: TotalType.today,
+                    reportController: controller,
+                  ),
                   const SizedBox(
                     height: 16.0,
                   ),
-                  controller.monthlyReport != null
-                      ? TotalSaleWidget(
-                          type: TotalType.month, reportController: controller)
-                      : NoDataReport(type: TotalType.month),
+                  TotalSaleWidget(
+                      type: TotalType.month, reportController: controller),
+                  // : NoDataReport(type: TotalType.month),
                   const SizedBox(
                     height: 42.0,
                   ),

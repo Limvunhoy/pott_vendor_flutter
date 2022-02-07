@@ -61,9 +61,11 @@ class OptionList extends StatelessWidget {
           ],
           dataRowColor:
               MaterialStateColor.resolveWith((states) => Colors.white),
-          rows: controller.generatedOptions
+          // rows: controller.
+          rows: controller.addProductVariance
               .map((e) => DataRow(cells: [
-                    DataCell(Text("${controller.getOptionFormat(e)}")),
+                    // DataCell(Text("${controller.getOptionFormat(e)}")),
+                    DataCell(Text("${e.combination}")),
                     DataCell(TextField(
                       decoration: InputDecoration(
                         hintText: "...",
