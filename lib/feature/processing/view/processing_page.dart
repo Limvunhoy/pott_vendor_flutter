@@ -21,7 +21,9 @@ class ProcessingPage extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            AppDialog.showAppDialog(context, onClose: () {
+            AppDialog.showAppDialog(context,
+                title: "Are you sure?",
+                subtitle: "You want to reject delivery?", onClose: () {
               Get.back();
             }, onConfirm: () {
               // TODO: Handle reject order

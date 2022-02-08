@@ -1,7 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pott_vendor/feature/menu/view/menu_page.dart';
 import 'package:pott_vendor/feature/sign_in/controller/auth_controller.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/dissmiss_keyboard_content.dart';
@@ -88,10 +87,10 @@ class SignInPage extends StatelessWidget {
                                       textStyle: TextStyle(
                                           fontSize: fontSizeExt.mediumSize,
                                           color: Colors.black),
-                                      onInit: (code) {
-                                        authController
-                                            .onUpdateCountryCode(code!);
-                                      },
+                                      // onInit: (code) {
+                                      //   authController
+                                      //       .onUpdateCountryCode(code!);
+                                      // },
                                     ),
                                     Container(
                                       width: 11.0,
