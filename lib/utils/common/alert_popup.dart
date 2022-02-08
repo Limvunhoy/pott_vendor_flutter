@@ -7,17 +7,20 @@ import 'dart:io' show Platform;
 
 class AppDialog {
   static void showAppDialog(BuildContext context,
-      {required VoidCallback onClose, required VoidCallback onConfirm}) {
+      {required VoidCallback onClose,
+      required VoidCallback onConfirm,
+      required String title,
+      required String subtitle}) {
     Platform.isIOS
         ? showCupertinoDialog(
             context: context,
             builder: (context) {
               return CupertinoAlertDialog(
                 title: BaseMediumText(
-                  text: "Are you sure?",
+                  text: title,
                 ),
                 content: BaseSmallText(
-                  text: "You want to reject delivery",
+                  text: subtitle,
                 ),
                 actions: [
                   CupertinoDialogAction(
