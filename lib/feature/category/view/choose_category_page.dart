@@ -43,8 +43,7 @@ class ChooseCategoryPage extends GetWidget<CategoryController> {
                                 child: ExpansionTile(
                                     key: PageStorageKey(index),
                                     leading: Image.network(
-                                      // TODO: Set icon url after update from B Vanto
-                                      "https://purepng.com/public/uploads/large/purepng.com-photos-iconsymbolsiconsapple-iosiosios-8-iconsios-8-721522596102asedt.png",
+                                      controller.categoryImage(index),
                                       fit: BoxFit.cover,
                                       width: 44,
                                     ),
@@ -83,7 +82,8 @@ class ChooseCategoryPage extends GetWidget<CategoryController> {
                                                 const EdgeInsets.symmetric(
                                                     horizontal: 45),
                                             leading: Image.network(
-                                              "https://purepng.com/public/uploads/large/purepng.com-photos-iconsymbolsiconsapple-iosiosios-8-iconsios-8-721522596102asedt.png",
+                                              controller.subCategoryImage(
+                                                  e.data.icon),
                                               fit: BoxFit.cover,
                                               width: 44,
                                             ),
