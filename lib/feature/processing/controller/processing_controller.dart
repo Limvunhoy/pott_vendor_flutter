@@ -9,10 +9,6 @@ import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
 class ProcessingController extends GetxController {
-  // Rx<ProcessingModel> dummyData = ProcessingModel().obs;
-
-  // Timer? timer;
-
   late OrderRecordResponse orderRecordItem;
 
   final arg = Get.arguments;

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 
 class ProductOptionController extends GetxController {
   List<String> titleOptions = [
@@ -8,69 +9,83 @@ class ProductOptionController extends GetxController {
     "QTY",
   ];
 
-  List<String> variantTypes = [];
-  // List<List<String>> productOptions = [];
-  List<Map<String, List<String>>> productOptions =
-      <Map<String, List<String>>>[];
-
   handleAddVariantType(String newType) {
-    variantTypes.add(newType);
+    listProductOptions
+        .add(AddProductOption(option: newType, productOptionValue: []));
+    update();
+  }
 
-    productOptions.add({newType: []});
-    print(productOptions);
+  bool hideHintText = false;
+
+  handleHintText() {
+    hideHintText = true;
     update();
   }
 
   handleRemoveVariantType(int index) {
-    productOptions.removeAt(index);
-    print("Product Option After Removed $productOptions");
+    listProductOptions.removeAt(index);
     update();
   }
 
   handleAddOptionVariant(int index, String option) {
-    productOptions[index].forEach((key, value) {
-      value.add(option);
-    });
-    print(productOptions);
+    listProductOptions[index].productOptionValue.add(
+        AddProductOptionValue(optionValue: option, optionValueImageUrl: ""));
     update();
   }
 
-  handleRemoveOption(index) {
-    productOptions.forEach((element) {
-      element.values.single.removeAt(index);
-    });
-    print(productOptions);
+  handleRemoveOption(int parentIndex, int index) {
+    listProductOptions[parentIndex].productOptionValue.removeAt(index);
     update();
   }
 
-  List<String> optionVariant(index) {
-    List<String> options = [];
-    productOptions[index].forEach((key, value) {
-      List<String> list = List.castFrom(value);
-      options = list;
-    });
-    return options;
-  }
+  // List<List<String>> generatedOptions = <List<String>>[];
 
-  List<String> types() {
-    List<String> types = [];
-    productOptions.forEach((element) {
-      element.forEach((key, value) {
-        types.add(key);
+  List<AddProductOption> listProductOptions = <AddProductOption>[];
+
+  List<AddProductVariance> addProductVariance = <AddProductVariance>[];
+  List<List<AddProductOptionValue>> productOptionVariances =
+      <List<AddProductOptionValue>>[];
+
+  handleGenerateProductOption() {
+    addProductVariance.clear();
+    var type = listProductOptions[0].productOptionValue.map((e) => [e]);
+
+    for (var i = 1; i < listProductOptions.length; i++) {
+      var next = [];
+      type.forEach((item) {
+        listProductOptions[i].productOptionValue.forEach((word) {
+          List<AddProductOptionValue> line = item.sublist(0);
+          line.add(AddProductOptionValue(
+              optionValue: word.optionValue, optionValueImageUrl: ""));
+          next.add(line);
+        });
       });
-    });
-    return types;
+      type = next.map((e) => e);
+      print("LOL: $type");
+
+      productOptionVariances.addAll(type);
+
+      for (var i = 0; i < productOptionVariances.length; i++) {
+        List<String> wa = [];
+        String combine = "";
+        for (var j = 0; j < productOptionVariances[i].length; j++) {
+          wa.add(productOptionVariances[i][j].optionValue);
+          combine = wa.join("-");
+        }
+        addProductVariance.add(AddProductVariance(combination: combine));
+      }
+
+      update();
+      print("GG ${addProductVariance.length}");
+    }
+  }
+
+  String getOptionFormat(List<String> options) {
+    String format = options.join("-");
+    return format;
   }
 
   String option(index) {
     return "";
-  }
-
-  String variantTypeFormat() {
-    String format = "";
-    variantTypes.forEach((element) {
-      format = element;
-    });
-    return format;
   }
 }
