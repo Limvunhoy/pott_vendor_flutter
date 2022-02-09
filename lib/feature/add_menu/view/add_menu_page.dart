@@ -16,6 +16,11 @@ import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/base_medium_text.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
 
+enum ProductPhotoType {
+  productPhoto,
+  photoDescription,
+}
+
 class AddMenuPage extends GetWidget<AddMenuController> {
   // final AddMenuController _controller = Get.find<AddMenuController>();
 
@@ -76,7 +81,9 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                               iconHeight: 30.77,
                               fontSize: fontSizeExt.smallSize,
                               onTap: () {
-                                controller.photoPicker();
+                                // controller.photoPicker();
+                                showImageSource(
+                                    context, ProductPhotoType.productPhoto);
                               },
                             ),
                             const SizedBox(
@@ -240,7 +247,9 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                                       iconHeight: 20.71,
                                       fontSize: fontSizeExt.extraSmallSize,
                                       onTap: () {
-                                        controller.descriptionPhotoPicker();
+                                        // controller.descriptionPhotoPicker();
+                                        showImageSource(context,
+                                            ProductPhotoType.photoDescription);
                                       },
                                     ),
                                     const SizedBox(
@@ -275,7 +284,9 @@ class AddMenuPage extends GetWidget<AddMenuController> {
         child: Container(
           padding: const EdgeInsets.all(appSizeExt.basePadding),
           child: BaseButton(
-            onPressed: () {},
+            onPressed: () {
+              controller.uploadProductPhotos();
+            },
             title: "Create",
             titleColor: Colors.white,
             backgroundColor: colorExt.PRIMARY_COLOR,
@@ -287,7 +298,8 @@ class AddMenuPage extends GetWidget<AddMenuController> {
 }
 
 extension on AddMenuPage {
-  Future<ImageSource?> showImageSource(BuildContext context) async {
+  Future<ImageSource?> showImageSource(
+      BuildContext context, ProductPhotoType photoType) async {
     if (Platform.isIOS) {
       return showCupertinoModalPopup(
         context: context,
@@ -295,13 +307,33 @@ extension on AddMenuPage {
           actions: [
             CupertinoActionSheetAction(
               onPressed: () {
-                Get.back(result: ImageSource.camera);
+                switch (photoType) {
+                  case ProductPhotoType.productPhoto:
+                    controller.photoCameraPicker();
+                    Get.back();
+                    break;
+                  case ProductPhotoType.photoDescription:
+                    controller.photoDescriptionCameraPicker();
+                    Get.back();
+                    break;
+                }
+                // Get.back(result: ImageSource.camera);
               },
               child: Text("Take Photo"),
             ),
             CupertinoActionSheetAction(
               onPressed: () {
-                Get.back(result: ImageSource.gallery);
+                switch (photoType) {
+                  case ProductPhotoType.productPhoto:
+                    controller.photoPicker();
+                    Get.back();
+                    break;
+                  case ProductPhotoType.photoDescription:
+                    controller.descriptionPhotoPicker();
+                    Get.back();
+                    break;
+                }
+                // Get.back(result: ImageSource.gallery);
               },
               child: Text("Choose From Library"),
             ),
@@ -317,13 +349,30 @@ extension on AddMenuPage {
             ListTile(
               title: Text("Take Photo"),
               onTap: () {
+                switch (photoType) {
+                  case ProductPhotoType.productPhoto:
+                    controller.photoCameraPicker();
+                    break;
+                  case ProductPhotoType.photoDescription:
+                    controller.photoDescriptionCameraPicker();
+                    break;
+                }
                 Get.back(result: ImageSource.camera);
               },
             ),
             ListTile(
               title: Text("Gallery"),
               onTap: () {
-                Get.back(result: ImageSource.gallery);
+                switch (photoType) {
+                  case ProductPhotoType.productPhoto:
+                    controller.photoPicker();
+                    Get.back();
+                    break;
+                  case ProductPhotoType.photoDescription:
+                    controller.descriptionPhotoPicker();
+                    Get.back();
+                    break;
+                }
               },
             ),
           ],

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       // initialBinding: AuthBinding(),
       getPages: AppPages.routes,
       initialRoute: authController.isAuthentication.isTrue
-          ? Routes.PRODUCT_OPTION
+          ? Routes.ADD_MENU
           : Routes.SIGNIN,
     );
   }

@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pott_vendor/core/service/product/product_service.dart';
 
 class AddMenuController extends GetxController {
   RxString enteredText = "".obs;
+
+  ProductService _service = ProductService();
 
   final ImagePicker _imagePicker = ImagePicker();
 
@@ -25,6 +28,8 @@ class AddMenuController extends GetxController {
 
   List<File> descriptionPhotos = [];
   List<File> photos = [];
+
+  // UploadImageResponse? uploadPhotoResponse
 
   // Future pickImage() async {
   //   try {
@@ -55,6 +60,20 @@ class AddMenuController extends GetxController {
     }
   }
 
+  photoCameraPicker() async {
+    try {
+      final _pic = await _imagePicker.pickImage(source: ImageSource.camera);
+      if (_pic != null) {
+        photos.add(File(_pic.path));
+        update();
+      } else {
+        print("No Photo Selected");
+      }
+    } on PlatformException catch (e) {
+      print("Error Pick Image $e");
+    }
+  }
+
   descriptionPhotoPicker() async {
     try {
       final _selectedImages = await _imagePicker.pickMultiImage(
@@ -72,6 +91,20 @@ class AddMenuController extends GetxController {
     }
   }
 
+  photoDescriptionCameraPicker() async {
+    try {
+      final _pic = await _imagePicker.pickImage(source: ImageSource.camera);
+      if (_pic != null) {
+        descriptionPhotos.add(File(_pic.path));
+        update();
+      } else {
+        print("No Photo Selected");
+      }
+    } on PlatformException catch (e) {
+      print("Error Pick Image $e");
+    }
+  }
+
   handleRemovePhoto(int index) {
     photos.removeAt(index);
     update();
@@ -80,5 +113,18 @@ class AddMenuController extends GetxController {
   handleRemoveDescriptionPhoto(int index) {
     descriptionPhotos.removeAt(index);
     update();
+  }
+
+  uploadProductPhotos() async {
+    try {
+      photos.forEach((element) async {
+        final res = await _service.uploadImage(element);
+        if (res != null) {
+          print("Product Upload Photo: ${res.results.path}");
+        }
+      });
+    } catch (e) {
+      print("Failed to Upload Product Photo $e");
+    }
   }
 }
