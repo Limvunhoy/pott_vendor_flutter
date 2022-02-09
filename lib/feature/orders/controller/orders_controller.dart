@@ -76,6 +76,18 @@ class OrdersController extends GetxController
     super.onClose();
   }
 
+  late OrderRecordResponse orderDetail;
+
+  getOrderDetail(String id) async {
+    try {
+      final response = await _orderService.getOrderDetail(id);
+      if (response != null) {
+        orderDetail = response;
+        update();
+      }
+    } catch (e) {}
+  }
+
   confirmNewOrder(int index) async {
     try {
       final response = await _orderService.updateOrderStatus(
