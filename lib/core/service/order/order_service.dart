@@ -41,8 +41,9 @@ class OrderService {
       if (res.data["httpCode"] == 200) {
         print("Update Order Status Successfully");
         return true;
+      } else {
+        return false;
       }
-      return false;
     } catch (e) {
       throw e;
     }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/core/model/order/order_response.dart';
+import 'package:pott_vendor/core/model/processing/processing_model.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
@@ -29,12 +32,23 @@ class FinishedPage extends StatelessWidget {
               primary: false,
               itemCount: ordersController.getFinishedOrderCount(),
               itemBuilder: (context, index) {
-                return NewItem(
-                  orderStatus: OrderStatus.finished,
-                  onConfirm: () {},
-                  orderRecord: ordersController.finishedOrderRecords[index],
-                  orderEnum: OrderType.finishedOrder,
-                  orderTotal: "",
+                return GestureDetector(
+                  onTap: () {
+                    ordersController.getOrderDetail(
+                        ordersController.finishedOrderRecords[index].id);
+                    // print("Pass order at index: $index");
+                    // Get.toNamed(Routes.PROCESSING, arguments: {
+                    //   "type": ProcessingState.delivered,
+                    //   "record": ordersController.finishedOrderRecords[index]
+                    // });
+                  },
+                  child: NewItem(
+                    orderStatus: OrderStatus.finished,
+                    onConfirm: () {},
+                    orderRecord: ordersController.finishedOrderRecords[index],
+                    orderEnum: OrderType.finishedOrder,
+                    orderTotal: "",
+                  ),
                 );
               },
             ),
