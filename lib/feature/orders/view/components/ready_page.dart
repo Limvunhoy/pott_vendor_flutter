@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pott_vendor/config/app_routes.dart';
+import 'package:pott_vendor/core/model/processing/processing_model.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
@@ -27,14 +30,29 @@ class ReadyPage extends StatelessWidget {
               primary: false,
               itemCount: ordersController.getReadyOrderCount(),
               itemBuilder: (context, index) {
-                return NewItem(
-                  onOrderReady: () {
-                    ordersController.updateReadyOrder(index);
+                return GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.PROCESSING, arguments: {
+                      "type": ProcessingState.estimatedTime,
+                      "record": ordersController.confirmOrderRecords[index],
+                    });
                   },
-                  orderStatus: OrderStatus.ready,
-                  orderRecord: ordersController.confirmOrderRecords[index],
-                  orderEnum: OrderType.readyOrder,
-                  orderTotal: "",
+                  child: NewItem(
+                    onOrderReady: () async {
+                      await ordersController
+                          .updateReadyOrder(
+                              ordersController.confirmOrderRecords[index].id)
+                          .then((isSuccess) {
+                        if (isSuccess) {
+                          ordersController.handleUpdateReadyOrderItem(index);
+                        }
+                      });
+                    },
+                    orderStatus: OrderStatus.ready,
+                    orderRecord: ordersController.confirmOrderRecords[index],
+                    orderEnum: OrderType.readyOrder,
+                    orderTotal: "",
+                  ),
                 );
               },
             ),
