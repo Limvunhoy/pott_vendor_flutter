@@ -72,7 +72,7 @@ class AuthController extends GetxController {
     }
   }
 
-  onUpdateCountryCode(CountryCode code) {
+  void onUpdateCountryCode(CountryCode code) {
     countryCode = code;
     update();
   }
@@ -91,6 +91,7 @@ class AuthController extends GetxController {
       fetchStatus = FetchStatus.complete;
       update();
 
+      resetTextField();
       return true;
     } catch (e) {
       fetchStatus = FetchStatus.complete;
@@ -101,6 +102,11 @@ class AuthController extends GetxController {
       update();
       return false;
     }
+  }
+
+  resetTextField() {
+    phoneNumberController.clear();
+    passwordController.clear();
   }
 
   saveUser(UserDataResponse _auth) async {
@@ -115,10 +121,24 @@ class AuthController extends GetxController {
     auth = userDataResponse;
     update();
   }
+
+  Future<bool> handleLogout() async {
+    try {
+      await sharedPreferenceHelper.remove(SharedPreferenceKey.user);
+      return true;
+    } catch (e) {
+      print("Failed to Logout $e");
+      return false;
+    }
+  }
 }
 
 extension on AuthController {
   String getPhoneNumber(CountryCode code, String phone) {
-    return code.toString() + "${int.parse(phone)}";
+    if (code.name == null) {
+      return "+855${int.parse(phone)}";
+    } else {
+      return code.toString() + "${int.parse(phone)}";
+    }
   }
 }

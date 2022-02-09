@@ -19,7 +19,9 @@ class ProcessingPage extends GetWidget<ProcessingController> {
         controller.processingModel?.state == ProcessingState.processing
             ? TextButton(
                 onPressed: () {
-                  AppDialog.showAppDialog(context, onClose: () {
+                  AppDialog.showAppDialog(context,
+                      title: "Are you sure?",
+                      subtitle: "You want to reject delivery?", onClose: () {
                     Get.back();
                   }, onConfirm: () {
                     // TODO: Handle reject order

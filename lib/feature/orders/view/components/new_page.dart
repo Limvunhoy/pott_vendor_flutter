@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/config/app_routes.dart';
-import 'package:pott_vendor/core/model/processing/processing_model.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/empty_new_orders_widget.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
@@ -51,17 +50,18 @@ class NewPage extends StatelessWidget {
                         });
                       },
                       onReject: () {
-                        AppDialog.showAppDialog(context, onClose: () {
+                        AppDialog.showAppDialog(context,
+                            title: "Are you sure?",
+                            subtitle: "You want to reject delivery?",
+                            onClose: () {
                           Get.back();
                         }, onConfirm: () {
                           // TODO: Handle reject order
                         });
                       },
                       onGoToOrderDetail: () {
-                        Get.toNamed(Routes.PROCESSING, arguments: {
-                          "type": ProcessingState.processing,
-                          "record": ordersController.newOrderRecords[index]
-                        });
+                        Get.toNamed(Routes.PROCESSING,
+                            arguments: ordersController.newOrderRecords[index]);
                       },
                       orderRecord: ordersController.newOrderRecords[index],
                       orderEnum: OrderType.newOrder,
