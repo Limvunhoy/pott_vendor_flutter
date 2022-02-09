@@ -45,13 +45,16 @@ class VariantTypeWidget extends StatelessWidget {
                 delimiters: [
                   ',',
                   '.',
+                  ' ',
                 ],
                 onSubmitted: (newValue) {
                   onSubmitted(newValue);
+                  FocusScope.of(context).unfocus();
                 },
                 resetTextOnSubmitted: true,
                 tagSpacing: 0.0,
                 hasAddButton: false,
+                textInputAction: TextInputAction.next,
                 inputDecoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Add tag...',
@@ -59,7 +62,7 @@ class VariantTypeWidget extends StatelessWidget {
                   isDense: false,
                 ),
                 onTagChanged: (newValue) {
-                  // controller.handleAddVariantType(newValue);
+                  onSubmitted(newValue);
                 },
                 tagBuilder: (context, index) => _Chip(
                   label: items[index].option,
