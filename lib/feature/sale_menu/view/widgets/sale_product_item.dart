@@ -12,12 +12,14 @@ class SaleProductItem extends StatelessWidget {
       {Key? key,
       required this.onItemTapped,
       required this.saleProduct,
-      required this.controller})
+      required this.controller,
+      required this.onToggleSwitch})
       : super(key: key);
 
   final VoidCallback onItemTapped;
   final ProductRecord saleProduct;
   final SaleMenuController controller;
+  final VoidCallback onToggleSwitch;
 
   @override
   Widget build(BuildContext context) {
@@ -206,30 +208,24 @@ class SaleProductItem extends StatelessWidget {
                       const SizedBox(
                         width: 43.5,
                       ),
-                      Obx(
-                        () {
-                          return Container(
-                            alignment: Alignment.centerRight,
-                            width: 23.0,
-                            child: Material(
-                              color: Colors.transparent,
-                              elevation: 0.0,
-                              child: Ink(
-                                child: InkWell(
-                                  onTap: () {
-                                    controller.handleSwitch();
-                                  },
-                                  child: Image.asset(
-                                    controller.isOn.isTrue
-                                        ? "assets/icons/sale_menu/switch_active_icon.png"
-                                        : "assets/icons/sale_menu/switch_inactive_icon.png",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        width: 23.0,
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 0.0,
+                          child: Ink(
+                            child: InkWell(
+                              onTap: onToggleSwitch,
+                              child: Image.asset(
+                                saleProduct.status == "true"
+                                    ? "assets/icons/sale_menu/switch_active_icon.png"
+                                    : "assets/icons/sale_menu/switch_inactive_icon.png",
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          );
-                        },
+                          ),
+                        ),
                       ),
                     ],
                   ),

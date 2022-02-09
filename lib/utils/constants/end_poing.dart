@@ -3,13 +3,14 @@ class EndPoint {
 
   // Order
   static const order = "/order/query";
+  static const updateOrderStatus = "/order/status";
 
   // Account
   static const updateUserInfo = "/user";
 
   // Product
   static const queryProduct = "/product/query";
-  static const updateOrderStatus = "/order/status";
+  static const updateProductStatus = "/product";
 
   // Report
   static const report = "/report";

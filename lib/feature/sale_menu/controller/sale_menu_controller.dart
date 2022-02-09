@@ -14,6 +14,8 @@ class SaleMenuController extends GetxController
 
   ProductService _service = ProductService();
 
+  bool isLoadingOverlay = false;
+
   handleSwitch() {
     isOn.toggle();
   }
@@ -50,6 +52,25 @@ class SaleMenuController extends GetxController
     scrollController = ScrollController()..addListener(handleFetchMoreProduct);
 
     super.onInit();
+  }
+
+  updateProductStatus(int index) async {
+    try {
+      String id = saleProductRecords[index].id;
+      String status = saleProductRecords[index].status;
+
+      isLoadingOverlay = true;
+      update();
+
+      final response = await _service.updateProductStatus(
+          id, status == "false" ? "true" : "false");
+
+      saleProductRecords[index].status = response;
+      isLoadingOverlay = false;
+      update();
+    } catch (e) {
+      print("Failed to Update Product Status $e");
+    }
   }
 
   int getSaleCount() {

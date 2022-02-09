@@ -36,6 +36,9 @@ class SaleProductPage extends StatelessWidget {
                     Get.toNamed(Routes.VIEW_PRODUCT);
                   },
                   saleProduct: controller.saleProductRecords[index],
+                  onToggleSwitch: () {
+                    controller.updateProductStatus(index);
+                  },
                 );
               },
             ),

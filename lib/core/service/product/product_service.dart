@@ -30,4 +30,19 @@ class ProductService {
       throw e;
     }
   }
+
+  Future<String> updateProductStatus(String id, String status) async {
+    final bodyRequest = {"_id": id, "status": status};
+    try {
+      final res =
+          await _apiBaseHelper.put(EndPoint.updateProductStatus, bodyRequest);
+      if (res.data["httpCode"] == 200) {
+        return res.data["data"]["status"];
+      } else {
+        throw ErrorResponse.fromJson(res.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 }
