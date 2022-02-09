@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,6 +8,10 @@ import 'package:pott_vendor/core/service/product/product_service.dart';
 
 class AddMenuController extends GetxController {
   RxString enteredText = "".obs;
+
+  final TextEditingController titleTextController = TextEditingController();
+  final TextEditingController descriptionTextController =
+      TextEditingController();
 
   ProductService _service = ProductService();
 

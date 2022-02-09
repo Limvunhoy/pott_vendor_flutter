@@ -15,6 +15,7 @@ import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart'
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/base_medium_text.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
+import 'package:pott_vendor/utils/common/dissmiss_keyboard_content.dart';
 
 enum ProductPhotoType {
   productPhoto,
@@ -22,8 +23,6 @@ enum ProductPhotoType {
 }
 
 class AddMenuPage extends GetWidget<AddMenuController> {
-  // final AddMenuController _controller = Get.find<AddMenuController>();
-
   @override
   Widget build(BuildContext context) {
     return BaseView(
@@ -31,255 +30,231 @@ class AddMenuPage extends GetWidget<AddMenuController> {
       titleColor: Colors.black,
       appBarBackgroundColor: Colors.white,
       backgroundColor: Colors.white,
-      body: GetBuilder(
-          init: controller,
-          builder: (_) {
-            return SingleChildScrollView(
-              physics: ScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(appSizeExt.basePadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 2,
-                              height: 11,
-                              alignment: Alignment.bottomCenter,
-                              decoration: BoxDecoration(
-                                color: colorExt.PRIMARY_COLOR,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 8.0,
-                            ),
-                            BaseTitleText(text: "Photo"),
-                            Expanded(
-                              child: BaseMediumText(
-                                text: "0/10",
-                                color: colorExt.LIGHT_GRAY,
-                                textAlign: TextAlign.end,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 13.0,
-                        ),
-                        Row(
-                          children: [
-                            AddPhotoWidget(
-                              frameWidth: 104.0,
-                              frameHeight: 104.0,
-                              iconWidth: 37.37,
-                              iconHeight: 30.77,
-                              fontSize: fontSizeExt.smallSize,
-                              onTap: () {
-                                // controller.photoPicker();
-                                showImageSource(
-                                    context, ProductPhotoType.productPhoto);
-                              },
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Container(
-                                  height: 104,
-                                  color: Colors.transparent,
-                                  child: PhotoList(
-                                    controller: controller,
-                                  )
-                                  // ListView.separated(
-                                  //     shrinkWrap: true,
-                                  //     scrollDirection: Axis.horizontal,
-                                  //     separatorBuilder: (context, index) {
-                                  //       return const SizedBox(
-                                  //         width: 10,
-                                  //       );
-                                  //     },
-                                  //     itemCount: 5,
-                                  //     itemBuilder: (context, index) {
-                                  //       return Container(
-                                  //         width: 104,
-                                  //         height: 104,
-                                  //         color: Colors.yellow,
-                                  //       );
-                                  //     }),
-                                  ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Color(0xFFF6F6F6),
-                    height: 10.0,
-                  ),
-                  Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(appSizeExt.basePadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 2.5,
-                              height: 11,
-                              alignment: Alignment.bottomCenter,
-                              decoration: BoxDecoration(
-                                color: colorExt.PRIMARY_COLOR,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 8.0,
-                            ),
-                            BaseTitleText(text: "Product Detail"),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 16.0,
-                        ),
-                        BaseTitleText(text: "Title"),
-                        Container(
-                          margin: const EdgeInsets.only(top: 8.0),
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          height: 35.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFF0F0F0),
-                            borderRadius: BorderRadius.circular(6.0),
-                          ),
-                          child: TextFormField(
-                            cursorColor: colorExt.PRIMARY_COLOR,
-                            style: TextStyle(fontSize: fontSizeExt.smallSize),
-                            decoration: new InputDecoration(
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              hintText: "Title",
-                              hintStyle: TextStyle(
-                                  fontSize: fontSizeExt.smallSize,
-                                  color: colorExt.LIGHT_GRAY),
-                            ),
-                          ),
-                        ),
-                        ProductOptionWidget(
-                          title: "Category",
-                          isCategory: true,
-                          selectedCategory: controller.selectedCategory,
-                          onTap: () {
-                            Get.toNamed(Routes.CHOOSE_CATEGORY)?.then((result) {
-                              if (result is CategoryResult) {
-                                controller
-                                    .updateSelectedCategory(result.data.nameEn);
-                              }
-                            });
-                          },
-                        ),
-                        // ProductOptionWidget(
-                        //   title: "Product Option",
-                        //   onTap: () {
-                        //     print("Navigate to Product Option Screen");
-                        //     Get.toNamed(Routes.PRODUCT_OPTION);
-                        //   },
-                        // ),
-                        AddDescriptionWidget(controller: controller),
-                        Container(
-                          margin: const EdgeInsets.only(top: 16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+      body: DismissKeyboardContent(
+        child: GetBuilder(
+            init: controller,
+            builder: (_) {
+              return SingleChildScrollView(
+                physics: ScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(appSizeExt.basePadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BaseTitleText(text: "Photo Description"),
-                                  BaseMediumText(
-                                    text:
-                                        "${controller.descriptionPhotos.length}/${controller.limitPhoto}",
-                                    color: controller.descriptionPhotos.length >
-                                            controller.limitPhoto
-                                        ? Colors.red
-                                        : colorExt.LIGHT_GRAY,
-                                  ),
-                                ],
-                              ),
-                              // TODO: Add Photo List
-                              // Row(
-                              //   children: [
-                              //     AddPhotoWidget(
-                              //       frameWidth: 70.0,
-                              //       frameHeight: 70.0,
-                              //       iconWidth: 25.15,
-                              //       iconHeight: 20.71,
-                              //       fontSize: fontSizeExt.extraSmallSize,
-                              //       onTap: () async {
-                              //         final source = await showImageSource(context);
-                              //         if (source != null) {
-                              //           _controller.pickImage(source);
-                              //         }
-                              //       },
-                              //     ),
-                              //   ],
-                              // ),
-                              // const SizedBox(
-                              //   height: 13.0,
-                              // ),
                               Container(
-                                height: 100,
-                                child: Row(
-                                  children: [
-                                    AddPhotoWidget(
-                                      frameWidth: 70.0,
-                                      frameHeight: 70.0,
-                                      iconWidth: 25.15,
-                                      iconHeight: 20.71,
-                                      fontSize: fontSizeExt.extraSmallSize,
-                                      onTap: () {
-                                        // controller.descriptionPhotoPicker();
-                                        showImageSource(context,
-                                            ProductPhotoType.photoDescription);
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    PhotoDescriptionList(
-                                      // onRemove: () async {
-                                      //   // final source = await showImageSource(context);
-                                      //   // if (source != null) {
-                                      //   //   _controller.pickImage(source);
-                                      //   // }
-                                      //   // controller.pickImage();
-                                      //   // controller.descriptionPhotoPicker();
-                                      //   controller.handleRemoveDescriptionPhoto(index);
-                                      // },
-                                      controller: controller,
-                                    ),
-                                  ],
+                                width: 2,
+                                height: 11,
+                                alignment: Alignment.bottomCenter,
+                                decoration: BoxDecoration(
+                                  color: colorExt.PRIMARY_COLOR,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              BaseTitleText(text: "Photo"),
+                              Expanded(
+                                child: BaseMediumText(
+                                  text: "0/10",
+                                  color: colorExt.LIGHT_GRAY,
+                                  textAlign: TextAlign.end,
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                          Row(
+                            children: [
+                              AddPhotoWidget(
+                                frameWidth: 104.0,
+                                frameHeight: 104.0,
+                                iconWidth: 37.37,
+                                iconHeight: 30.77,
+                                fontSize: fontSizeExt.smallSize,
+                                onTap: () {
+                                  // controller.photoPicker();
+                                  showImageSource(
+                                      context, ProductPhotoType.productPhoto);
+                                },
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: Container(
+                                  height: 104,
+                                  color: Colors.transparent,
+                                  child: PhotoList(
+                                    controller: controller,
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          }),
+                    Container(
+                      color: Color(0xFFF6F6F6),
+                      height: 10.0,
+                    ),
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(appSizeExt.basePadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 2.5,
+                                height: 11,
+                                alignment: Alignment.bottomCenter,
+                                decoration: BoxDecoration(
+                                  color: colorExt.PRIMARY_COLOR,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              BaseTitleText(text: "Product Detail"),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 16.0,
+                          ),
+                          BaseTitleText(text: "Title"),
+                          Container(
+                            margin: const EdgeInsets.only(top: 8.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            height: 35.0,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF0F0F0),
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
+                            child: TextFormField(
+                              controller: controller.titleTextController,
+                              cursorColor: colorExt.PRIMARY_COLOR,
+                              style: TextStyle(fontSize: fontSizeExt.smallSize),
+                              decoration: new InputDecoration(
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                hintText: "Title",
+                                hintStyle: TextStyle(
+                                    fontSize: fontSizeExt.smallSize,
+                                    color: colorExt.LIGHT_GRAY),
+                              ),
+                            ),
+                          ),
+                          ProductOptionWidget(
+                            title: "Category",
+                            isCategory: true,
+                            selectedCategory: controller.selectedCategory,
+                            onTap: () {
+                              Get.toNamed(Routes.CHOOSE_CATEGORY)
+                                  ?.then((result) {
+                                if (result is CategoryResult) {
+                                  controller.updateSelectedCategory(
+                                      result.data.nameEn);
+                                }
+                              });
+                            },
+                          ),
+                          // ProductOptionWidget(
+                          //   title: "Product Option",
+                          //   onTap: () {
+                          //     print("Navigate to Product Option Screen");
+                          //     Get.toNamed(Routes.PRODUCT_OPTION);
+                          //   },
+                          // ),
+                          AddDescriptionWidget(controller: controller),
+                          Container(
+                            margin: const EdgeInsets.only(top: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    BaseTitleText(text: "Photo Description"),
+                                    BaseMediumText(
+                                      text:
+                                          "${controller.descriptionPhotos.length}/${controller.limitPhoto}",
+                                      color:
+                                          controller.descriptionPhotos.length >
+                                                  controller.limitPhoto
+                                              ? Colors.red
+                                              : colorExt.LIGHT_GRAY,
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 100,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.only(top: 30),
+                                        child: Align(
+                                          alignment: Alignment.topCenter,
+                                          child: Container(
+                                            width: 2.5,
+                                            height: 11,
+                                            decoration: BoxDecoration(
+                                              color: colorExt.PRIMARY_COLOR,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      AddPhotoWidget(
+                                        frameWidth: 70.0,
+                                        frameHeight: 70.0,
+                                        iconWidth: 25.15,
+                                        iconHeight: 20.71,
+                                        fontSize: fontSizeExt.extraSmallSize,
+                                        onTap: () {
+                                          showImageSource(
+                                              context,
+                                              ProductPhotoType
+                                                  .photoDescription);
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      PhotoDescriptionList(
+                                        controller: controller,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+      ),
       bottomNavigation: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(appSizeExt.basePadding),
@@ -287,7 +262,7 @@ class AddMenuPage extends GetWidget<AddMenuController> {
             onPressed: () {
               controller.uploadProductPhotos();
             },
-            title: "Create",
+            title: "Continue",
             titleColor: Colors.white,
             backgroundColor: colorExt.PRIMARY_COLOR,
           ),
@@ -317,7 +292,6 @@ extension on AddMenuPage {
                     Get.back();
                     break;
                 }
-                // Get.back(result: ImageSource.camera);
               },
               child: Text("Take Photo"),
             ),
@@ -333,7 +307,6 @@ extension on AddMenuPage {
                     Get.back();
                     break;
                 }
-                // Get.back(result: ImageSource.gallery);
               },
               child: Text("Choose From Library"),
             ),
