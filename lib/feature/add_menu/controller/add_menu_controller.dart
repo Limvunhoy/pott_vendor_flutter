@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pott_vendor/core/model/category/category_response.dart';
+import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 import 'package:pott_vendor/core/service/product/product_service.dart';
 
 class AddMenuController extends GetxController {
@@ -19,34 +21,22 @@ class AddMenuController extends GetxController {
 
   final int limitPhoto = 10;
 
+  late AddProductBodyRequest addProductBodyRequest;
+
   // List<XFile>? selectedImages;
-  String? selectedCategory;
+  CategoryResult? selectedCategory;
 
   counterText(String text) {
     enteredText.value = text;
   }
 
-  updateSelectedCategory(String cate) {
+  updateSelectedCategory(CategoryResult cate) {
     selectedCategory = cate;
     update();
   }
 
   List<File> descriptionPhotos = [];
   List<File> photos = [];
-
-  // UploadImageResponse? uploadPhotoResponse
-
-  // Future pickImage() async {
-  //   try {
-  //     final image = await _imagePicker.pickMultiImage();
-  //     if (image == null) return;
-  //     selectedImages = image;
-  //     update();
-  //     print("Selected Images ${selectedImages!.length}");
-  //   } on PlatformException catch (e) {
-  //     print("Error Pick Image $e");
-  //   }
-  // }
 
   photoPicker() async {
     try {
@@ -131,5 +121,19 @@ class AddMenuController extends GetxController {
     } catch (e) {
       print("Failed to Upload Product Photo $e");
     }
+  }
+
+  AddProductBodyRequest handleContinue() {
+    addProductBodyRequest = AddProductBodyRequest(
+      name: titleTextController.text,
+      image: "",
+      description: descriptionTextController.text,
+      categoryId: selectedCategory!.data.id,
+      vendorId: '',
+      productOptions: [],
+      productVariance: [],
+    );
+
+    return addProductBodyRequest;
   }
 }

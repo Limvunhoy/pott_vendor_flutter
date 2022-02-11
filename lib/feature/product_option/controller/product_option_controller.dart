@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 
@@ -9,6 +10,22 @@ class ProductOptionController extends GetxController {
     "QTY",
   ];
 
+  final arg = Get.arguments;
+  late AddProductBodyRequest addProductBodyRequest;
+
+  TextEditingController oriPriceTextController = TextEditingController();
+  TextEditingController salePriceTextController = TextEditingController();
+  int qty = 0;
+
+  @override
+  void onInit() {
+    if (arg is AddProductBodyRequest) {
+      addProductBodyRequest = arg;
+    }
+
+    super.onInit();
+  }
+
   handleAddVariantType(String newType) {
     listProductOptions
         .add(AddProductOption(option: newType, productOptionValue: []));
@@ -16,6 +33,34 @@ class ProductOptionController extends GetxController {
   }
 
   bool hideHintText = false;
+
+  String getQtyFormat() {
+    return "${addProductBodyRequest.productVariance}";
+  }
+
+  handleDecreaseQty(int index) {
+    int intQty = int.parse(addProductVariance[index].quantity ?? "");
+    if (intQty != 0) {
+      intQty--;
+      addProductVariance[index].quantity = intQty.toString();
+      update();
+    }
+  }
+
+  handleIncreaseQty(int index) {
+    int intQty = int.parse(addProductVariance[index].quantity ?? "0");
+    intQty++;
+    addProductVariance[index].quantity = intQty.toString();
+    update();
+  }
+
+  handleUpdateOriPrice(int index, String oriPrice) {
+    addProductVariance[index].cost = oriPrice;
+  }
+
+  handleUpdateSalePrice(int index, String salePrice) {
+    addProductVariance[index].price = salePrice;
+  }
 
   handleHintText() {
     hideHintText = true;
@@ -47,6 +92,7 @@ class ProductOptionController extends GetxController {
       <List<AddProductOptionValue>>[];
 
   handleGenerateProductOption() {
+    productOptionVariances.clear();
     addProductVariance.clear();
     var type = listProductOptions[0].productOptionValue.map((e) => [e]);
 
@@ -87,5 +133,12 @@ class ProductOptionController extends GetxController {
 
   String option(index) {
     return "";
+  }
+
+  handleAddProduct() {
+    addProductBodyRequest.productOptions = listProductOptions;
+    addProductBodyRequest.productVariance = addProductVariance;
+
+    print("Add Product Body Request $addProductBodyRequest");
   }
 }

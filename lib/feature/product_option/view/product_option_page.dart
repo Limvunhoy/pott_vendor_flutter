@@ -103,6 +103,9 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                       color: Color(0xFFF5F5F5),
                       height: 10,
                     ),
+                    const SizedBox(
+                      height: 12.0,
+                    ),
                     OptionList(
                       controller: controller,
                     ),
@@ -118,7 +121,9 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
               title: "Create",
               titleColor: Colors.white,
               backgroundColor: colorExt.PRIMARY_COLOR,
-              onPressed: () {},
+              onPressed: () {
+                controller.handleAddProduct();
+              },
             ),
           ),
         ),

@@ -163,13 +163,13 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                           ProductOptionWidget(
                             title: "Category",
                             isCategory: true,
-                            selectedCategory: controller.selectedCategory,
+                            selectedCategory:
+                                controller.selectedCategory?.data.nameEn,
                             onTap: () {
                               Get.toNamed(Routes.CHOOSE_CATEGORY)
                                   ?.then((result) {
                                 if (result is CategoryResult) {
-                                  controller.updateSelectedCategory(
-                                      result.data.nameEn);
+                                  controller.updateSelectedCategory(result);
                                 }
                               });
                             },
@@ -260,7 +260,9 @@ class AddMenuPage extends GetWidget<AddMenuController> {
           padding: const EdgeInsets.all(appSizeExt.basePadding),
           child: BaseButton(
             onPressed: () {
-              controller.uploadProductPhotos();
+              // controller.uploadProductPhotos();
+              final res = controller.handleContinue();
+              Get.toNamed(Routes.PRODUCT_OPTION, arguments: res);
             },
             title: "Continue",
             titleColor: Colors.white,

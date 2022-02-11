@@ -74,6 +74,11 @@ class AddProductBodyRequest {
         "productVariance":
             List<dynamic>.from(productVariance.map((x) => x.toJson())),
       };
+
+  @override
+  String toString() {
+    return "{name: $name, image: $image, description: $description, categoryId: $categoryId, vendorId: $vendorId, productOptions: $productOptions, productVariance: $productVariance}";
+  }
 }
 
 class AddProductOption {
