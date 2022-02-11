@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getX;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:pott_vendor/core/api/api_base_helper.dart';
 import 'package:pott_vendor/core/model/account/upload_image_response.dart';
 import 'package:pott_vendor/core/model/error/error_response.dart';
+import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/utils/constants/app_constants.dart';
 import 'package:pott_vendor/utils/constants/end_poing.dart';
@@ -66,6 +68,20 @@ class ProductService {
       if (e is DioError) {
         print("Upload error ${e.response!.data}");
       }
+      throw e;
+    }
+  }
+
+  Future<bool> addProduct(AddProductBodyRequest bodyRequest) async {
+    try {
+      final response =
+          await _apiBaseHelper.post(EndPoint.addProduct, bodyRequest.toJson());
+      if (response.data["httpCode"] == 200) {
+        return true;
+      } else {
+        throw ErrorResponse.fromJson(response.data);
+      }
+    } catch (e) {
       throw e;
     }
   }

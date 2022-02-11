@@ -62,7 +62,7 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                               BaseTitleText(text: "Photo"),
                               Expanded(
                                 child: BaseMediumText(
-                                  text: "0/10",
+                                  text: "${controller.photos.length}/10",
                                   color: colorExt.LIGHT_GRAY,
                                   textAlign: TextAlign.end,
                                 ),
