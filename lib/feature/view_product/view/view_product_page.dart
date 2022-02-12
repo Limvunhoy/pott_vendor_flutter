@@ -30,15 +30,15 @@ class ViewProductPage extends StatelessWidget {
             child: Column(
               children: [
                 // RemainingWidget(),
-                HotSaleWidget(),
+                // HotSaleWidget(),
                 ProductOverView(),
                 const SizedBox(
                   height: 10.0,
                 ),
-                BidPriceStarting(),
-                const SizedBox(
-                  height: 10.0,
-                ),
+                // BidPriceStarting(),
+                // const SizedBox(
+                //   height: 10.0,
+                // ),
                 ProductDescription(),
                 ItemDescription(controller: _controller),
               ],
