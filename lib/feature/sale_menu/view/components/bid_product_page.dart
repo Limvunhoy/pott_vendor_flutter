@@ -7,6 +7,7 @@ import 'package:pott_vendor/feature/sale_menu/view/widgets/bid_prodcut_item.dart
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
+import 'package:pott_vendor/utils/common/no_data_widget.dart';
 import 'package:pott_vendor/utils/common/refresh_widget.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
@@ -28,12 +29,7 @@ class BidProductPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 1.2,
               child: LoadingWidget())
           : controller.fetchStatus == FetchStatus.error
-              ? Center(
-                  child: BaseTitleText(
-                    text: "No Data",
-                    color: colorExt.PRIMARY_COLOR,
-                  ),
-                )
+              ? NoDataWidget(title: "No Bid Product")
               : ListView.builder(
                   itemCount: controller.getBidCount(),
                   itemBuilder: (context, index) {

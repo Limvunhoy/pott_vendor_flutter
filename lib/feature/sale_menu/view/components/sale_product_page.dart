@@ -5,6 +5,7 @@ import 'package:pott_vendor/feature/sale_menu/controller/sale_menu_controller.da
 import 'package:pott_vendor/feature/sale_menu/view/widgets/sale_product_item.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
+import 'package:pott_vendor/utils/common/no_data_widget.dart';
 import 'package:pott_vendor/utils/common/refresh_widget.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
@@ -25,20 +26,22 @@ class SaleProductPage extends StatelessWidget {
           ? Container(
               height: MediaQuery.of(context).size.height / 1.2,
               child: LoadingWidget())
-          : ListView.builder(
-              // shrinkWrap: true,
-              // primary: false,
-              itemCount: controller.getSaleCount(),
-              itemBuilder: (context, index) {
-                return SaleProductItem(
-                  controller: controller,
-                  onItemTapped: () {
-                    Get.toNamed(Routes.VIEW_PRODUCT);
+          : controller.fetchStatus == FetchStatus.error
+              ? NoDataWidget(title: "No Sale Product")
+              : ListView.builder(
+                  // shrinkWrap: true,
+                  // primary: false,
+                  itemCount: controller.getSaleCount(),
+                  itemBuilder: (context, index) {
+                    return SaleProductItem(
+                      controller: controller,
+                      onItemTapped: () {
+                        Get.toNamed(Routes.VIEW_PRODUCT);
+                      },
+                      saleProduct: controller.saleProductRecords[index],
+                    );
                   },
-                  saleProduct: controller.saleProductRecords[index],
-                );
-              },
-            ),
+                ),
     );
   }
 }
