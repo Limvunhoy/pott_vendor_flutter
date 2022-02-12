@@ -54,6 +54,7 @@ class VariantOptionWidget extends StatelessWidget {
                 delimiters: [
                   ',',
                   '.',
+                  ' ',
                 ],
                 onSubmitted: (newValue) {
                   onSubmitted(newValue);
@@ -69,6 +70,7 @@ class VariantOptionWidget extends StatelessWidget {
                 ),
                 onTagChanged: (newValue) {
                   // controller.handleAddVariantType(newValue);
+                  onSubmitted(newValue);
                 },
                 tagBuilder: (context, index) => _Chip(
                   label: items?[index].optionValue ?? "",

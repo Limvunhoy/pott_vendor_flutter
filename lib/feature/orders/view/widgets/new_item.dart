@@ -275,28 +275,36 @@ class NewItem extends StatelessWidget {
             margin: const EdgeInsets.only(top: 10.0),
             padding: EdgeInsets.zero,
             child: orderStatus == OrderStatus.newOrder
-                ? Row(
-                    children: [
-                      Expanded(
-                        child: BaseButton(
-                          onPressed: onReject,
-                          title: "Reject",
-                          titleColor: colorExt.PRIMARY_COLOR,
-                          backgroundColor: Colors.white,
-                          borderColor: colorExt.PRIMARY_COLOR,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 12.0,
-                      ),
-                      Expanded(
-                        child: BaseButton(
-                            onPressed: onConfirm,
-                            title: "Confirm",
-                            titleColor: Colors.white,
-                            backgroundColor: colorExt.PRIMARY_COLOR),
-                      ),
-                    ],
+                // ? Row(
+                //     children: [
+                //       Expanded(
+                //         child: BaseButton(
+                //           onPressed: onReject,
+                //           title: "Reject",
+                //           titleColor: colorExt.PRIMARY_COLOR,
+                //           backgroundColor: Colors.white,
+                //           borderColor: colorExt.PRIMARY_COLOR,
+                //         ),
+                //       ),
+                //       const SizedBox(
+                //         width: 12.0,
+                //       ),
+                //       Expanded(
+                //         child: BaseButton(
+                //             onPressed: onConfirm,
+                //             title: "Confirm",
+                //             titleColor: Colors.white,
+                //             backgroundColor: colorExt.PRIMARY_COLOR),
+                //       ),
+                //     ],
+                //   )
+                ? Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: BaseButton(
+                        onPressed: onConfirm,
+                        title: "Confirm",
+                        titleColor: Colors.white,
+                        backgroundColor: colorExt.PRIMARY_COLOR),
                   )
                 : orderStatus == OrderStatus.ready
                     ? Container(

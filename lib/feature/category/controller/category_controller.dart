@@ -39,6 +39,16 @@ class CategoryController extends GetxController {
     }
   }
 
+  String categoryImage(int index) {
+    return categories!.isNotEmpty
+        ? "https://api.pottbid.com${categories![index].data.icon}"
+        : "";
+  }
+
+  String subCategoryImage(String imagePath) {
+    return categories!.isNotEmpty ? "https://api.pottbid.com$imagePath" : "";
+  }
+
   int getCategoryCount() {
     return categories!.length;
   }

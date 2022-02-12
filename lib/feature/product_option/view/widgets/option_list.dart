@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 import 'package:pott_vendor/feature/product_option/controller/product_option_controller.dart';
 import 'package:pott_vendor/feature/product_option/view/widgets/option_list_item.dart';
 import 'package:pott_vendor/feature/product_option/view/widgets/option_product_item.dart';
@@ -30,9 +32,11 @@ class OptionList extends StatelessWidget {
           headingTextStyle: TextStyle(
             fontWeight: FontWeight.normal,
           ),
+
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6.0),
-              color: colorExt.LINE_COLOR),
+            borderRadius: BorderRadius.circular(6.0),
+            color: Color(0xFFF5F5F5),
+          ),
           columns: const <DataColumn>[
             DataColumn(
               label: BaseSmallText(
@@ -44,6 +48,7 @@ class OptionList extends StatelessWidget {
               label: BaseSmallText(
                 text: 'Ori-Price',
                 color: colorExt.LIGHT_GRAY,
+                textAlign: TextAlign.center,
               ),
             ),
             DataColumn(
@@ -53,100 +58,129 @@ class OptionList extends StatelessWidget {
               ),
             ),
             DataColumn(
-              label: BaseSmallText(
-                text: 'Qty',
-                color: colorExt.LIGHT_GRAY,
+              label: Expanded(
+                child: BaseSmallText(
+                  text: 'Qty',
+                  color: colorExt.LIGHT_GRAY,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ],
           dataRowColor:
               MaterialStateColor.resolveWith((states) => Colors.white),
-          // rows: controller.
           rows: controller.addProductVariance
-              .map((e) => DataRow(cells: [
-                    // DataCell(Text("${controller.getOptionFormat(e)}")),
-                    DataCell(Text("${e.combination}")),
-                    DataCell(TextField(
-                      decoration: InputDecoration(
-                        hintText: "...",
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        prefix: Text("\$"),
+              .asMap()
+              .entries
+              .map(
+                (e) => DataRow(cells: [
+                  // DataCell(Text("${controller.getOptionFormat(e)}")),
+                  DataCell(Text("${e.value.combination}")),
+                  DataCell(TextField(
+                    // controller: controller.oriPriceTextController,
+                    onChanged: (value) {
+                      controller.handleUpdateOriPrice(e.key, value);
+                    },
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: "...",
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      prefix: Text("\$"),
+                    ),
+                  )),
+                  DataCell(TextField(
+                    // controller: controller.salePriceTextController,
+                    onChanged: (value) {
+                      controller.handleUpdateSalePrice(e.key, value);
+                    },
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: "...",
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      prefix: Text("\$"),
+                    ),
+                  )),
+                  DataCell(ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: 65.0,
+                    ),
+                    child: Container(
+                      height: 19.64,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF9F9F9),
+                        borderRadius: BorderRadius.circular(6.0),
                       ),
-                    )),
-                    DataCell(TextField(
-                      decoration: InputDecoration(
-                        hintText: "...",
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        prefix: Text("\$"),
-                      ),
-                    )),
-                    DataCell(ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: 65.0,
-                      ),
-                      child: Container(
-                        height: 19.64,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF9F9F9),
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            customQTYButton(
-                                icon: Icons.remove, onPressed: () {})!,
-                            Container(
-                              width: 19.84,
-                              decoration: BoxDecoration(
-                                color: Color(0xFFF9F9F9),
-                                border: Border.symmetric(
-                                  horizontal: BorderSide(
-                                      width: 0.5, color: colorExt.LINE_COLOR),
-                                ),
-                              ),
-                              child: FittedBox(
-                                fit: BoxFit.none,
-                                child: BaseExtraSmallText(
-                                  textAlign: TextAlign.center,
-                                  text: "1",
-                                  color: Colors.black,
-                                ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          customQTYButton(
+                              icon: Icons.remove,
+                              onPressed: () {
+                                controller.handleDecreaseQty(e.key);
+                              })!,
+                          Container(
+                            width: 19.84,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF9F9F9),
+                              border: Border.symmetric(
+                                horizontal: BorderSide(
+                                    width: 0.5, color: colorExt.LINE_COLOR),
                               ),
                             ),
-                            customQTYButton(
-                                icon: Icons.add,
-                                isIncrease: true,
-                                onPressed: () {})!
-                          ],
-                        ),
+                            child: FittedBox(
+                              fit: BoxFit.none,
+                              child: BaseExtraSmallText(
+                                textAlign: TextAlign.center,
+                                text: e.value.quantity != null
+                                    ? "${controller.addProductVariance[e.key].quantity}"
+                                    : "0",
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          customQTYButton(
+                              icon: Icons.add,
+                              isIncrease: true,
+                              onPressed: () {
+                                controller.handleIncreaseQty(e.key);
+                              })!
+                        ],
                       ),
-                    )),
-                  ]))
+                    ),
+                  )),
+                ]),
+              )
               .toList(),
-          // rows: List.generate(
-          //     4,
-          //     (index) => DataRow(cells: [
-          //           DataCell(Text("Index: $index")),
+
+          // rows: controller.addProductVariance
+          //     .map((e) => DataRow(cells: [
+          //           // DataCell(Text("${controller.getOptionFormat(e)}")),
+          //           DataCell(Text("${e.combination}")),
           //           DataCell(TextField(
+          //             controller: controller.oriPriceTextController,
           //             decoration: InputDecoration(
-          //                 // hintText: "\$",
-          //                 focusedBorder: InputBorder.none,
-          //                 enabledBorder: InputBorder.none,
-          //                 errorBorder: InputBorder.none,
-          //                 prefix: Text("\$")),
+          //               hintText: "...",
+          //               focusedBorder: InputBorder.none,
+          //               enabledBorder: InputBorder.none,
+          //               errorBorder: InputBorder.none,
+          //               prefix: Text("\$"),
+          //             ),
           //           )),
           //           DataCell(TextField(
+          //             controller: controller.salePriceTextController,
           //             decoration: InputDecoration(
-          //                 focusedBorder: InputBorder.none,
-          //                 enabledBorder: InputBorder.none,
-          //                 errorBorder: InputBorder.none,
-          //                 prefix: Text("\$")),
+          //               hintText: "...",
+          //               focusedBorder: InputBorder.none,
+          //               enabledBorder: InputBorder.none,
+          //               errorBorder: InputBorder.none,
+          //               prefix: Text("\$"),
+          //             ),
           //           )),
           //           DataCell(ConstrainedBox(
           //             constraints: BoxConstraints(
@@ -164,7 +198,10 @@ class OptionList extends StatelessWidget {
           //                 crossAxisAlignment: CrossAxisAlignment.center,
           //                 children: [
           //                   customQTYButton(
-          //                       icon: Icons.remove, onPressed: () {})!,
+          //                       icon: Icons.remove,
+          //                       onPressed: () {
+          //                         controller.handleDecreaseQty(e);
+          //                       })!,
           //                   Container(
           //                     width: 19.84,
           //                     decoration: BoxDecoration(
@@ -178,7 +215,9 @@ class OptionList extends StatelessWidget {
           //                       fit: BoxFit.none,
           //                       child: BaseExtraSmallText(
           //                         textAlign: TextAlign.center,
-          //                         text: "1",
+          //                         text: e.quantity != null
+          //                             ? "${controller.addProductBodyRequest}"
+          //                             : "0",
           //                         color: Colors.black,
           //                       ),
           //                     ),
@@ -186,38 +225,15 @@ class OptionList extends StatelessWidget {
           //                   customQTYButton(
           //                       icon: Icons.add,
           //                       isIncrease: true,
-          //                       onPressed: () {})!
+          //                       onPressed: () {
+          //                         controller.handleIncreaseQty();
+          //                       })!
           //                 ],
           //               ),
           //             ),
           //           )),
-          //         ])),
-          // rows: const <DataRow>[
-          //   DataRow(
-          //     cells: <DataCell>[
-          //       DataCell(Text('Sarah')),
-          //       DataCell(Text('19')),
-          //       DataCell(Text('Student')),
-          //       DataCell(Text('Associate Professor')),
-          //     ],
-          //   ),
-          //   DataRow(
-          //     cells: <DataCell>[
-          //       DataCell(Text('Janine')),
-          //       DataCell(Text('43')),
-          //       DataCell(Text('Professor')),
-          //       DataCell(Text('Associate Professor')),
-          //     ],
-          //   ),
-          //   DataRow(
-          //     cells: <DataCell>[
-          //       DataCell(Text('William')),
-          //       DataCell(Text('27')),
-          //       DataCell(Text('Associate Professor')),
-          //       DataCell(Text('Associate Professor')),
-          //     ],
-          //   ),
-          // ],
+          //         ]))
+          //     .toList(),
         ),
       ),
     );

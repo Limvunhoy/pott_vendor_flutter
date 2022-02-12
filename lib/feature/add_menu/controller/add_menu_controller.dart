@@ -1,42 +1,42 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pott_vendor/core/model/category/category_response.dart';
+import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
+import 'package:pott_vendor/core/service/product/product_service.dart';
 
 class AddMenuController extends GetxController {
   RxString enteredText = "".obs;
+
+  final TextEditingController titleTextController = TextEditingController();
+  final TextEditingController descriptionTextController =
+      TextEditingController();
+
+  ProductService _service = ProductService();
 
   final ImagePicker _imagePicker = ImagePicker();
 
   final int limitPhoto = 10;
 
+  late AddProductBodyRequest addProductBodyRequest;
+
   // List<XFile>? selectedImages;
-  String? selectedCategory;
+  CategoryResult? selectedCategory;
 
   counterText(String text) {
     enteredText.value = text;
   }
 
-  updateSelectedCategory(String cate) {
+  updateSelectedCategory(CategoryResult cate) {
     selectedCategory = cate;
     update();
   }
 
   List<File> descriptionPhotos = [];
   List<File> photos = [];
-
-  // Future pickImage() async {
-  //   try {
-  //     final image = await _imagePicker.pickMultiImage();
-  //     if (image == null) return;
-  //     selectedImages = image;
-  //     update();
-  //     print("Selected Images ${selectedImages!.length}");
-  //   } on PlatformException catch (e) {
-  //     print("Error Pick Image $e");
-  //   }
-  // }
 
   photoPicker() async {
     try {
@@ -46,6 +46,20 @@ class AddMenuController extends GetxController {
         _selectedImages.forEach((element) {
           photos.add(File(element.path));
         });
+        update();
+      } else {
+        print("No Photo Selected");
+      }
+    } on PlatformException catch (e) {
+      print("Error Pick Image $e");
+    }
+  }
+
+  photoCameraPicker() async {
+    try {
+      final _pic = await _imagePicker.pickImage(source: ImageSource.camera);
+      if (_pic != null) {
+        photos.add(File(_pic.path));
         update();
       } else {
         print("No Photo Selected");
@@ -72,6 +86,20 @@ class AddMenuController extends GetxController {
     }
   }
 
+  photoDescriptionCameraPicker() async {
+    try {
+      final _pic = await _imagePicker.pickImage(source: ImageSource.camera);
+      if (_pic != null) {
+        descriptionPhotos.add(File(_pic.path));
+        update();
+      } else {
+        print("No Photo Selected");
+      }
+    } on PlatformException catch (e) {
+      print("Error Pick Image $e");
+    }
+  }
+
   handleRemovePhoto(int index) {
     photos.removeAt(index);
     update();
@@ -80,5 +108,32 @@ class AddMenuController extends GetxController {
   handleRemoveDescriptionPhoto(int index) {
     descriptionPhotos.removeAt(index);
     update();
+  }
+
+  uploadProductPhotos() async {
+    try {
+      photos.forEach((element) async {
+        final res = await _service.uploadImage(element);
+        if (res != null) {
+          print("Product Upload Photo: ${res.results.path}");
+        }
+      });
+    } catch (e) {
+      print("Failed to Upload Product Photo $e");
+    }
+  }
+
+  AddProductBodyRequest handleContinue() {
+    addProductBodyRequest = AddProductBodyRequest(
+      name: titleTextController.text,
+      image: "",
+      description: descriptionTextController.text,
+      categoryId: selectedCategory!.data.id,
+      vendorId: '',
+      productOptions: [],
+      productVariance: [],
+    );
+
+    return addProductBodyRequest;
   }
 }

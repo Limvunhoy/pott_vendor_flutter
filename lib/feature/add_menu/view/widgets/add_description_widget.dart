@@ -29,6 +29,7 @@ class AddDescriptionWidget extends StatelessWidget {
             ),
             child: Obx(
               () => TextField(
+                controller: controller.descriptionTextController,
                 onChanged: (valueChanged) {
                   controller.counterText(valueChanged);
                 },

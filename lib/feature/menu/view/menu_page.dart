@@ -173,6 +173,8 @@ class MenuPage extends GetWidget<AuthController> {
                     child: SafeArea(
                       bottom: true,
                       child: Container(
+                        margin: const EdgeInsets.only(
+                            bottom: appSizeExt.basePadding),
                         child: Text(
                           "2020 Pottbid, all rights reserved",
                           style: TextStyle(fontSize: fontSizeExt.smallSize),
