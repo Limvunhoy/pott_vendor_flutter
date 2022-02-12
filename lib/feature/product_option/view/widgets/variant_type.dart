@@ -49,7 +49,6 @@ class VariantTypeWidget extends StatelessWidget {
                 ],
                 onSubmitted: (newValue) {
                   onSubmitted(newValue);
-                  FocusScope.of(context).unfocus();
                 },
                 resetTextOnSubmitted: true,
                 tagSpacing: 0.0,
