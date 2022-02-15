@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pott_vendor/core/model/category/category_response.dart';
+import 'package:pott_vendor/core/service/product/product_service.dart';
 import 'package:pott_vendor/feature/add_menu/controller/add_menu_controller.dart';
 import 'package:pott_vendor/feature/add_menu/view/widgets/add_description_widget.dart';
 import 'package:pott_vendor/feature/add_menu/view/widgets/add_photo_widget.dart';
@@ -259,7 +260,7 @@ class AddMenuPage extends GetWidget<AddMenuController> {
         child: Container(
           padding: const EdgeInsets.all(appSizeExt.basePadding),
           child: BaseButton(
-            onPressed: () {
+            onPressed: () async {
               // controller.uploadProductPhotos();
               final res = controller.handleContinue();
               Get.toNamed(Routes.PRODUCT_OPTION, arguments: res);

@@ -41,7 +41,7 @@ class AddMenuController extends GetxController {
   photoPicker() async {
     try {
       final _selectedImages = await _imagePicker.pickMultiImage(
-          maxWidth: 2048.0, maxHeight: 2048.0);
+          maxWidth: 1920.0, maxHeight: 1080.0);
       if (_selectedImages!.isNotEmpty) {
         _selectedImages.forEach((element) {
           photos.add(File(element.path));
@@ -72,7 +72,7 @@ class AddMenuController extends GetxController {
   descriptionPhotoPicker() async {
     try {
       final _selectedImages = await _imagePicker.pickMultiImage(
-          maxWidth: 2048.0, maxHeight: 2048.0);
+          maxWidth: 1920.0, maxHeight: 1080.0);
       if (_selectedImages!.isNotEmpty) {
         _selectedImages.forEach((element) {
           descriptionPhotos.add(File(element.path));
@@ -126,10 +126,11 @@ class AddMenuController extends GetxController {
   AddProductBodyRequest handleContinue() {
     addProductBodyRequest = AddProductBodyRequest(
       name: titleTextController.text,
-      image: "",
+      thumnail: "",
+      images: [],
       description: descriptionTextController.text,
       categoryId: selectedCategory!.data.id,
-      vendorId: '',
+      vendorId: -1,
       productOptions: [],
       productVariance: [],
     );

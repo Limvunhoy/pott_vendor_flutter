@@ -2,11 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/config/app_routes.dart';
+import 'package:pott_vendor/core/model/auth/user_response.dart';
 import 'package:pott_vendor/core/model/error/error_response.dart';
 import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 import 'package:pott_vendor/core/service/product/product_service.dart';
 import 'package:pott_vendor/feature/add_menu/controller/add_menu_controller.dart';
+import 'package:pott_vendor/main.dart';
+import 'package:pott_vendor/utils/constants/shared_preference_keys.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
+import 'package:pott_vendor/utils/helper/shared_preference_helper.dart';
 
 class ProductOptionController extends GetxController {
   List<String> titleOptions = [
@@ -137,7 +141,8 @@ class ProductOptionController extends GetxController {
           wa.add(productOptionVariances[i][j].optionValue);
           combine = wa.join("-");
         }
-        addProductVariance.add(AddProductVariance(combination: combine));
+        addProductVariance
+            .add(AddProductVariance(combination: combine, imageUrl: ""));
       }
 
       update();
@@ -162,17 +167,17 @@ class ProductOptionController extends GetxController {
     update();
 
     try {
-      String imagePath = await uploadProductPhotos();
+      await getUserFromSharedPreference();
 
-      if (imagePath.isNotEmpty) {
-        addProductBodyRequest.image = imagePath;
-        await _service.addProduct(addProductBodyRequest);
+      addProductBodyRequest.images = await uploadPhotoDescription();
+      addProductBodyRequest.thumnail = await uploadProductPhotos();
 
-        fetchStatus = FetchStatus.complete;
-        update();
+      await _service.addProduct(addProductBodyRequest);
 
-        Get.offNamedUntil(Routes.SALE_MENU, (route) => false);
-      }
+      fetchStatus = FetchStatus.complete;
+      update();
+
+      Get.offNamedUntil(Routes.SALE_MENU, (route) => false);
     } catch (e) {
       print("Failed to Add Product: $e");
       fetchStatus = FetchStatus.error;
@@ -187,12 +192,19 @@ class ProductOptionController extends GetxController {
       }
     }
 
-    //
     print("Add Product Body Request $addProductBodyRequest");
   }
 }
 
 extension on ProductOptionController {
+  getUserFromSharedPreference() async {
+    SharedPreferenceHelper sharedPreferenceHelper = SharedPreferenceHelper();
+    UserDataResponse currentUser = UserDataResponse.fromJson(
+        await sharedPreferenceHelper.read(SharedPreferenceKey.user));
+
+    addProductBodyRequest.vendorId = currentUser.vendorId;
+  }
+
   Future<String> uploadProductPhotos() async {
     String imagePath = "";
 
@@ -201,25 +213,32 @@ extension on ProductOptionController {
         final res = await _service.uploadImage(photo);
         if (res != null) {
           print("Product Upload Photo: ${res.results.path}");
-          // addProductBodyRequest.image = res.results.path;
           imagePath = res.results.path;
         }
       }
-
-      // addMenuController.photos.forEach((element) async {
-      //   final res = await _service.uploadImage(element);
-      //   if (res != null) {
-      //     print("Product Upload Photo: ${res.results.path}");
-      //     // addProductBodyRequest.image = res.results.path;
-      //     imagePath = res.results.path;
-      //   } else {
-      //     print("GGWP");
-      //   }
-      // });
       return imagePath;
     } catch (e) {
       print("Failed to Upload Product Photo $e");
       return "";
+    }
+  }
+
+  uploadPhotoDescription() async {
+    // List<String> images = [];
+
+    try {
+      for (var photo in addMenuController.descriptionPhotos) {
+        print("Loop Description Photos");
+        final res = await _service.uploadImage(photo);
+        if (res != null) {
+          print("Product Description Photo: ${res.results.path}");
+          addProductBodyRequest.images.add(res.results.path);
+        }
+      }
+      // return images;
+    } catch (e) {
+      print("Failed to Upload Product Photo $e");
+      // return [];
     }
   }
 }
