@@ -37,7 +37,7 @@ class OrdersPage extends StatelessWidget {
               Tab(
                 text: "New",
               ),
-              ordersController.newOrderRecords != []
+              ordersController.newOrderRecords.isNotEmpty
                   ? Container(
                       margin: const EdgeInsets.only(left: 2.0),
                       width: 16.0,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_tag_editor/tag_editor.dart';
+import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 import 'package:pott_vendor/feature/product_option/controller/product_option_controller.dart';
 import 'package:pott_vendor/feature/product_option/view/widgets/variant_item.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
@@ -14,7 +15,7 @@ class VariantTypeWidget extends StatelessWidget {
     required this.onDeleted,
   }) : super(key: key);
 
-  final List<String> items;
+  final List<AddProductOption> items;
   final Function(String) onSubmitted;
   final Function(int) onDeleted;
 
@@ -44,6 +45,7 @@ class VariantTypeWidget extends StatelessWidget {
                 delimiters: [
                   ',',
                   '.',
+                  ' ',
                 ],
                 onSubmitted: (newValue) {
                   onSubmitted(newValue);
@@ -51,6 +53,7 @@ class VariantTypeWidget extends StatelessWidget {
                 resetTextOnSubmitted: true,
                 tagSpacing: 0.0,
                 hasAddButton: false,
+                textInputAction: TextInputAction.next,
                 inputDecoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Add tag...',
@@ -58,10 +61,10 @@ class VariantTypeWidget extends StatelessWidget {
                   isDense: false,
                 ),
                 onTagChanged: (newValue) {
-                  // controller.handleAddVariantType(newValue);
+                  onSubmitted(newValue);
                 },
                 tagBuilder: (context, index) => _Chip(
-                  label: items[index],
+                  label: items[index].option,
                   onDeleted: () {
                     print("Remove At Index: $index");
                     onDeleted(index);

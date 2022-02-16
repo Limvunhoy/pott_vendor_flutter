@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_tag_editor/tag_editor.dart';
+import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 import 'package:pott_vendor/feature/product_option/controller/product_option_controller.dart';
 import 'package:pott_vendor/feature/product_option/view/widgets/variant_item.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
@@ -19,7 +20,7 @@ class VariantOptionWidget extends StatelessWidget {
 
   final String titleType;
   final ProductOptionController controller;
-  final List<String>? items;
+  final List<AddProductOptionValue>? items;
   final bool isTopPadding;
   final Function(String) onSubmitted;
   final Function(int) onDeleted;
@@ -53,6 +54,7 @@ class VariantOptionWidget extends StatelessWidget {
                 delimiters: [
                   ',',
                   '.',
+                  ' ',
                 ],
                 onSubmitted: (newValue) {
                   onSubmitted(newValue);
@@ -68,9 +70,10 @@ class VariantOptionWidget extends StatelessWidget {
                 ),
                 onTagChanged: (newValue) {
                   // controller.handleAddVariantType(newValue);
+                  onSubmitted(newValue);
                 },
                 tagBuilder: (context, index) => _Chip(
-                  label: items != null ? items![index] : "",
+                  label: items?[index].optionValue ?? "",
                   onDeleted: () {
                     onDeleted(index);
                   },

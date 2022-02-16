@@ -63,8 +63,8 @@ class HStackProductImageList extends StatelessWidget {
                         }
                       },
                       child: Image.network(
-                        // "https://i.ytimg.com/vi/ISVCtciJ7yM/maxresdefault.jpg",
-                        "${controller.productRecord.image}",
+                        "https://i.ytimg.com/vi/ISVCtciJ7yM/maxresdefault.jpg",
+                        // "${controller.productRecord.image}",
                         fit: BoxFit.cover,
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width,

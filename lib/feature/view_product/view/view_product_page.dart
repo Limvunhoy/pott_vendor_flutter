@@ -29,7 +29,7 @@ class ViewProductPage extends GetWidget<ViewProductController> {
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
-                      controller.isBid ? RemainingWidget() : HotSaleWidget(),
+                      // controller.isBid ? RemainingWidget() : HotSaleWidget(),
                       ProductOverView(
                         productRecord: controller.productRecord,
                       ),
@@ -46,7 +46,7 @@ class ViewProductPage extends GetWidget<ViewProductController> {
                       ItemDescription(controller: controller),
                     ],
                   ),
-                )
+                ),
               ],
             );
           }),

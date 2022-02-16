@@ -34,78 +34,78 @@ class ProductOverView extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "4.2",
-                style: TextStyle(
-                  color: colorExt.PRIMARY_COLOR,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.fade,
-              ),
-              const SizedBox(
-                width: 6,
-              ),
-              Container(
-                height: 15,
-                child: VerticalDivider(
-                  color: Color(0xFFEEEEEE),
-                  thickness: 1,
-                ),
-              ),
-              const SizedBox(
-                width: 3,
-              ),
-              Row(
-                children: List.generate(
-                  5,
-                  (index) {
-                    return Icon(
-                      Icons.star,
-                      color: index < 4 ? Color(0xFFF7D92E) : Color(0xFFDDDDDD),
-                      size: 17.0,
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(
-                width: 3,
-              ),
-              Container(
-                height: 15,
-                child: VerticalDivider(
-                  color: Color(0xFFEEEEEE),
-                  thickness: 1,
-                ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                "5 Reviews",
-                style: TextStyle(
-                  color: colorExt.LIGHT_GRAY,
-                  fontSize: fontSizeExt.mediumSize,
-                  fontWeight: FontWeight.w500,
-                  decoration: TextDecoration.underline,
-                  decorationThickness: 0.5,
-                ),
-              ),
-              const SizedBox(
-                width: 5.0,
-              ),
-              Container(
-                padding: EdgeInsets.zero,
-                height: 15,
-                child: VerticalDivider(
-                  color: Color(0xFFEEEEEE),
-                  thickness: 1,
-                ),
-              ),
-              const SizedBox(
-                width: 5.0,
-              ),
+              // Text(
+              //   "4.2",
+              //   style: TextStyle(
+              //     color: colorExt.PRIMARY_COLOR,
+              //     fontSize: 16.0,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              //   maxLines: 2,
+              //   overflow: TextOverflow.fade,
+              // ),
+              // const SizedBox(
+              //   width: 6,
+              // ),
+              // Container(
+              //   height: 15,
+              //   child: VerticalDivider(
+              //     color: Color(0xFFEEEEEE),
+              //     thickness: 1,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   width: 3,
+              // ),
+              // Row(
+              //   children: List.generate(
+              //     5,
+              //     (index) {
+              //       return Icon(
+              //         Icons.star,
+              //         color: index < 4 ? Color(0xFFF7D92E) : Color(0xFFDDDDDD),
+              //         size: 17.0,
+              //       );
+              //     },
+              //   ),
+              // ),
+              // const SizedBox(
+              //   width: 3,
+              // ),
+              // Container(
+              //   height: 15,
+              //   child: VerticalDivider(
+              //     color: Color(0xFFEEEEEE),
+              //     thickness: 1,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   width: 5,
+              // ),
+              // Text(
+              //   "5 Reviews",
+              //   style: TextStyle(
+              //     color: colorExt.LIGHT_GRAY,
+              //     fontSize: fontSizeExt.mediumSize,
+              //     fontWeight: FontWeight.w500,
+              //     decoration: TextDecoration.underline,
+              //     decorationThickness: 0.5,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   width: 5.0,
+              // ),
+              // Container(
+              //   padding: EdgeInsets.zero,
+              //   height: 15,
+              //   child: VerticalDivider(
+              //     color: Color(0xFFEEEEEE),
+              //     thickness: 1,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   width: 5.0,
+              // ),
               Text(
                 "Stock 10",
                 style: TextStyle(
