@@ -135,7 +135,7 @@ class NewItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
                     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
-                    "${orderRecord.itemList.first.image}",
+                    "${orderRecord.itemList.first.thumbnail.first}",
                     fit: BoxFit.cover,
                     width: 80.0,
                     height: 80.0,

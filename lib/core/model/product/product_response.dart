@@ -111,7 +111,8 @@ class ProductRecord {
   ProductRecord({
     required this.id,
     required this.name,
-    required this.image,
+    required this.thumbnail,
+    required this.images,
     required this.description,
     required this.cost,
     required this.salePrice,
@@ -119,29 +120,33 @@ class ProductRecord {
     required this.status,
     required this.createdAt,
     required this.category,
-    required this.vendor,
+    this.vendor,
     required this.productOptions,
     required this.productVariance,
+    required this.totalStock,
   });
 
   String id;
   String name;
-  String image;
+  List<String> thumbnail;
+  List<String> images;
   String description;
   int cost;
   int salePrice;
   String type;
   String status;
   int createdAt;
-  Category category;
-  Vendor vendor;
+  Category? category;
+  Vendor? vendor;
   List<ProductOption> productOptions;
   List<ProductVariance> productVariance;
+  int totalStock;
 
   ProductRecord copyWith({
     String? id,
     String? name,
-    String? image,
+    List<String>? thumbnail,
+    List<String>? images,
     String? description,
     int? cost,
     int? salePrice,
@@ -152,11 +157,13 @@ class ProductRecord {
     Vendor? vendor,
     List<ProductOption>? productOptions,
     List<ProductVariance>? productVariance,
+    int? totalStock,
   }) =>
       ProductRecord(
         id: id ?? this.id,
         name: name ?? this.name,
-        image: image ?? this.image,
+        thumbnail: thumbnail ?? this.thumbnail,
+        images: images ?? this.images,
         description: description ?? this.description,
         cost: cost ?? this.cost,
         salePrice: salePrice ?? this.salePrice,
@@ -167,42 +174,49 @@ class ProductRecord {
         vendor: vendor ?? this.vendor,
         productOptions: productOptions ?? this.productOptions,
         productVariance: productVariance ?? this.productVariance,
+        totalStock: totalStock ?? this.totalStock,
       );
 
   factory ProductRecord.fromJson(Map<String, dynamic> json) => ProductRecord(
         id: json["_id"],
         name: json["name"],
-        image: json["image"],
+        thumbnail: List<String>.from(json["thumbnail"].map((x) => x)),
+        images: List<String>.from(json["images"].map((x) => x)),
         description: json["description"],
         cost: json["cost"],
         salePrice: json["salePrice"],
         type: json["type"],
         status: json["status"],
         createdAt: json["createdAt"],
-        category: Category.fromJson(json["category"]),
-        vendor: Vendor.fromJson(json["vendor"]),
+        category: json["category"] == null
+            ? null
+            : Category.fromJson(json["category"]),
+        vendor: json["vendor"] == null ? null : Vendor.fromJson(json["vendor"]),
         productOptions: List<ProductOption>.from(
             json["productOptions"].map((x) => ProductOption.fromJson(x))),
         productVariance: List<ProductVariance>.from(
             json["productVariance"].map((x) => ProductVariance.fromJson(x))),
+        totalStock: json["totalStock"],
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
         "name": name,
-        "image": image,
+        "thumbnail": List<dynamic>.from(thumbnail.map((x) => x)),
+        "images": List<dynamic>.from(images.map((x) => x)),
         "description": description,
         "cost": cost,
         "salePrice": salePrice,
         "type": type,
         "status": status,
         "createdAt": createdAt,
-        "category": category.toJson(),
-        "vendor": vendor.toJson(),
+        "category": category == null ? null : category!.toJson(),
+        "vendor": vendor == null ? null : vendor!.toJson(),
         "productOptions":
             List<dynamic>.from(productOptions.map((x) => x.toJson())),
         "productVariance":
             List<dynamic>.from(productVariance.map((x) => x.toJson())),
+        "totalStock": totalStock,
       };
 }
 
