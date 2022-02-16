@@ -42,7 +42,7 @@ class BidProductItem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    bidProduct.image,
+                    bidProduct.thumbnail.first,
                     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
                     fit: BoxFit.cover,
                     width: 100.0,

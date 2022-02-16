@@ -104,6 +104,7 @@ class SaleMenuController extends GetxController
       update();
       return records;
     } catch (e) {
+      print("Failed to Get Product $e");
       fetchStatus = FetchStatus.error;
       update();
       return [];
@@ -127,9 +128,9 @@ class SaleMenuController extends GetxController
     return "\$${saleProductRecords[index].salePrice}";
   }
 
-  String saleProductImage(int index) {
-    return "${saleProductRecords[index].image}";
-  }
+  // String saleProductImage(int index) {
+  //   return "${saleProductRecords[index].image}";
+  // }
 }
 
 extension on SaleMenuController {

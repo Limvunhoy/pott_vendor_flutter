@@ -45,7 +45,7 @@ class SaleProductItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
                     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
-                    saleProduct.image,
+                    saleProduct.thumbnail.first,
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
