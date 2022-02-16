@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1050475825372",
+    "firebase_url": "https://pottbit-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "pottbit",
+    "storage_bucket": "pottbit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050475825372:android:b75a714a2a492437eacc19",
+        "android_client_info": {
+          "package_name": "com.example.pott_vendor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050475825372-dufmuvnsbqfjdonagt34niui3ubidrc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUex39i0aGbdAnxpFdffQSv0t3ZGWZGjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050475825372-dufmuvnsbqfjdonagt34niui3ubidrc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050475825372:android:c1a183c60c79eefceacc19",
+        "android_client_info": {
+          "package_name": "pottbit.pottbitgroup.api"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050475825372-dufmuvnsbqfjdonagt34niui3ubidrc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUex39i0aGbdAnxpFdffQSv0t3ZGWZGjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050475825372-dufmuvnsbqfjdonagt34niui3ubidrc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

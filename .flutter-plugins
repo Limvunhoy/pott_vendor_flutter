@@ -1,4 +1,9 @@
 # This is a generated file; do not edit or check into version control.
+firebase_core=/Users/limvunhoy/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.12.0/
+firebase_core_web=/Users/limvunhoy/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.5.4/
+firebase_messaging=/Users/limvunhoy/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-11.2.6/
+firebase_messaging_web=/Users/limvunhoy/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging_web-2.2.7/
+flutter_local_notifications=/Users/limvunhoy/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications-9.3.2/
 flutter_plugin_android_lifecycle=/Users/limvunhoy/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.3/
 fluttertoast=/Users/limvunhoy/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.8/
 image_picker=/Users/limvunhoy/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+1/
