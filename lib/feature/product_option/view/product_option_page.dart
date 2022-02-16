@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_overlay/loading_overlay.dart';
+import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/feature/product_option/controller/product_option_controller.dart';
 import 'package:pott_vendor/feature/product_option/view/export_widget.dart';
 import 'package:pott_vendor/feature/product_option/view/widgets/variant_type.dart';
@@ -90,6 +91,13 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                                   // controller.handleGenerateOptions();
                                   // controller.handleAddProductOptions();
                                   controller.handleGenerateProductOption();
+                                  FocusScopeNode currentFocus =
+                                      FocusScope.of(context);
+                                  if (!currentFocus.hasPrimaryFocus &&
+                                      currentFocus.focusedChild != null) {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                  }
                                 }
                               : null,
                           style: TextButton.styleFrom(
@@ -148,8 +156,15 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                         titleColor: Colors.white,
                         backgroundColor: colorExt.PRIMARY_COLOR,
                         onPressed: controller.addProductVariance.isNotEmpty
-                            ? () {
-                                controller.handleAddProduct();
+                            ? () async {
+                                final res = await controller.handleAddProduct();
+                                if (res) {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      Routes.SALE_MENU,
+                                      ModalRoute.withName(Routes.MENU),
+                                      arguments: true);
+                                }
                               }
                             : null),
                   ),

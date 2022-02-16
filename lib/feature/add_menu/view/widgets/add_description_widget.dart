@@ -37,6 +37,7 @@ class AddDescriptionWidget extends StatelessWidget {
                 maxLength: 200,
                 cursorColor: colorExt.PRIMARY_COLOR,
                 style: TextStyle(fontSize: fontSizeExt.smallSize),
+                textCapitalization: TextCapitalization.sentences,
                 decoration: new InputDecoration(
                     contentPadding: EdgeInsets.zero,
                     border: InputBorder.none,

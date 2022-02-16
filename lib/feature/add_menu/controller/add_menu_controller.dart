@@ -129,7 +129,7 @@ class AddMenuController extends GetxController {
       thumnail: "",
       images: [],
       description: descriptionTextController.text,
-      categoryId: selectedCategory!.data.id,
+      categoryId: selectedCategory?.data.id ?? "",
       vendorId: -1,
       productOptions: [],
       productVariance: [],

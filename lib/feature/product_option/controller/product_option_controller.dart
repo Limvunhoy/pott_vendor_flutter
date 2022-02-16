@@ -159,7 +159,7 @@ class ProductOptionController extends GetxController {
     return "";
   }
 
-  handleAddProduct() async {
+  Future<bool> handleAddProduct() async {
     addProductBodyRequest.productOptions = listProductOptions;
     addProductBodyRequest.productVariance = addProductVariance;
 
@@ -169,17 +169,21 @@ class ProductOptionController extends GetxController {
     try {
       await getUserFromSharedPreference();
 
-      addProductBodyRequest.images = await uploadPhotoDescription();
+      await uploadPhotoDescription();
       addProductBodyRequest.thumnail = await uploadProductPhotos();
+
+      print("Add Product Body Request $addProductBodyRequest");
 
       await _service.addProduct(addProductBodyRequest);
 
       fetchStatus = FetchStatus.complete;
       update();
 
+      return true;
+
       Get.offNamedUntil(Routes.SALE_MENU, (route) => false);
     } catch (e) {
-      print("Failed to Add Product: $e");
+      print("Failed to Add Product: ${e.runtimeType}");
       fetchStatus = FetchStatus.error;
       update();
       if (e is ErrorResponse) {
@@ -190,9 +194,8 @@ class ProductOptionController extends GetxController {
               snackPosition: SnackPosition.BOTTOM);
         }
       }
+      return false;
     }
-
-    print("Add Product Body Request $addProductBodyRequest");
   }
 }
 
