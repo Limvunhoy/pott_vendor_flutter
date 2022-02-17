@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/feature/view_product/controller/view_product_controller.dart';
 import 'package:pott_vendor/feature/view_product/view/widgets/bid_price_starting.dart';
-import 'package:pott_vendor/feature/view_product/view/widgets/hot_sale_widget.dart';
 import 'package:pott_vendor/feature/view_product/view/widgets/hstack_product_image_list.dart';
 import 'package:pott_vendor/feature/view_product/view/widgets/item_description.dart';
 import 'package:pott_vendor/feature/view_product/view/widgets/product_description.dart';
 import 'package:pott_vendor/feature/view_product/view/widgets/product_overview.dart';
-import 'package:pott_vendor/feature/view_product/view/widgets/remaining_widget.dart';
 
 class ViewProductPage extends GetWidget<ViewProductController> {
   const ViewProductPage({Key? key}) : super(key: key);
@@ -36,10 +34,10 @@ class ViewProductPage extends GetWidget<ViewProductController> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      BidPriceStarting(),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
+                      // BidPriceStarting(),
+                      // const SizedBox(
+                      //   height: 10.0,
+                      // ),
                       ProductDescription(
                         productRecord: controller.productRecord,
                       ),

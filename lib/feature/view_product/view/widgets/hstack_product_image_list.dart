@@ -51,7 +51,7 @@ class HStackProductImageList extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   physics: PageScrollPhysics(parent: ClampingScrollPhysics()),
-                  itemCount: 1,
+                  itemCount: controller.productRecord.thumbnail.length,
                   itemBuilder: (context, index) {
                     return VisibilityDetector(
                       key: Key(
@@ -63,8 +63,7 @@ class HStackProductImageList extends StatelessWidget {
                         }
                       },
                       child: Image.network(
-                        "https://i.ytimg.com/vi/ISVCtciJ7yM/maxresdefault.jpg",
-                        // "${controller.productRecord.image}",
+                        "${controller.productRecord.thumbnail[index]}",
                         fit: BoxFit.cover,
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width,

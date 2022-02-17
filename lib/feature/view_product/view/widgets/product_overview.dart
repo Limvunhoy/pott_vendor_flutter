@@ -107,7 +107,7 @@ class ProductOverView extends StatelessWidget {
               //   width: 5.0,
               // ),
               Text(
-                "Stock 10",
+                "Stock ${productRecord.totalStock}",
                 style: TextStyle(
                   color: colorExt.LIGHT_GRAY,
                   fontSize: fontSizeExt.mediumSize,
