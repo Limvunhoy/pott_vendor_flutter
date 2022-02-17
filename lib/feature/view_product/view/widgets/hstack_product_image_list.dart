@@ -51,7 +51,7 @@ class HStackProductImageList extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   physics: PageScrollPhysics(parent: ClampingScrollPhysics()),
-                  itemCount: controller.dummyProductItems.length,
+                  itemCount: controller.productRecord.thumbnail.length,
                   itemBuilder: (context, index) {
                     return VisibilityDetector(
                       key: Key(
@@ -63,7 +63,7 @@ class HStackProductImageList extends StatelessWidget {
                         }
                       },
                       child: Image.network(
-                        "https://i.ytimg.com/vi/ISVCtciJ7yM/maxresdefault.jpg",
+                        "${controller.productRecord.thumbnail[index]}",
                         fit: BoxFit.cover,
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width,
@@ -74,26 +74,20 @@ class HStackProductImageList extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
-                    margin: const EdgeInsets.all(16.0),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 9.0),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: GetBuilder<ViewProductController>(
-                      init: controller,
-                      builder: (context) {
-                        return Text(
-                          "${controller.getScrollIndex}/${controller.dummyProductItems.length}",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeExt.extraSmallSize,
-                              fontWeight: FontWeight.w500),
-                        );
-                      },
-                    ),
-                  ),
+                      margin: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4.0, horizontal: 9.0),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Text(
+                        "${controller.getScrollIndex}/1",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: fontSizeExt.extraSmallSize,
+                            fontWeight: FontWeight.w500),
+                      )),
                 ),
               ],
             ),
