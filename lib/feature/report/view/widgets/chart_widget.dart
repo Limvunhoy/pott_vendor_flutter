@@ -74,7 +74,7 @@ class ChartWidget extends StatelessWidget {
               // Sets the corner radius
               color: colorExt.PRIMARY_COLOR,
               borderWidth: 5,
-              width: 0.2,
+              width: 0.1,
               borderRadius: BorderRadius.all(
                 Radius.circular(15),
               ),

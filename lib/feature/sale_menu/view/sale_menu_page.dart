@@ -47,7 +47,7 @@ class SaleMenuScreen extends StatelessWidget {
           controller: _controller.tabController,
           indicator: UnderlineTabIndicator(
             borderSide: BorderSide(width: 2.0, color: colorExt.PRIMARY_COLOR),
-            insets: EdgeInsets.symmetric(horizontal: 95.0),
+            insets: EdgeInsets.symmetric(horizontal: 85.0),
           ),
           labelStyle: TextStyle(
               fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w600),

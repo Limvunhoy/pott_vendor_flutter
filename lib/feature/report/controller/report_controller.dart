@@ -29,8 +29,8 @@ class ReportController extends GetxController {
   @override
   void onInit() async {
     await getTodayReport();
-    await getMonthlyReport();
     await getWeeklyReport();
+    await getMonthlyReport();
 
     tooltipBehavior = TooltipBehavior(
       enable: true,
@@ -71,13 +71,30 @@ class ReportController extends GetxController {
     return todayReport?.records.first.totalPrice.toDouble() ?? 0.0;
   }
 
-  String reportDate(DateTime date) {
-    String formattedDate = DateFormat('MM-dd').format(date);
+  String reportDate(String date) {
+    String formattedDate = "";
+    try {
+      DateTime dateTime = DateTime.parse(date);
+      formattedDate = DateFormat('MM-dd').format(dateTime);
+    } catch (e) {
+      formattedDate = date;
+    }
+
     return formattedDate;
   }
 
   List<SalesData> sortByWeekly() {
     List<SalesData> salesData = weeklyReport?.records
+            .map((e) => SalesData(reportDate(e.id), e.totalPrice.toDouble(),
+                e.totalPrice.toDouble()))
+            .toList() ??
+        [];
+
+    return salesData;
+  }
+
+  List<SalesData> sortByMonthly() {
+    List<SalesData> salesData = monthlyReport?.records
             .map((e) => SalesData(reportDate(e.id), e.totalPrice.toDouble(),
                 e.totalPrice.toDouble()))
             .toList() ??
@@ -93,16 +110,6 @@ class ReportController extends GetxController {
       SalesData('...', 0, 0),
       SalesData('...', 0, 0),
     ];
-  }
-
-  List<SalesData> sortByMonthly() {
-    List<SalesData> salesData = monthlyReport?.records
-            .map((e) => SalesData(reportDate(e.id), e.totalPrice.toDouble(),
-                e.totalPrice.toDouble()))
-            .toList() ??
-        [];
-
-    return salesData;
   }
 
   String strItem = "";

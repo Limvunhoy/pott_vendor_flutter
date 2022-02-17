@@ -26,22 +26,22 @@ class SaleProductPage extends StatelessWidget {
           ? Container(
               height: MediaQuery.of(context).size.height / 1.2,
               child: LoadingWidget())
-          : controller.fetchStatus == FetchStatus.error
-              ? NoDataWidget(title: "No Sale Product")
-              : ListView.builder(
-                  // shrinkWrap: true,
-                  // primary: false,
-                  itemCount: controller.getSaleCount(),
-                  itemBuilder: (context, index) {
-                    return SaleProductItem(
-                      controller: controller,
-                      onItemTapped: () {
-                        Get.toNamed(Routes.VIEW_PRODUCT);
-                      },
-                      saleProduct: controller.saleProductRecords[index],
-                    );
+          : ListView.builder(
+              // shrinkWrap: true,
+              // primary: false,
+              itemCount: controller.getSaleCount(),
+              itemBuilder: (context, index) {
+                return SaleProductItem(
+                  controller: controller,
+                  onItemTapped: () {
+                    Get.toNamed(Routes.VIEW_PRODUCT, arguments: {
+                      "isBid": false,
+                      "productRecord": controller.saleProductRecords[index]
+                    });
                   },
-                ),
+                  saleProduct: controller.saleProductRecords[index],
+                );
+              }),
     );
   }
 }
