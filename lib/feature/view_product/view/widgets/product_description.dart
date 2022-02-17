@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 
 class ProductDescription extends StatelessWidget {
-  const ProductDescription({Key? key}) : super(key: key);
+  const ProductDescription({Key? key, required this.productRecord})
+      : super(key: key);
+
+  final ProductRecord productRecord;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +26,10 @@ class ProductDescription extends StatelessWidget {
             height: 8.0,
           ),
           Text(
-            "- ABS: Single Channel \n"
-            "- Engine: 199.5 cc \n"
-            "- Power: 24.6 PS @ 9750 rpm",
+            // "- ABS: Single Channel \n"
+            // "- Engine: 199.5 cc \n"
+            // "- Power: 24.6 PS @ 9750 rpm",
+            "${productRecord.description}",
             style:
                 TextStyle(color: Colors.black, fontSize: fontSizeExt.smallSize),
           ),

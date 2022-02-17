@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
-import 'package:pott_vendor/feature/orders/view/widgets/empty_new_orders_widget.dart';
+import 'package:pott_vendor/utils/common/no_data_widget.dart';
 import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
 import 'package:pott_vendor/utils/common/alert_popup.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
@@ -26,7 +26,11 @@ class NewPage extends StatelessWidget {
               alignment: Alignment.center,
               child: LoadingWidget())
           : ordersController.fetchStatus == FetchStatus.error
-              ? Center(child: EmptyNewOrdersWidget())
+              ? Center(
+                  child: NoDataWidget(
+                  title: "No New Order Now",
+                  subtitle: "If have order coming, you can see here.",
+                ))
               : ListView.builder(
                   key: PageStorageKey("newOrderList"),
                   controller: ordersController.scrollController,
@@ -36,36 +40,44 @@ class NewPage extends StatelessWidget {
                       parent: AlwaysScrollableScrollPhysics()),
                   itemCount: ordersController.getNewOrderCount(),
                   itemBuilder: (context, index) {
-                    return NewItem(
-                      orderStatus: OrderStatus.newOrder,
-                      onConfirm: () async {
-                        // Get.toNamed(Routes.PROCESSING);
-                        await ordersController
-                            .confirmNewOrder(
-                                ordersController.newOrderRecords[index].id)
-                            .then((isSuccess) {
-                          if (isSuccess) {
-                            ordersController.handleUpdateNewOrderItem(index);
-                          }
-                        });
-                      },
-                      onReject: () {
-                        AppDialog.showAppDialog(context,
-                            title: "Are you sure?",
-                            subtitle: "You want to reject delivery?",
-                            onClose: () {
-                          Get.back();
-                        }, onConfirm: () {
-                          // TODO: Handle reject order
-                        });
-                      },
-                      onGoToOrderDetail: () {
+                    return GestureDetector(
+                      onTap: () {
                         Get.toNamed(Routes.PROCESSING,
-                            arguments: ordersController.newOrderRecords[index]);
+                            arguments:
+                                ordersController.newOrderRecords[index].id);
                       },
-                      orderRecord: ordersController.newOrderRecords[index],
-                      orderEnum: OrderType.newOrder,
-                      orderTotal: ordersController.calculateOrderTotal(index),
+                      child: NewItem(
+                        orderStatus: OrderStatus.newOrder,
+                        onConfirm: () async {
+                          // Get.toNamed(Routes.PROCESSING);
+                          await ordersController
+                              .confirmNewOrder(
+                                  ordersController.newOrderRecords[index].id)
+                              .then((isSuccess) {
+                            if (isSuccess) {
+                              ordersController.handleUpdateNewOrderItem(index);
+                            }
+                          });
+                        },
+                        onReject: () {
+                          AppDialog.showAppDialog(context,
+                              title: "Are you sure?",
+                              subtitle: "You want to reject delivery?",
+                              onClose: () {
+                            Get.back();
+                          }, onConfirm: () {
+                            // TODO: Handle reject order
+                          });
+                        },
+                        onGoToOrderDetail: () {
+                          // Get.toNamed(Routes.PROCESSING,
+                          //     arguments:
+                          //         ordersController.newOrderRecords[index]);
+                        },
+                        orderRecord: ordersController.newOrderRecords[index],
+                        orderEnum: OrderType.newOrder,
+                        orderTotal: ordersController.calculateOrderTotal(index),
+                      ),
                     );
                   },
                 ),

@@ -39,6 +39,7 @@ class BaseButton extends StatelessWidget {
               fontWeight: fontWeight),
         ),
         style: ElevatedButton.styleFrom(
+          onSurface: colorExt.PRIMARY_COLOR,
           primary: backgroundColor,
           elevation: 0.0,
           side: BorderSide(width: 1, color: borderColor!),

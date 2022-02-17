@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final welcome = welcomeFromJson(jsonString);
-
 import 'dart:convert';
 
 ReportResponse welcomeFromJson(String str) =>
@@ -78,27 +74,22 @@ class ReportDataResponse {
 class ReportRecord {
   ReportRecord({
     required this.id,
-    required this.displayId,
     required this.totalQty,
     required this.totalPrice,
   });
 
-  DateTime id;
-  String displayId;
+  String id;
   int totalQty;
   int totalPrice;
 
   factory ReportRecord.fromJson(Map<String, dynamic> json) => ReportRecord(
-        id: DateTime.parse(json["_id"]),
-        displayId: json["displayId"],
+        id: json["_id"],
         totalQty: json["totalQty"],
         totalPrice: json["totalPrice"],
       );
 
   Map<String, dynamic> toJson() => {
-        "_id":
-            "${id.year.toString().padLeft(4, '0')}-${id.month.toString().padLeft(2, '0')}-${id.day.toString().padLeft(2, '0')}",
-        "displayId": displayId,
+        "_id": id,
         "totalQty": totalQty,
         "totalPrice": totalPrice,
       };
