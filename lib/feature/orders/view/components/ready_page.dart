@@ -37,10 +37,13 @@ class ReadyPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(Routes.PROCESSING, arguments: {
-                          "type": ProcessingState.estimatedTime,
-                          "record": ordersController.confirmOrderRecords[index],
-                        });
+                        // Get.toNamed(Routes.PROCESSING, arguments: {
+                        //   "type": ProcessingState.estimatedTime,
+                        //   "record": ordersController.confirmOrderRecords[index],
+                        // });
+                        Get.toNamed(Routes.PROCESSING,
+                            arguments:
+                                ordersController.confirmOrderRecords[index].id);
                       },
                       child: NewItem(
                         onOrderReady: () async {

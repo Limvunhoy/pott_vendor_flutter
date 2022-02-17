@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/config/app_routes.dart';
-import 'package:pott_vendor/core/model/processing/processing_model.dart';
 import 'package:pott_vendor/feature/orders/controller/orders_controller.dart';
-import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
 import 'package:pott_vendor/utils/common/no_data_widget.dart';
 import 'package:pott_vendor/utils/common/refresh_widget.dart';
@@ -27,7 +25,9 @@ class FinishedPage extends StatelessWidget {
               alignment: Alignment.center,
               child: LoadingWidget())
           : ordersController.fetchStatus == FetchStatus.error
-              ? NoDataWidget(title: "No Finished Order")
+              ? NoDataWidget(
+                  title: "No Ready Order",
+                )
               : ListView.builder(
                   key: PageStorageKey("readyOrderList"),
                   shrinkWrap: true,
@@ -36,20 +36,10 @@ class FinishedPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        print("Pass order at index: $index");
-                        Get.toNamed(Routes.PROCESSING, arguments: {
-                          "type": ProcessingState.delivered,
-                          "record": ordersController.finishedOrderRecords[index]
-                        });
+                        Get.toNamed(Routes.PROCESSING,
+                            arguments: ordersController
+                                .finishedOrderRecords[index].id);
                       },
-                      child: NewItem(
-                        orderStatus: OrderStatus.finished,
-                        onConfirm: () {},
-                        orderRecord:
-                            ordersController.finishedOrderRecords[index],
-                        orderEnum: OrderType.finishedOrder,
-                        orderTotal: "",
-                      ),
                     );
                   },
                 ),

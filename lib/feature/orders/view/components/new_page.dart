@@ -40,36 +40,44 @@ class NewPage extends StatelessWidget {
                       parent: AlwaysScrollableScrollPhysics()),
                   itemCount: ordersController.getNewOrderCount(),
                   itemBuilder: (context, index) {
-                    return NewItem(
-                      orderStatus: OrderStatus.newOrder,
-                      onConfirm: () async {
-                        // Get.toNamed(Routes.PROCESSING);
-                        await ordersController
-                            .confirmNewOrder(
-                                ordersController.newOrderRecords[index].id)
-                            .then((isSuccess) {
-                          if (isSuccess) {
-                            ordersController.handleUpdateNewOrderItem(index);
-                          }
-                        });
-                      },
-                      onReject: () {
-                        AppDialog.showAppDialog(context,
-                            title: "Are you sure?",
-                            subtitle: "You want to reject delivery?",
-                            onClose: () {
-                          Get.back();
-                        }, onConfirm: () {
-                          // TODO: Handle reject order
-                        });
-                      },
-                      onGoToOrderDetail: () {
+                    return GestureDetector(
+                      onTap: () {
                         Get.toNamed(Routes.PROCESSING,
-                            arguments: ordersController.newOrderRecords[index]);
+                            arguments:
+                                ordersController.newOrderRecords[index].id);
                       },
-                      orderRecord: ordersController.newOrderRecords[index],
-                      orderEnum: OrderType.newOrder,
-                      orderTotal: ordersController.calculateOrderTotal(index),
+                      child: NewItem(
+                        orderStatus: OrderStatus.newOrder,
+                        onConfirm: () async {
+                          // Get.toNamed(Routes.PROCESSING);
+                          await ordersController
+                              .confirmNewOrder(
+                                  ordersController.newOrderRecords[index].id)
+                              .then((isSuccess) {
+                            if (isSuccess) {
+                              ordersController.handleUpdateNewOrderItem(index);
+                            }
+                          });
+                        },
+                        onReject: () {
+                          AppDialog.showAppDialog(context,
+                              title: "Are you sure?",
+                              subtitle: "You want to reject delivery?",
+                              onClose: () {
+                            Get.back();
+                          }, onConfirm: () {
+                            // TODO: Handle reject order
+                          });
+                        },
+                        onGoToOrderDetail: () {
+                          // Get.toNamed(Routes.PROCESSING,
+                          //     arguments:
+                          //         ordersController.newOrderRecords[index]);
+                        },
+                        orderRecord: ordersController.newOrderRecords[index],
+                        orderEnum: OrderType.newOrder,
+                        orderTotal: ordersController.calculateOrderTotal(index),
+                      ),
                     );
                   },
                 ),
