@@ -146,6 +146,7 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                             child: TextFormField(
                               controller: controller.titleTextController,
                               cursorColor: colorExt.PRIMARY_COLOR,
+                              textCapitalization: TextCapitalization.sentences,
                               style: TextStyle(fontSize: fontSizeExt.smallSize),
                               decoration: new InputDecoration(
                                 border: InputBorder.none,
@@ -259,7 +260,7 @@ class AddMenuPage extends GetWidget<AddMenuController> {
         child: Container(
           padding: const EdgeInsets.all(appSizeExt.basePadding),
           child: BaseButton(
-            onPressed: () {
+            onPressed: () async {
               // controller.uploadProductPhotos();
               final res = controller.handleContinue();
               Get.toNamed(Routes.PRODUCT_OPTION, arguments: res);

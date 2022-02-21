@@ -26,6 +26,10 @@ class SaleMenuController extends GetxController
     isOn.toggle();
   }
 
+  final args = Get.arguments;
+
+  late bool isProductCreated;
+
   List<ProductRecord> saleProductRecords = [];
   List<ProductRecord> bidProductRecords = [];
 
@@ -43,6 +47,13 @@ class SaleMenuController extends GetxController
           handleTabBarChanged(tabController.index);
         }
       });
+
+    if (args != null && args is bool) {
+      isProductCreated = args;
+      if (isProductCreated) {
+        await handlePullRefresh(ProductType.sell);
+      }
+    }
 
     await queryProduct("sell", salePage, isLoadMoreSale, saleProductRecords);
     toggleSwitch();

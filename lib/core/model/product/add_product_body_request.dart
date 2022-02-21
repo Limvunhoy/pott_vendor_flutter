@@ -15,7 +15,8 @@ String addProductBodyRequestToJson(AddProductBodyRequest data) =>
 class AddProductBodyRequest {
   AddProductBodyRequest({
     required this.name,
-    required this.image,
+    required this.thumnail,
+    required this.images,
     required this.description,
     required this.categoryId,
     required this.vendorId,
@@ -24,28 +25,31 @@ class AddProductBodyRequest {
   });
 
   String name;
-  String image;
+  String thumnail;
+  List<String> images;
   String description;
   String categoryId;
-  String vendorId;
+  int vendorId;
   List<AddProductOption> productOptions;
   List<AddProductVariance> productVariance;
 
   AddProductBodyRequest copyWith({
     String? name,
-    String? image,
+    String? thumnail,
+    List<String>? images,
     String? description,
     String? categoryId,
-    String? vendorId,
+    int? vendorId,
     List<AddProductOption>? productOptions,
     List<AddProductVariance>? productVariance,
   }) =>
       AddProductBodyRequest(
         name: name ?? this.name,
-        image: image ?? this.image,
+        thumnail: thumnail ?? this.thumnail,
+        images: images ?? this.images,
         description: description ?? this.description,
         categoryId: categoryId ?? this.categoryId,
-        vendorId: vendorId ?? this.vendorId,
+        vendorId: vendorId ?? -1,
         productOptions: productOptions ?? this.productOptions,
         productVariance: productVariance ?? this.productVariance,
       );
@@ -53,7 +57,8 @@ class AddProductBodyRequest {
   factory AddProductBodyRequest.fromJson(Map<String, dynamic> json) =>
       AddProductBodyRequest(
         name: json["name"],
-        image: json["image"],
+        thumnail: json["thumnail"],
+        images: List<String>.from(json["images"].map((x) => x)),
         description: json["description"],
         categoryId: json["categoryId"],
         vendorId: json["vendorId"],
@@ -65,7 +70,8 @@ class AddProductBodyRequest {
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        "image": image,
+        "thumnail": thumnail,
+        "images": List<dynamic>.from(images.map((x) => x)),
         "description": description,
         "categoryId": categoryId,
         "vendorId": vendorId,
@@ -77,7 +83,7 @@ class AddProductBodyRequest {
 
   @override
   String toString() {
-    return "{name: $name, image: $image, description: $description, categoryId: $categoryId, vendorId: $vendorId, productOptions: $productOptions, productVariance: $productVariance}";
+    return "{name: $name, thumbnail: $thumnail, image: $images, description: $description, categoryId: $categoryId, vendorId: $vendorId, productOptions: $productOptions, productVariance: $productVariance}";
   }
 }
 

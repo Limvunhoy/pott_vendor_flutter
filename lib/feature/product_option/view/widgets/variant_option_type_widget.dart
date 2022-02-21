@@ -59,6 +59,7 @@ class VariantOptionWidget extends StatelessWidget {
                 onSubmitted: (newValue) {
                   onSubmitted(newValue);
                 },
+                textCapitalization: TextCapitalization.sentences,
                 resetTextOnSubmitted: true,
                 tagSpacing: 0.0,
                 hasAddButton: false,
