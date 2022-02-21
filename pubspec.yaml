@@ -42,6 +42,9 @@ dependencies:
   intl: ^0.17.0
   material_tag_editor: ^0.1.1
   loading_overlay: ^0.3.0
+  firebase_core: ^1.12.0
+  firebase_messaging: ^11.2.6
+  flutter_local_notifications: ^9.3.2
 
 dev_dependencies:
   flutter_test:

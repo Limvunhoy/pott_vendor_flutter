@@ -4,7 +4,6 @@ import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart'
 import 'package:pott_vendor/feature/product_option/view/export_widget.dart';
 import 'package:pott_vendor/feature/report/view/widgets/chart_widget.dart';
 import 'package:pott_vendor/feature/report/controller/report_controller.dart';
-import 'package:pott_vendor/feature/report/view/widgets/no_data_report.dart';
 import 'package:pott_vendor/feature/report/view/widgets/total_sale_widget.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
 

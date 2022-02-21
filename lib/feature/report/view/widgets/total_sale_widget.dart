@@ -54,7 +54,9 @@ class TotalSaleWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BaseSmallText(
-                  text: "Total sales Today",
+                  text: type == TotalType.today
+                      ? "Total sales Today"
+                      : "Total sales this month",
                   color: type == TotalType.today
                       ? Colors.white
                       : colorExt.PRIMARY_COLOR,
