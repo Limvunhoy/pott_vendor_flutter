@@ -48,4 +48,17 @@ class OrderService {
       throw e;
     }
   }
+
+  Future<OrderRecordResponse?> getOrderDetail(String id) async {
+    try {
+      final res = await _apiBaseHelper.get("${EndPoint.orderDetail}/$id");
+      if (res.data["httpCode"] == 200) {
+        return OrderRecordResponse.fromJson(res.data["data"]);
+      } else {
+        throw ErrorResponse.fromJson(res.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 }

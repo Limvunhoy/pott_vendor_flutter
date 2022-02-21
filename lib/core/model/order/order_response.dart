@@ -82,6 +82,8 @@ class OrderRecordResponse {
     this.delivery,
     required this.displayId,
     required this.timeLine,
+    required this.orderStatus,
+    required this.recentTimeLine,
     required this.vendor,
     required this.totalQty,
     required this.totalPrice,
@@ -93,6 +95,8 @@ class OrderRecordResponse {
   final String displayId;
   final OrderTimeLineResponse timeLine;
   final OrderVendorResponse vendor;
+  final String orderStatus;
+  DateTime recentTimeLine;
   final int totalQty;
   final int totalPrice;
 
@@ -106,6 +110,8 @@ class OrderRecordResponse {
             : OrderDeliveryResponse.fromJson(json["delivery"]),
         displayId: json["displayId"],
         timeLine: OrderTimeLineResponse.fromJson(json["timeLine"]),
+        orderStatus: json["orderStatus"],
+        recentTimeLine: DateTime.parse(json["recentTimeLine"]),
         vendor: OrderVendorResponse.fromJson(json["vendor"]),
         totalQty: json["totalQty"],
         totalPrice: json["totalPrice"],
@@ -117,6 +123,8 @@ class OrderRecordResponse {
         "delivery": delivery == null ? null : delivery?.toJson(),
         "displayId": displayId,
         "timeLine": timeLine.toJson(),
+        "orderStatus": orderStatus,
+        "recentTimeLine": recentTimeLine.toIso8601String(),
         "vendor": vendor.toJson(),
         "totalQty": totalQty,
         "totalPrice": totalPrice,
@@ -152,7 +160,8 @@ class OrderItemListResponse {
   OrderItemListResponse({
     required this.qty,
     required this.name,
-    required this.image,
+    required this.thumbnail,
+    required this.images,
     required this.description,
     required this.cost,
     required this.salePrice,
@@ -163,7 +172,8 @@ class OrderItemListResponse {
 
   final int qty;
   final String name;
-  final String image;
+  List<String> thumbnail;
+  List<dynamic> images;
   final String description;
   final int cost;
   final int salePrice;
@@ -175,7 +185,8 @@ class OrderItemListResponse {
       OrderItemListResponse(
         qty: json["qty"],
         name: json["name"],
-        image: json["image"],
+        thumbnail: List<String>.from(json["thumbnail"].map((x) => x)),
+        images: List<dynamic>.from(json["images"].map((x) => x)),
         description: json["description"],
         cost: json["cost"],
         salePrice: json["salePrice"],
@@ -188,7 +199,8 @@ class OrderItemListResponse {
   Map<String, dynamic> toJson() => {
         "qty": qty,
         "name": name,
-        "image": image,
+        "thumbnail": List<dynamic>.from(thumbnail.map((x) => x)),
+        "images": List<dynamic>.from(images.map((x) => x)),
         "description": description,
         "cost": cost,
         "salePrice": salePrice,

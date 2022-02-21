@@ -13,10 +13,10 @@ class ItemDescription extends StatelessWidget {
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         primary: false,
-        itemCount: controller.dummyProductItems.length,
+        itemCount: controller.productRecord.images.length,
         itemBuilder: (context, index) {
           return Image.network(
-            controller.dummyProductItems[index],
+            controller.productRecord.images[index],
             fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.width / 2,

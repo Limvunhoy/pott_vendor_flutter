@@ -39,7 +39,7 @@ class BottomNavigationWidget extends StatelessWidget {
                     color: Colors.black, fontSize: fontSizeExt.smallSize),
               ),
               Text(
-                "\$ ${processingController.orderRecordItem.totalPrice}",
+                "\$ ${processingController.orderRecordItem?.totalPrice}",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: fontSizeExt.largeSize,
@@ -53,8 +53,8 @@ class BottomNavigationWidget extends StatelessWidget {
           const SizedBox(
             height: 13.0,
           ),
-          processingController.fetchStatus == FetchStatus.loading
-              ? LoadingButton()
+          processingController.isButtonTapped == true
+              ? Center(child: LoadingButton())
               : processingController.processingState ==
                       ProcessingState.processing
                   ? BaseButton(
