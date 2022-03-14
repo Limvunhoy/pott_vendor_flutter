@@ -15,7 +15,7 @@ String addProductBodyRequestToJson(AddProductBodyRequest data) =>
 class AddProductBodyRequest {
   AddProductBodyRequest({
     required this.name,
-    required this.thumnail,
+    required this.thumbnail,
     required this.images,
     required this.description,
     required this.categoryId,
@@ -25,7 +25,7 @@ class AddProductBodyRequest {
   });
 
   String name;
-  String thumnail;
+  List<String> thumbnail;
   List<String> images;
   String description;
   String categoryId;
@@ -35,7 +35,7 @@ class AddProductBodyRequest {
 
   AddProductBodyRequest copyWith({
     String? name,
-    String? thumnail,
+    List<String>? thumbnail,
     List<String>? images,
     String? description,
     String? categoryId,
@@ -45,7 +45,7 @@ class AddProductBodyRequest {
   }) =>
       AddProductBodyRequest(
         name: name ?? this.name,
-        thumnail: thumnail ?? this.thumnail,
+        thumbnail: thumbnail ?? this.thumbnail,
         images: images ?? this.images,
         description: description ?? this.description,
         categoryId: categoryId ?? this.categoryId,
@@ -57,7 +57,7 @@ class AddProductBodyRequest {
   factory AddProductBodyRequest.fromJson(Map<String, dynamic> json) =>
       AddProductBodyRequest(
         name: json["name"],
-        thumnail: json["thumnail"],
+        thumbnail: json["thumbnail"],
         images: List<String>.from(json["images"].map((x) => x)),
         description: json["description"],
         categoryId: json["categoryId"],
@@ -70,7 +70,7 @@ class AddProductBodyRequest {
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        "thumnail": thumnail,
+        "thumbnail": thumbnail,
         "images": List<dynamic>.from(images.map((x) => x)),
         "description": description,
         "categoryId": categoryId,
@@ -83,7 +83,7 @@ class AddProductBodyRequest {
 
   @override
   String toString() {
-    return "{name: $name, thumbnail: $thumnail, image: $images, description: $description, categoryId: $categoryId, vendorId: $vendorId, productOptions: $productOptions, productVariance: $productVariance}";
+    return "{name: $name, thumbnail: $thumbnail, image: $images, description: $description, categoryId: $categoryId, vendorId: $vendorId, productOptions: $productOptions, productVariance: $productVariance}";
   }
 }
 
