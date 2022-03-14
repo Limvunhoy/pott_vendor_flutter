@@ -49,5 +49,7 @@
 		<string>Allow to use your microphone</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Allow to access your device photo</string>
+		<key>FirebaseAppDelegateProxyEnabled</key>
+        <true/>
 	</dict>
 </plist>

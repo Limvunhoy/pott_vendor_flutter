@@ -169,8 +169,10 @@ class ProductOptionController extends GetxController {
     try {
       await getUserFromSharedPreference();
 
+      await uploadProductPhotos();
+
       await uploadPhotoDescription();
-      addProductBodyRequest.thumnail = await uploadProductPhotos();
+      // addProductBodyRequest.thumnail = await uploadProductPhotos();
 
       print("Add Product Body Request $addProductBodyRequest");
 
@@ -208,21 +210,34 @@ extension on ProductOptionController {
     addProductBodyRequest.vendorId = currentUser.vendorId;
   }
 
-  Future<String> uploadProductPhotos() async {
-    String imagePath = "";
-
+  // Future<String> uploadProductPhotos() async {
+  //   String imagePath = "";
+  //
+  //   try {
+  //     for (var photo in addMenuController.photos) {
+  //       final res = await _service.uploadImage(photo);
+  //       if (res != null) {
+  //         print("Product Upload Photo: ${res.results.path}");
+  //         imagePath = res.results.path;
+  //       }
+  //     }
+  //     return imagePath;
+  //   } catch (e) {
+  //     print("Failed to Upload Product Photo $e");
+  //     return "";
+  //   }
+  // }
+  uploadProductPhotos() async {
     try {
       for (var photo in addMenuController.photos) {
         final res = await _service.uploadImage(photo);
         if (res != null) {
-          print("Product Upload Photo: ${res.results.path}");
-          imagePath = res.results.path;
+          debugPrint("Product Photo Uploaded: ${res.results.path}");
+          addProductBodyRequest.thumbnail.add(res.results.path);
         }
       }
-      return imagePath;
     } catch (e) {
-      print("Failed to Upload Product Photo $e");
-      return "";
+      debugPrint("Failed to Upload Product Photo: $e");
     }
   }
 
