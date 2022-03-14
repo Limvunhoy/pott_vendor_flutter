@@ -6,11 +6,14 @@ import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'dart:io' show Platform;
 
 class AppDialog {
-  static void showAppDialog(BuildContext context,
-      {required VoidCallback onClose,
-      required VoidCallback onConfirm,
-      required String title,
-      required String subtitle}) {
+  static void showAppDialog(
+    BuildContext context, {
+    required VoidCallback onClose,
+    required VoidCallback onConfirm,
+    required String title,
+    required String subtitle,
+    String? secondButtonTitle,
+  }) {
     Platform.isIOS
         ? showCupertinoDialog(
             context: context,
@@ -48,66 +51,73 @@ class AppDialog {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 // contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
-                content: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        "Are you sure?\nYou want to reject delivery",
-                        textAlign: TextAlign.center,
-                        style:
-                            TextStyle(height: 1.3, fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(
-                        height: 26.0,
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(height: 1.3, fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      height: 3.0,
+                    ),
+                    Text(
+                      subtitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(height: 1.3),
+                    ),
+                    const SizedBox(
+                      height: 26.0,
+                    ),
+                    Container(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
                               onPressed: onClose,
                               child: BaseMediumText(
                                 text: "No",
                               ),
                               style: ElevatedButton.styleFrom(
                                 primary: Color(0xFFF3F4FA),
-                                minimumSize: Size(105, 45),
                                 elevation: 0.0,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 30.0,
-                            ),
-                            ElevatedButton(
+                          ),
+                          const SizedBox(
+                            width: 30.0,
+                          ),
+                          Expanded(
+                            child: ElevatedButton(
                               onPressed: onConfirm,
                               child: BaseMediumText(
-                                text: "Okay",
+                                text: secondButtonTitle ?? "Okay",
                                 color: Colors.white,
                               ),
                               style: ElevatedButton.styleFrom(
                                 primary: colorExt.PRIMARY_COLOR,
-                                minimumSize: Size(105, 45),
                                 elevation: 0.0,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               );
             });
