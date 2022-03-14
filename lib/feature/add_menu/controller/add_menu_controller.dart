@@ -40,7 +40,7 @@ class AddMenuController extends GetxController {
 
   photoPicker() async {
     try {
-      final _selectedImages = await _imagePicker.pickMultiImage(
+      List<XFile>? _selectedImages = await _imagePicker.pickMultiImage(
           maxWidth: 1920.0, maxHeight: 1080.0);
       if (_selectedImages!.isNotEmpty) {
         _selectedImages.forEach((element) {
@@ -126,7 +126,7 @@ class AddMenuController extends GetxController {
   AddProductBodyRequest handleContinue() {
     addProductBodyRequest = AddProductBodyRequest(
       name: titleTextController.text,
-      thumnail: "",
+      thumbnail: [],
       images: [],
       description: descriptionTextController.text,
       categoryId: selectedCategory?.data.id ?? "",
