@@ -136,8 +136,10 @@ class MenuPage extends GetWidget<AuthController> {
                                         break;
                                       case MenuItemEnum.logout:
                                         AppDialog.showAppDialog(context,
-                                            title: "Are you sure?",
-                                            subtitle: "You want to logout?",
+                                            title: "Log out",
+                                            subtitle:
+                                                "Are you sure want to logout?",
+                                            secondButtonTitle: "Yes",
                                             onClose: () {
                                           Get.back();
                                         }, onConfirm: () async {
