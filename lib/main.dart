@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/api/api_base_helper.dart';
@@ -8,6 +9,7 @@ import 'package:pott_vendor/config/app_pages.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/feature/sign_in/controller/auth_controller.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
+import 'package:pott_vendor/utils/helper/base_notification_manager.dart';
 
 final authController = Get.put(AuthController());
 
@@ -23,30 +25,6 @@ const AndroidNotificationChannel androidNotificationChannel =
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print("Background Message: $message");
-  if (message.notification != null) {
-    RemoteNotification remoteNotification = message.notification!;
-    AndroidNotification androidNotification = message.notification!.android!;
-
-    flutterLocalNotificationsPlugin.show(
-      remoteNotification.hashCode,
-      remoteNotification.title,
-      remoteNotification.body,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          androidNotificationChannel.id,
-          androidNotificationChannel.name,
-          channelDescription: androidNotificationChannel.description,
-          color: colorExt.PRIMARY_COLOR,
-          playSound: true,
-        ),
-      ),
-    );
-  }
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -54,14 +32,11 @@ void main() async {
   await authController.readUser();
 
   await Firebase.initializeApp();
-  await init();
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await BaseNotificationManager.initialize(flutterLocalNotificationsPlugin);
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(androidNotificationChannel);
+  FirebaseMessaging.onBackgroundMessage(
+      BaseNotificationManager.firebaseMessagingBackgroundHandler);
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -69,29 +44,11 @@ void main() async {
     sound: true,
   );
 
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
+
   runApp(MyApp());
-}
-
-Future<void> init() async {
-  //Initialization Settings for Android
-  final AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-
-  //Initialization Settings for iOS
-  final IOSInitializationSettings initializationSettingsIOS =
-      IOSInitializationSettings(
-    requestSoundPermission: false,
-    requestBadgePermission: false,
-    requestAlertPermission: false,
-  );
-
-  //InitializationSettings for initializing settings for both platforms (Android & iOS)
-  final InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-
-  await flutterLocalNotificationsPlugin.initialize(
-    initializationSettings,
-  );
 }
 
 class MyApp extends StatefulWidget {
@@ -101,34 +58,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AuthController authController = Get.find<AuthController>();
-
-  @override
-  void initState() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      if (message.notification != null) {
-        RemoteNotification remoteNotification = message.notification!;
-        AndroidNotification androidNotification =
-            message.notification!.android!;
-
-        flutterLocalNotificationsPlugin.show(
-          remoteNotification.hashCode,
-          remoteNotification.title,
-          remoteNotification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              androidNotificationChannel.id,
-              androidNotificationChannel.name,
-              channelDescription: androidNotificationChannel.description,
-              color: colorExt.PRIMARY_COLOR,
-              playSound: true,
-            ),
-          ),
-        );
-      }
-    });
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
