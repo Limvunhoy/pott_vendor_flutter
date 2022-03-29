@@ -8,16 +8,18 @@ import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class SaleProductItem extends StatelessWidget {
-  const SaleProductItem(
-      {Key? key,
-      required this.onItemTapped,
-      required this.saleProduct,
-      required this.controller})
-      : super(key: key);
+  const SaleProductItem({
+    Key? key,
+    required this.onItemTapped,
+    required this.saleProduct,
+    required this.controller,
+    required this.onEditTap,
+  }) : super(key: key);
 
   final VoidCallback onItemTapped;
   final ProductRecord saleProduct;
   final SaleMenuController controller;
+  final VoidCallback onEditTap;
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +181,7 @@ class SaleProductItem extends StatelessWidget {
                           elevation: 0.0,
                           child: Ink(
                             child: InkWell(
-                              onTap: () {},
+                              onTap: onEditTap,
                               child: Row(
                                 children: [
                                   Image.asset(

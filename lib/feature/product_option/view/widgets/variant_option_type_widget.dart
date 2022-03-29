@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_tag_editor/tag_editor.dart';
 import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
+import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/feature/product_option/controller/product_option_controller.dart';
 import 'package:pott_vendor/feature/product_option/view/widgets/variant_item.dart';
 import 'package:pott_vendor/utils/common/base_title_text.dart';
@@ -20,7 +21,7 @@ class VariantOptionWidget extends StatelessWidget {
 
   final String titleType;
   final ProductOptionController controller;
-  final List<AddProductOptionValue>? items;
+  final List<ProductOptionValue>? items;
   final bool isTopPadding;
   final Function(String) onSubmitted;
   final Function(int) onDeleted;

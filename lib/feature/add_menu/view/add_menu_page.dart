@@ -30,6 +30,15 @@ class AddMenuPage extends GetWidget<AddMenuController> {
       titleColor: Colors.black,
       appBarBackgroundColor: Colors.white,
       backgroundColor: Colors.white,
+      leading: IconButton(
+        onPressed: () {
+          Get.back();
+        },
+        icon: Icon(
+          Icons.arrow_back_ios,
+          color: colorExt.PRIMARY_COLOR,
+        ),
+      ),
       body: DismissKeyboardContent(
         child: GetBuilder(
             init: controller,
@@ -73,6 +82,7 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                             height: 13.0,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               AddPhotoWidget(
                                 frameWidth: 104.0,
@@ -90,16 +100,99 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                                 width: 10,
                               ),
                               Expanded(
-                                child: Container(
-                                  height: 104,
-                                  color: Colors.transparent,
-                                  child: PhotoList(
-                                    controller: controller,
-                                  ),
+                                  child: Container(
+                                width: 104,
+                                height: 104,
+                                child: PhotoList(
+                                  controller: controller,
                                 ),
                               )
+                                  // Expanded(
+                                  //   child: Container(
+                                  //     width: 125,
+                                  //     height: 125,
+                                  //     child: PhotoList(
+                                  //       controller: controller,
+                                  //     ),
+                                  // child: ListView.separated(
+                                  //     scrollDirection: Axis.horizontal,
+                                  //     shrinkWrap: true,
+                                  //     primary: false,
+                                  //     itemCount: 5,
+                                  //     separatorBuilder: (context, index) {
+                                  //       return const SizedBox(
+                                  //         width: 10,
+                                  //       );
+                                  //     },
+                                  //     itemBuilder: (context, index) {
+                                  //       // return Container(
+                                  //       //   color: Colors.grey,
+                                  //       //   width: 104,
+                                  //       //   height: 104,
+                                  //       // );
+                                  //       return Stack(
+                                  //         clipBehavior: Clip.none,
+                                  //         children: [
+                                  //           Center(
+                                  //             child: Container(
+                                  //               color: Colors.grey,
+                                  //               width: 104,
+                                  //               height: 104,
+                                  //             ),
+                                  //           ),
+                                  //           Positioned(
+                                  //             top: -15,
+                                  //             right: 0,
+                                  //             child: IconButton(
+                                  //               onPressed: () {
+                                  //                 print("Remove Image");
+                                  //                 controller
+                                  //                     .handleRemoveDescriptionPhoto(
+                                  //                         index);
+                                  //               },
+                                  //               icon: Icon(
+                                  //                 Icons.cancel_sharp,
+                                  //               ),
+                                  //             ),
+                                  //           )
+                                  //         ],
+                                  //       );
+                                  //     }),
+                                  // ),
+                                  )
                             ],
-                          )
+                          ),
+
+                          // Row(
+                          //   children: [
+                          //     AddPhotoWidget(
+                          //       frameWidth: 104.0,
+                          //       frameHeight: 104.0,
+                          //       iconWidth: 37.37,
+                          //       iconHeight: 30.77,
+                          //       fontSize: fontSizeExt.smallSize,
+                          //       onTap: () {
+                          //         // controller.photoPicker();
+                          //         showImageSource(
+                          //             context, ProductPhotoType.productPhoto);
+                          //       },
+                          //     ),
+                          //     const SizedBox(
+                          //       width: 10,
+                          //     ),
+                          //     // Expanded(
+                          //     //     child: PhotoList(controller: controller)),
+                          //     Expanded(
+                          //       child: Container(
+                          //         height: 104,
+                          //         color: Colors.transparent,
+                          //         child: PhotoList(
+                          //           controller: controller,
+                          //         ),
+                          //       ),
+                          //     )
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),
@@ -262,8 +355,13 @@ class AddMenuPage extends GetWidget<AddMenuController> {
           child: BaseButton(
             onPressed: () async {
               // controller.uploadProductPhotos();
-              final res = controller.handleContinue();
-              Get.toNamed(Routes.PRODUCT_OPTION, arguments: res);
+              if (controller.isEdit) {
+                Get.toNamed(Routes.PRODUCT_OPTION,
+                    arguments: controller.addProductBodyRequest);
+              } else {
+                final res = controller.handleContinue();
+                Get.toNamed(Routes.PRODUCT_OPTION, arguments: res);
+              }
             },
             title: "Continue",
             titleColor: Colors.white,

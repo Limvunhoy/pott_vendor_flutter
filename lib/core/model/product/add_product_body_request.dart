@@ -6,6 +6,8 @@ import 'dart:convert';
 
 import 'dart:math';
 
+import 'package:pott_vendor/core/model/product/product_response.dart';
+
 AddProductBodyRequest addProductBodyRequestFromJson(String str) =>
     AddProductBodyRequest.fromJson(json.decode(str));
 
@@ -30,8 +32,8 @@ class AddProductBodyRequest {
   String description;
   String categoryId;
   int vendorId;
-  List<AddProductOption> productOptions;
-  List<AddProductVariance> productVariance;
+  List<ProductOption> productOptions;
+  List<ProductVariance> productVariance;
 
   AddProductBodyRequest copyWith({
     String? name,
@@ -40,8 +42,8 @@ class AddProductBodyRequest {
     String? description,
     String? categoryId,
     int? vendorId,
-    List<AddProductOption>? productOptions,
-    List<AddProductVariance>? productVariance,
+    List<ProductOption>? productOptions,
+    List<ProductVariance>? productVariance,
   }) =>
       AddProductBodyRequest(
         name: name ?? this.name,
@@ -62,10 +64,18 @@ class AddProductBodyRequest {
         description: json["description"],
         categoryId: json["categoryId"],
         vendorId: json["vendorId"],
-        productOptions: List<AddProductOption>.from(
-            json["productOptions"].map((x) => AddProductOption.fromJson(x))),
-        productVariance: List<AddProductVariance>.from(
-            json["productVariance"].map((x) => AddProductVariance.fromJson(x))),
+        productOptions: List<ProductOption>.from(
+            json["productOptions"].map((x) => ProductOption.fromJson(x))),
+        // productVariance: List<AddProductVariance>.from(
+        //   json["productVariance"].map(
+        //     (x) => AddProductVariance.fromJson(x),
+        //   ),
+        // ),
+        productVariance: List<ProductVariance>.from(
+          json["productVariance"].map(
+            (x) => ProductVariance.fromJson(x),
+          ),
+        ),
       );
 
   Map<String, dynamic> toJson() => {

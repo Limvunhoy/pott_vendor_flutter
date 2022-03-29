@@ -31,6 +31,7 @@ class PhotoDescriptionList extends StatelessWidget {
           clipBehavior: Clip.none,
           alignment: Alignment.center,
           children: [
+            // if (!controller.isEdit) ...[
             Container(
               width: 70.0,
               height: 70.0,
@@ -44,16 +45,51 @@ class PhotoDescriptionList extends StatelessWidget {
                 ),
               ),
             ),
+            // ] else ...[
+            //   Container(
+            //     width: 70.0,
+            //     height: 70.0,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(6.0),
+            //       image: DecorationImage(
+            //           fit: BoxFit.cover,
+            //           image: NetworkImage(
+            //             controller.addProductBodyRequest.images[index],
+            //           )),
+            //     ),
+            //   ),
+            // ],
+            // Positioned(
+            //   top: -9,
+            //   right: -20,
+            //   child: IconButton(
+            //     onPressed: () {
+            //       print("Remove Image");
+            //       controller.handleRemoveDescriptionPhoto(index);
+            //     },
+            //     icon: Icon(
+            //       Icons.cancel_sharp,
+            //     ),
+            //   ),
+            // ),
             Positioned(
-              top: -9,
-              right: -20,
-              child: IconButton(
+              top: 3,
+              right: -12,
+              child: ElevatedButton(
                 onPressed: () {
-                  print("Remove Image");
                   controller.handleRemoveDescriptionPhoto(index);
                 },
-                icon: Icon(
-                  Icons.cancel_sharp,
+                child: Icon(
+                  Icons.close,
+                  color: Colors.white,
+                  size: 16,
+                ),
+                style: ElevatedButton.styleFrom(
+                  // fixedSize: Size(10, 10),
+                  minimumSize: Size(20, 20),
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(0),
+                  primary: Colors.black, // <-- Button color
                 ),
               ),
             ),

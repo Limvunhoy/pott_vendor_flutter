@@ -40,6 +40,12 @@ class SaleProductPage extends StatelessWidget {
                     });
                   },
                   saleProduct: controller.saleProductRecords[index],
+                  onEditTap: () {
+                    Get.toNamed(Routes.ADD_MENU, arguments: {
+                      "isEdit": true,
+                      "productRecord": controller.saleProductRecords[index]
+                    });
+                  },
                 );
               }),
     );

@@ -5,6 +5,7 @@ import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/core/model/auth/user_response.dart';
 import 'package:pott_vendor/core/model/error/error_response.dart';
 import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
+import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/core/service/product/product_service.dart';
 import 'package:pott_vendor/feature/add_menu/controller/add_menu_controller.dart';
 import 'package:pott_vendor/main.dart';
@@ -23,8 +24,10 @@ class ProductOptionController extends GetxController {
   final arg = Get.arguments;
   late AddProductBodyRequest addProductBodyRequest;
 
-  TextEditingController oriPriceTextController = TextEditingController();
-  TextEditingController salePriceTextController = TextEditingController();
+  // TextEditingController oriPriceTextController = TextEditingController();
+  // TextEditingController salePriceTextController = TextEditingController();
+  List<TextEditingController> oriPriceTextControllers = [];
+  List<TextEditingController> salePriceTextControllers = [];
   int qty = 0;
 
   FetchStatus fetchStatus = FetchStatus.idle;
@@ -37,6 +40,11 @@ class ProductOptionController extends GetxController {
   void onInit() {
     if (arg is AddProductBodyRequest) {
       addProductBodyRequest = arg;
+      listProductOptions = addProductBodyRequest.productOptions;
+      if (addProductBodyRequest.productOptions.isNotEmpty &&
+          addProductBodyRequest.productVariance.isNotEmpty) {
+        handleGenerateProductOption();
+      }
     }
 
     super.onInit();
@@ -44,8 +52,13 @@ class ProductOptionController extends GetxController {
 
   handleAddVariantType(String newType) {
     if (newType.isNotEmpty) {
-      listProductOptions
-          .add(AddProductOption(option: newType, productOptionValue: []));
+      listProductOptions.add(
+        // AddProductOption(
+        //   option: newType,
+        //   productOptionValue: [],
+        // ),
+        ProductOption(option: newType, productOptionValue: []),
+      );
       update();
     }
   }
@@ -96,7 +109,9 @@ class ProductOptionController extends GetxController {
   handleAddOptionVariant(int index, String option) {
     if (option.isNotEmpty) {
       listProductOptions[index].productOptionValue.add(
-          AddProductOptionValue(optionValue: option, optionValueImageUrl: ""));
+            // AddProductOptionValue(optionValue: option, optionValueImageUrl: ""),
+            ProductOptionValue(optionValue: option, optionValueImageUrl: ""),
+          );
       update();
     }
   }
@@ -108,11 +123,14 @@ class ProductOptionController extends GetxController {
 
   // List<List<String>> generatedOptions = <List<String>>[];
 
-  List<AddProductOption> listProductOptions = <AddProductOption>[];
+  List<ProductOption> listProductOptions = <ProductOption>[];
 
-  List<AddProductVariance> addProductVariance = <AddProductVariance>[];
-  List<List<AddProductOptionValue>> productOptionVariances =
-      <List<AddProductOptionValue>>[];
+  // List<AddProductVariance> addProductVariance = <AddProductVariance>[];
+  // List<List<AddProductOptionValue>> productOptionVariances =
+  //     <List<AddProductOptionValue>>[];
+  List<ProductVariance> addProductVariance = <ProductVariance>[];
+  List<List<ProductOptionValue>> productOptionVariances =
+      <List<ProductOptionValue>>[];
 
   handleGenerateProductOption() {
     // productOptionVariances.clear();
@@ -123,9 +141,17 @@ class ProductOptionController extends GetxController {
       var next = [];
       type.forEach((item) {
         listProductOptions[i].productOptionValue.forEach((word) {
-          List<AddProductOptionValue> line = item.sublist(0);
-          line.add(AddProductOptionValue(
-              optionValue: word.optionValue, optionValueImageUrl: ""));
+          // List<AddProductOptionValue> line = item.sublist(0);
+          List<ProductOptionValue> line = item.sublist(0);
+          // line.add(
+          //   AddProductOptionValue(
+          //       optionValue: word.optionValue, optionValueImageUrl: ""),
+          // );
+          line.add(
+            ProductOptionValue(
+                optionValue: word.optionValue,
+                optionValueImageUrl: word.optionValueImageUrl),
+          );
           next.add(line);
         });
       });
@@ -141,8 +167,34 @@ class ProductOptionController extends GetxController {
           wa.add(productOptionVariances[i][j].optionValue);
           combine = wa.join("-");
         }
-        addProductVariance
-            .add(AddProductVariance(combination: combine, imageUrl: ""));
+        // addProductVariance
+        //     .add(ProductVariance(combination: combine, imageUrl: ""));
+        oriPriceTextControllers.add(TextEditingController());
+        salePriceTextControllers.add(TextEditingController());
+
+        addProductVariance.add(
+          ProductVariance(
+            combination: combine,
+            cost: addProductBodyRequest.productVariance[i].cost,
+            price: addProductBodyRequest.productVariance[i].price,
+            quantity: addProductBodyRequest.productVariance[i].quantity,
+            imageUrl: "",
+          ),
+        );
+
+        oriPriceTextControllers[i].text =
+            addProductBodyRequest.productVariance[i].cost ?? "";
+        salePriceTextControllers[i].text =
+            addProductBodyRequest.productVariance[i].price ?? "";
+        // print(
+        // "OriPrice TextControllers Length: ${addProductBodyRequest.productVariance[i].quantity}");
+
+        // handleUpdateSalePrice(
+        //     i, addProductBodyRequest.productVariance[i].cost ?? "");
+        // handleUpdateOriPrice(
+        //     i, addProductBodyRequest.productVariance[i].price ?? "");
+
+        // oriPriceTextController.text = add
       }
 
       update();

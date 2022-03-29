@@ -78,6 +78,7 @@ class OptionList extends StatelessWidget {
                   DataCell(Text("${e.value.combination}")),
                   DataCell(TextField(
                     // controller: controller.oriPriceTextController,
+                    controller: controller.oriPriceTextControllers[e.key],
                     onChanged: (value) {
                       controller.handleUpdateOriPrice(e.key, value);
                     },
@@ -92,6 +93,7 @@ class OptionList extends StatelessWidget {
                   )),
                   DataCell(TextField(
                     // controller: controller.salePriceTextController,
+                    controller: controller.salePriceTextControllers[e.key],
                     onChanged: (value) {
                       controller.handleUpdateSalePrice(e.key, value);
                     },

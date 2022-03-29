@@ -1,11 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pott_vendor/feature/add_menu/controller/add_menu_controller.dart';
-import 'package:pott_vendor/feature/add_menu/view/widgets/add_photo_widget.dart';
-import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
-import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class PhotoList extends StatelessWidget {
   const PhotoList({Key? key, required this.controller}) : super(key: key);
@@ -30,6 +24,7 @@ class PhotoList extends StatelessWidget {
           clipBehavior: Clip.none,
           alignment: Alignment.center,
           children: [
+            // if (!controller.isEdit) ...[
             Container(
               width: 104.0,
               height: 104.0,
@@ -43,17 +38,37 @@ class PhotoList extends StatelessWidget {
                 ),
               ),
             ),
+            // ] else ...[
+            //   Container(
+            //     width: 104.0,
+            //     height: 104.0,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(6.0),
+            //       image: DecorationImage(
+            //           fit: BoxFit.cover,
+            //           image: NetworkImage(
+            //               controller.addProductBodyRequest.thumbnail[index])),
+            //     ),
+            //   ),
+            // ],
             Positioned(
-              top: -23,
-              right: -23,
-              child: IconButton(
+              top: -10,
+              right: -10,
+              child: ElevatedButton(
                 onPressed: () {
-                  print("Remove Image");
                   controller.handleRemovePhoto(index);
                 },
-                icon: Icon(
-                  Icons.cancel_sharp,
-                  size: 28.0,
+                child: Icon(
+                  Icons.close,
+                  color: Colors.white,
+                  size: 16,
+                ),
+                style: ElevatedButton.styleFrom(
+                  // fixedSize: Size(10, 10),
+                  minimumSize: Size(20, 20),
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(0),
+                  primary: Colors.black, // <-- Button color
                 ),
               ),
             ),

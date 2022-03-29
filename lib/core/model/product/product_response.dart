@@ -263,16 +263,16 @@ class Category {
 
 class ProductOption {
   ProductOption({
-    required this.id,
+    this.id,
     required this.option,
     required this.productOptionValue,
-    required this.productId,
+    this.productId,
   });
 
-  String id;
+  String? id;
   String option;
   List<ProductOptionValue> productOptionValue;
-  String productId;
+  String? productId;
 
   ProductOption copyWith({
     String? id,
@@ -337,30 +337,30 @@ class ProductOptionValue {
 
 class ProductVariance {
   ProductVariance({
-    required this.id,
+    this.id,
     required this.combination,
-    required this.imageUrl,
-    required this.cost,
-    required this.price,
-    required this.quantity,
-    required this.productId,
+    this.imageUrl,
+    this.cost,
+    this.price,
+    this.quantity,
+    this.productId,
   });
 
-  String id;
+  String? id;
   String combination;
-  String imageUrl;
-  int cost;
-  int price;
-  int quantity;
-  String productId;
+  String? imageUrl;
+  String? cost;
+  String? price;
+  String? quantity;
+  String? productId;
 
   ProductVariance copyWith({
     String? id,
     String? combination,
     String? imageUrl,
-    int? cost,
-    int? price,
-    int? quantity,
+    String? cost,
+    String? price,
+    String? quantity,
     String? productId,
   }) =>
       ProductVariance(
@@ -378,9 +378,9 @@ class ProductVariance {
         id: json["_id"],
         combination: json["combination"],
         imageUrl: json["imageUrl"],
-        cost: json["cost"],
-        price: json["price"],
-        quantity: json["quantity"],
+        cost: json["cost"].toString(),
+        price: json["price"].toString(),
+        quantity: json["quantity"].toString(),
         productId: json["productId"],
       );
 
