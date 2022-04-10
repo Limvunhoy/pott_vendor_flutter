@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/feature/notification/view/widget/notification_item.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
@@ -8,13 +9,10 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BaseView(
       backgroundColor: colorExt.PRIMARY_BACKGROUND_COLOR,
-      appBar: AppBar(
-        title: Text("Notification"),
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-      ),
+      title: "Notification",
+      appBarBackgroundColor: Colors.white,
       body: Container(
         margin: const EdgeInsets.all(appSizeExt.basePadding),
         decoration: BoxDecoration(
