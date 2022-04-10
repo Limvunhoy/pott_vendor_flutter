@@ -356,11 +356,16 @@ class AddMenuPage extends GetWidget<AddMenuController> {
             onPressed: () async {
               // controller.uploadProductPhotos();
               if (controller.isEdit) {
-                Get.toNamed(Routes.PRODUCT_OPTION,
-                    arguments: controller.addProductBodyRequest);
+                controller.addProductBodyRequest.categoryId =
+                    "621ce74871132eee5e1c71a9";
+                Get.toNamed(Routes.PRODUCT_OPTION, arguments: {
+                  "isEdit": true,
+                  "bodyRequest": controller.addProductBodyRequest
+                });
               } else {
                 final res = controller.handleContinue();
-                Get.toNamed(Routes.PRODUCT_OPTION, arguments: res);
+                Get.toNamed(Routes.PRODUCT_OPTION,
+                    arguments: {"isEdit": false, "bodyRequest": res});
               }
             },
             title: "Continue",

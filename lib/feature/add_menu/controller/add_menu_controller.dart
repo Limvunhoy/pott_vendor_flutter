@@ -71,6 +71,7 @@ class AddMenuController extends GetxController {
     titleTextController.text = productRecord.name;
     descriptionTextController.text = productRecord.description;
     addProductBodyRequest = AddProductBodyRequest(
+      id: productRecord.id,
       name: productRecord.name,
       thumbnail: productRecord.thumbnail,
       images: productRecord.thumbnail,

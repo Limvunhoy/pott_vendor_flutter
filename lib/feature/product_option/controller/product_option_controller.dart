@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/core/model/auth/user_response.dart';
@@ -8,6 +9,8 @@ import 'package:pott_vendor/core/model/product/add_product_body_request.dart';
 import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/core/service/product/product_service.dart';
 import 'package:pott_vendor/feature/add_menu/controller/add_menu_controller.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
+import 'package:pott_vendor/feature/sale_menu/controller/sale_menu_controller.dart';
 import 'package:pott_vendor/main.dart';
 import 'package:pott_vendor/utils/constants/shared_preference_keys.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
@@ -23,6 +26,7 @@ class ProductOptionController extends GetxController {
 
   final arg = Get.arguments;
   late AddProductBodyRequest addProductBodyRequest;
+  bool isEdit = false;
 
   // TextEditingController oriPriceTextController = TextEditingController();
   // TextEditingController salePriceTextController = TextEditingController();
@@ -38,12 +42,16 @@ class ProductOptionController extends GetxController {
 
   @override
   void onInit() {
-    if (arg is AddProductBodyRequest) {
-      addProductBodyRequest = arg;
+    isEdit = arg["isEdit"];
+
+    if (arg["bodyRequest"] != null &&
+        arg["bodyRequest"] is AddProductBodyRequest) {
+      addProductBodyRequest = arg["bodyRequest"];
       listProductOptions = addProductBodyRequest.productOptions;
       if (addProductBodyRequest.productOptions.isNotEmpty &&
           addProductBodyRequest.productVariance.isNotEmpty) {
-        handleGenerateProductOption();
+        // handleGenerateNewProductOption();
+        handleGenerateUpdateProductOption();
       }
     }
 
@@ -132,9 +140,13 @@ class ProductOptionController extends GetxController {
   List<List<ProductOptionValue>> productOptionVariances =
       <List<ProductOptionValue>>[];
 
-  handleGenerateProductOption() {
+  handleGenerateUpdateProductOption() {
     // productOptionVariances.clear();
     // addProductVariance.clear();
+
+    debugPrint(
+        "Update Product Body Request: ${addProductBodyRequest.toString()}");
+
     var type = listProductOptions[0].productOptionValue.map((e) => [e]);
 
     for (var i = 1; i < listProductOptions.length; i++) {
@@ -172,29 +184,73 @@ class ProductOptionController extends GetxController {
         oriPriceTextControllers.add(TextEditingController());
         salePriceTextControllers.add(TextEditingController());
 
-        addProductVariance.add(
-          ProductVariance(
-            combination: combine,
-            cost: addProductBodyRequest.productVariance[i].cost,
-            price: addProductBodyRequest.productVariance[i].price,
-            quantity: addProductBodyRequest.productVariance[i].quantity,
-            imageUrl: "",
-          ),
-        );
+        if (addProductBodyRequest.productVariance.isNotEmpty) {
+          addProductVariance.add(
+            ProductVariance(
+              combination: combine,
+              cost: addProductBodyRequest.productVariance[i].cost,
+              price: addProductBodyRequest.productVariance[i].price,
+              quantity: addProductBodyRequest.productVariance[i].quantity,
+              imageUrl: "",
+            ),
+          );
 
-        oriPriceTextControllers[i].text =
-            addProductBodyRequest.productVariance[i].cost ?? "";
-        salePriceTextControllers[i].text =
-            addProductBodyRequest.productVariance[i].price ?? "";
-        // print(
-        // "OriPrice TextControllers Length: ${addProductBodyRequest.productVariance[i].quantity}");
+          oriPriceTextControllers[i].text =
+              addProductBodyRequest.productVariance[i].cost ?? "";
+          salePriceTextControllers[i].text =
+              addProductBodyRequest.productVariance[i].price ?? "";
+        } else {
+          addProductVariance
+              .add(ProductVariance(combination: combine, imageUrl: ""));
+        }
 
-        // handleUpdateSalePrice(
-        //     i, addProductBodyRequest.productVariance[i].cost ?? "");
-        // handleUpdateOriPrice(
-        //     i, addProductBodyRequest.productVariance[i].price ?? "");
+        print(
+            "OriPrice TextControllers Length: ${addProductBodyRequest.productVariance[i].quantity}");
 
-        // oriPriceTextController.text = add
+        handleUpdateSalePrice(
+            i, addProductBodyRequest.productVariance[i].cost ?? "");
+        handleUpdateOriPrice(
+            i, addProductBodyRequest.productVariance[i].price ?? "");
+      }
+
+      update();
+      print("GG ${addProductVariance.length}");
+    }
+  }
+
+  handleGenerateNewProductOption() {
+    // productOptionVariances.clear();
+    // addProductVariance.clear();
+    var type = listProductOptions[0].productOptionValue.map((e) => [e]);
+
+    for (var i = 1; i < listProductOptions.length; i++) {
+      var next = [];
+      type.forEach((item) {
+        listProductOptions[i].productOptionValue.forEach((word) {
+          List<ProductOptionValue> line = item.sublist(0);
+          line.add(ProductOptionValue(
+              optionValue: word.optionValue, optionValueImageUrl: ""));
+          next.add(line);
+        });
+      });
+      type = next.map((e) => e);
+      print("LOL: $type");
+
+      productOptionVariances.addAll(type);
+
+      for (var i = 0; i < productOptionVariances.length; i++) {
+        List<String> wa = [];
+        String combine = "";
+        for (var j = 0; j < productOptionVariances[i].length; j++) {
+          wa.add(productOptionVariances[i][j].optionValue);
+          combine = wa.join("-");
+        }
+
+        oriPriceTextControllers.add(TextEditingController());
+        salePriceTextControllers.add(TextEditingController());
+
+        addProductVariance
+            .add(ProductVariance(combination: combine, imageUrl: ""));
       }
 
       update();
@@ -246,10 +302,54 @@ class ProductOptionController extends GetxController {
         if (e is DioError) {
           Get.snackbar("Something went wrong!", e.message,
               snackPosition: SnackPosition.BOTTOM);
+        } else {
+          Get.snackbar("Error", "$e", snackPosition: SnackPosition.BOTTOM);
         }
       }
       return false;
     }
+  }
+
+  var saleController = Get.find<SaleMenuController>();
+  Future<bool> handleUpdateProduct() async {
+    fetchStatus = FetchStatus.loading;
+    update();
+
+    Get.showOverlay(
+        asyncFunction: () async {
+          // await Future.delayed(Duration(seconds: 5));
+          List<ProductRecord> records = [];
+          await saleController.queryProduct("sell", 1, false, records);
+        },
+        loadingWidget: Center(
+          child: CircularProgressIndicator(
+            color: colorExt.PRIMARY_COLOR,
+          ),
+        ));
+    debugPrint(
+        "Update Product Body Request: ${addProductBodyRequest.toString()}");
+    // try {
+    //   await uploadProductPhotos();
+    //   await uploadPhotoDescription();
+    //
+    //   await _service.updateProduct(addProductBodyRequest);
+    //
+    //   fetchStatus = FetchStatus.complete;
+    //   update();
+    //   return true;
+    // } catch (e) {
+    //   if (e is ErrorResponse) {
+    //     Get.snackbar("Something went wrong!", e.message.description,
+    //         snackPosition: SnackPosition.BOTTOM);
+    //   } else {
+    //     if (e is DioError) {
+    //       Get.snackbar("Something went wrong!", e.message,
+    //           snackPosition: SnackPosition.BOTTOM);
+    //     }
+    //   }
+    // }
+
+    return false;
   }
 }
 

@@ -303,6 +303,11 @@ class ProductOption {
             List<dynamic>.from(productOptionValue.map((x) => x.toJson())),
         "productId": productId,
       };
+
+  @override
+  String toString() {
+    return "{id: $id, option: $option, product_option_value: ${productOptionValue.toString()}, product_id: $productId}";
+  }
 }
 
 class ProductOptionValue {
@@ -333,6 +338,11 @@ class ProductOptionValue {
         "optionValue": optionValue,
         "optionValueImageUrl": optionValueImageUrl,
       };
+
+  @override
+  String toString() {
+    return "{option_value: $optionValue, option_value_image_url: $optionValueImageUrl}";
+  }
 }
 
 class ProductVariance {
@@ -393,6 +403,11 @@ class ProductVariance {
         "quantity": quantity,
         "productId": productId,
       };
+
+  @override
+  String toString() {
+    return "{id: $id, combination: $combination, imageUrl: $imageUrl, cost: $cost, price: $price, quantity: $quantity, product_id: $productId}";
+  }
 }
 
 class Vendor {
