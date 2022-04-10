@@ -25,7 +25,8 @@ class AccountPage extends GetWidget<AccountController> {
           init: controller,
           builder: (_) {
             return Scaffold(
-              backgroundColor: colorExt.PRIMARY_BACKGROUND_COLOR,
+              // backgroundColor: colorExt.PRIMARY_BACKGROUND_COLOR,
+              backgroundColor: Colors.white,
               body: CustomScrollView(
                 physics: BouncingScrollPhysics(),
                 slivers: [

@@ -73,6 +73,9 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primaryColor: colorExt.PRIMARY_COLOR,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(color: colorExt.PRIMARY_COLOR),
+        ),
       ),
       // initialBinding: AuthBinding(),
       getPages: AppPages.routes,

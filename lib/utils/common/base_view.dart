@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 
 class BaseView extends StatelessWidget {
@@ -34,7 +35,16 @@ class BaseView extends StatelessWidget {
           title!,
           style: TextStyle(color: titleColor),
         ),
-        leading: leading,
+        leading: leading ??
+            IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: colorExt.PRIMARY_COLOR,
+              ),
+            ),
         actions: actions,
         backgroundColor: appBarBackgroundColor,
         bottom: bottom,
