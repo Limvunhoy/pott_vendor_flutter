@@ -5,21 +5,18 @@ import 'package:pott_vendor/feature/orders/view/components/finished_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/new_page.dart';
 import 'package:pott_vendor/feature/orders/view/components/ready_page.dart';
 import 'package:pott_vendor/utils/common/base_view.dart';
-import 'package:pott_vendor/utils/export.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
-class OrdersPage extends StatelessWidget {
-  final ordersController = Get.find<OrdersController>();
-
+class OrdersPage extends GetView<OrdersController> {
   @override
   Widget build(BuildContext context) {
     return BaseView(
       appBarBackgroundColor: Colors.white,
       title: "Orders",
       bottom: TabBar(
-        controller: ordersController.tabController,
+        controller: controller.tabController,
         indicator: UnderlineTabIndicator(
           borderSide: BorderSide(width: 2.0, color: colorExt.PRIMARY_COLOR),
           insets: EdgeInsets.symmetric(horizontal: 40.0),
@@ -37,7 +34,7 @@ class OrdersPage extends StatelessWidget {
               Tab(
                 text: "New",
               ),
-              ordersController.newOrderRecords.isNotEmpty
+              controller.newOrderRecords.isNotEmpty
                   ? Container(
                       margin: const EdgeInsets.only(left: 2.0),
                       width: 16.0,
@@ -48,7 +45,7 @@ class OrdersPage extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: Text(
-                        "${ordersController.getNewOrderCount()}",
+                        "${controller.getNewOrderCount()}",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: fontSizeExt.extraSmallSize),
@@ -69,29 +66,30 @@ class OrdersPage extends StatelessWidget {
         ],
       ),
       body: GetBuilder(
-          init: ordersController,
+          init: controller,
           builder: (_) {
             return Container(
               color: colorExt.PRIMARY_BACKGROUND_COLOR,
+              padding: const EdgeInsets.all(appSizeExt.basePadding),
               child: TabBarView(
-                controller: ordersController.tabController,
+                controller: controller.tabController,
                 children: [
                   // EmptyNewOrdersWidget(),
                   NewPage(
                     key: PageStorageKey<String>("newOrderPage"),
-                    ordersController: ordersController,
+                    ordersController: controller,
                   ),
                   ReadyPage(
                     key: PageStorageKey<String>("readyOrderPage"),
-                    ordersController: ordersController,
+                    ordersController: controller,
                   ),
                   FinishedPage(
                     key: PageStorageKey<String>("finishedOrderPage"),
-                    ordersController: ordersController,
+                    ordersController: controller,
                   ),
                   CompletedPage(
                     key: PageStorageKey<String>("completedOrderPage"),
-                    ordersController: ordersController,
+                    ordersController: controller,
                   ),
                 ],
               ),
