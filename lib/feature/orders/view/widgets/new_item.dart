@@ -7,6 +7,7 @@ import 'package:pott_vendor/utils/common/base_button.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
+import 'package:pott_vendor/utils/helper/cache_image_manager.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 enum OrderStatus { newOrder, ready, finished, competed }
@@ -70,7 +71,7 @@ class NewItem extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 35.0 / 2,
-                backgroundColor: Colors.grey,
+                backgroundColor: colorExt.PRIMARY_BACKGROUND_COLOR,
               ),
               const SizedBox(
                 width: 10.0,
@@ -133,13 +134,17 @@ class NewItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
-                    "${orderRecord.itemList.first.thumbnail.first}",
-                    fit: BoxFit.cover,
-                    width: 80.0,
-                    height: 80.0,
-                  ),
+                  // child: Image.network(
+                  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                  //   // "${orderRecord.itemList.first.thumbnail.first}",
+                  //   fit: BoxFit.cover,
+                  //   width: 80.0,
+                  //   height: 80.0,
+                  // ),
+                  child: CacheImageManager.cacheNetworkImage(
+                      imageUrl: orderRecord.itemList.first.thumbnail.first,
+                      width: 80.0,
+                      height: 80.0),
                 ),
                 const SizedBox(
                   width: 10.0,

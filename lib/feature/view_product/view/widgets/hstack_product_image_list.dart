@@ -4,6 +4,7 @@ import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/feature/view_product/controller/view_product_controller.dart';
+import 'package:pott_vendor/utils/helper/cache_image_manager.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class HStackProductImageList extends StatelessWidget {
@@ -14,6 +15,8 @@ class HStackProductImageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return SliverAppBar(
       backgroundColor: Colors.white,
       expandedHeight: MediaQuery.of(context).size.width / 1.2,
@@ -62,12 +65,10 @@ class HStackProductImageList extends StatelessWidget {
                           controller.setScrollIndex(index);
                         }
                       },
-                      child: Image.network(
-                        "${controller.productRecord.thumbnail[index]}",
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.width,
-                      ),
+                      child: CacheImageManager.cacheNetworkImage(
+                          imageUrl: controller.productRecord.thumbnail[index],
+                          width: size.width,
+                          height: size.width),
                     );
                   },
                 ),
