@@ -23,12 +23,6 @@ class CompletedOrderItem extends StatelessWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(
-        appSizeExt.basePadding,
-        appSizeExt.basePadding,
-        appSizeExt.basePadding,
-        0,
-      ),
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.white,

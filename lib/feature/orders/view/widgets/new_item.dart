@@ -52,8 +52,8 @@ class NewItem extends StatelessWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(appSizeExt.basePadding,
-          appSizeExt.basePadding, appSizeExt.basePadding, 0),
+      // margin: const EdgeInsets.fromLTRB(appSizeExt.basePadding,
+      //     appSizeExt.basePadding, appSizeExt.basePadding, 0),
       padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 12.0),
       decoration: BoxDecoration(
         color: Colors.white,
