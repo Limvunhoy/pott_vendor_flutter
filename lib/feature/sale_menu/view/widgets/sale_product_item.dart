@@ -6,6 +6,7 @@ import 'package:pott_vendor/feature/sale_menu/controller/sale_menu_controller.da
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
+import 'package:pott_vendor/utils/helper/cache_image_manager.dart';
 
 class SaleProductItem extends StatelessWidget {
   const SaleProductItem(
@@ -43,13 +44,17 @@ class SaleProductItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
-                    saleProduct.thumbnail.first,
-                    fit: BoxFit.cover,
-                    width: 100.0,
-                    height: 100.0,
-                  ),
+                  // child: Image.network(
+                  //   // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                  //   saleProduct.thumbnail.first,
+                  //   fit: BoxFit.cover,
+                  //   width: 100.0,
+                  //   height: 100.0,
+                  // ),
+                  child: CacheImageManager.cacheNetworkImage(
+                      imageUrl: saleProduct.thumbnail.first,
+                      width: 100.0,
+                      height: 100.0),
                 ),
                 saleProduct.status == "true"
                     ? const SizedBox.shrink()

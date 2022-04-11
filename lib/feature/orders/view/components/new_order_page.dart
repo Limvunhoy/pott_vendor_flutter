@@ -7,6 +7,7 @@ import 'package:pott_vendor/feature/orders/view/widgets/new_item.dart';
 import 'package:pott_vendor/utils/common/alert_popup.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
 import 'package:pott_vendor/utils/common/refresh_widget.dart';
+import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
 class NewOrderPage extends StatelessWidget {
@@ -21,18 +22,18 @@ class NewOrderPage extends StatelessWidget {
       onRefresh: () async {
         await ordersController.handlePullRefresh(OrderType.newOrder);
       },
-      child: ordersController.fetchStatus == FetchStatus.loading
+      child: ordersController.newOrderFetchStatus == FetchStatus.loading
           ? Container(
               height: MediaQuery.of(context).size.height / 1.2,
               alignment: Alignment.center,
               child: LoadingWidget())
-          : ordersController.fetchStatus == FetchStatus.error
+          : ordersController.newOrderFetchStatus == FetchStatus.error
               ? Center(
                   child: NoDataWidget(
                   title: "No New Order Now",
                   subtitle: "If have order coming, you can see here.",
                 ))
-              : ListView.builder(
+              : ListView.separated(
                   key: PageStorageKey("newOrderList"),
                   controller: ordersController.scrollController,
                   // shrinkWrap: true,
@@ -40,6 +41,11 @@ class NewOrderPage extends StatelessWidget {
                   physics: BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
                   itemCount: ordersController.getNewOrderCount(),
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: appSizeExt.basePadding,
+                    );
+                  },
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
