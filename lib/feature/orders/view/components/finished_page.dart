@@ -34,7 +34,7 @@ class FinishedPage extends StatelessWidget {
                   ),
                 )
               : ListView.separated(
-                  key: PageStorageKey("readyOrderList"),
+                  key: PageStorageKey("finishedOrderPage"),
                   // shrinkWrap: true,
                   // primary: false,
                   itemCount: ordersController.getFinishedOrderCount(),

@@ -25,12 +25,12 @@ class SaleProductItem extends StatelessWidget {
     return GestureDetector(
       onTap: onItemTapped,
       child: Container(
-        margin: const EdgeInsets.fromLTRB(
-          appSizeExt.basePadding,
-          appSizeExt.basePadding,
-          appSizeExt.basePadding,
-          0.0,
-        ),
+        // margin: const EdgeInsets.fromLTRB(
+        //   appSizeExt.basePadding,
+        //   appSizeExt.basePadding,
+        //   appSizeExt.basePadding,
+        //   0.0,
+        // ),
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white,

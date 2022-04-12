@@ -8,6 +8,7 @@ import 'package:pott_vendor/utils/common/base_view.dart';
 import 'package:pott_vendor/utils/common/colored_tab_bar.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
+import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 
 class SaleMenuScreen extends StatelessWidget {
   // const SaleMenuScreen({Key? key}) : super(key: key);
@@ -69,13 +70,16 @@ class SaleMenuScreen extends StatelessWidget {
           builder: (_) {
             return Container(
               color: colorExt.PRIMARY_BACKGROUND_COLOR,
+              padding: const EdgeInsets.all(appSizeExt.basePadding),
               child: TabBarView(
                 controller: _controller.tabController,
                 children: [
                   SaleProductPage(
+                    key: PageStorageKey<String>("saleProductPage"),
                     controller: _controller,
                   ),
                   BidProductPage(
+                    key: PageStorageKey("bidProductPage"),
                     controller: _controller,
                   ),
                 ],

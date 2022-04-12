@@ -19,10 +19,9 @@ class BidProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshWidget(
+      key: PageStorageKey(key),
       onRefresh: () async {
-        Future.delayed(Duration(milliseconds: 300), () async {
-          await controller.handlePullRefresh(ProductType.bid);
-        });
+        await controller.handlePullRefresh(ProductType.bid);
       },
       child: controller.fetchStatus == FetchStatus.loading
           ? Container(
@@ -30,8 +29,14 @@ class BidProductPage extends StatelessWidget {
               child: LoadingWidget())
           : controller.fetchStatus == FetchStatus.error
               ? NoDataWidget(title: "No Bid Product")
-              : ListView.builder(
+              : ListView.separated(
+                  key: PageStorageKey(key),
                   itemCount: controller.getBidCount(),
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: appSizeExt.basePadding,
+                    );
+                  },
                   itemBuilder: (context, index) {
                     return BidProductItem(
                       controller: controller,
