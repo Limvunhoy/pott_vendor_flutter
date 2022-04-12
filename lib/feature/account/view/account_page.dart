@@ -64,15 +64,18 @@ class AccountPage extends GetWidget<AccountController> {
                       horizontal: appSizeExt.basePadding,
                       vertical: appSizeExt.basePadding),
                   child: ElevatedButton(
-                    onPressed: !controller.isUpdateButtonEnabled ||
-                            controller.fetchStatus == FetchStatus.loading
+                    onPressed: !controller.isUpdateButtonEnabled
+                        // ||
+                        //     controller.fetchStatus == FetchStatus.loading
                         ? null
                         : () async {
                             await controller.updateAccountInfo();
                           },
-                    child: controller.fetchStatus == FetchStatus.loading
-                        ? LoadingButton()
-                        : Text("UPDATE"),
+                    child:
+                        // controller.fetchStatus == FetchStatus.loading
+                        //     ? LoadingButton()
+                        //     :
+                        Text("UPDATE"),
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(0, 40.0),
                       primary: colorExt.PRIMARY_COLOR,
