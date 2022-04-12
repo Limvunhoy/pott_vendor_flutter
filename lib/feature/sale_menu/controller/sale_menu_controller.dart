@@ -81,7 +81,7 @@ class SaleMenuController extends GetxController
     }).toList();
   }
 
-  Future<List<ProductRecord>> queryProduct(
+  queryProduct(
       String type, int page, bool isLoadMore, List<ProductRecord> records,
       {bool isPullRefresh = false, bool isLoading = true}) async {
     if (isLoading) {
@@ -90,10 +90,10 @@ class SaleMenuController extends GetxController
     }
 
     try {
-      if (isPullRefresh) {
-        page = 1;
-        records.clear();
-      }
+      // if (isPullRefresh) {
+      //   page = 1;
+      //   // records.clear();
+      // }
 
       final response = await _service.queryProduct(type, page);
       fetchStatus = FetchStatus.complete;
@@ -109,26 +109,32 @@ class SaleMenuController extends GetxController
           isLoadMore = false;
         }
 
-        records.addAll(response.records);
+        if (isPullRefresh) {
+          records = response.records;
+        } else {
+          records.addAll(response.records);
+        }
       }
 
       update();
-      return records;
+      // return records;
     } catch (e) {
       print("Failed to Get Product $e");
       fetchStatus = FetchStatus.error;
       update();
-      return [];
+      // return [];
     }
   }
 
   handlePullRefresh(ProductType type) async {
     switch (type) {
       case ProductType.sell:
+        salePage = 1;
         await queryProduct("sell", salePage, isLoadMoreSale, saleProductRecords,
             isPullRefresh: true, isLoading: false);
         break;
       case ProductType.bid:
+        bidPage = 1;
         await queryProduct("bid", bidPage, isLoadMoreBid, bidProductRecords,
             isPullRefresh: true, isLoading: false);
         break;
