@@ -98,6 +98,8 @@ class AuthController extends GetxController {
       fetchStatus = FetchStatus.error;
       if (e is ErrorResponse) {
         Fluttertoast.showToast(msg: e.message.description);
+      } else {
+        Fluttertoast.showToast(msg: "$e");
       }
       update();
       return false;
