@@ -141,8 +141,8 @@ class ProductOptionController extends GetxController {
           wa.add(productOptionVariances[i][j].optionValue);
           combine = wa.join("-");
         }
-        addProductVariance
-            .add(AddProductVariance(combination: combine, imageUrl: ""));
+        addProductVariance.add(AddProductVariance(
+            combination: combine, imageUrl: "", quantity: "0"));
       }
 
       update();
