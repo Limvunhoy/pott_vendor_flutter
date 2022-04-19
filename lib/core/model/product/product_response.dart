@@ -140,7 +140,7 @@ class ProductRecord {
   Vendor? vendor;
   List<ProductOption> productOptions;
   List<ProductVariance> productVariance;
-  int totalStock;
+  int? totalStock;
 
   ProductRecord copyWith({
     String? id,

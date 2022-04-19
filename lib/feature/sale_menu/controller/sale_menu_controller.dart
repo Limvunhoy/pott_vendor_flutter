@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/core/service/product/product_service.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/utils/constants/app_constants.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
@@ -79,6 +81,36 @@ class SaleMenuController extends GetxController
         isOn.value = false;
       }
     }).toList();
+  }
+
+  handleUpdateProductStatus(int index) async {
+    var status = "";
+
+    if (saleProductRecords[index].status == "true") {
+      status = "false";
+    } else {
+      status = "true";
+    }
+
+    Get.showOverlay(
+      asyncFunction: () async {
+        try {
+          var res = await _service.updateProductStatus(
+              saleProductRecords[index].id, status);
+          if (res != null) {
+            saleProductRecords[index].status = res;
+            update();
+          }
+        } catch (e) {
+          Fluttertoast.showToast(msg: "$e", gravity: ToastGravity.BOTTOM);
+        }
+      },
+      loadingWidget: Center(
+        child: CircularProgressIndicator(
+          color: colorExt.PRIMARY_COLOR,
+        ),
+      ),
+    );
   }
 
   queryProduct(

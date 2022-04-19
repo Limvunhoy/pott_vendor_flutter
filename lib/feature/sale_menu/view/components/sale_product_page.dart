@@ -46,6 +46,10 @@ class SaleProductPage extends StatelessWidget {
                     Get.toNamed(Routes.VIEW_PRODUCT,
                         arguments: {"isBid": false, "productRecord": product});
                   },
+                  onToggleSwitch: () {
+                    debugPrint("Toggle Switch at Index: $index");
+                    controller.handleUpdateProductStatus(index);
+                  },
                   saleProduct: product,
                 );
               }),
