@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,9 +10,9 @@ import 'package:pott_vendor/core/model/account/update_account_info_response.dart
 import 'package:pott_vendor/core/model/account/upload_image_response.dart';
 import 'package:pott_vendor/core/model/auth/user_response.dart';
 import 'package:pott_vendor/core/service/account/account_service.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/feature/sign_in/controller/auth_controller.dart';
 import 'package:pott_vendor/utils/constants/shared_preference_keys.dart';
-import 'package:pott_vendor/utils/helper/fetch_status.dart';
 import 'package:pott_vendor/utils/helper/shared_preference_helper.dart';
 
 enum PictureType {
@@ -38,8 +38,6 @@ class AccountController extends GetxController {
   UpdateAccountInfoResponse? updateAccountInfoResponse;
 
   SharedPreferenceHelper _sharedPreferenceHelper = SharedPreferenceHelper();
-
-  FetchStatus fetchStatus = FetchStatus.idle;
 
   late UpdateAccountBodyRequest bodyRequest;
   UploadImageResponse? _profileUploadResponse;
@@ -134,57 +132,61 @@ class AccountController extends GetxController {
   }
 
   Future updateAccountInfo() async {
-    try {
-      fetchStatus = FetchStatus.loading;
-      update();
-
-      if (profilePic != null) {
-        await _accountService.uploadImage(profilePic!).then((res) {
-          if (res != null) {
-            _profileUploadResponse = res;
+    Get.showOverlay(
+      asyncFunction: () async {
+        try {
+          if (profilePic != null) {
+            await _accountService.uploadImage(profilePic!).then((res) {
+              if (res != null) {
+                _profileUploadResponse = res;
+              }
+            });
           }
-        });
-      }
 
-      if (coverPic != null) {
-        await _accountService.uploadImage(coverPic!).then((res) {
-          if (res != null) {
-            _coverUploadResponse = res;
+          if (coverPic != null) {
+            await _accountService.uploadImage(coverPic!).then((res) {
+              if (res != null) {
+                _coverUploadResponse = res;
+              }
+            });
           }
-        });
-      }
 
-      updateBodyRequest(_profileUploadResponse?.results.path ?? null,
-          _coverUploadResponse?.results.path ?? null);
+          updateBodyRequest(_profileUploadResponse?.results.path ?? null,
+              _coverUploadResponse?.results.path ?? null);
 
-      UserDataResponse currentUser = UserDataResponse.fromJson(
-          await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
-      final res = await _accountService.updateAccountInfo(
-          currentUser.vendorId, bodyRequest.toJson());
+          UserDataResponse currentUser = UserDataResponse.fromJson(
+              await _sharedPreferenceHelper.read(SharedPreferenceKey.user));
+          final res = await _accountService.updateAccountInfo(
+              currentUser.vendorId, bodyRequest.toJson());
 
-      resetData();
+          resetData();
 
-      UserDataResponse? _copyUser = authController.auth;
+          UserDataResponse? _copyUser = authController.auth;
 
-      authController.auth = _copyUser?.copyWith(
-        firstName: res.data.firstName,
-        lastName: res.data.lastName,
-        phone: res.data.phone,
-        photo: res.data.photo,
-        cover: res.data.cover,
-      );
+          authController.auth = _copyUser?.copyWith(
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+            phone: res.data.phone,
+            photo: res.data.photo,
+            cover: res.data.cover,
+          );
 
-      authController.saveUser(authController.auth!);
-      print("Update User Account Info Successfully: ${res.data}");
+          authController.saveUser(authController.auth!);
+          print("Update User Account Info Successfully: ${res.data}");
 
-      isUpdateButtonEnabled = false;
-      fetchStatus = FetchStatus.complete;
-      update();
-    } catch (e) {
-      if (e is DioError) {
-        print("Failed to Update User Account Info: ${e.response!.data}");
-      }
-    }
+          isUpdateButtonEnabled = false;
+          update();
+        } catch (e) {
+          Get.snackbar("Something went wrong!", "$e",
+              snackPosition: SnackPosition.BOTTOM);
+        }
+      },
+      loadingWidget: Center(
+        child: CircularProgressIndicator(
+          color: colorExt.PRIMARY_COLOR,
+        ),
+      ),
+    );
   }
 }
 

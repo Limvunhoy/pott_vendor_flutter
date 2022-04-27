@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/feature/account/controller/account_controller.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
+import 'package:pott_vendor/utils/helper/cache_image_manager.dart';
 
 class HeaderCover extends StatelessWidget {
   const HeaderCover(
@@ -50,20 +51,13 @@ class HeaderCover extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 4,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: accountController.coverPic != null
-                        ? FileImage(File(accountController.coverPic!.path))
-                            as ImageProvider
-                        : accountController.authController.auth?.cover != null
-                            ? NetworkImage(
-                                accountController.authController.auth!.cover!)
-                            : NetworkImage(
-                                "https://cdn.dribbble.com/users/5536321/screenshots/14189735/dribble_4x.png",
-                              ),
-                  ),
-                ),
+                child: accountController.coverPic != null
+                    ? FileImage(File(accountController.coverPic!.path))
+                    : accountController.authController.auth?.cover != null
+                        ? CacheImageManager.cacheNetworkImage(
+                            imageUrl:
+                                accountController.authController.auth!.cover)
+                        : const SizedBox.shrink(),
               ),
               Positioned(
                 bottom: 0.0,
@@ -76,28 +70,21 @@ class HeaderCover extends StatelessWidget {
                       border: Border.all(color: Colors.white, width: 4),
                       borderRadius: BorderRadius.circular(60.0),
                     ),
-                    child: ClipOval(
-                      child: Material(
-                        child: Ink.image(
-                          image: accountController.profilePic != null
-                              ? FileImage(
-                                      File(accountController.profilePic!.path))
-                                  as ImageProvider
-                              : accountController.authController.auth?.photo !=
-                                      null
-                                  ? NetworkImage(
-                                      accountController
-                                          .authController.auth!.photo!,
-                                    )
-                                  : NetworkImage(
-                                      "https://graphicsfamily.com/wp-content/uploads/edd/2021/02/Cool-Gadgets-Facebook-Cover-Template-Design-scaled.jpg",
-                                    ),
-                          fit: BoxFit.cover,
+                    child: GestureDetector(
+                      onTap: onProfileTap,
+                      child: ClipOval(
+                        child: Container(
                           width: 116.0,
                           height: 116.0,
-                          child: InkWell(
-                            onTap: onProfileTap,
-                          ),
+                          child: accountController.profilePic != null
+                              ? FileImage(
+                                  File(accountController.profilePic!.path))
+                              : accountController.authController.auth?.photo !=
+                                      null
+                                  ? CacheImageManager.cacheNetworkImage(
+                                      imageUrl: accountController
+                                          .authController.auth!.photo)
+                                  : const SizedBox.shrink(),
                         ),
                       ),
                     ),

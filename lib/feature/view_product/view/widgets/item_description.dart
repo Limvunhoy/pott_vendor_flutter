@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pott_vendor/feature/view_product/controller/view_product_controller.dart';
+import 'package:pott_vendor/utils/helper/cache_image_manager.dart';
 
 class ItemDescription extends StatelessWidget {
   const ItemDescription({Key? key, required this.controller}) : super(key: key);
@@ -8,6 +9,7 @@ class ItemDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       child: ListView.builder(
         padding: EdgeInsets.zero,
@@ -15,11 +17,10 @@ class ItemDescription extends StatelessWidget {
         primary: false,
         itemCount: controller.productRecord.images.length,
         itemBuilder: (context, index) {
-          return Image.network(
-            controller.productRecord.images[index],
-            fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.width / 2,
+          return CacheImageManager.cacheNetworkImage(
+            imageUrl: controller.productRecord.images[index],
+            width: size.width,
+            height: size.width / 2,
           );
         },
       ),

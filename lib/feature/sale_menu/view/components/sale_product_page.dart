@@ -7,6 +7,7 @@ import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/utils/common/loading_widget.dart';
 import 'package:pott_vendor/utils/common/no_data_widget.dart';
 import 'package:pott_vendor/utils/common/refresh_widget.dart';
+import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
 class SaleProductPage extends StatelessWidget {
@@ -17,29 +18,39 @@ class SaleProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshWidget(
+      key: PageStorageKey(key),
       onRefresh: () async {
-        Future.delayed(Duration(milliseconds: 300), () async {
-          await controller.handlePullRefresh(ProductType.sell);
-        });
+        await controller.handlePullRefresh(ProductType.sell);
       },
       child: controller.fetchStatus == FetchStatus.loading
           ? Container(
               height: MediaQuery.of(context).size.height / 1.2,
               child: LoadingWidget())
-          : ListView.builder(
+          : ListView.separated(
+              key: PageStorageKey("saleProductPage"),
               // shrinkWrap: true,
               // primary: false,
+              physics: AlwaysScrollableScrollPhysics(),
               itemCount: controller.getSaleCount(),
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: appSizeExt.basePadding,
+                );
+              },
               itemBuilder: (context, index) {
+                var product = controller.saleProductRecords[index];
+
                 return SaleProductItem(
                   controller: controller,
                   onItemTapped: () {
-                    Get.toNamed(Routes.VIEW_PRODUCT, arguments: {
-                      "isBid": false,
-                      "productRecord": controller.saleProductRecords[index]
-                    });
+                    Get.toNamed(Routes.VIEW_PRODUCT,
+                        arguments: {"isBid": false, "productRecord": product});
                   },
-                  saleProduct: controller.saleProductRecords[index],
+                  onToggleSwitch: () {
+                    debugPrint("Toggle Switch at Index: $index");
+                    controller.handleUpdateProductStatus(index);
+                  },
+                  saleProduct: product,
                 );
               }),
     );
