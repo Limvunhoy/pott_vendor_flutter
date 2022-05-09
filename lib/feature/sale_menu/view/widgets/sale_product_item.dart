@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/feature/sale_menu/controller/sale_menu_controller.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/extension/color%20+%20extension.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
+import 'package:pott_vendor/utils/helper/cache_image_manager.dart';
 
 class SaleProductItem extends StatelessWidget {
   const SaleProductItem({
@@ -13,6 +13,7 @@ class SaleProductItem extends StatelessWidget {
     required this.onItemTapped,
     required this.saleProduct,
     required this.controller,
+    required this.onToggleSwitch,
     required this.onEditTap,
   }) : super(key: key);
 
@@ -20,18 +21,13 @@ class SaleProductItem extends StatelessWidget {
   final ProductRecord saleProduct;
   final SaleMenuController controller;
   final VoidCallback onEditTap;
+  final VoidCallback onToggleSwitch;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onItemTapped,
       child: Container(
-        margin: const EdgeInsets.fromLTRB(
-          appSizeExt.basePadding,
-          appSizeExt.basePadding,
-          appSizeExt.basePadding,
-          0.0,
-        ),
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -45,13 +41,12 @@ class SaleProductItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
-                    saleProduct.thumbnail.first,
-                    fit: BoxFit.cover,
-                    width: 100.0,
-                    height: 100.0,
-                  ),
+                  child: CacheImageManager.cacheNetworkImage(
+                      imageUrl: saleProduct.thumbnail.first,
+                      // imageUrl:
+                      // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqVmFDtPzb1NE0UOaixF8W7gQfqkwc5RFXRw&usqp=CAU",
+                      width: 100.0,
+                      height: 100.0),
                 ),
                 saleProduct.status == "true"
                     ? const SizedBox.shrink()
@@ -60,7 +55,7 @@ class SaleProductItem extends StatelessWidget {
                         height: 100.0,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.4),
+                          color: Colors.black.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Text(
@@ -95,7 +90,9 @@ class SaleProductItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "\$${saleProduct.salePrice}",
+                        saleProduct.productVariance.isNotEmpty
+                            ? "\$${saleProduct.productVariance[0].price}"
+                            : "",
                         style: TextStyle(
                             color: colorExt.RED,
                             fontSize: fontSizeExt.mediumSize,
@@ -162,7 +159,7 @@ class SaleProductItem extends StatelessWidget {
                                 width: 7.0,
                               ),
                               Text(
-                                "Stock 0",
+                                "Stock ${saleProduct.totalStock}",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: fontSizeExt.smallSize,
@@ -175,63 +172,79 @@ class SaleProductItem extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        alignment: Alignment.centerRight,
-                        child: Material(
-                          color: Colors.transparent,
-                          elevation: 0.0,
-                          child: Ink(
-                            child: InkWell(
-                              onTap: onEditTap,
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    AssetPath.EDIT_ICON,
-                                    fit: BoxFit.cover,
-                                    width: 9.0,
-                                    height: 10.0,
-                                  ),
-                                  const SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Text(
-                                    "Edit",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: fontSizeExt.smallSize),
-                                  ),
-                                ],
+                        color: Colors.transparent,
+                        constraints: BoxConstraints(maxHeight: 15.0),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: onEditTap,
+                          icon: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(
+                                AssetPath.EDIT_ICON,
+                                fit: BoxFit.cover,
+                                width: 9.0,
+                                height: 10.0,
                               ),
-                            ),
+                              const SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                "Edit",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: fontSizeExt.smallSize),
+                              ),
+                            ],
                           ),
                         ),
                       ),
+
+                      // Container(
+                      //   alignment: Alignment.centerRight,
+                      //   child: Material(
+                      //     color: Colors.transparent,
+                      //     elevation: 0.0,
+                      //     child: Ink(
+                      //       child: InkWell(
+                      //         onTap: onEditTap,
+                      //         child: Row(
+                      //           children: [
+                      //             Image.asset(
+                      //               AssetPath.EDIT_ICON,
+                      //               fit: BoxFit.cover,
+                      //               width: 9.0,
+                      //               height: 10.0,
+                      //             ),
+                      //             const SizedBox(
+                      //               width: 5.0,
+                      //             ),
+                      //             Text(
+                      //               "Edit",
+                      //               style: TextStyle(
+                      //                   color: Colors.black,
+                      //                   fontSize: fontSizeExt.smallSize),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       const SizedBox(
                         width: 43.5,
                       ),
-                      Obx(
-                        () {
-                          return Container(
-                            alignment: Alignment.centerRight,
-                            width: 23.0,
-                            child: Material(
-                              color: Colors.transparent,
-                              elevation: 0.0,
-                              child: Ink(
-                                child: InkWell(
-                                  onTap: () {
-                                    controller.handleSwitch();
-                                  },
-                                  child: Image.asset(
-                                    controller.isOn.isTrue
-                                        ? "assets/icons/sale_menu/switch_active_icon.png"
-                                        : "assets/icons/sale_menu/switch_inactive_icon.png",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+                      IconButton(
+                        onPressed: onToggleSwitch,
+                        padding: EdgeInsets.zero,
+                        constraints:
+                            BoxConstraints(maxWidth: 23.0, maxHeight: 15.0),
+                        icon: Image.asset(
+                          saleProduct.status == "true"
+                              ? "assets/icons/sale_menu/switch_active_icon.png"
+                              : "assets/icons/sale_menu/switch_inactive_icon.png",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ],
                   ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/product/product_response.dart';
 import 'package:pott_vendor/core/service/product/product_service.dart';
+import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/utils/constants/app_constants.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
@@ -81,7 +83,33 @@ class SaleMenuController extends GetxController
     }).toList();
   }
 
-  Future<List<ProductRecord>> queryProduct(
+  handleTesting() async {
+    // update();
+    await Future.delayed(Duration(seconds: 3));
+  }
+
+  Future handleUpdateProductStatus(int index) async {
+    var status = "";
+
+    if (saleProductRecords[index].status == "true") {
+      status = "false";
+    } else {
+      status = "true";
+    }
+
+    try {
+      var res = await _service.updateProductStatus(
+          saleProductRecords[index].id, status);
+      if (res != null) {
+        saleProductRecords[index].status = res;
+        update();
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "$e", gravity: ToastGravity.BOTTOM);
+    }
+  }
+
+  queryProduct(
       String type, int page, bool isLoadMore, List<ProductRecord> records,
       {bool isPullRefresh = false, bool isLoading = true}) async {
     if (isLoading) {
@@ -90,10 +118,10 @@ class SaleMenuController extends GetxController
     }
 
     try {
-      if (isPullRefresh) {
-        page = 1;
-        records.clear();
-      }
+      // if (isPullRefresh) {
+      //   page = 1;
+      //   // records.clear();
+      // }
 
       final response = await _service.queryProduct(type, page);
       fetchStatus = FetchStatus.complete;
@@ -109,26 +137,32 @@ class SaleMenuController extends GetxController
           isLoadMore = false;
         }
 
-        records.addAll(response.records);
+        if (isPullRefresh) {
+          records = response.records;
+        } else {
+          records.addAll(response.records);
+        }
       }
 
       update();
-      return records;
+      // return records;
     } catch (e) {
       print("Failed to Get Product $e");
       fetchStatus = FetchStatus.error;
       update();
-      return [];
+      // return [];
     }
   }
 
   handlePullRefresh(ProductType type) async {
     switch (type) {
       case ProductType.sell:
+        salePage = 1;
         await queryProduct("sell", salePage, isLoadMoreSale, saleProductRecords,
             isPullRefresh: true, isLoading: false);
         break;
       case ProductType.bid:
+        bidPage = 1;
         await queryProduct("bid", bidPage, isLoadMoreBid, bidProductRecords,
             isPullRefresh: true, isLoading: false);
         break;

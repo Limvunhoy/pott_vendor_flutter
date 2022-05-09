@@ -129,7 +129,7 @@ class ProductRecord {
   String id;
   String name;
   List<String> thumbnail;
-  List<String> images;
+  List<String>? images;
   String description;
   int cost;
   int salePrice;
@@ -140,7 +140,7 @@ class ProductRecord {
   Vendor? vendor;
   List<ProductOption> productOptions;
   List<ProductVariance> productVariance;
-  int totalStock;
+  int? totalStock;
 
   ProductRecord copyWith({
     String? id,
@@ -181,7 +181,9 @@ class ProductRecord {
         id: json["_id"],
         name: json["name"],
         thumbnail: List<String>.from(json["thumbnail"].map((x) => x)),
-        images: List<String>.from(json["images"].map((x) => x)),
+        images: json["images"] == null
+            ? null
+            : List<String>.from(json["images"].map((x) => x)),
         description: json["description"],
         cost: json["cost"],
         salePrice: json["salePrice"],
@@ -203,7 +205,8 @@ class ProductRecord {
         "_id": id,
         "name": name,
         "thumbnail": List<dynamic>.from(thumbnail.map((x) => x)),
-        "images": List<dynamic>.from(images.map((x) => x)),
+        "images":
+            images == null ? null : List<dynamic>.from(images!.map((x) => x)),
         "description": description,
         "cost": cost,
         "salePrice": salePrice,

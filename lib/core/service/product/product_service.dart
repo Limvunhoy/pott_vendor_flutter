@@ -74,8 +74,10 @@ class ProductService {
 
   Future<bool> addProduct(AddProductBodyRequest bodyRequest) async {
     try {
-      final response = await _apiBaseHelper.post(EndPoint.addProduct,
-          bodyRequest.toJson()..removeWhere((key, value) => value == null));
+      final response = await _apiBaseHelper.post(
+          EndPoint.addProduct,
+          bodyRequest.toJson()
+            ..removeWhere((key, value) => value["_id"] == null));
       if (response.data["httpCode"] == 200) {
         return true;
       } else {
@@ -95,6 +97,19 @@ class ProductService {
       } else {
         throw ErrorResponse.fromJson(response.data);
       }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<String?> updateProductStatus(String id, String status) async {
+    try {
+      final response = await _apiBaseHelper
+          .put(EndPoint.updateProductStatus, {"_id": id, "status": status});
+      if (response.data["httpCode"] == 200) {
+        return response.data["data"]["status"];
+      }
+      return null;
     } catch (e) {
       throw e;
     }

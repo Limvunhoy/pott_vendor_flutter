@@ -20,12 +20,12 @@ class NewPage extends StatelessWidget {
       onRefresh: () async {
         await ordersController.handlePullRefresh(OrderType.newOrder);
       },
-      child: ordersController.fetchStatus == FetchStatus.loading
+      child: ordersController.newOrderFetchStatus == FetchStatus.loading
           ? Container(
               height: MediaQuery.of(context).size.height / 1.2,
               alignment: Alignment.center,
               child: LoadingWidget())
-          : ordersController.fetchStatus == FetchStatus.error
+          : ordersController.newOrderFetchStatus == FetchStatus.error
               ? Center(
                   child: NoDataWidget(
                   title: "No New Order Now",

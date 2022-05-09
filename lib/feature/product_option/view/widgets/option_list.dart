@@ -106,56 +106,75 @@ class OptionList extends StatelessWidget {
                       prefix: Text("\$"),
                     ),
                   )),
-                  DataCell(ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: 65.0,
-                    ),
-                    child: Container(
-                      height: 19.64,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF9F9F9),
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          customQTYButton(
-                              icon: Icons.remove,
-                              onPressed: () {
-                                controller.handleDecreaseQty(e.key);
-                              })!,
-                          Container(
-                            width: 19.84,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF9F9F9),
-                              border: Border.symmetric(
-                                horizontal: BorderSide(
-                                    width: 0.5, color: colorExt.LINE_COLOR),
-                              ),
-                            ),
-                            child: FittedBox(
-                              fit: BoxFit.none,
-                              child: BaseExtraSmallText(
-                                textAlign: TextAlign.center,
-                                text: e.value.quantity != null
-                                    ? "${controller.addProductVariance[e.key].quantity}"
-                                    : "0",
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          customQTYButton(
-                              icon: Icons.add,
-                              isIncrease: true,
-                              onPressed: () {
-                                controller.handleIncreaseQty(e.key);
-                              })!
-                        ],
+                  DataCell(
+                    TextField(
+                      // controller: controller.salePriceTextController,
+                      controller: controller.qtyTextControllers[e.key],
+                      onChanged: (value) {
+                        controller.handleUpdateQty(e.key, value);
+                      },
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        hintText: "0",
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        // prefix: Text("\$"),
                       ),
                     ),
-                  )),
+                  ),
+
+                  // DataCell(
+                  //     ConstrainedBox(
+                  //   constraints: BoxConstraints(
+                  //     maxWidth: 65.0,
+                  //   ),
+                  //   child: Container(
+                  //     height: 19.64,
+                  //     alignment: Alignment.center,
+                  //     decoration: BoxDecoration(
+                  //       color: Color(0xFFF9F9F9),
+                  //       borderRadius: BorderRadius.circular(6.0),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       crossAxisAlignment: CrossAxisAlignment.center,
+                  //       children: [
+                  //         customQTYButton(
+                  //             icon: Icons.remove,
+                  //             onPressed: () {
+                  //               controller.handleDecreaseQty(e.key);
+                  //             })!,
+                  //         Container(
+                  //           width: 19.84,
+                  //           decoration: BoxDecoration(
+                  //             color: Color(0xFFF9F9F9),
+                  //             border: Border.symmetric(
+                  //               horizontal: BorderSide(
+                  //                   width: 0.5, color: colorExt.LINE_COLOR),
+                  //             ),
+                  //           ),
+                  //           child: FittedBox(
+                  //             fit: BoxFit.none,
+                  //             child: BaseExtraSmallText(
+                  //               textAlign: TextAlign.center,
+                  //               text: e.value.quantity != null
+                  //                   ? "${controller.addProductVariance[e.key].quantity}"
+                  //                   : "0",
+                  //               color: Colors.black,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         customQTYButton(
+                  //             icon: Icons.add,
+                  //             isIncrease: true,
+                  //             onPressed: () {
+                  //               controller.handleIncreaseQty(e.key);
+                  //             })!
+                  //       ],
+                  //     ),
+                  //   ),
+                  // )),
                 ]),
               )
               .toList(),

@@ -6,6 +6,8 @@ import 'package:pott_vendor/feature/add_menu/controller/add_menu_controller.dart
 import 'package:pott_vendor/feature/add_menu/view/widgets/add_photo_widget.dart';
 import 'package:pott_vendor/feature/processing/view/widgets/export_widgets.dart';
 import 'package:pott_vendor/utils/extension/double%20+%20extension.dart';
+import 'package:pott_vendor/utils/helper/cache_image_manager.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class PhotoDescriptionList extends StatelessWidget {
   const PhotoDescriptionList({Key? key, required this.controller})
@@ -15,7 +17,7 @@ class PhotoDescriptionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ScrollablePositionedList.separated(
       separatorBuilder: (context, index) {
         return SizedBox(
           width: 10.0,
@@ -23,7 +25,8 @@ class PhotoDescriptionList extends StatelessWidget {
       },
       scrollDirection: Axis.horizontal,
       shrinkWrap: true,
-      primary: false,
+      // primary: false,
+      itemScrollController: controller.photoDescriptionListItemScrollController,
       physics: ClampingScrollPhysics(),
       itemCount: controller.descriptionPhotos.length,
       itemBuilder: (context, index) {
@@ -32,19 +35,54 @@ class PhotoDescriptionList extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             // if (!controller.isEdit) ...[
-            Container(
-              width: 70.0,
-              height: 70.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: FileImage(
-                    controller.descriptionPhotos[index],
-                  ),
-                ),
-              ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6.0),
+              child: controller.descriptionPhotos[index].runtimeType != String
+                  ? Container(
+                      width: 70.0,
+                      height: 70.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: FileImage(controller.descriptionPhotos[index]),
+                          // image:
+                          //     MemoryImage(controller.descriptionPhotos[index]),
+                        ),
+                      ),
+                    )
+                  : CacheImageManager.cacheNetworkImage(
+                      width: 70.0,
+                      height: 70.0,
+                      imageUrl:
+                          controller.descriptionPhotos[index].runtimeType !=
+                                  String
+                              ? ""
+                              : controller.descriptionPhotos[index],
+                      errorWidget: (context, _, __) {
+                        return Container(
+                          width: 70.0,
+                          height: 70.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                          child: Icon(Icons.error),
+                        );
+                      }),
             ),
+            // Container(
+            //   width: 70.0,
+            //   height: 70.0,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(6.0),
+            //     image: DecorationImage(
+            //       fit: BoxFit.cover,
+            //       image: FileImage(
+            //         controller.descriptionPhotos[index],
+            //       ),
+            //     ),
+            //   ),
+            // ),
             // ] else ...[
             //   Container(
             //     width: 70.0,

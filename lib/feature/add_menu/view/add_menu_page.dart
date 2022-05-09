@@ -71,8 +71,12 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                               BaseTitleText(text: "Photo"),
                               Expanded(
                                 child: BaseMediumText(
-                                  text: "${controller.photos.length}/10",
-                                  color: colorExt.LIGHT_GRAY,
+                                  text:
+                                      "${controller.photos.length}/${controller.maxPhoto}",
+                                  color: controller.photos.length >
+                                          controller.maxPhotoDescription
+                                      ? Colors.red
+                                      : colorExt.LIGHT_GRAY,
                                   textAlign: TextAlign.end,
                                 ),
                               ),
@@ -288,10 +292,10 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                                     BaseTitleText(text: "Photo Description"),
                                     BaseMediumText(
                                       text:
-                                          "${controller.descriptionPhotos.length}/${controller.limitPhoto}",
+                                          "${controller.descriptionPhotos.length}/${controller.maxPhotoDescription}",
                                       color:
                                           controller.descriptionPhotos.length >
-                                                  controller.limitPhoto
+                                                  controller.maxPhotoDescription
                                               ? Colors.red
                                               : colorExt.LIGHT_GRAY,
                                     ),
@@ -300,6 +304,7 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                                 Container(
                                   height: 100,
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
                                         margin: const EdgeInsets.only(top: 30),
@@ -332,8 +337,10 @@ class AddMenuPage extends GetWidget<AddMenuController> {
                                       const SizedBox(
                                         width: 10,
                                       ),
-                                      PhotoDescriptionList(
-                                        controller: controller,
+                                      Expanded(
+                                        child: PhotoDescriptionList(
+                                          controller: controller,
+                                        ),
                                       ),
                                     ],
                                   ),

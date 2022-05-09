@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +35,7 @@ class ProductOptionController extends GetxController {
   // TextEditingController salePriceTextController = TextEditingController();
   List<TextEditingController> oriPriceTextControllers = [];
   List<TextEditingController> salePriceTextControllers = [];
+  List<TextEditingController> qtyTextControllers = [];
   int qty = 0;
 
   FetchStatus fetchStatus = FetchStatus.idle;
@@ -55,6 +59,12 @@ class ProductOptionController extends GetxController {
       }
     }
 
+    debugPrint("Product Photos: ${addMenuController.photos.length}");
+    debugPrint(
+        "Product Description Photos: ${addMenuController.descriptionPhotos.length}");
+    debugPrint(
+        "Body Request Thumbnail: ${addProductBodyRequest.thumbnail.length}");
+    debugPrint("Body Request Images: ${addProductBodyRequest.images.length}");
     super.onInit();
   }
 
@@ -99,6 +109,10 @@ class ProductOptionController extends GetxController {
 
   handleUpdateSalePrice(int index, String salePrice) {
     addProductVariance[index].price = salePrice;
+  }
+
+  handleUpdateQty(int index, String qty) {
+    addProductVariance[index].quantity = qty;
   }
 
   handleHintText() {
@@ -183,6 +197,7 @@ class ProductOptionController extends GetxController {
         //     .add(ProductVariance(combination: combine, imageUrl: ""));
         oriPriceTextControllers.add(TextEditingController());
         salePriceTextControllers.add(TextEditingController());
+        qtyTextControllers.add(TextEditingController());
 
         if (addProductBodyRequest.productVariance.isNotEmpty) {
           addProductVariance.add(
@@ -199,6 +214,8 @@ class ProductOptionController extends GetxController {
               addProductBodyRequest.productVariance[i].cost ?? "";
           salePriceTextControllers[i].text =
               addProductBodyRequest.productVariance[i].price ?? "";
+          qtyTextControllers[i].text =
+              addProductBodyRequest.productVariance[i].quantity ?? "0";
         } else {
           addProductVariance
               .add(ProductVariance(combination: combine, imageUrl: ""));
@@ -207,10 +224,10 @@ class ProductOptionController extends GetxController {
         print(
             "OriPrice TextControllers Length: ${addProductBodyRequest.productVariance[i].quantity}");
 
-        handleUpdateSalePrice(
-            i, addProductBodyRequest.productVariance[i].cost ?? "");
-        handleUpdateOriPrice(
-            i, addProductBodyRequest.productVariance[i].price ?? "");
+        // handleUpdateSalePrice(
+        //     i, addProductBodyRequest.productVariance[i].cost ?? "");
+        // handleUpdateOriPrice(
+        //     i, addProductBodyRequest.productVariance[i].price ?? "");
       }
 
       update();
@@ -248,6 +265,7 @@ class ProductOptionController extends GetxController {
 
         oriPriceTextControllers.add(TextEditingController());
         salePriceTextControllers.add(TextEditingController());
+        qtyTextControllers.add(TextEditingController());
 
         addProductVariance
             .add(ProductVariance(combination: combine, imageUrl: ""));
@@ -312,42 +330,47 @@ class ProductOptionController extends GetxController {
 
   var saleController = Get.find<SaleMenuController>();
   Future<bool> handleUpdateProduct() async {
-    fetchStatus = FetchStatus.loading;
-    update();
+    // fetchStatus = FetchStatus.loading;
+    // update();
 
-    Get.showOverlay(
-        asyncFunction: () async {
-          // await Future.delayed(Duration(seconds: 5));
-          List<ProductRecord> records = [];
-          await saleController.queryProduct("sell", 1, false, records);
-        },
-        loadingWidget: Center(
-          child: CircularProgressIndicator(
-            color: colorExt.PRIMARY_COLOR,
-          ),
-        ));
-    debugPrint(
-        "Update Product Body Request: ${addProductBodyRequest.toString()}");
-    // try {
-    //   await uploadProductPhotos();
-    //   await uploadPhotoDescription();
-    //
-    //   await _service.updateProduct(addProductBodyRequest);
-    //
-    //   fetchStatus = FetchStatus.complete;
-    //   update();
-    //   return true;
-    // } catch (e) {
-    //   if (e is ErrorResponse) {
-    //     Get.snackbar("Something went wrong!", e.message.description,
-    //         snackPosition: SnackPosition.BOTTOM);
-    //   } else {
-    //     if (e is DioError) {
-    //       Get.snackbar("Something went wrong!", e.message,
-    //           snackPosition: SnackPosition.BOTTOM);
-    //     }
-    //   }
-    // }
+    // Get.showOverlay(
+    //     asyncFunction: () async {
+    //       // await Future.delayed(Duration(seconds: 5));
+    //       List<ProductRecord> records = [];
+    //       await saleController.queryProduct("sell", 1, false, records);
+    //     },
+    //     loadingWidget: Center(
+    //       child: CircularProgressIndicator(
+    //         color: colorExt.PRIMARY_COLOR,
+    //       ),
+    //     ));
+    // debugPrint(
+    //     "Update Product Body Request: ${addProductBodyRequest.toString()}");
+    try {
+      await uploadProductPhotos();
+      await uploadPhotoDescription();
+
+      debugPrint(
+          "BodyRequest Product Photos: ${addProductBodyRequest.thumbnail.length}");
+      debugPrint(
+          "BodyRequest Product Photos: ${addProductBodyRequest.images.length}");
+      await _service.updateProduct(addProductBodyRequest);
+      // fetchStatus = FetchStatus.complete;
+      // update();
+      return true;
+    } catch (e) {
+      debugPrint(
+          "Failed to Update Product with ID: ${addProductBodyRequest.id}, error: $e");
+      if (e is ErrorResponse) {
+        Get.snackbar("Something went wrong!", e.message.description,
+            snackPosition: SnackPosition.BOTTOM);
+      } else {
+        if (e is DioError) {
+          Get.snackbar("Something went wrong!", e.message,
+              snackPosition: SnackPosition.BOTTOM);
+        }
+      }
+    }
 
     return false;
   }
@@ -382,10 +405,11 @@ extension on ProductOptionController {
   uploadProductPhotos() async {
     try {
       for (var photo in addMenuController.photos) {
-        final res = await _service.uploadImage(photo);
-        if (res != null) {
-          debugPrint("Product Photo Uploaded: ${res.results.path}");
-          addProductBodyRequest.thumbnail.add(res.results.path);
+        if (photo is File) {
+          final res = await _service.uploadImage(photo);
+          if (res != null) {
+            addProductBodyRequest.thumbnail.add(res.results.path);
+          }
         }
       }
     } catch (e) {
@@ -399,10 +423,12 @@ extension on ProductOptionController {
     try {
       for (var photo in addMenuController.descriptionPhotos) {
         print("Loop Description Photos");
-        final res = await _service.uploadImage(photo);
-        if (res != null) {
-          print("Product Description Photo: ${res.results.path}");
-          addProductBodyRequest.images.add(res.results.path);
+        if (photo is File) {
+          final res = await _service.uploadImage(photo);
+          if (res != null) {
+            print("Product Description Photo: ${res.results.path}");
+            addProductBodyRequest.images.add(res.results.path);
+          }
         }
       }
       // return images;

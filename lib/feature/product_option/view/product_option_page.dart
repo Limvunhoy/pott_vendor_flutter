@@ -3,15 +3,13 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:loading_overlay/loading_overlay.dart';
 import 'package:pott_vendor/config/app_routes.dart';
 import 'package:pott_vendor/feature/product_option/controller/product_option_controller.dart';
 import 'package:pott_vendor/feature/product_option/view/export_widget.dart';
 import 'package:pott_vendor/feature/product_option/view/widgets/variant_type.dart';
 import 'package:pott_vendor/utils/common/dissmiss_keyboard_content.dart';
-import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
-class ProductOptionPage extends GetWidget<ProductOptionController> {
+class ProductOptionPage extends GetView<ProductOptionController> {
   const ProductOptionPage({Key? key}) : super(key: key);
 
   @override
@@ -61,7 +59,6 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                             controller.handleAddOptionVariant(index, newValue);
                           },
                           onDeleted: (deletedIndex) {
-                            print(index);
                             controller.handleRemoveOption(index, deletedIndex);
                           },
                         );
@@ -153,28 +150,54 @@ class ProductOptionPage extends GetWidget<ProductOptionController> {
                       titleColor: Colors.white,
                       backgroundColor: colorExt.PRIMARY_COLOR,
                       onPressed: controller.addProductVariance.isNotEmpty
-                          ? () async {
+                          ? () {
                               var res;
                               if (controller.isEdit) {
-                                res = await controller.handleUpdateProduct();
-                              } else {
                                 Get.showOverlay(
                                     asyncFunction: () async {
-                                      res = await controller.handleAddProduct();
+                                      await controller
+                                          .handleUpdateProduct()
+                                          .then((value) => {
+                                                if (value)
+                                                  {
+                                                    Navigator
+                                                        .pushNamedAndRemoveUntil(
+                                                            context,
+                                                            Routes.SALE_MENU,
+                                                            ModalRoute.withName(
+                                                                Routes.MENU),
+                                                            arguments: true)
+                                                  }
+                                              });
                                     },
                                     loadingWidget: Center(
                                       child: CircularProgressIndicator(
                                         color: colorExt.PRIMARY_COLOR,
                                       ),
                                     ));
-                              }
-
-                              if (res) {
-                                Navigator.pushNamedAndRemoveUntil(
-                                    context,
-                                    Routes.SALE_MENU,
-                                    ModalRoute.withName(Routes.MENU),
-                                    arguments: true);
+                              } else {
+                                Get.showOverlay(
+                                    asyncFunction: () async {
+                                      await controller
+                                          .handleAddProduct()
+                                          .then((value) => {
+                                                if (value)
+                                                  {
+                                                    Navigator
+                                                        .pushNamedAndRemoveUntil(
+                                                            context,
+                                                            Routes.SALE_MENU,
+                                                            ModalRoute.withName(
+                                                                Routes.MENU),
+                                                            arguments: true)
+                                                  }
+                                              });
+                                    },
+                                    loadingWidget: Center(
+                                      child: CircularProgressIndicator(
+                                        color: colorExt.PRIMARY_COLOR,
+                                      ),
+                                    ));
                               }
                             }
                           : null),

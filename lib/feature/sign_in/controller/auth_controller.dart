@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -93,11 +95,19 @@ class AuthController extends GetxController {
 
       resetTextField();
       return true;
+    } on SocketException catch (e) {
+      fetchStatus = FetchStatus.complete;
+      fetchStatus = FetchStatus.error;
+      Fluttertoast.showToast(msg: "No internet connection!");
+      update();
+      return false;
     } catch (e) {
       fetchStatus = FetchStatus.complete;
       fetchStatus = FetchStatus.error;
       if (e is ErrorResponse) {
         Fluttertoast.showToast(msg: e.message.description);
+      } else {
+        Fluttertoast.showToast(msg: "$e");
       }
       update();
       return false;
