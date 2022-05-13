@@ -34,6 +34,8 @@ void main() async {
   await Firebase.initializeApp();
 
   await BaseNotificationManager.initialize(flutterLocalNotificationsPlugin);
+  // BaseNotificationManager.configLocationNotification(
+  //     flutterLocalNotificationsPlugin);
 
   FirebaseMessaging.onBackgroundMessage(
       BaseNotificationManager.firebaseMessagingBackgroundHandler);

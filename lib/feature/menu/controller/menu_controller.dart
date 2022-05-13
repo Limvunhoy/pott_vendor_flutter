@@ -1,7 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pott_vendor/core/model/menu/home_report_response.dart';
 import 'package:pott_vendor/core/model/menu/menu_item_model.dart';
 import 'package:pott_vendor/core/service/menu/menu_service.dart';
+import 'package:pott_vendor/core/service/nofication/notification_service.dart';
 import 'package:pott_vendor/utils/constants/asset_path.dart';
 import 'package:pott_vendor/utils/helper/fetch_status.dart';
 
@@ -35,6 +38,7 @@ class MenuController extends GetxController {
   HomeReportData? homeReportData;
 
   MenuService _service = MenuService();
+  NotificationService _notificationService = NotificationService();
   Rx<FetchStatus> fetchStatus = FetchStatus.idle.obs;
 
   RxString todaySale = "".obs;
@@ -44,7 +48,20 @@ class MenuController extends GetxController {
   @override
   void onInit() async {
     getHomeReport();
+    initFirebaseToken();
     super.onInit();
+  }
+
+  initFirebaseToken() {
+    FirebaseMessaging.instance.requestPermission();
+    FirebaseMessaging.instance.getToken().then((token) async => {
+          debugPrint("Firebase Token: $token"),
+          if (token != null)
+            {
+              await _notificationService.registerToken(
+                  token, "Token Registration"),
+            }
+        });
   }
 
   getHomeReport() async {
