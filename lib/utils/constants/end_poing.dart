@@ -17,4 +17,7 @@ class EndPoint {
   // Report
   static const report = "/report";
   static const homeReport = "/report/home";
+
+  // Notification
+  static const registerNotification = "/notification";
 }
